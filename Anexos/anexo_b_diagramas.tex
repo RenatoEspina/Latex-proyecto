@@ -1,0 +1,72 @@
+\chapter{Regeneración de los diagramas}
+\label{anexo:diagramas}
+
+Todos los diagramas de este informe se generaron con \textbf{PlantUML}
+\parencite{plantuml_sf} a partir de los archivos fuente versionados en
+\texttt{informe/diagramas/fuente/}. Para regenerarlos tras una modificación:
+
+\begin{verbatim}
+# Requisitos: plantuml y graphviz
+sudo apt-get install -y plantuml graphviz
+
+cd informe/diagramas
+
+# Imágenes PNG (para el documento)
+plantuml -charset UTF-8 -tpng -o .. fuente/*.puml
+
+# Imágenes SVG (vectoriales, para lectura en detalle)
+plantuml -charset UTF-8 -tsvg -o ../svg fuente/*.puml
+\end{verbatim}
+
+Las imágenes PNG utilizadas por este documento se encuentran copiadas en
+\texttt{informe/latex/Figuras/diagramas/}; tras regenerarlas es necesario actualizar esa copia
+antes de recompilar el informe.
+
+{\estilotabla
+\begin{longtable}{L{0.44\textwidth} C{0.10\textwidth} L{0.40\textwidth}}
+
+\caption{Correspondencia entre archivos fuente PlantUML y figuras del informe}
+\label{tab:fuentes_diagramas}
+\\
+
+\toprule
+\textbf{Archivo fuente} & \textbf{Figura} & \textbf{Diagrama} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Archivo fuente} & \textbf{Figura} & \textbf{Diagrama} \\
+\midrule
+\endhead
+
+\texttt{01-casos-uso-alto-nivel.puml} & \ref{fig:cu_altonivel} &
+Casos de uso de alto nivel \\
+\midrule
+\texttt{02-casos-uso-ejecucion-terreno.puml} & \ref{fig:cu_terreno} &
+Casos de uso: ejecución en terreno \\
+\midrule
+\texttt{03-secuencia-cu05-importar-manifiesto.puml} & \ref{fig:sec_cu05} &
+Secuencia CU-05 \\
+\midrule
+\texttt{04-secuencia-cu08-programar-faena.puml} & \ref{fig:sec_cu08} &
+Secuencia CU-08 \\
+\midrule
+\texttt{05-secuencia-cu12-registrar-desconsolidado.puml} & \ref{fig:sec_cu12} &
+Secuencia CU-12 \\
+\midrule
+\texttt{06-secuencia-cu18-cu20-revisar-enviar-reporte.puml} & \ref{fig:sec_reporte} &
+Secuencia CU-17 / CU-18 / CU-19 / CU-20 \\
+\midrule
+\texttt{07-colaboracion-cu12-registrar-desconsolidado.puml} & \ref{fig:col_cu12} &
+Colaboración CU-12 \\
+\midrule
+\texttt{08-colaboracion-cu18-revisar-enviar-reporte.puml} & \ref{fig:col_reporte} &
+Colaboración CU-18 / CU-20 \\
+\midrule
+\texttt{09-clases-diseno.puml} & \ref{fig:clases} &
+Clases de diseño \\
+
+\bottomrule
+
+\end{longtable}
+}

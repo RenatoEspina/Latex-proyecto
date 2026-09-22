@@ -1,0 +1,70 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Problemas identificados en el proceso de desconsolidado}}{3}{table.2.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Componentes de la arquitectura general de BeeTracer}}{5}{table.3.1}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Módulos funcionales del sistema}}{6}{table.3.2}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Etapas de la ejecución en terreno y evidencia exigida}}{7}{table.3.3}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Soluciones técnicas adoptadas frente a las restricciones del entorno}}{7}{table.3.4}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Actores del sistema BeeTracer}}{9}{table.4.1}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Matriz de acceso de usuarios por módulo}}{11}{table.4.2}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Funciones del sistema y su categoría}}{12}{table.5.1}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Atributos del sistema y restricciones de frontera}}{14}{table.5.2}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Casos de uso de alto nivel del sistema BeeTracer}}{16}{table.6.1}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces CU-05 Importar manifiesto electrónico (XML): descripción expandida}}{19}{table.6.2}%
+\contentsline {table}{\numberline {6.3}{\ignorespaces CU-05: curso normal de los eventos}}{19}{table.6.3}%
+\contentsline {table}{\numberline {6.4}{\ignorespaces CU-05: cursos alternos}}{20}{table.6.4}%
+\contentsline {table}{\numberline {6.5}{\ignorespaces CU-08 Programar faena de desconsolidado: descripción expandida}}{20}{table.6.5}%
+\contentsline {table}{\numberline {6.6}{\ignorespaces CU-08: curso normal de los eventos}}{21}{table.6.6}%
+\contentsline {table}{\numberline {6.7}{\ignorespaces CU-08: cursos alternos}}{21}{table.6.7}%
+\contentsline {table}{\numberline {6.8}{\ignorespaces CU-12 Registrar desconsolidado y separación por cliente: descripción expandida}}{22}{table.6.8}%
+\contentsline {table}{\numberline {6.9}{\ignorespaces CU-12: curso normal de los eventos}}{23}{table.6.9}%
+\contentsline {table}{\numberline {6.10}{\ignorespaces CU-12: cursos alternos}}{24}{table.6.10}%
+\contentsline {table}{\numberline {6.11}{\ignorespaces CU-13 Registrar incidencia: descripción expandida}}{24}{table.6.11}%
+\contentsline {table}{\numberline {6.12}{\ignorespaces CU-13: curso normal de los eventos}}{25}{table.6.12}%
+\contentsline {table}{\numberline {6.13}{\ignorespaces CU-13: cursos alternos}}{25}{table.6.13}%
+\contentsline {table}{\numberline {6.14}{\ignorespaces CU-18 Revisar y aprobar reporte: descripción expandida}}{26}{table.6.14}%
+\contentsline {table}{\numberline {6.15}{\ignorespaces CU-18: curso normal de los eventos}}{26}{table.6.15}%
+\contentsline {table}{\numberline {6.16}{\ignorespaces CU-18: cursos alternos}}{27}{table.6.16}%
+\contentsline {table}{\numberline {6.17}{\ignorespaces CU-20 Enviar reporte al cliente: descripción expandida}}{27}{table.6.17}%
+\contentsline {table}{\numberline {6.18}{\ignorespaces CU-20: curso normal de los eventos}}{28}{table.6.18}%
+\contentsline {table}{\numberline {6.19}{\ignorespaces CU-20: cursos alternos}}{28}{table.6.19}%
+\contentsline {table}{\numberline {6.20}{\ignorespaces Casos de uso pendientes de expansión y prioridad sugerida}}{29}{table.6.20}%
+\contentsline {table}{\numberline {6.21}{\ignorespaces Plantilla en blanco para la expansión de un caso de uso}}{29}{table.6.21}%
+\contentsline {table}{\numberline {6.22}{\ignorespaces Plantilla en blanco para el curso normal de los eventos}}{30}{table.6.22}%
+\contentsline {table}{\numberline {6.23}{\ignorespaces Plantilla en blanco para los cursos alternos}}{30}{table.6.23}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {7.1}{\ignorespaces Estereotipos empleados en los diagramas de interacción}}{31}{table.7.1}%
+\contentsline {table}{\numberline {7.2}{\ignorespaces Diagramas de interacción pendientes de construir}}{37}{table.7.2}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {8.1}{\ignorespaces Paquetes del diagrama de clases y su responsabilidad}}{38}{table.8.1}%
+\contentsline {table}{\numberline {8.2}{\ignorespaces Restricciones de integridad del modelo de clases}}{41}{table.8.2}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {9.1}{\ignorespaces Clase \texttt {Deposito}: atributos y operaciones}}{42}{table.9.1}%
+\contentsline {table}{\numberline {9.2}{\ignorespaces Clase \texttt {Usuario}: atributos y operaciones}}{42}{table.9.2}%
+\contentsline {table}{\numberline {9.3}{\ignorespaces Clase \texttt {Rol}: atributos y operaciones}}{43}{table.9.3}%
+\contentsline {table}{\numberline {9.4}{\ignorespaces Clase \texttt {Permiso}: atributos}}{43}{table.9.4}%
+\contentsline {table}{\numberline {9.5}{\ignorespaces Clase \texttt {Cliente}: atributos y operaciones}}{44}{table.9.5}%
+\contentsline {table}{\numberline {9.6}{\ignorespaces Clase \texttt {Trabajador}: atributos y operaciones}}{44}{table.9.6}%
+\contentsline {table}{\numberline {9.7}{\ignorespaces Clase \texttt {Cuadrilla}: atributos y operaciones}}{45}{table.9.7}%
+\contentsline {table}{\numberline {9.8}{\ignorespaces Clase \texttt {TipoBulto}: atributos}}{45}{table.9.8}%
+\contentsline {table}{\numberline {9.9}{\ignorespaces Clase \texttt {Manifiesto}: atributos y operaciones}}{45}{table.9.9}%
+\contentsline {table}{\numberline {9.10}{\ignorespaces Clase \texttt {Contenedor}: atributos y operaciones}}{46}{table.9.10}%
+\contentsline {table}{\numberline {9.11}{\ignorespaces Clase \texttt {LineaCarga}: atributos y operaciones}}{47}{table.9.11}%
+\contentsline {table}{\numberline {9.12}{\ignorespaces Clase \texttt {Faena}: atributos y operaciones}}{47}{table.9.12}%
+\contentsline {table}{\numberline {9.13}{\ignorespaces Clase \texttt {EtapaFaena}: atributos y operaciones}}{48}{table.9.13}%
+\contentsline {table}{\numberline {9.14}{\ignorespaces Clase \texttt {SelloSeguridad}: atributos y operaciones}}{49}{table.9.14}%
+\contentsline {table}{\numberline {9.15}{\ignorespaces Clase \texttt {Fotografia}: atributos y operaciones}}{49}{table.9.15}%
+\contentsline {table}{\numberline {9.16}{\ignorespaces Clase \texttt {Incidencia}: atributos y operaciones}}{50}{table.9.16}%
+\contentsline {table}{\numberline {9.17}{\ignorespaces Enumeraciones del paquete «Operación en terreno»}}{50}{table.9.17}%
+\contentsline {table}{\numberline {9.18}{\ignorespaces Clase \texttt {Reporte}: atributos y operaciones}}{51}{table.9.18}%
+\contentsline {table}{\numberline {9.19}{\ignorespaces Clase \texttt {EnvioReporte}: atributos y operaciones}}{51}{table.9.19}%
+\contentsline {table}{\numberline {9.20}{\ignorespaces Controladores, interfaces y servicios del diseño}}{52}{table.9.20}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {Anexo~A.1}{\ignorespaces Trazabilidad entre funciones, casos de uso y clases de diseño}}{57}{table.A.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {Anexo~B.1}{\ignorespaces Correspondencia entre archivos fuente PlantUML y figuras del informe}}{59}{table.B.1}%

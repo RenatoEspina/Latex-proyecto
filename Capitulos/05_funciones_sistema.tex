@@ -1,0 +1,219 @@
+\chapter{Funciones del sistema (alto nivel)}
+\label{cap:funciones}
+
+Siguiendo el enfoque de \textcite{larman2003}, las funciones se clasifican en tres categorías:
+
+\begin{itemize}
+    \item \textbf{Evidente (E):} el usuario sabe que se ejecuta y espera su resultado.
+    \item \textbf{Oculta (O):} el sistema la ejecuta sin que el usuario la perciba; su omisión no
+          se advierte hasta que falla.
+    \item \textbf{Superflua / Opcional (S):} aporta valor pero es prescindible; su ausencia no
+          compromete la operación.
+\end{itemize}
+
+\section{Funciones básicas}
+\label{sec:funcionesbasicas}
+
+{\estilotabla
+\begin{longtable}{L{0.07\textwidth} L{0.75\textwidth} C{0.08\textwidth}}
+
+\caption{Funciones del sistema y su categoría}
+\label{tab:funciones}
+\\
+
+\toprule
+\textbf{Ref.} & \textbf{Función} & \textbf{Cat.} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Ref.} & \textbf{Función} & \textbf{Cat.} \\
+\midrule
+\endhead
+
+\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{R1. Administración de maestros}} \\
+\midrule
+R1.1 & Registrar, modificar y desactivar usuarios del sistema & E \\
+R1.2 & Definir roles y asignar permisos granulares por funcionalidad & E \\
+R1.3 & Registrar y mantener la ficha de clientes (importadores) y sus destinatarios de correo & E \\
+R1.4 & Registrar trabajadores y conformar cuadrillas de trabajo & E \\
+R1.5 & Parametrizar tipos de bulto y unidades de medida de la operación & E \\
+R1.6 & Registrar la trazabilidad de los cambios de configuración (auditoría) & O \\
+
+\midrule
+\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{R2. Ingesta de información de carga}} \\
+\midrule
+R2.1 & Conectarse al \este{web service} del Servicio Nacional de Aduanas & O \\
+R2.2 & Descargar el manifiesto electrónico en formato XML & E \\
+R2.3 & Validar el esquema del XML recibido & O \\
+R2.4 & Interpretar el XML y persistir contenedores, líneas de carga, consignatarios y cantidades
+        declaradas & O \\
+R2.5 & Recibir información de carga mediante integración API con el sistema del cliente & E \\
+R2.6 & Habilitar el ingreso manual de carga en modalidad \textbf{tarja ciega} & E \\
+R2.7 & Consultar el contenido declarado de un contenedor antes de su arribo & E \\
+
+\midrule
+\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{R3. Programación de faenas}} \\
+\midrule
+R3.1 & Listar los contenedores por arribar sin faena asignada & E \\
+R3.2 & Programar una faena de desconsolidado con fecha y franja horaria & E \\
+R3.3 & Validar disponibilidad de horario y detectar conflictos de agenda & O \\
+R3.4 & Asignar una cuadrilla y designar al jefe tarjador responsable & E \\
+R3.5 & Publicar la programación en la aplicación móvil del operario asignado & O \\
+R3.6 & Reprogramar o anular una faena & E \\
+
+\midrule
+\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{R4. Ejecución de la faena en terreno}} \\
+\midrule
+R4.1 & Consultar desde el móvil las faenas asignadas al operario & E \\
+R4.2 & Iniciar la faena y registrar la marca de tiempo de cada etapa & E/O \\
+R4.3 & Exigir la captura fotográfica de puertas, candado y sello antes de permitir la apertura & E \\
+R4.4 & Exigir la digitación del número de sello de seguridad & E \\
+R4.5 & Contrastar el número de sello digitado contra el declarado en el manifiesto & O \\
+R4.6 & Registrar fotografías panorámicas de la mercancía intacta al abrir & E \\
+R4.7 & Registrar cada lote separado por cliente, con su tipo de bulto y cantidad recibida & E \\
+R4.8 & Contrastar cantidad declarada contra cantidad recibida y calcular la diferencia & O \\
+R4.9 & Registrar incidencias (daño, faltante, sobrante, mal embalaje) con fotografías
+        exclusivas & E \\
+R4.10 & Exigir la fotografía del contenedor vacío para permitir el cierre de la faena & E \\
+R4.11 & Bloquear el avance de etapa mientras la evidencia obligatoria esté incompleta & O \\
+
+\midrule
+\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{R5. Gestión de evidencia fotográfica}} \\
+\midrule
+R5.1 & Capturar fotografías desde la cámara del dispositivo & E \\
+R5.2 & Comprimir la imagen buscando el equilibrio entre peso y legibilidad & O \\
+R5.3 & Sellar cada fotografía con fecha, hora y geoposición de captura & O \\
+R5.4 & Subir cada fotografía individualmente e inmediatamente después de su captura & O \\
+R5.5 & Persistir las capturas en base de datos local cuando no hay conectividad
+        (\textbf{modo offline}) & O \\
+R5.6 & Sincronizar automáticamente la cola de pendientes al recuperar señal & O \\
+R5.7 & Detectar y notificar fallos de subida y reintentar el envío & O \\
+
+\midrule
+\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{R6. Generación, revisión y publicación de
+        reportes}} \\
+\midrule
+R6.1 & Compilar automáticamente datos y fotografías en un reporte PDF al cerrar la faena & E \\
+R6.2 & Componer el encabezado del reporte (fecha, hora, cuadrilla a cargo, folio) & O \\
+R6.3 & Desglosar el reporte por cliente, con sus lotes y fotografías & E \\
+R6.4 & Destacar en rojo la mercancía reportada como dañada & E \\
+R6.5 & Presentar el borrador del reporte al Supervisor para su revisión visual & E \\
+R6.6 & Permitir el rechazo de una fotografía defectuosa e indicar el motivo & E \\
+R6.7 & Notificar al jefe tarjador la solicitud de recaptura & E \\
+R6.8 & Regenerar y versionar el reporte tras la corrección & O \\
+R6.9 & Aprobar el reporte y registrar quién lo aprobó y cuándo & E \\
+R6.10 & Enviar el reporte aprobado por correo electrónico a los destinatarios del cliente & E \\
+R6.11 & Registrar el acuse de envío y reintentar ante fallo & O \\
+
+\midrule
+\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{R7. Consulta y trazabilidad}} \\
+\midrule
+R7.1 & Visualizar en tiempo real las faenas en proceso y sus imágenes & E \\
+R7.2 & Consultar faenas históricas filtrando por evento, cliente o fecha & E \\
+R7.3 & Recuperar el reporte PDF de una faena pasada & E \\
+R7.4 & Obtener indicadores de operación (faenas por período, incidencias por cliente) & S \\
+
+\midrule
+\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{R8. Seguridad y soporte}} \\
+\midrule
+R8.1 & Autenticar usuarios mediante credenciales & E \\
+R8.2 & Autorizar cada acción según los permisos del rol & O \\
+R8.3 & Cifrar la transmisión de datos mediante certificados SSL & O \\
+R8.4 & Registrar la bitácora de accesos y operaciones & O \\
+R8.5 & Ofrecer canal de soporte técnico y documentación en línea & S \\
+
+\bottomrule
+
+\end{longtable}
+}
+
+\section{Atributos del sistema}
+\label{sec:atributos}
+
+{\estilotabla
+\begin{longtable}{L{0.28\textwidth} L{0.66\textwidth}}
+
+\caption{Atributos del sistema y restricciones de frontera}
+\label{tab:atributos}
+\\
+
+\toprule
+\textbf{Atributo} & \textbf{Detalle y restricciones de frontera} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Atributo} & \textbf{Detalle y restricciones de frontera} \\
+\midrule
+\endhead
+
+\textbf{Tolerancia a fallos de conectividad} &
+La aplicación móvil debe operar \textbf{100\,\% sin conexión}, persistiendo localmente y
+sincronizando al recuperar señal. Restricción impuesta por el bloqueo de Wi-Fi que producen los
+contenedores metálicos en patio. \\
+
+\midrule
+
+\textbf{Estrategia de transferencia} &
+Subida \textbf{incremental, foto a foto}, inmediatamente tras la captura. Prohibido el envío en
+lote al cierre de la faena (causaba caídas del sistema). \\
+
+\midrule
+
+\textbf{Calidad de imagen} &
+Compresión en dispositivo. La imagen debe pesar lo mínimo posible \textbf{manteniendo legibilidad
+suficiente para servir como evidencia} ante un seguro. \\
+
+\midrule
+
+\textbf{Usabilidad en terreno} &
+Interfaz guiada paso a paso, operable con guantes sobre tablet, sin requerir conocimientos previos.
+El sistema \textbf{impone el orden} de las etapas. \\
+
+\midrule
+
+\textbf{Tiempo de respuesta del reporte} &
+El PDF debe quedar disponible \textbf{inmediatamente} al cerrar la faena; el envío al cliente se
+ejecuta con un solo botón. \\
+
+\midrule
+
+\textbf{Seguridad} &
+Certificados SSL en todas las transacciones, encriptación de datos y control de acceso por roles y
+permisos. \\
+
+\midrule
+
+\textbf{Disponibilidad} &
+Alojamiento en servidores contratados como servicio externo, con tiempo máximo estimado de
+resolución de incidentes de \textbf{30 minutos}. \\
+
+\midrule
+
+\textbf{Escalabilidad} &
+Usuarios ilimitados por licencia; la plataforma debe escalar en el tiempo conforme crece la
+operación del depósito. \\
+
+\midrule
+
+\textbf{Internacionalización} &
+El sistema opera igual en otros países; solo varían la dirección del \este{web service} y la
+conexión a la aduana local. Prospectos en Perú, Argentina y Brasil. \\
+
+\midrule
+
+\textbf{Multiplataforma} &
+Aplicación móvil desarrollada en Ionic, ejecutable en tablet o teléfono; se recomienda tablet para
+mejor desempeño. \\
+
+\midrule
+
+\textbf{Confidencialidad comercial} &
+El cliente \textbf{no accede a la evidencia en vivo}; solo recibe el reporte una vez aprobado por
+el Supervisor. \\
+
+\bottomrule
+
+\end{longtable}
+}

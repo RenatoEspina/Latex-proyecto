@@ -1,0 +1,156 @@
+% =========================================================
+% ESTILOS Y COMANDOS PROPIOS DEL INFORME
+% Complementa a pucv_inf_2024.sty sin modificarlo.
+% =========================================================
+
+% ---------------------------------------------------------
+% Rótulos en español
+% Se reaplican después de babel para conservar los títulos de
+% índices definidos por pucv_inf_2024.sty.
+% ---------------------------------------------------------
+
+\AtBeginDocument{%
+    \renewcommand{\figurename}{Figura}%
+    \renewcommand{\tablename}{Tabla}%
+    \renewcommand{\nomname}{\uppercase{Lista de Símbolos}}%
+    \renewcommand{\contentsname}{\uppercase{Índice General}}%
+    \renewcommand{\listfigurename}{\uppercase{Lista de Figuras}}%
+    \renewcommand{\listtablename}{\uppercase{Lista de Tablas}}%
+    \renewcommand{\chaptername}{Capítulo}%
+    \renewcommand{\appendixname}{Anexo}%
+}
+
+% ---------------------------------------------------------
+% Bibliografía en español
+% Fuerza los rótulos APA en español («Recuperado el ... de»,
+% «2.ª ed.», «y» en lugar de «and») sin depender de babel.
+% ---------------------------------------------------------
+
+\ExecuteBibliographyOptions{language = spanish}
+\DeclareLanguageMapping{spanish}{spanish-apa}
+
+% ---------------------------------------------------------
+% Colores auxiliares
+% ---------------------------------------------------------
+
+\definecolor{notacolor}{HTML}{4472c4}   % azul institucional (igual a titlecolor)
+\definecolor{notafondo}{HTML}{EEF2FA}
+\definecolor{pendientecolor}{HTML}{B85C00}
+\definecolor{pendientefondo}{HTML}{FDF3E7}
+\definecolor{filacabecera}{HTML}{DCE6F5}
+
+% ---------------------------------------------------------
+% Cajas de nota y de tareas pendientes
+% (equivalen a las citas en bloque y a los bloques
+%  "POR COMPLETAR" del documento original en Markdown)
+% ---------------------------------------------------------
+
+\newtcolorbox{nota}[1][]{%
+    enhanced,
+    breakable,
+    colback = notafondo,
+    colframe = notacolor,
+    boxrule = 0pt,
+    leftrule = 3pt,
+    arc = 0pt,
+    outer arc = 0pt,
+    left = 8pt, right = 8pt, top = 6pt, bottom = 6pt,
+    fontupper = \small,
+    parbox = false,
+    #1
+}
+
+\newtcolorbox{pendiente}[1][Por completar]{%
+    enhanced,
+    breakable,
+    colback = pendientefondo,
+    colframe = pendientecolor,
+    boxrule = 0.6pt,
+    arc = 2pt,
+    left = 8pt, right = 8pt, top = 6pt, bottom = 6pt,
+    fontupper = \small,
+    parbox = false,
+    title = {\footnotesize\bfseries\MakeUppercase{#1}},
+    coltitle = white,
+    colbacktitle = pendientecolor
+}
+
+% Marca breve, para usar dentro de una línea de texto
+\newcommand{\porcompletarinline}[1]{%
+    \textcolor{pendientecolor}{\textbf{[por completar: #1]}}%
+}
+
+% ---------------------------------------------------------
+% Estilo común de las tablas largas
+% ---------------------------------------------------------
+
+\newcommand{\estilotabla}{%
+    \footnotesize
+    \setlength{\parskip}{0pt}%
+    \setlength{\parindent}{0pt}%
+    \setlength{\tabcolsep}{4pt}%
+    \renewcommand{\arraystretch}{1.25}%
+}
+
+\newcommand{\estilotablachica}{%
+    \estilotabla
+    \scriptsize
+}
+
+% Separación antes y después de las longtable
+\setlength{\LTpre}{8pt}
+\setlength{\LTpost}{8pt}
+
+% Columnas de párrafo centradas verticalmente arriba
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+% ---------------------------------------------------------
+% Identificadores de código, clases y estados
+% ---------------------------------------------------------
+
+\newcommand{\clase}[1]{\texttt{#1}}
+\newcommand{\estado}[1]{\texttt{#1}}
+\newcommand{\este}[1]{\textit{#1}}
+
+% Estereotipos UML
+\newcommand{\ster}[1]{\texttt{\guillemotleft #1\guillemotright}}
+
+% ---------------------------------------------------------
+% Figuras de diagramas: comando abreviado
+% #1 ancho relativo · #2 archivo · #3 título breve (Lista de Figuras)
+% #4 leyenda completa · #5 etiqueta
+% ---------------------------------------------------------
+
+\newcommand{\figuradiagrama}[5]{%
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=#1\textwidth]{#2}
+        \caption[#3]{#4}
+        \label{#5}
+    \end{figure}%
+}
+
+% ---------------------------------------------------------
+% Formato de los anexos: "Anexo A." en lugar de "A."
+% ---------------------------------------------------------
+
+\newcommand{\formatoanexos}{%
+    \renewcommand{\thechapter}{Anexo~\Alph{chapter}}%
+    \setcounter{figure}{0}%
+    \setcounter{table}{0}%
+}
+
+% ---------------------------------------------------------
+% Ajustes de listas y espaciado dentro de entornos
+% ---------------------------------------------------------
+
+\setlist[itemize]{leftmargin=1.2cm, itemsep=2pt, topsep=4pt}
+\setlist[enumerate]{leftmargin=1.2cm, itemsep=2pt, topsep=4pt}
+
+% Evita que hyperref rompa las referencias de longtable
+\hypersetup{
+    bookmarksnumbered = true,
+    pdftitle = {Informe 2 - Modelamiento UML del sistema BeeTracer},
+    pdfsubject = {ICI-3242 Modelamiento de Software - PUCV}
+}

@@ -1,0 +1,82 @@
+\chapter{Trazabilidad entre modelos}
+\label{anexo:trazabilidad}
+
+Tabla de correspondencia entre las funciones del sistema (Capítulo~\ref{cap:funciones}), los casos
+de uso (Capítulo~\ref{cap:casosuso}) y las clases de diseño (Capítulos~\ref{cap:clases}
+y~\ref{cap:diccionario}). Permite verificar que el modelo cubre la totalidad de las funciones
+levantadas.
+
+{\estilotabla
+\begin{longtable}{L{0.16\textwidth} L{0.24\textwidth} L{0.54\textwidth}}
+
+\caption{Trazabilidad entre funciones, casos de uso y clases de diseño}
+\label{tab:trazabilidad}
+\\
+
+\toprule
+\textbf{Función} & \textbf{Caso(s) de uso} & \textbf{Clase(s) principal(es)} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Función} & \textbf{Caso(s) de uso} & \textbf{Clase(s) principal(es)} \\
+\midrule
+\endhead
+
+R1.1 -- R1.2 & CU-01 & \clase{Usuario}, \clase{Rol}, \clase{Permiso} \\
+\midrule
+R1.3 & CU-02 & \clase{Cliente} \\
+\midrule
+R1.4 & CU-03 & \clase{Trabajador}, \clase{Cuadrilla} \\
+\midrule
+R1.5 & CU-04 & \clase{TipoBulto}, \clase{Deposito} \\
+\midrule
+R2.1 -- R2.4, R2.7 & CU-05 &
+\clase{GestorManifiesto}, \clase{IServicioAduana}, \clase{ServicioAduanaWS},
+\clase{Manifiesto}, \clase{Contenedor}, \clase{LineaCarga} \\
+\midrule
+R2.5 & CU-06 & \clase{GestorManifiesto}, \clase{Manifiesto} \\
+\midrule
+R2.6 & CU-07 & \clase{GestorManifiesto}, \clase{LineaCarga} \\
+\midrule
+R3.1 -- R3.6 & CU-08, CU-09, CU-10 &
+\clase{GestorProgramacion}, \clase{Faena}, \clase{Cuadrilla}, \clase{Trabajador} \\
+\midrule
+R4.1 & CU-10 & \clase{Faena} \\
+\midrule
+R4.2 & CU-11 -- CU-14 & \clase{Faena}, \clase{EtapaFaena} \\
+\midrule
+R4.3 -- R4.5 & CU-11 & \clase{GestorFaena}, \clase{SelloSeguridad}, \clase{Fotografia} \\
+\midrule
+R4.6 -- R4.8 & CU-12 & \clase{GestorFaena}, \clase{EtapaFaena}, \clase{LineaCarga} \\
+\midrule
+R4.9 & CU-13 & \clase{Incidencia}, \clase{Fotografia} \\
+\midrule
+R4.10 -- R4.11 & CU-14 & \clase{Faena}, \clase{EtapaFaena} \\
+\midrule
+R5.1 -- R5.4 & CU-15 & \clase{Fotografia}, \clase{RepositorioFotos} \\
+\midrule
+R5.5 -- R5.7 & CU-16 & \clase{SincronizadorOffline}, \clase{Fotografia} \\
+\midrule
+R6.1 -- R6.4 & CU-17 & \clase{GestorReportes}, \clase{Reporte}, \clase{GeneradorPDF} \\
+\midrule
+R6.5 -- R6.9 & CU-18, CU-19 &
+\clase{GestorReportes}, \clase{Reporte}, \clase{Fotografia}, \clase{Usuario} \\
+\midrule
+R6.10 -- R6.11 & CU-20 &
+\clase{GestorReportes}, \clase{IPasarelaCorreo}, \clase{ServicioCorreoSMTP},
+\clase{EnvioReporte} \\
+\midrule
+R7.1 -- R7.3 & CU-21 & \clase{Faena}, \clase{Reporte}, \clase{Fotografia} \\
+\midrule
+R7.4 & \este{(no modelado)} & Función superflua, fuera del alcance \\
+\midrule
+R8.1 -- R8.2 & CU-22 & \clase{Usuario}, \clase{Rol}, \clase{Permiso} \\
+\midrule
+R8.3 -- R8.5 & \este{(no modelado)} &
+Atributos del sistema, Sección~\ref{sec:atributos} \\
+
+\bottomrule
+
+\end{longtable}
+}

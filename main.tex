@@ -1,0 +1,150 @@
+\documentclass[12pt, letterpaper]{report}
+
+% =========================================================
+% FORMATO PUCV
+% =========================================================
+
+\usepackage{pucv_inf_2024}
+\usepackage{tikz}
+
+% Idioma: partición silábica en español.
+% Solo se activa si la distribución de LaTeX tiene instalado el idioma
+% (paquete 'texlive-langspanish' o equivalente). Sin él, el documento
+% compila igual, pero la separación silábica usa las reglas del inglés.
+% 'es-noshorthands' evita que babel active caracteres (", <, >, ', ~)
+% que interferirían con el resto de los paquetes.
+\IfFileExists{spanish.ldf}{%
+    \usepackage[spanish, es-tabla, es-noshorthands]{babel}%
+}{}
+
+% =========================================================
+% PAQUETES ADICIONALES
+% =========================================================
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage[most]{tcolorbox}
+\usepackage[hidelinks]{hyperref}
+
+% Carpeta donde se encuentran los gráficos
+\graphicspath{{Figuras/}{Figuras/diagramas/}}
+
+% =========================================================
+% ESTILOS PROPIOS DEL INFORME
+% =========================================================
+
+\input{estilo_informe}
+
+% =========================================================
+% DATOS DE PORTADA
+% =========================================================
+% >>> Editar aquí los datos de la portada <<<
+
+\newcommand{\tituloInforme}{%
+    Informe 2: Modelamiento UML del sistema BeeTracer}
+\newcommand{\subtituloInforme}{%
+    Trazabilidad y evidencia fotográfica del desconsolidado
+    en terminales extraportuarios}
+\newcommand{\asignaturaInforme}{ICI-3242 Modelamiento de Software}
+\newcommand{\profesorInforme}{\porcompletarinline{profesor(a)}}
+\newcommand{\seccionInforme}{\porcompletarinline{sección}}
+\newcommand{\fechaInforme}{Septiembre 2026}
+
+% =========================================================
+% REFERENCIAS
+% =========================================================
+
+\addbibresource{referencias.bib}
+
+% =========================================================
+% DOCUMENTO
+% =========================================================
+
+\begin{document}
+
+% =========================================================
+% PORTADA
+% =========================================================
+
+\include{Portadas/portada_principal}
+
+% =========================================================
+% ÍNDICES
+% =========================================================
+
+\pagenumbering{roman}
+
+\clearpage
+\addcontentsline{toc}{chapter}{Índice General}
+\tableofcontents
+
+\clearpage
+\addcontentsline{toc}{chapter}{Lista de Figuras}
+\listoffigures
+
+\clearpage
+\addcontentsline{toc}{chapter}{Lista de Tablas}
+\listoftables
+
+% =========================================================
+% CONTENIDO PRINCIPAL
+% =========================================================
+
+\clearpage
+\pagenumbering{arabic}
+
+\include{Capitulos/01_introduccion}
+
+\include{Capitulos/02_definicion_problema}
+
+\include{Capitulos/03_descripcion_general}
+
+\include{Capitulos/04_clientes_usuarios}
+
+\include{Capitulos/05_funciones_sistema}
+
+\include{Capitulos/06_casos_uso}
+
+\include{Capitulos/07_interaccion}
+
+\include{Capitulos/08_clases_diseno}
+
+\include{Capitulos/09_diccionario_clases}
+
+\include{Capitulos/10_conclusiones}
+
+% =========================================================
+% REFERENCIAS BIBLIOGRÁFICAS
+% =========================================================
+
+\clearpage
+
+\nocite{*}
+
+\printbibliography[
+    heading=bibintoc,
+    title={Referencias bibliográficas}
+]
+
+\input{Capitulos/11_nota_referencias}
+
+% =========================================================
+% ANEXOS
+% =========================================================
+
+\clearpage
+\appendix
+\formatoanexos
+
+\include{Anexos/anexo_a_trazabilidad}
+
+\include{Anexos/anexo_b_diagramas}
+
+\end{document}

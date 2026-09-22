@@ -1,0 +1,671 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{apa/apasortcite//global/global/global}
+    \entry{bilix_sf}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=8e089d8e30e39ba99124ec6b430bee11}{%
+           family={{Bilix Ingeniería}},
+           familyi={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{8e089d8e30e39ba99124ec6b430bee11}
+      \strng{fullhash}{8e089d8e30e39ba99124ec6b430bee11}
+      \strng{fullhashraw}{8e089d8e30e39ba99124ec6b430bee11}
+      \strng{bibnamehash}{8e089d8e30e39ba99124ec6b430bee11}
+      \strng{authorbibnamehash}{8e089d8e30e39ba99124ec6b430bee11}
+      \strng{authornamehash}{8e089d8e30e39ba99124ec6b430bee11}
+      \strng{authorfullhash}{8e089d8e30e39ba99124ec6b430bee11}
+      \strng{authorfullhashraw}{8e089d8e30e39ba99124ec6b430bee11}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{BeeTracer}: Gestiona, consulta y traza tus faenas logísticas con facilidad}
+      \field{urlday}{22}
+      \field{urlmonth}{9}
+      \field{urlyear}{2026}
+      \field{year}{s.f.}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.beetracer.cl/
+      \endverb
+      \verb{url}
+      \verb https://www.beetracer.cl/
+      \endverb
+    \endentry
+    \entry{booch2005}{book}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=e4f07715269e006a4d4a4efa3ce3f996}{%
+           family={Booch},
+           familyi={B\bibinitperiod},
+           given={Grady},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b8ace965f1ffa84dd4512f7e64c62d75}{%
+           family={Rumbaugh},
+           familyi={R\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3e8f03cc324f52193ab00c1fab4df61a}{%
+           family={Jacobson},
+           familyi={J\bibinitperiod},
+           given={Ivar},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Boston}%
+      }
+      \list{publisher}{1}{%
+        {Addison-Wesley}%
+      }
+      \strng{namehash}{c3345176bc96f17c7ea4c60e61223be4}
+      \strng{fullhash}{be6f3ff47123ebcb32f54f571b015ebc}
+      \strng{fullhashraw}{be6f3ff47123ebcb32f54f571b015ebc}
+      \strng{bibnamehash}{be6f3ff47123ebcb32f54f571b015ebc}
+      \strng{authorbibnamehash}{be6f3ff47123ebcb32f54f571b015ebc}
+      \strng{authornamehash}{c3345176bc96f17c7ea4c60e61223be4}
+      \strng{authorfullhash}{be6f3ff47123ebcb32f54f571b015ebc}
+      \strng{authorfullhashraw}{be6f3ff47123ebcb32f54f571b015ebc}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2}
+      \field{title}{The {Unified Modeling Language} user guide}
+      \field{year}{2005}
+      \true{nocite}
+    \endentry
+    \entry{charlabeetracer2026}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=95fcd7aa656906854bda8302d22e3dfc}{%
+           family={{Equipo de desarrollo de BeeTracer, Bilix Ingeniería}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Pontificia Universidad Católica de Valparaíso, Escuela de Ingeniería Informática}%
+      }
+      \strng{namehash}{95fcd7aa656906854bda8302d22e3dfc}
+      \strng{fullhash}{95fcd7aa656906854bda8302d22e3dfc}
+      \strng{fullhashraw}{95fcd7aa656906854bda8302d22e3dfc}
+      \strng{bibnamehash}{95fcd7aa656906854bda8302d22e3dfc}
+      \strng{authorbibnamehash}{95fcd7aa656906854bda8302d22e3dfc}
+      \strng{authornamehash}{95fcd7aa656906854bda8302d22e3dfc}
+      \strng{authorfullhash}{95fcd7aa656906854bda8302d22e3dfc}
+      \strng{authorfullhashraw}{95fcd7aa656906854bda8302d22e3dfc}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Presentación}
+      \field{title}{Charla técnica sobre el proceso de desconsolidado y la plataforma {BeeTracer}}
+      \field{year}{2026}
+    \endentry
+    \entry{fowler2004}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=312ac886938a9b2be4f8eb607567fe4c}{%
+           family={Fowler},
+           familyi={F\bibinitperiod},
+           given={Martin},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Boston}%
+      }
+      \list{publisher}{1}{%
+        {Addison-Wesley}%
+      }
+      \strng{namehash}{312ac886938a9b2be4f8eb607567fe4c}
+      \strng{fullhash}{312ac886938a9b2be4f8eb607567fe4c}
+      \strng{fullhashraw}{312ac886938a9b2be4f8eb607567fe4c}
+      \strng{bibnamehash}{312ac886938a9b2be4f8eb607567fe4c}
+      \strng{authorbibnamehash}{312ac886938a9b2be4f8eb607567fe4c}
+      \strng{authornamehash}{312ac886938a9b2be4f8eb607567fe4c}
+      \strng{authorfullhash}{312ac886938a9b2be4f8eb607567fe4c}
+      \strng{authorfullhashraw}{312ac886938a9b2be4f8eb607567fe4c}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{3}
+      \field{title}{{UML} distilled: A brief guide to the standard object modeling language}
+      \field{year}{2004}
+      \true{nocite}
+    \endentry
+    \entry{larman2003}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=be7db5922f05fc919bdc1c036502e5ee}{%
+           family={Larman},
+           familyi={L\bibinitperiod},
+           given={Craig},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Madrid}%
+      }
+      \list{publisher}{1}{%
+        {Pearson Educación}%
+      }
+      \strng{namehash}{be7db5922f05fc919bdc1c036502e5ee}
+      \strng{fullhash}{be7db5922f05fc919bdc1c036502e5ee}
+      \strng{fullhashraw}{be7db5922f05fc919bdc1c036502e5ee}
+      \strng{bibnamehash}{be7db5922f05fc919bdc1c036502e5ee}
+      \strng{authorbibnamehash}{be7db5922f05fc919bdc1c036502e5ee}
+      \strng{authornamehash}{be7db5922f05fc919bdc1c036502e5ee}
+      \strng{authorfullhash}{be7db5922f05fc919bdc1c036502e5ee}
+      \strng{authorfullhashraw}{be7db5922f05fc919bdc1c036502e5ee}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2}
+      \field{title}{{UML} y patrones: Una introducción al análisis y diseño orientado a objetos y al proceso unificado}
+      \field{year}{2003}
+    \endentry
+    \entry{omg2017}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=4d6b6fbad838f7618c462458711482fa}{%
+           family={{Object Management Group}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{4d6b6fbad838f7618c462458711482fa}
+      \strng{fullhash}{4d6b6fbad838f7618c462458711482fa}
+      \strng{fullhashraw}{4d6b6fbad838f7618c462458711482fa}
+      \strng{bibnamehash}{4d6b6fbad838f7618c462458711482fa}
+      \strng{authorbibnamehash}{4d6b6fbad838f7618c462458711482fa}
+      \strng{authornamehash}{4d6b6fbad838f7618c462458711482fa}
+      \strng{authorfullhash}{4d6b6fbad838f7618c462458711482fa}
+      \strng{authorfullhashraw}{4d6b6fbad838f7618c462458711482fa}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{OMG Unified Modeling Language} ({OMG UML}), version 2.5.1}
+      \field{urlday}{22}
+      \field{urlmonth}{9}
+      \field{urlyear}{2026}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.omg.org/spec/UML/2.5.1/
+      \endverb
+      \verb{url}
+      \verb https://www.omg.org/spec/UML/2.5.1/
+      \endverb
+    \endentry
+    \entry{plantuml_sf}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=9e991784a7de86b867cc684c4745f4dd}{%
+           family={{PlantUML}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{9e991784a7de86b867cc684c4745f4dd}
+      \strng{fullhash}{9e991784a7de86b867cc684c4745f4dd}
+      \strng{fullhashraw}{9e991784a7de86b867cc684c4745f4dd}
+      \strng{bibnamehash}{9e991784a7de86b867cc684c4745f4dd}
+      \strng{authorbibnamehash}{9e991784a7de86b867cc684c4745f4dd}
+      \strng{authornamehash}{9e991784a7de86b867cc684c4745f4dd}
+      \strng{authorfullhash}{9e991784a7de86b867cc684c4745f4dd}
+      \strng{authorfullhashraw}{9e991784a7de86b867cc684c4745f4dd}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{PlantUML}: Open-source tool that uses simple textual descriptions to draw {UML} diagrams}
+      \field{urlday}{22}
+      \field{urlmonth}{9}
+      \field{urlyear}{2026}
+      \field{year}{s.f.}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://plantuml.com/
+      \endverb
+      \verb{url}
+      \verb https://plantuml.com/
+      \endverb
+    \endentry
+    \entry{pressman2021}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=4d3f81788d99cf425c4b6e0a454baab0}{%
+           family={Pressman},
+           familyi={P\bibinitperiod},
+           given={Roger\bibnamedelima S.},
+           giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=13b3d71ce7fd3614b4e2e9ce804597f3}{%
+           family={Maxim},
+           familyi={M\bibinitperiod},
+           given={Bruce\bibnamedelima R.},
+           giveni={B\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {México D. F.}%
+      }
+      \list{publisher}{1}{%
+        {McGraw-Hill}%
+      }
+      \strng{namehash}{da6ec91488daec8c3c9eddf18c78dad8}
+      \strng{fullhash}{da6ec91488daec8c3c9eddf18c78dad8}
+      \strng{fullhashraw}{da6ec91488daec8c3c9eddf18c78dad8}
+      \strng{bibnamehash}{da6ec91488daec8c3c9eddf18c78dad8}
+      \strng{authorbibnamehash}{da6ec91488daec8c3c9eddf18c78dad8}
+      \strng{authornamehash}{da6ec91488daec8c3c9eddf18c78dad8}
+      \strng{authorfullhash}{da6ec91488daec8c3c9eddf18c78dad8}
+      \strng{authorfullhashraw}{da6ec91488daec8c3c9eddf18c78dad8}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{9}
+      \field{title}{Ingeniería del software: Un enfoque práctico}
+      \field{year}{2021}
+      \true{nocite}
+    \endentry
+    \entry{sommerville2011}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=70341b3bfcce7026902f4eb1e4111b58}{%
+           family={Sommerville},
+           familyi={S\bibinitperiod},
+           given={Ian},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {México D. F.}%
+      }
+      \list{publisher}{1}{%
+        {Pearson Educación}%
+      }
+      \strng{namehash}{70341b3bfcce7026902f4eb1e4111b58}
+      \strng{fullhash}{70341b3bfcce7026902f4eb1e4111b58}
+      \strng{fullhashraw}{70341b3bfcce7026902f4eb1e4111b58}
+      \strng{bibnamehash}{70341b3bfcce7026902f4eb1e4111b58}
+      \strng{authorbibnamehash}{70341b3bfcce7026902f4eb1e4111b58}
+      \strng{authornamehash}{70341b3bfcce7026902f4eb1e4111b58}
+      \strng{authorfullhash}{70341b3bfcce7026902f4eb1e4111b58}
+      \strng{authorfullhashraw}{70341b3bfcce7026902f4eb1e4111b58}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{9}
+      \field{title}{Ingeniería de software}
+      \field{year}{2011}
+      \true{nocite}
+    \endentry
+  \enddatalist
+  \datalist[entry]{apa/global//global/global/global}
+    \entry{bilix_sf}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=8e089d8e30e39ba99124ec6b430bee11}{%
+           family={{Bilix Ingeniería}},
+           familyi={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{8e089d8e30e39ba99124ec6b430bee11}
+      \strng{fullhash}{8e089d8e30e39ba99124ec6b430bee11}
+      \strng{fullhashraw}{8e089d8e30e39ba99124ec6b430bee11}
+      \strng{bibnamehash}{8e089d8e30e39ba99124ec6b430bee11}
+      \strng{authorbibnamehash}{8e089d8e30e39ba99124ec6b430bee11}
+      \strng{authornamehash}{8e089d8e30e39ba99124ec6b430bee11}
+      \strng{authorfullhash}{8e089d8e30e39ba99124ec6b430bee11}
+      \strng{authorfullhashraw}{8e089d8e30e39ba99124ec6b430bee11}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{BeeTracer}: Gestiona, consulta y traza tus faenas logísticas con facilidad}
+      \field{urlday}{22}
+      \field{urlmonth}{9}
+      \field{urlyear}{2026}
+      \field{year}{s.f.}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.beetracer.cl/
+      \endverb
+      \verb{url}
+      \verb https://www.beetracer.cl/
+      \endverb
+    \endentry
+    \entry{booch2005}{book}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=e4f07715269e006a4d4a4efa3ce3f996}{%
+           family={Booch},
+           familyi={B\bibinitperiod},
+           given={Grady},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b8ace965f1ffa84dd4512f7e64c62d75}{%
+           family={Rumbaugh},
+           familyi={R\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3e8f03cc324f52193ab00c1fab4df61a}{%
+           family={Jacobson},
+           familyi={J\bibinitperiod},
+           given={Ivar},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Boston}%
+      }
+      \list{publisher}{1}{%
+        {Addison-Wesley}%
+      }
+      \strng{namehash}{c3345176bc96f17c7ea4c60e61223be4}
+      \strng{fullhash}{be6f3ff47123ebcb32f54f571b015ebc}
+      \strng{fullhashraw}{be6f3ff47123ebcb32f54f571b015ebc}
+      \strng{bibnamehash}{be6f3ff47123ebcb32f54f571b015ebc}
+      \strng{authorbibnamehash}{be6f3ff47123ebcb32f54f571b015ebc}
+      \strng{authornamehash}{c3345176bc96f17c7ea4c60e61223be4}
+      \strng{authorfullhash}{be6f3ff47123ebcb32f54f571b015ebc}
+      \strng{authorfullhashraw}{be6f3ff47123ebcb32f54f571b015ebc}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2}
+      \field{title}{The {Unified Modeling Language} user guide}
+      \field{year}{2005}
+      \true{nocite}
+    \endentry
+    \entry{charlabeetracer2026}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=95fcd7aa656906854bda8302d22e3dfc}{%
+           family={{Equipo de desarrollo de BeeTracer, Bilix Ingeniería}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Pontificia Universidad Católica de Valparaíso, Escuela de Ingeniería Informática}%
+      }
+      \strng{namehash}{95fcd7aa656906854bda8302d22e3dfc}
+      \strng{fullhash}{95fcd7aa656906854bda8302d22e3dfc}
+      \strng{fullhashraw}{95fcd7aa656906854bda8302d22e3dfc}
+      \strng{bibnamehash}{95fcd7aa656906854bda8302d22e3dfc}
+      \strng{authorbibnamehash}{95fcd7aa656906854bda8302d22e3dfc}
+      \strng{authornamehash}{95fcd7aa656906854bda8302d22e3dfc}
+      \strng{authorfullhash}{95fcd7aa656906854bda8302d22e3dfc}
+      \strng{authorfullhashraw}{95fcd7aa656906854bda8302d22e3dfc}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Presentación}
+      \field{title}{Charla técnica sobre el proceso de desconsolidado y la plataforma {BeeTracer}}
+      \field{year}{2026}
+    \endentry
+    \entry{fowler2004}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=312ac886938a9b2be4f8eb607567fe4c}{%
+           family={Fowler},
+           familyi={F\bibinitperiod},
+           given={Martin},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Boston}%
+      }
+      \list{publisher}{1}{%
+        {Addison-Wesley}%
+      }
+      \strng{namehash}{312ac886938a9b2be4f8eb607567fe4c}
+      \strng{fullhash}{312ac886938a9b2be4f8eb607567fe4c}
+      \strng{fullhashraw}{312ac886938a9b2be4f8eb607567fe4c}
+      \strng{bibnamehash}{312ac886938a9b2be4f8eb607567fe4c}
+      \strng{authorbibnamehash}{312ac886938a9b2be4f8eb607567fe4c}
+      \strng{authornamehash}{312ac886938a9b2be4f8eb607567fe4c}
+      \strng{authorfullhash}{312ac886938a9b2be4f8eb607567fe4c}
+      \strng{authorfullhashraw}{312ac886938a9b2be4f8eb607567fe4c}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{3}
+      \field{title}{{UML} distilled: A brief guide to the standard object modeling language}
+      \field{year}{2004}
+      \true{nocite}
+    \endentry
+    \entry{larman2003}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=be7db5922f05fc919bdc1c036502e5ee}{%
+           family={Larman},
+           familyi={L\bibinitperiod},
+           given={Craig},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Madrid}%
+      }
+      \list{publisher}{1}{%
+        {Pearson Educación}%
+      }
+      \strng{namehash}{be7db5922f05fc919bdc1c036502e5ee}
+      \strng{fullhash}{be7db5922f05fc919bdc1c036502e5ee}
+      \strng{fullhashraw}{be7db5922f05fc919bdc1c036502e5ee}
+      \strng{bibnamehash}{be7db5922f05fc919bdc1c036502e5ee}
+      \strng{authorbibnamehash}{be7db5922f05fc919bdc1c036502e5ee}
+      \strng{authornamehash}{be7db5922f05fc919bdc1c036502e5ee}
+      \strng{authorfullhash}{be7db5922f05fc919bdc1c036502e5ee}
+      \strng{authorfullhashraw}{be7db5922f05fc919bdc1c036502e5ee}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2}
+      \field{title}{{UML} y patrones: Una introducción al análisis y diseño orientado a objetos y al proceso unificado}
+      \field{year}{2003}
+    \endentry
+    \entry{omg2017}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=4d6b6fbad838f7618c462458711482fa}{%
+           family={{Object Management Group}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{4d6b6fbad838f7618c462458711482fa}
+      \strng{fullhash}{4d6b6fbad838f7618c462458711482fa}
+      \strng{fullhashraw}{4d6b6fbad838f7618c462458711482fa}
+      \strng{bibnamehash}{4d6b6fbad838f7618c462458711482fa}
+      \strng{authorbibnamehash}{4d6b6fbad838f7618c462458711482fa}
+      \strng{authornamehash}{4d6b6fbad838f7618c462458711482fa}
+      \strng{authorfullhash}{4d6b6fbad838f7618c462458711482fa}
+      \strng{authorfullhashraw}{4d6b6fbad838f7618c462458711482fa}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{OMG Unified Modeling Language} ({OMG UML}), version 2.5.1}
+      \field{urlday}{22}
+      \field{urlmonth}{9}
+      \field{urlyear}{2026}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.omg.org/spec/UML/2.5.1/
+      \endverb
+      \verb{url}
+      \verb https://www.omg.org/spec/UML/2.5.1/
+      \endverb
+    \endentry
+    \entry{plantuml_sf}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=9e991784a7de86b867cc684c4745f4dd}{%
+           family={{PlantUML}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{9e991784a7de86b867cc684c4745f4dd}
+      \strng{fullhash}{9e991784a7de86b867cc684c4745f4dd}
+      \strng{fullhashraw}{9e991784a7de86b867cc684c4745f4dd}
+      \strng{bibnamehash}{9e991784a7de86b867cc684c4745f4dd}
+      \strng{authorbibnamehash}{9e991784a7de86b867cc684c4745f4dd}
+      \strng{authornamehash}{9e991784a7de86b867cc684c4745f4dd}
+      \strng{authorfullhash}{9e991784a7de86b867cc684c4745f4dd}
+      \strng{authorfullhashraw}{9e991784a7de86b867cc684c4745f4dd}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{PlantUML}: Open-source tool that uses simple textual descriptions to draw {UML} diagrams}
+      \field{urlday}{22}
+      \field{urlmonth}{9}
+      \field{urlyear}{2026}
+      \field{year}{s.f.}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://plantuml.com/
+      \endverb
+      \verb{url}
+      \verb https://plantuml.com/
+      \endverb
+    \endentry
+    \entry{pressman2021}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=4d3f81788d99cf425c4b6e0a454baab0}{%
+           family={Pressman},
+           familyi={P\bibinitperiod},
+           given={Roger\bibnamedelima S.},
+           giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=13b3d71ce7fd3614b4e2e9ce804597f3}{%
+           family={Maxim},
+           familyi={M\bibinitperiod},
+           given={Bruce\bibnamedelima R.},
+           giveni={B\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {México D. F.}%
+      }
+      \list{publisher}{1}{%
+        {McGraw-Hill}%
+      }
+      \strng{namehash}{da6ec91488daec8c3c9eddf18c78dad8}
+      \strng{fullhash}{da6ec91488daec8c3c9eddf18c78dad8}
+      \strng{fullhashraw}{da6ec91488daec8c3c9eddf18c78dad8}
+      \strng{bibnamehash}{da6ec91488daec8c3c9eddf18c78dad8}
+      \strng{authorbibnamehash}{da6ec91488daec8c3c9eddf18c78dad8}
+      \strng{authornamehash}{da6ec91488daec8c3c9eddf18c78dad8}
+      \strng{authorfullhash}{da6ec91488daec8c3c9eddf18c78dad8}
+      \strng{authorfullhashraw}{da6ec91488daec8c3c9eddf18c78dad8}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{9}
+      \field{title}{Ingeniería del software: Un enfoque práctico}
+      \field{year}{2021}
+      \true{nocite}
+    \endentry
+    \entry{sommerville2011}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=70341b3bfcce7026902f4eb1e4111b58}{%
+           family={Sommerville},
+           familyi={S\bibinitperiod},
+           given={Ian},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {México D. F.}%
+      }
+      \list{publisher}{1}{%
+        {Pearson Educación}%
+      }
+      \strng{namehash}{70341b3bfcce7026902f4eb1e4111b58}
+      \strng{fullhash}{70341b3bfcce7026902f4eb1e4111b58}
+      \strng{fullhashraw}{70341b3bfcce7026902f4eb1e4111b58}
+      \strng{bibnamehash}{70341b3bfcce7026902f4eb1e4111b58}
+      \strng{authorbibnamehash}{70341b3bfcce7026902f4eb1e4111b58}
+      \strng{authornamehash}{70341b3bfcce7026902f4eb1e4111b58}
+      \strng{authorfullhash}{70341b3bfcce7026902f4eb1e4111b58}
+      \strng{authorfullhashraw}{70341b3bfcce7026902f4eb1e4111b58}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{9}
+      \field{title}{Ingeniería de software}
+      \field{year}{2011}
+      \true{nocite}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
