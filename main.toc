@@ -1,8 +1,9 @@
-\contentsline {chapter}{Índice General}{i}{Doc-Start}%
-\contentsline {chapter}{Lista de Figuras}{v}{chapter*.1}%
-\contentsline {chapter}{Lista de Tablas}{vi}{chapter*.2}%
+\babel@toc {spanish}{}\relax 
+\contentsline {chapter}{Índice General}{\es@scroman {i}}{Doc-Start}%
+\contentsline {chapter}{Lista de Figuras}{\es@scroman {v}}{chapter*.1}%
+\contentsline {chapter}{Lista de Tablas}{\es@scroman {vi}}{chapter*.2}%
 \contentsline {chapter}{\numberline {1}Introducción}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Objetivos}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.1}Objetivos}{2}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Alcance y limitaciones del modelo}{2}{section.1.2}%
 \contentsline {chapter}{\numberline {2}Definición del problema}{3}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Contexto del negocio}{3}{section.2.1}%
@@ -79,5 +80,5 @@
 \contentsline {section}{\numberline {9.5}Paquete «Controladores y servicios»}{52}{section.9.5}%
 \contentsline {chapter}{\numberline {10}Conclusiones}{54}{chapter.10}%
 \contentsline {chapter}{Referencias bibliográficas}{56}{chapter*.13}%
-\contentsline {chapter}{\numberline {Anexo~A}Trazabilidad entre modelos}{57}{appendix.A}%
-\contentsline {chapter}{\numberline {Anexo~B}Regeneración de los diagramas}{59}{appendix.B}%
+\contentsline {chapter}{\numberline {Anexo~A}Trazabilidad entre modelos}{57}{appendix.Alph1}%
+\contentsline {chapter}{\numberline {Anexo~B}Regeneración de los diagramas}{59}{appendix.Alph2}%
