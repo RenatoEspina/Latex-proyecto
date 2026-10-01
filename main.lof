@@ -5,18 +5,29 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Diagrama de casos de uso de alto nivel del sistema BeeTracer}}{15}{figure.caption.4}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Casos de uso del subsistema de ejecución en terreno}}{16}{figure.caption.5}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Diagrama de caso de uso de alto nivel}}{9}{figure.caption.4}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Gestionar usuarios - Diag. expandido}}{10}{figure.caption.5}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Gestionar roles - Diag. expandido}}{10}{figure.caption.6}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Gestionar tipos de bulto - Diag. expandido}}{11}{figure.caption.7}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Gestionar clientes - Diag. expandido}}{11}{figure.caption.8}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Gestionar trabajadores - Diag. expandido}}{12}{figure.caption.9}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Importar manifiesto - Diag. expandido}}{12}{figure.caption.10}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Gestionar programaciones - Diag. expandido}}{13}{figure.caption.11}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Gestionar operaciones - Diag. expandido}}{13}{figure.caption.12}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Completar información de consolidado/desconsolidado - Diag. expandido}}{14}{figure.caption.13}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Aprobar reporte - Diag. expandido}}{14}{figure.caption.14}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Visualizar estado - Diag. expandido}}{15}{figure.caption.15}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces Diagrama de secuencia del caso de uso CU-05}}{32}{figure.caption.6}%
-\contentsline {figure}{\numberline {7.2}{\ignorespaces Diagrama de secuencia del caso de uso CU-08}}{33}{figure.caption.7}%
-\contentsline {figure}{\numberline {7.3}{\ignorespaces Diagrama de secuencia del caso de uso CU-12}}{34}{figure.caption.8}%
-\contentsline {figure}{\numberline {7.4}{\ignorespaces Diagrama de secuencia del ciclo completo del reporte}}{35}{figure.caption.9}%
-\contentsline {figure}{\numberline {7.5}{\ignorespaces Diagrama de colaboración del caso de uso CU-12}}{36}{figure.caption.10}%
-\contentsline {figure}{\numberline {7.6}{\ignorespaces Diagrama de colaboración del ciclo de revisión, aprobación y envío del reporte}}{36}{figure.caption.11}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Diagrama de secuencia - Importar manifiesto}}{24}{figure.caption.16}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Diagrama de secuencia - Crear programación}}{25}{figure.caption.17}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Diagrama de secuencia - Registrar desconsolidado}}{26}{figure.caption.18}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Diagrama de secuencia - Revisar reporte}}{26}{figure.caption.19}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Diagrama de colaboración - Importar manifiesto}}{27}{figure.caption.20}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Diagrama de colaboración - Crear programación}}{27}{figure.caption.21}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Diagrama de colaboración - Registrar desconsolidado}}{28}{figure.caption.22}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Diagrama de colaboración - Revisar reporte}}{28}{figure.caption.23}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.1}{\ignorespaces Diagrama de clases de diseño del sistema BeeTracer}}{39}{figure.caption.12}%
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {21}{\ignorespaces Diagrama de clases}}{30}{figure.caption.24}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.27)  27 SEP 2026 23:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.27)  30 SEP 2026 00:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1470,9 +1470,14 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip116
 ) (estilo_informe.tex
-Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 156.
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 160.
 
-)
+
+(C:\Users\benjo\AppData\Local\Programs\MiKTeX\tex/latex/chngcntr\chngcntr.sty
+Package: chngcntr 2018/04/09 v1.1a change counter resetting
+Package chngcntr Info: \counterwithout already defined.
+(chngcntr)             Quitting chngcntr on input line 21.
+))
 
 Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 (biblatex)                Loading 'csquotes' recommended.
@@ -1484,13 +1489,7 @@ LaTeX Font Info:    Trying to load font information for T1+ptm on input line 70
 (C:\Users\benjo\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
-(main.aux (Portadas/portada_principal.aux) (Capitulos/01_introduccion.aux)
-(Capitulos/02_definicion_problema.aux) (Capitulos/03_descripcion_general.aux)
-(Capitulos/04_clientes_usuarios.aux) (Capitulos/05_funciones_sistema.aux)
-(Capitulos/06_casos_uso.aux) (Capitulos/07_interaccion.aux)
-(Capitulos/08_clases_diseno.aux) (Capitulos/09_diccionario_clases.aux)
-(Capitulos/10_conclusiones.aux) (Anexos/anexo_a_trazabilidad.aux)
-(Anexos/anexo_b_diagramas.aux))
+No file main.aux.
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 70.
@@ -1511,7 +1510,6 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 70.
 LaTeX Font Info:    ... okay on input line 70.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 70.
 LaTeX Font Info:    ... okay on input line 70.
-
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -1598,8 +1596,9 @@ Package biblatex Info: Automatic encoding selection.
 \openout4 = `main.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'main.bbl' found.
- (main.bbl)
+Package biblatex Info: ... file 'main.bbl' not found.
+
+No file main.bbl.
 Package biblatex Info: Reference section=0 on input line 70.
 Package biblatex Info: Reference segment=0 on input line 70.
 Package caption Info: Begin \AtBeginDocument code.
@@ -1613,22 +1612,20 @@ Package babel Info: 'spanish' activates 'spanish' shorthands.
 (babel)             Reported on input line 70.
 \c@lstlisting=\count555
 Package tocbasic Info: setting babel extension for `lol' on input line 70.
-
 (C:\Users\benjo\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
 Package: inputenc 2024/02/08 v1.3d Input encoding file
 \inpenc@prehook=\toks62
 \inpenc@posthook=\toks63
 )
 Package hyperref Info: Link coloring OFF on input line 70.
-
-(main.out) (main.out)
 \@outlinefile=\write6
 \openout6 = `main.out'.
 
 \openout2 = `Portadas/portada_principal.aux'.
 
- (Portadas/portada_principal.tex
-<Figuras/encabezado_pucv.png, id=374, 895.09406pt x 237.13594pt>
+
+(Portadas/portada_principal.tex
+<Figuras/encabezado_pucv.png, id=42, 895.09406pt x 237.13594pt>
 File: Figuras/encabezado_pucv.png Graphic file (type png)
 <use Figuras/encabezado_pucv.png>
 Package pdftex.def Info: Figuras/encabezado_pucv.png  used on input line 18.
@@ -1639,546 +1636,346 @@ Package pdftex.def Info: Figuras/encabezado_pucv.png  used on input line 18.
 {C:/Users/benjo/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/benj
 o/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc} <./Figuras/encabez
 ado_pucv.png>])
-(main.toc
+No file main.toc.
+\tf@toc=\write7
+\openout7 = `main.toc'.
+
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.I}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.23 ...io \texttimes {} mÃ³dulo}{10}{section.4.3}
-                                                  % [1
+l.88 \clearpage
+                [1
 
 
 
 
 ]
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 2
-3.
-
-(C:\Users\benjo\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
-File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-)
-[2]
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 55
-.
- (C:\Users\benjo\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1pcr.fd
-File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-)
-[3]
-Overfull \hbox (28.60779pt too wide) detected at line 82
-\T1/ptm/b/n/12 Anexo A. 
- []
-
-
-Overfull \hbox (27.94774pt too wide) detected at line 83
-\T1/ptm/b/n/12 Anexo B. 
- []
-
-)
-\tf@toc=\write7
-\openout7 = `main.toc'.
-
- [4] (main.lof)
+No file main.lof.
 \tf@lof=\write8
 \openout8 = `main.lof'.
 
- [5
+[2
 
 
-] (main.lot [6
-
-
-] [7]
-Overfull \hbox (27.15594pt too wide) detected at line 68
-\T1/ptm/m/n/12 Anexo A.1. 
- []
-
-
-Overfull \hbox (26.4959pt too wide) detected at line 70
-\T1/ptm/m/n/12 Anexo B.1. 
- []
-
-)
+]
+No file main.lot.
 \tf@lot=\write9
 \openout9 = `main.lot'.
 
- [8]
+[3
+
+
+]
 \openout2 = `Capitulos/01_introduccion.aux'.
 
  (Capitulos/01_introduccion.tex
 CapÃ­tulo 1.
-[1
+
+LaTeX Warning: Citation 'charlabeetracer2026' on page 1 undefined on input line
+ 8.
+
+
+LaTeX Warning: Citation 'bilix_sf' on page 1 undefined on input line 8.
+
+
+LaTeX Warning: Citation 'omg2017' on page 1 undefined on input line 10.
+
+
+LaTeX Warning: Citation 'larman2003' on page 1 undefined on input line 10.
+
+
+LaTeX Warning: Citation '' on page 1 undefined on input line 10.
+
+) [1
 
 
 
-]) [2]
+]
 \openout2 = `Capitulos/02_definicion_problema.aux'.
 
  (Capitulos/02_definicion_problema.tex
 CapÃ­tulo 2.
-ignored error: Infinite glue shrinkage found in box being split [3
+
+Overfull \hbox (5.8677pt too wide) in paragraph at lines 4--5
+\T1/ptm/b/n/12 da\T1/ptm/m/n/12 : las em-pre-sas im-por-ta-do-ras pe-que-ñas y 
+me-dia-nas ---una za-pa-te-ría, una ju-gue-te-ría, una ferretería---
+ []
+
+) [2
 
 
 
 
-]) [4]
+]
 \openout2 = `Capitulos/03_descripcion_general.aux'.
 
-
-(Capitulos/03_descripcion_general.tex
+ (Capitulos/03_descripcion_general.tex
 CapÃ­tulo 3.
-[5
+) [3
+
+
+
+
+] [4]
+\openout2 = `Capitulos/04_clientes_usuarios.aux'.
+
+ (Capitulos/04_clientes_usuarios.tex
+CapÃ­tulo 4.
+) [5
 
 
 
 
 ] [6]
-ignored error: Infinite glue shrinkage found in box being split [7]) [8]
-\openout2 = `Capitulos/04_clientes_usuarios.aux'.
-
-
-(Capitulos/04_clientes_usuarios.tex
-CapÃ­tulo 4.
-
-Overfull \hbox (6.95277pt too wide) in paragraph at lines 110--110
-[]|\T1/ptm/m/n/10 Almacenamiento|  
- []
-
-ignored error: Infinite glue shrinkage found in box being split [9
-
-
-
-
-]
-Overfull \hbox (18.2366pt too wide) in alignment at lines 127--137
- [] [] [] [] [] [] [] 
- []
-
-
-Overfull \hbox (18.2366pt too wide) in alignment at lines 137--143
- [] [] [] [] [] [] [] 
- []
-
-
-Overfull \hbox (18.2366pt too wide) in alignment at lines 143--159
- [] [] [] [] [] [] [] 
- []
-
-[10]) [11]
 \openout2 = `Capitulos/05_funciones_sistema.aux'.
 
  (Capitulos/05_funciones_sistema.tex
 CapÃ­tulo 5.
-ignored error: Infinite glue shrinkage found in box being split [12
+[7
 
 
 
 
-]
-ignored error: Infinite glue shrinkage found in box being split [13]) [14]
+]) [8]
 \openout2 = `Capitulos/06_casos_uso.aux'.
 
-
-(Capitulos/06_casos_uso.tex
+ (Capitulos/06_casos_uso.tex
 CapÃ­tulo 6.
-<Figuras/diagramas/01-casos-uso-alto-nivel.png, id=718, 2732.2075pt x 1635.1087
-5pt>
-File: Figuras/diagramas/01-casos-uso-alto-nivel.png Graphic file (type png)
-<use Figuras/diagramas/01-casos-uso-alto-nivel.png>
-Package pdftex.def Info: Figuras/diagramas/01-casos-uso-alto-nivel.png  used on
- input line 11.
-(pdftex.def)             Requested size: 472.03123pt x 282.48071pt.
-<Figuras/diagramas/02-casos-uso-ejecucion-terreno.png, id=719, 1726.45pt x 526.
-96875pt>
-File: Figuras/diagramas/02-casos-uso-ejecucion-terreno.png Graphic file (type p
-ng)
-<use Figuras/diagramas/02-casos-uso-ejecucion-terreno.png>
-Package pdftex.def Info: Figuras/diagramas/02-casos-uso-ejecucion-terreno.png  
-used on input line 29.
-(pdftex.def)             Requested size: 472.03123pt x 144.07657pt.
 
-Underfull \hbox (badness 2368) in paragraph at lines 29--29
-[]\T1/ptm/m/n/10 Figura 6.2: |Ca-sos de uso del sub-sis-te-ma de eje-cu-ción en
- te-rreno (apli-ca-ción mó-vil). Fuen-te Plan-tUML:
- []
+LaTeX Warning: Reference `fig:cu_alto' on page 9 undefined on input line 12.
 
-[15
+
+LaTeX Warning: Reference `cap:funciones' on page 9 undefined on input line 12.
+
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 14
+.
+(C:\Users\benjo\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)
+[9
 
 
 
 
- <./Figuras/diagramas/01-casos-uso-alto-nivel.png (PNG copy)>]
-ignored error: Infinite glue shrinkage found in box being split [16 <./Figuras/
-diagramas/02-casos-uso-ejecucion-terreno.png (PNG copy)>]
-ignored error: Infinite glue shrinkage found in box being split [17] [18]
+] [10] [11] [12] [13] [14]
+
+LaTeX Warning: Reference `fig:cu_usuarios' on page 15 undefined on input line 4
+6.
+
+
+LaTeX Warning: Reference `fig:cu_visualizar' on page 15 undefined on input line
+ 46.
+
+
+LaTeX Warning: Reference `fig:cu_usuarios' on page 15 undefined on input line 5
+7.
+
+ignored error: Infinite glue shrinkage found in box being split [15]
+
+LaTeX Warning: Reference `fig:cu_usuarios' on page 16 undefined on input line 8
+3.
+
+ignored error: Infinite glue shrinkage found in box being split [16]
+
+LaTeX Warning: Reference `fig:cu_manifiesto' on page 17 undefined on input line
+ 108.
+
+ignored error: Infinite glue shrinkage found in box being split [17]
+
+LaTeX Warning: Reference `fig:cu_programaciones' on page 18 undefined on input 
+line 136.
+
+ignored error: Infinite glue shrinkage found in box being split [18]
+
+LaTeX Warning: Reference `fig:cu_completar' on page 19 undefined on input line 
+164.
+
 ignored error: Infinite glue shrinkage found in box being split [19]
 ignored error: Infinite glue shrinkage found in box being split [20]
-ignored error: Infinite glue shrinkage found in box being split [21] [22]
-[23]
-ignored error: Infinite glue shrinkage found in box being split [24]
-ignored error: Infinite glue shrinkage found in box being split [25]
-ignored error: Infinite glue shrinkage found in box being split [26]
-ignored error: Infinite glue shrinkage found in box being split [27] [28]
-[29]) [30]
+
+LaTeX Warning: Reference `fig:cu_aprobar' on page 21 undefined on input line 19
+3.
+
+ignored error: Infinite glue shrinkage found in box being split [21]
+
+LaTeX Warning: Reference `fig:cu_visualizar' on page 22 undefined on input line
+ 220.
+
+ignored error: Infinite glue shrinkage found in box being split [22]) [23]
 \openout2 = `Capitulos/07_interaccion.aux'.
 
- (Capitulos/07_interaccion.tex
+
+(Capitulos/07_interaccion.tex
 CapÃ­tulo 7.
 
-Overfull \hbox (3.9197pt too wide) in paragraph at lines 4--8
-\T1/ptm/m/n/12 (én-fa-sis en el \T1/ptm/b/n/12 or-den tem-po-ral\T1/ptm/m/n/12 
-) y co-la-bo-ra-ción (én-fa-sis en los \T1/ptm/b/n/12 en-la-ces es-truc-tu-ra-l
-es \T1/ptm/m/n/12 en-tre objetos)---
+LaTeX Warning: Reference `cap:clases' on page 24 undefined on input line 4.
+
+
+LaTeX Warning: Reference `cap:diccionario' on page 24 undefined on input line 4
+.
+
+
+LaTeX Warning: Reference `tab:cu_importar_manifiesto' on page 24 undefined on i
+nput line 13.
+
+
+Overfull \hbox (2.63pt too wide) in paragraph at lines 13--14
+\T1/ptm/m/n/12 me-dian-te \T1/pcr/m/n/12 ServicioAduana\T1/ptm/m/n/12 . Si el s
+er-vi-cio res-pon-de y el XML es vá-li-do, se crea el \T1/pcr/m/n/12 Manifiesto
+
  []
 
-<Figuras/diagramas/03-secuencia-cu05-importar-manifiesto.png, id=790, 1407.2575
-pt x 902.37125pt>
-File: Figuras/diagramas/03-secuencia-cu05-importar-manifiesto.png Graphic file 
-(type png)
-<use Figuras/diagramas/03-secuencia-cu05-importar-manifiesto.png>
-Package pdftex.def Info: Figuras/diagramas/03-secuencia-cu05-importar-manifiest
-o.png  used on input line 61.
-(pdftex.def)             Requested size: 415.38979pt x 266.34866pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 61--61
-[]\T1/ptm/m/n/10 Figura 7.1: |Dia-gra-ma de se-cuen-cia del ca-so de uso CU-05.
- Fuen-te:
+Overfull \hbox (17.00375pt too wide) in paragraph at lines 13--14
+\T1/ptm/m/n/12 y, por ca-da con-te-ne-dor y lí-nea de car-ga de-cla-ra-dos, se 
+crean los ob-je-tos \T1/pcr/m/n/12 Contenedor \T1/ptm/m/n/12 y \T1/pcr/m/n/12 L
+ineaCarga
  []
 
-[31
+
+LaTeX Warning: Reference `tab:cu_crear_programacion' on page 24 undefined on in
+put line 19.
+
+[24
 
 
 
 
 ]
-Overfull \hbox (8.37425pt too wide) in paragraph at lines 63--72
-\T1/ptm/m/n/12 co-mu-ni-ca-ción ex-ter-na en \T1/pcr/m/n/12 ServicioAduanaWS\T1
-/ptm/m/n/12 , que im-ple-men-ta la in-ter-faz \T1/pcr/m/n/12 IServicioAduana\T1
-/ptm/m/n/12 .
- []
 
-<Figuras/diagramas/04-secuencia-cu08-programar-faena.png, id=795, 1520.68124pt 
-x 1088.065pt>
-File: Figuras/diagramas/04-secuencia-cu08-programar-faena.png Graphic file (typ
-e png)
-<use Figuras/diagramas/04-secuencia-cu08-programar-faena.png>
-Package pdftex.def Info: Figuras/diagramas/04-secuencia-cu08-programar-faena.pn
-g  used on input line 80.
-(pdftex.def)             Requested size: 387.06906pt x 276.94653pt.
+LaTeX Warning: Reference `tab:cu_registrar_desconsolidado' on page 25 undefined
+ on input line 25.
 
-Underfull \hbox (badness 10000) in paragraph at lines 80--80
-[]\T1/ptm/m/n/10 Figura 7.2: |Dia-gra-ma de se-cuen-cia del ca-so de uso CU-08.
- Fuen-te:
- []
+[25]
 
-[32 <./Figuras/diagramas/03-secuencia-cu05-importar-manifiesto.png (PNG copy)>]
+LaTeX Warning: Reference `tab:cu_revisar_reporte' on page 26 undefined on input
+ line 31.
 
-Overfull \hbox (43.84995pt too wide) in paragraph at lines 82--88
-\T1/ptm/m/n/12 ción del ho-ra-rio y lue-go la asig-na-ción de la cua-dri-lla (C
-U-08 in-clu-ye a CU-09). El \T1/pcr/m/n/12 GestorProgramacion
- []
-
-
-Overfull \hbox (16.32806pt too wide) in paragraph at lines 82--88
-\T1/ptm/m/n/12 va-li-da en dos mo-men-tos dis-tin-tos ---disponibilidad de ho-r
-a-rio y ha-bi-li-ta-ción del tra-ba-ja-dor designado---
- []
-
-<Figuras/diagramas/05-secuencia-cu12-registrar-desconsolidado.png, id=800, 1997
-.4625pt x 1796.7125pt>
-File: Figuras/diagramas/05-secuencia-cu12-registrar-desconsolidado.png Graphic 
-file (type png)
-<use Figuras/diagramas/05-secuencia-cu12-registrar-desconsolidado.png>
-Package pdftex.def Info: Figuras/diagramas/05-secuencia-cu12-registrar-desconso
-lidado.png  used on input line 97.
-(pdftex.def)             Requested size: 415.38979pt x 373.61966pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 97--97
-[]\T1/ptm/m/n/10 Figura 7.3: |Dia-gra-ma de se-cuen-cia del ca-so de uso CU-12,
- in-clu-yen-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 97--97
-\T1/ptm/m/n/10 do las eta-pas de aper-tu-ra (CU-11) y cie-rre (CU-14) que lo en
--mar-can. Fuen-te:
- []
-
-[33 <./Figuras/diagramas/04-secuencia-cu08-programar-faena.png (PNG copy)>]
-[34 <./Figuras/diagramas/05-secuencia-cu12-registrar-desconsolidado.png (PNG co
-py)>]
-<Figuras/diagramas/06-secuencia-cu18-cu20-revisar-enviar-reporte.png, id=812, 1
-648.1575pt x 1512.65125pt>
-File: Figuras/diagramas/06-secuencia-cu18-cu20-revisar-enviar-reporte.png Graph
-ic file (type png)
-<use Figuras/diagramas/06-secuencia-cu18-cu20-revisar-enviar-reporte.png>
-Package pdftex.def Info: Figuras/diagramas/06-secuencia-cu18-cu20-revisar-envia
-r-reporte.png  used on input line 128.
-(pdftex.def)             Requested size: 401.22942pt x 368.23698pt.
- [35 <./Figuras/diagramas/06-secuencia-cu18-cu20-revisar-enviar-reporte.png (PN
-G copy)>]
-<Figuras/diagramas/07-colaboracion-cu12-registrar-desconsolidado.png, id=817, 1
-778.645pt x 518.93875pt>
-File: Figuras/diagramas/07-colaboracion-cu12-registrar-desconsolidado.png Graph
-ic file (type png)
-<use Figuras/diagramas/07-colaboracion-cu12-registrar-desconsolidado.png>
-Package pdftex.def Info: Figuras/diagramas/07-colaboracion-cu12-registrar-desco
-nsolidado.png  used on input line 154.
-(pdftex.def)             Requested size: 472.03123pt x 137.71606pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 154--154
-[]\T1/ptm/m/n/10 Figura 7.5: |Dia-gra-ma de co-la-bo-ra-ción del ca-so de uso C
-U-12. Fuen-te:
- []
-
-<Figuras/diagramas/08-colaboracion-cu18-revisar-enviar-reporte.png, id=818, 273
-0.2pt x 539.01375pt>
-File: Figuras/diagramas/08-colaboracion-cu18-revisar-enviar-reporte.png Graphic
- file (type png)
-<use Figuras/diagramas/08-colaboracion-cu18-revisar-enviar-reporte.png>
-Package pdftex.def Info: Figuras/diagramas/08-colaboracion-cu18-revisar-enviar-
-reporte.png  used on input line 171.
-(pdftex.def)             Requested size: 472.03123pt x 93.18558pt.
-
-Underfull \hbox (badness 4582) in paragraph at lines 171--171
-[]\T1/ptm/m/n/10 Figura 7.6: |Dia-gra-ma de co-la-bo-ra-ción del ci-clo de re-v
-i-sión, apro-ba-ción y en-vío del re-por-te. Fuen-te:
- []
-
-[36 <./Figuras/diagramas/07-colaboracion-cu12-registrar-desconsolidado.png (PNG
- copy)> <./Figuras/diagramas/08-colaboracion-cu18-revisar-enviar-reporte.png (P
-NG copy)>]) [37]
+[26] [27]) [28]
 \openout2 = `Capitulos/08_clases_diseno.aux'.
 
  (Capitulos/08_clases_diseno.tex
 CapÃ­tulo 8.
-[38
+
+LaTeX Warning: Reference `fig:clases' on page 29 undefined on input line 4.
+
+
+Underfull \hbox (badness 6078) in paragraph at lines 8--9
+[]\T1/ptm/b/n/12 Carga y ope-ra-ción en te-rreno: \T1/pcr/m/n/12 Manifiesto\T1/
+ptm/m/n/12 , \T1/pcr/m/n/12 Contenedor\T1/ptm/m/n/12 , \T1/pcr/m/n/12 LineaCarg
+a\T1/ptm/m/n/12 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--10
+[]\T1/ptm/b/n/12 Controladores y ser-vi-cios: \T1/pcr/m/n/12 GestorManifiesto\T
+1/ptm/m/n/12 , \T1/pcr/m/n/12 GestorProgramacion\T1/ptm/m/n/12 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--10
+\T1/pcr/m/n/12 GestorOperacion \T1/ptm/m/n/12 y \T1/pcr/m/n/12 GestorReportes \
+T1/ptm/m/n/12 coor-di-nan los ca-sos de uso;
+ []
+
+
+Underfull \hbox (badness 6808) in paragraph at lines 9--10
+\T1/pcr/m/n/12 ServicioAduana \T1/ptm/m/n/12 y \T1/pcr/m/n/12 ServicioCorreo \T
+1/ptm/m/n/12 en-cap-su-lan los sis-te-mas ex-ter-nos; y
+ []
+
+[29
+
+
+
+
+] [30
+
+])
+\openout2 = `Capitulos/09_diccionario_clases.aux'.
+
+ (Capitulos/09_diccionario_clases.tex
+CapÃ­tulo 9.
+
+LaTeX Warning: Reference `fig:clases' on page 31 undefined on input line 4.
+
+ignored error: Infinite glue shrinkage found in box being split [31
+
 
 
 
 
 ]
-<Figuras/diagramas/09-clases-diseno.png, id=836, 3628.55624pt x 1923.185pt>
-File: Figuras/diagramas/09-clases-diseno.png Graphic file (type png)
-<use Figuras/diagramas/09-clases-diseno.png>
-Package pdftex.def Info: Figuras/diagramas/09-clases-diseno.png  used on input 
-line 76.
-(pdftex.def)             Requested size: 472.03123pt x 250.16956pt.
- [39
+ignored error: Infinite glue shrinkage found in box being split [32]
+Overfull \hbox (14.5812pt too wide) in paragraph at lines 105--105
+[]|\T1/pcr/m/n/10.95 Trabajador[]|  
+ []
 
- <./Figuras/diagramas/09-clases-diseno.png (PNG copy)>]
-Overfull \hbox (19.37804pt too wide) in paragraph at lines 91--97
-\T1/ptm/m/n/12 guar-da si-mul-tá-nea-men-te \T1/pcr/m/n/12 cantidadDeclarada \T
-1/ptm/m/n/12 (lo que di-ce el ma-ni-fies-to) y \T1/pcr/m/n/12 cantidadRecibida
+ignored error: Infinite glue shrinkage found in box being split [33]
+ignored error: Infinite glue shrinkage found in box being split [34]
+Overfull \hbox (52.17578pt too wide) in paragraph at lines 195--195
+[]|\T1/pcr/m/n/10.95 EstadoProgramacion|  
  []
 
 
-Overfull \hbox (33.53432pt too wide) in paragraph at lines 104--109
-\T1/ptm/b/n/12 3. Do-ble vía de aso-cia-ción de las fo-to-gra-fías. \T1/ptm/m/n
-/12 Una \T1/pcr/m/n/12 Fotografia \T1/ptm/m/n/12 per-te-ne-ce siem-pre a una \T
-1/pcr/m/n/12 EtapaFaena
+Overfull \hbox (32.4658pt too wide) in paragraph at lines 214--214
+[]|\T1/pcr/m/n/10.95 EstadoOperacion|  
  []
 
 
-Overfull \hbox (62.32262pt too wide) in paragraph at lines 110--116
-\T1/ptm/b/n/12 4. Pro-gra-ma-ción por in-ter-fa-ces en las in-te-gra-cio-nes ex
--ter-nas. \T1/pcr/m/n/12 IServicioAduana \T1/ptm/m/n/12 e \T1/pcr/m/n/12 IPasar
-elaCorreo
+Overfull \hbox (6.18584pt too wide) in paragraph at lines 215--215
+[]|\T1/pcr/m/n/10.95 OrigenDatos|  
+ []
+
+ignored error: Infinite glue shrinkage found in box being split [35]
+Overfull \hbox (6.18584pt too wide) in paragraph at lines 233--233
+[]|\T1/pcr/m/n/10.95 EstadoSello|  
  []
 
 
-Overfull \hbox (24.47516pt too wide) in paragraph at lines 117--122
-\T1/ptm/b/n/12 5. \T1/pcr/b/n/12 SincronizadorOffline \T1/ptm/b/n/12 co-mo con-
-tro-la-dor de in-fra-es-truc-tu-ra. \T1/ptm/m/n/12 Man-tie-ne \T1/pcr/m/n/12 co
-laPendientes
+Overfull \hbox (25.89581pt too wide) in paragraph at lines 249--249
+[]|\T1/pcr/m/n/10.95 TipoIncidencia|  
+ []
+
+ignored error: Infinite glue shrinkage found in box being split [36]
+Overfull \hbox (19.32582pt too wide) in paragraph at lines 292--292
+[]|\T1/pcr/m/n/10.95 EstadoReporte|  
  []
 
 
-Overfull \hbox (58.67621pt too wide) in paragraph at lines 123--128
-\T1/ptm/b/n/12 6. Es-ta-dos mo-de-la-dos co-mo enu-me-ra-cio-nes ex-plí-ci-tas.
- \T1/pcr/m/n/12 EstadoFaena\T1/ptm/m/n/12 , \T1/pcr/m/n/12 EstadoFoto\T1/ptm/m/
-n/12 , \T1/pcr/m/n/12 EstadoReporte\T1/ptm/m/n/12 ,
+Overfull \hbox (6.18584pt too wide) in paragraph at lines 296--296
+[]|\T1/pcr/m/n/10.95 EstadoEnvio|  
  []
 
-
-Overfull \hbox (12.63062pt too wide) in paragraph at lines 134--137
-\T1/ptm/b/n/12 8. Ver-sio-na-do del re-por-te. \T1/pcr/m/n/12 Reporte \T1/ptm/m
-/n/12 man-tie-ne el atri-bu-to \T1/pcr/m/n/12 version \T1/ptm/m/n/12 y la ope-r
-a-ción \T1/pcr/m/n/12 versionar()\T1/ptm/m/n/12 ,
+ignored error: Infinite glue shrinkage found in box being split [37]
+Overfull \hbox (30.0409pt too wide) in paragraph at lines 326--326
+[]|\T1/pcr/m/n/10.95 listarContenedoresPendientes( 
  []
 
-[40
-
-]) [41]
-\openout2 = `Capitulos/09_diccionario_clases.aux'.
-
- (Capitulos/09_diccionario_clases.tex
-CapÃ­tulo 9.
-ignored error: Infinite glue shrinkage found in box being split [42
-
-
-
-
-] [43]
-[44]
-ignored error: Infinite glue shrinkage found in box being split [45] [46]
-ignored error: Infinite glue shrinkage found in box being split [47] [48]
-ignored error: Infinite glue shrinkage found in box being split [49]
-Overfull \hbox (3.54796pt too wide) in paragraph at lines 566--566
-[]|\T1/ptm/m/n/10 TipoIncidencia|  
+ignored error: Infinite glue shrinkage found in box being split [38] [39]
+Overfull \hbox (14.5812pt too wide) in paragraph at lines 403--403
+[]|\T1/pcr/m/n/10.95 Fotografia[]|  
  []
 
-
-Overfull \hbox (2.23793pt too wide) in paragraph at lines 658--658
-[]|\T1/ptm/m/n/10 EstadoReporte|  
- []
-
-[50]
-ignored error: Infinite glue shrinkage found in box being split [51]
-Overfull \hbox (6.794pt too wide) in paragraph at lines 737--737
-[]|\T1/pcr/m/n/10 ^^Scontrol^^T|  
- []
-
-
-Overfull \hbox (6.794pt too wide) in paragraph at lines 742--742
-[]|\T1/pcr/m/n/10 ^^Scontrol^^T|  
- []
-
-
-Overfull \hbox (50.33183pt too wide) in paragraph at lines 744--746
-[]|\T1/pcr/m/n/10 listarContenedoresPendientes()\T1/ptm/m/n/10 , 
- []
-
-
-Overfull \hbox (47.83183pt too wide) in paragraph at lines 744--746
-\T1/pcr/m/n/10 validarDisponibilidadHorario()|  
- []
-
-
-Overfull \hbox (6.794pt too wide) in paragraph at lines 748--748
-[]|\T1/pcr/m/n/10 ^^Scontrol^^T|  
- []
-
-
-Overfull \hbox (6.794pt too wide) in paragraph at lines 755--755
-[]|\T1/pcr/m/n/10 ^^Scontrol^^T|  
- []
-
-
-Overfull \hbox (3.75557pt too wide) in paragraph at lines 761--761
-[]|\T1/pcr/m/n/10 Sincronizador- 
- []
-
-
-Overfull \hbox (6.794pt too wide) in paragraph at lines 761--761
-[]|\T1/pcr/m/n/10 ^^Scontrol^^T|  
- []
-
-
-Overfull \hbox (8.33183pt too wide) in paragraph at lines 764--766
-\T1/pcr/m/n/10 sincronizarPendientes()\T1/ptm/m/n/10 , 
- []
-
-
-Overfull \hbox (18.794pt too wide) in paragraph at lines 768--768
-[]|\T1/pcr/m/n/10 ^^Sinterface^^T|  
- []
-
-
-Overfull \hbox (18.794pt too wide) in paragraph at lines 779--779
-[]|\T1/pcr/m/n/10 ^^Sinterface^^T|  
- []
-
-
-Overfull \hbox (6.794pt too wide) in paragraph at lines 789--789
-[]|\T1/pcr/m/n/10 ^^Sservice^^T|  
- []
-
-
-Overfull \hbox (6.794pt too wide) in paragraph at lines 795--795
-[]|\T1/pcr/m/n/10 ^^Sservice^^T|  
- []
-
-ignored error: Infinite glue shrinkage found in box being split [52]) [53]
+ignored error: Infinite glue shrinkage found in box being split [40]) [41]
 \openout2 = `Capitulos/10_conclusiones.aux'.
 
 
 (Capitulos/10_conclusiones.tex
 CapÃ­tulo 10.
-[54
-
-
-
-
-]) [55] (Capitulos/11_nota_referencias.tex
-Overfull \hbox (53.08934pt too wide) in paragraph at lines 8--10
-[]\T1/ptm/m/n/10.95 Agregar la fe-cha exac-ta de la char-la téc-ni-ca y el nom-
-bre del ex-po-si-tor (en-tra-da \T1/pcr/m/n/10.95 charlabeetracer2026\T1/ptm/m/
-n/10.95 ). 
- []
-
-) [56
+) [42
 
 
 
 
 ]
-\openout2 = `Anexos/anexo_a_trazabilidad.aux'.
+CapÃ­tulo 11.
 
- (Anexos/anexo_a_trazabilidad.tex
-Anexo Anexo~A.
-ignored error: Infinite glue shrinkage found in box being split [57
+LaTeX Warning: Empty bibliography on input line 132.
 
-
-
-]) [58]
-\openout2 = `Anexos/anexo_b_diagramas.aux'.
-
-
-(Anexos/anexo_b_diagramas.tex
-Anexo Anexo~B.
-
-Overfull \hbox (151.82106pt too wide) in paragraph at lines 21--24
-[]\T1/ptm/m/n/12 Las imá-ge-nes PNG uti-li-za-das por es-te do-cu-men-to se en-
-cuen-tran co-pia-das en \T1/pcr/m/n/12 informe/latex/Figuras/diagramas/\T1/ptm/
-m/n/12 ;
- []
-
-
-Overfull \hbox (2.30511pt too wide) in paragraph at lines 45--45
-[]|\T1/pcr/m/n/10 02-casos-uso-ejecucion-terreno.puml|  
- []
-
-
-Overfull \hbox (44.30511pt too wide) in paragraph at lines 48--48
-[]|\T1/pcr/m/n/10 03-secuencia-cu05-importar-manifiesto.puml|  
- []
-
-
-Overfull \hbox (20.30511pt too wide) in paragraph at lines 51--51
-[]|\T1/pcr/m/n/10 04-secuencia-cu08-programar-faena.puml|  
- []
-
-
-Overfull \hbox (74.30511pt too wide) in paragraph at lines 54--54
-[]|\T1/pcr/m/n/10 05-secuencia-cu12-registrar-desconsolidado.puml|  
- []
-
-
-Overfull \hbox (92.30511pt too wide) in paragraph at lines 57--57
-[]|\T1/pcr/m/n/10 06-secuencia-cu18-cu20-revisar-enviar-reporte.puml|  
- []
-
-
-Overfull \hbox (92.30511pt too wide) in paragraph at lines 60--60
-[]|\T1/pcr/m/n/10 07-colaboracion-cu12-registrar-desconsolidado.puml|  
- []
-
-
-Overfull \hbox (80.30511pt too wide) in paragraph at lines 63--63
-[]|\T1/pcr/m/n/10 08-colaboracion-cu18-revisar-enviar-reporte.puml|  
- []
-
-) [59
+[43
 
 
 
@@ -2187,17 +1984,19 @@ Overfull \hbox (80.30511pt too wide) in paragraph at lines 63--63
 LaTeX Info: Redefining \sptext on input line 11.
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
-
-(Capitulos/01_introduccion.aux) (Capitulos/02_definicion_problema.aux)
-(Capitulos/03_descripcion_general.aux) (Capitulos/04_clientes_usuarios.aux)
-(Capitulos/05_funciones_sistema.aux) (Capitulos/06_casos_uso.aux)
-(Capitulos/07_interaccion.aux) (Capitulos/08_clases_diseno.aux)
-(Capitulos/09_diccionario_clases.aux) (Capitulos/10_conclusiones.aux)
-(Anexos/anexo_a_trazabilidad.aux) (Anexos/anexo_b_diagramas.aux))
+ (Capitulos/01_introduccion.aux) (Capitulos/02_definicion_problema.aux) (Capitu
+los/03_descripcion_general.aux)
+(Capitulos/04_clientes_usuarios.aux) (Capitulos/05_funciones_sistema.aux)
+(Capitulos/06_casos_uso.aux) (Capitulos/07_interaccion.aux)
+(Capitulos/08_clases_diseno.aux) (Capitulos/09_diccionario_clases.aux)
+(Capitulos/10_conclusiones.aux))
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
+
+
+LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
@@ -2208,43 +2007,33 @@ Package rerunfilecheck Warning: File `main.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: 30FB94CC30BEFDBD7911A97D7B9AB99E;18768
-(rerunfilecheck)             After:  3C98C555275C802C7539CC27E8DACDAF;18776.
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  6E947777712030BC4ABA53EA3E8C7558;9271.
 
-Package biblatex Warning: Please rerun LaTeX.
-(biblatex)                Page breaks have changed.
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                main
+(biblatex)                and rerun LaTeX afterwards.
 
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 49103 strings out of 467871
- 1027399 string characters out of 5418376
- 2200106 words of memory out of 5000000
- 76949 multiletter control sequences out of 15000+600000
- 699692 words of font info for 105 fonts, out of 8000000 for 9000
+ 48537 strings out of 467871
+ 1012938 string characters out of 5418376
+ 2133841 words of memory out of 5000000
+ 76530 multiletter control sequences out of 15000+600000
+ 683382 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 125i,12n,131p,2492b,2893s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{appendix.B} has been referenced but does not exist,
- replaced by a fixed one
-
-
-pdfTeX warning (dest): name{appendix.A} has been referenced but does not exist,
- replaced by a fixed one
-
-<C:/Users/benjo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
-sy10.pfb><C:/Users/benjo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/
-ucrb8a.pfb><C:/Users/benjo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courie
-r/ucrr8a.pfb><C:/Users/benjo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/time
-s/utmb8a.pfb><C:/Users/benjo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/time
-s/utmbi8a.pfb><C:/Users/benjo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/tim
-es/utmr8a.pfb><C:/Users/benjo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/tim
-es/utmri8a.pfb>
-Output written on main.pdf (68 pages, 1854170 bytes).
+ 125i,11n,131p,2492b,2893s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/benjo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.
+pfb><C:/Users/benjo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.
+pfb><C:/Users/benjo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.
+pfb><C:/Users/benjo/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a
+.pfb>
+Output written on main.pdf (47 pages, 249250 bytes).
 PDF statistics:
- 1039 PDF objects out of 1200 (max. 8388607)
- 235 named destinations out of 1000 (max. 500000)
- 871 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 402 PDF objects out of 1000 (max. 8388607)
+ 153 named destinations out of 1000 (max. 500000)
+ 162 words of extra memory for PDF output out of 10000 (max. 10000000)
 
