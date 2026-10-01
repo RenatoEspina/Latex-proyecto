@@ -1,0 +1,128 @@
+\chapter{Definición del problema}
+\label{cap:problema}
+
+\section{Contexto del negocio}
+\label{sec:contexto}
+
+El comercio exterior chileno opera mayoritariamente bajo la modalidad de \textbf{carga
+consolidada}. Las empresas importadoras pequeñas y medianas ---una zapatería, una juguetería, una
+ferretería--- no generan volumen suficiente para llenar un contenedor completo. Por ello,
+operadores logísticos en el extranjero agrupan mercancía de múltiples clientes dentro de un mismo
+contenedor, que luego viaja por vía marítima hasta el puerto de destino.
+
+Toda la carga transportada se declara en un \textbf{manifiesto}, documento que funciona como índice
+de lo que viene a bordo. Actualmente este manifiesto es electrónico y viaja en formato \textbf{XML}
+bajo estándares internacionales; la nave lo transmite al \textbf{Servicio Nacional de Aduanas}
+antes de recalar.
+
+El puerto de Valparaíso, sin embargo, no dispone de espacio físico para realizar las faenas de
+apertura de contenedores dentro de su recinto. La solución de la industria fueron los
+\textbf{terminales extraportuarios} o \este{puertos secos}: extensiones del puerto ubicadas a
+algunos kilómetros (por ejemplo, en Placilla), dotadas de las instituciones fiscalizadoras
+necesarias ---Aduana, PDI, Servicio Nacional de Salud---. Allí ocurre el \textbf{desconsolidado}:
+se abre el contenedor, se extrae la mercancía, se deposita en el piso separada por lotes según el
+cliente destinatario, y cada empresa envía posteriormente su propio camión a retirar lo suyo.
+
+\section{El problema}
+\label{sec:elproblema}
+
+\begin{nota}
+\este{«Un puerto no pierde carga: pierde información.»}
+\end{nota}
+
+El desconsolidado es el punto del proceso logístico donde \textbf{la custodia de la mercancía
+cambia de manos varias veces en pocas horas} y donde, históricamente, la información se ha
+registrado de la forma más precaria. Los problemas concretos identificados se resumen en la
+Tabla~\ref{tab:problemas}.
+
+{\estilotabla
+\begin{longtable}{L{0.05\textwidth} L{0.46\textwidth} L{0.40\textwidth}}
+
+\caption{Problemas identificados en el proceso de desconsolidado}
+\label{tab:problemas}
+\\
+
+\toprule
+\textbf{\#} & \textbf{Problema} & \textbf{Consecuencia para el negocio} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{\#} & \textbf{Problema} & \textbf{Consecuencia para el negocio} \\
+\midrule
+\endhead
+
+P1 &
+\textbf{Registro manual en papel y planillas sueltas.} Los datos de la faena se anotan a mano y se
+transcriben después, en sistemas que no se comunican entre sí. &
+Errores de transcripción, información tardía y duplicada, imposibilidad de consultar el estado de
+una faena en tiempo real. \\
+
+\midrule
+
+P2 &
+\textbf{Evidencia fotográfica dispersa.} Las fotos del estado de la carga se toman con teléfonos
+personales y circulan por mensajería instantánea. &
+Evidencia sin orden ni respaldo, difícil de localizar e \textbf{imposible de auditar} semanas
+después. \\
+
+\midrule
+
+P3 &
+\textbf{Ausencia de prueba del estado de la carga al momento de abrir el contenedor.} &
+Ante un reclamo, el terminal no puede demostrar si el daño venía desde origen o si se produjo
+durante sus propias maniobras. Es \este{su palabra contra la del cliente}. \\
+
+\midrule
+
+P4 &
+\textbf{Indefinición de responsabilidades ante los seguros.} Sin un registro fechado y verificable
+del estado del sello y de la mercancía, no es posible determinar rápidamente a qué aseguradora
+corresponde responder. &
+Litigios prolongados, costos asumidos por el terminal, deterioro de la relación comercial. \\
+
+\midrule
+
+P5 &
+\textbf{Descoordinación en la planificación de faenas y cuadrillas.} &
+Tiempos muertos, sobreasignación de personal, incumplimiento de horarios comprometidos con el
+importador. \\
+
+\midrule
+
+P6 &
+\textbf{Reporte al cliente lento y de calidad heterogénea.} &
+El importador no sabe en qué estado llegó su carga hasta días después de la faena. \\
+
+\bottomrule
+
+\end{longtable}
+}
+
+\section{Restricciones del entorno operativo}
+\label{sec:restricciones}
+
+El problema no es solo informacional: el \textbf{entorno físico impone restricciones técnicas
+severas} que todo sistema que pretenda resolverlo debe considerar.
+
+\begin{itemize}
+    \item \textbf{Conectividad deficiente.} Los patios de los terminales están ocupados por miles
+          de contenedores metálicos que actúan como pantalla y bloquean la señal Wi-Fi.
+    \item \textbf{Volumen de datos elevado.} Cada faena genera decenas o cientos de fotografías de
+          alta resolución que deben transferirse desde el terreno.
+    \item \textbf{Condiciones de trabajo adversas.} El registro lo realiza un operario de patio,
+          con guantes, a la intemperie y con iluminación variable, sobre un dispositivo móvil.
+    \item \textbf{Sensibilidad comercial de la evidencia.} El terminal necesita registrar todo,
+          pero no necesariamente publicar todo: existen detalles operativos internos que prefiere
+          resolver antes de notificar al cliente.
+\end{itemize}
+
+\section{Formulación del problema}
+\label{sec:formulacion}
+
+\begin{nota}
+\textbf{¿Cómo digitalizar, documentar y transparentar el proceso de desconsolidado de contenedores
+en un terminal extraportuario, generando evidencia verificable e irrefutable del estado de la carga
+en cada etapa crítica, bajo condiciones de conectividad intermitente y sin aumentar
+significativamente la carga de trabajo del operario en terreno?}
+\end{nota}

@@ -1,0 +1,166 @@
+\chapter{Clientes y usuarios}
+\label{cap:clientes}
+
+\section{Cliente del sistema}
+\label{sec:clientesistema}
+
+Es necesario distinguir dos acepciones del término «cliente», que en este dominio se solapan:
+
+\begin{itemize}
+    \item \textbf{Cliente del sistema (quien adquiere la licencia):} el \textbf{terminal
+          extraportuario, depósito o bodega} que contrata BeeTracer bajo suscripción. Es quien
+          define los requisitos, sufre el problema descrito en el Capítulo~\ref{cap:problema} y
+          obtiene el beneficio legal y operativo.
+    \item \textbf{Cliente del depósito (quien recibe el servicio logístico):} la \textbf{empresa
+          importadora} ---zapatería, juguetería, ferretería--- cuya carga viene consignada dentro
+          del contenedor. Dentro del modelo UML este es un \textbf{actor del sistema}, no su
+          comprador: no opera la plataforma, pero es el destinatario final del reporte y, por
+          tanto, el beneficiario último de la trazabilidad.
+\end{itemize}
+
+En este informe se emplea \textbf{«Cliente del depósito»} para referirse al importador (actor) y
+\textbf{«Depósito»} o \textbf{«Terminal»} para referirse a la organización que adquiere el sistema.
+
+\section{Usuarios y actores del sistema}
+\label{sec:actores}
+
+La Tabla~\ref{tab:actores} identifica los actores del sistema, distinguiendo entre actores
+principales ---los que inician casos de uso--- y secundarios ---los que participan en ellos sin
+iniciarlos, incluidos los sistemas externos---.
+
+{\estilotabla
+\begin{longtable}{L{0.04\textwidth} L{0.17\textwidth} L{0.13\textwidth} L{0.13\textwidth} L{0.44\textwidth}}
+
+\caption{Actores del sistema BeeTracer}
+\label{tab:actores}
+\\
+
+\toprule
+\textbf{\#} & \textbf{Actor} & \textbf{Tipo} & \textbf{Plataforma} &
+\textbf{Perfil y responsabilidades} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{\#} & \textbf{Actor} & \textbf{Tipo} & \textbf{Plataforma} &
+\textbf{Perfil y responsabilidades} \\
+\midrule
+\endhead
+
+A1 & \textbf{Administrador del depósito} & Principal (humano) & Web &
+Gestiona la configuración global del sistema: usuarios, roles y permisos, clientes, trabajadores,
+cuadrillas y tipos de bulto. Define \textbf{quién accede a qué funcionalidades}. Perfil
+administrativo, conocimiento medio-alto del sistema. \\
+
+\midrule
+
+A2 & \textbf{Jefe de faena} & Principal (humano) & Web &
+Opera la plataforma web desde la oficina. Recibe la información de los barcos, importa manifiestos,
+crea las programaciones de desconsolidado y asigna qué cuadrilla trabajará en qué contenedor y a
+qué hora. Coordina al personal. Perfil operativo-planificador. \\
+
+\midrule
+
+A3 & \textbf{Jefe tarjador} (operario de terreno) & Principal (humano) & Móvil &
+Líder de la cuadrilla física que abre el contenedor. Registra toda la evidencia en terreno:
+fotografías, número de sello, lotes por cliente e incidencias. \textbf{Usuario más crítico del
+sistema}: trabaja a la intemperie, con guantes y bajo presión de tiempo; requiere una interfaz
+simple, guiada paso a paso y tolerante a fallos de conectividad. No se le exigen conocimientos
+informáticos previos. \\
+
+\midrule
+
+A4 & \textbf{Supervisor / Revisor de reportes} & Principal (humano) & Web &
+Revisa en la plataforma web el borrador del PDF generado por la faena antes de su envío al cliente
+final. Puede rechazar fotografías defectuosas y solicitar su recaptura. Actúa como \textbf{control
+de calidad y filtro comercial}. \\
+
+\midrule
+
+A5 & \textbf{Cliente del depósito} (importador) & Secundario (humano) & Correo / consulta web &
+Usuario externo que espera su carga. Recibe el reporte PDF con el estado de su mercancía y puede
+consultar el histórico de sus faenas. No configura ni opera el sistema. \\
+
+\midrule
+
+A6 & \textbf{Ejecutivo comercial} & Secundario (humano) & Web &
+Recibe el llamado inicial de las empresas importadoras, les vende el servicio y agenda la llegada
+del contenedor. Alimenta y mantiene la ficha de clientes. \\
+
+\midrule
+
+A7 & \textbf{Servicio Nacional de Aduanas} & Secundario (sistema externo) & \este{Web service} &
+Sistema externo desde el cual BeeTracer descarga el manifiesto electrónico en formato XML. Estándar
+mundial, lo que permite replicar la integración en otros países cambiando únicamente la dirección
+del servicio. \\
+
+\midrule
+
+A8 & \textbf{Sistema del cliente (API)} & Secundario (sistema externo) & API &
+Sistema informático del propio cliente que se integra directamente con BeeTracer para transferirle
+la información de la carga. \\
+
+\midrule
+
+A9 & \textbf{Servidor de correo} & Secundario (sistema externo) & SMTP &
+Servicio a través del cual se despacha el reporte PDF aprobado a los destinatarios. \\
+
+\midrule
+
+A10 & \textbf{Repositorio de fotografías (nube)} & Secundario (sistema externo) & Almacenamiento &
+Servicio de almacenamiento externo donde se persisten las imágenes capturadas en terreno. \\
+
+\bottomrule
+
+\end{longtable}
+}
+
+\section{Matriz de usuario \texttimes{} módulo}
+\label{sec:matriz}
+
+La Tabla~\ref{tab:matriz} cruza los actores humanos con los módulos funcionales definidos en la
+Sección~\ref{sec:modulos}, indicando el nivel de acceso de cada perfil. Leyenda: \textbf{C} crear
+$\cdot$ \textbf{L} leer/consultar $\cdot$ \textbf{M} modificar $\cdot$ \textbf{A} aprobar $\cdot$
+\textbf{---} sin acceso.
+
+{\estilotabla
+\begin{longtable}{L{0.24\textwidth} C{0.11\textwidth} C{0.11\textwidth} C{0.12\textwidth} C{0.11\textwidth} C{0.11\textwidth} C{0.12\textwidth}}
+
+\caption{Matriz de acceso de usuarios por módulo}
+\label{tab:matriz}
+\\
+
+\toprule
+\textbf{Módulo} & \textbf{A1 Admin.} & \textbf{A2 Jefe faena} & \textbf{A3 Jefe tarjador} &
+\textbf{A4 Super\-visor} & \textbf{A5 Cliente} & \textbf{A6 Ejecutivo} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Módulo} & \textbf{A1 Admin.} & \textbf{A2 Jefe faena} & \textbf{A3 Jefe tarjador} &
+\textbf{A4 Super\-visor} & \textbf{A5 Cliente} & \textbf{A6 Ejecutivo} \\
+\midrule
+\endhead
+
+M1. Administrar maestros & C L M & L & --- & L & --- & C L M \este{(clientes)} \\
+\midrule
+M2. Ingesta de carga & L & C L M & C \este{(tarja ciega)} & L & --- & --- \\
+\midrule
+M3. Programar faenas & L & C L M & L \este{(su asignación)} & L & --- & L \\
+\midrule
+M4. Ejecutar operaciones & L & L & C L M & L & --- & --- \\
+\midrule
+M5. Gestión de reportes & L & L & M \este{(recaptura)} & L M \textbf{A} & --- & --- \\
+\midrule
+M6. Publicar y enviar & L & L & --- & C L & L \este{(sus faenas)} & L \\
+
+\bottomrule
+
+\end{longtable}
+}
+
+\begin{pendiente}[Por completar --- opcional]
+Si el equipo obtiene acceso a la plataforma, conviene validar esta matriz contra el catálogo real
+de permisos del módulo de administración, ya que BeeTracer permite definir roles a medida y no
+necesariamente coinciden con los seis perfiles tipo aquí descritos.
+\end{pendiente}

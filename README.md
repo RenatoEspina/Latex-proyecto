@@ -9,8 +9,13 @@ Conclusiones, Referencias bibliográficas).
 `pdflatex main.tex` → `biber main` → `pdflatex main.tex` (dos veces). Requiere biblatex con backend biber.
 
 ## Diagramas
-Los 21 diagramas se guardan como PNG en `Figuras/diagramas/` con los nombres indicados en `Guia_de_diagramas.md`.
+Todos se guardan en `Figuras/diagramas/` con los nombres indicados en `Guia_de_diagramas.md`.
 Mientras un archivo no exista, el PDF muestra un recuadro "[Diagrama pendiente]".
+
+* Figuras 1-12 (casos de uso): imágenes `.jpg` dibujadas en draw.io. Falta `04-cu-gestionar-tipos-bulto` (.png o .jpg; ajustar la extensión en `Capitulos/06_casos_uso.tex`).
+* Figuras 13-21 (secuencia, colaboración y clases): se generan con PlantUML desde `Figuras/diagramas/fuente/*.puml`:
+  `cd Figuras/diagramas/fuente && plantuml -charset UTF-8 -Sdpi=200 -tpng -o .. 1[3-9]-*.puml 2[01]-*.puml`
+  (el diagrama de clases también en SVG: `plantuml -charset UTF-8 -tsvg -o ../svg 21-diagrama-clases.puml`).
 
 ## Datos por completar
 Integrantes, profesor(a) y sección en `main.tex` y `Portadas/portada_principal.tex`.

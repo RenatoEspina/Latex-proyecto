@@ -1,201 +1,51 @@
-\chapter{Diagrama de Clases (de Diseño)}
+\chapter{Diagrama de clases}
 \label{cap:clases}
 
-La Figura~\ref{fig:clases} presenta el diagrama de clases de diseño completo del sistema. Por su
-extensión se incluye en una página apaisada; para su lectura en detalle se recomienda consultar la
-versión vectorial del archivo. Las secciones siguientes explican su organización en paquetes, las
-decisiones de diseño que lo sustentan y las restricciones de integridad que el modelo debe
-garantizar.
+\sloppy
 
+El diagrama de clases (Figura~\ref{fig:clases}) es una propuesta de diseño inferida a partir de la
+funcionalidad observada. Se organiza en tres grupos:
 
-\section{Organización en paquetes}
-\label{sec:paquetes}
+\begin{itemize}
+    \item \textbf{Datos maestros y seguridad:} \clase{Usuario}, \clase{Rol}, \clase{Permiso},
+          \clase{Cliente}, \clase{Trabajador}, \clase{Cuadrilla} y \clase{TipoBulto}. Los permisos
+          se asignan a los roles y no al usuario, de modo que \clase{Usuario} solo conoce su rol y
+          no concentra la lógica de autorización de cada módulo.
+    \item \textbf{Carga y operación en terreno:} \clase{Manifiesto}, \clase{Contenedor},
+          \clase{LineaCarga}, \clase{Programacion}, \clase{Operacion}, \clase{SelloSeguridad},
+          \clase{Incidencia}, \clase{Fotografia} y \clase{Reporte}.
+    \item \textbf{Controladores y servicios:} \clase{GestorManifiesto},
+          \clase{GestorProgramacion}, \clase{GestorOperacion} y \clase{GestorReportes} coordinan
+          los casos de uso; \clase{ServicioAduana} y \clase{ServicioCorreo} encapsulan los sistemas
+          externos; y \clase{SincronizadorOffline} gestiona el envío diferido de fotografías.
+\end{itemize}
 
-El diagrama se organiza en \textbf{cuatro paquetes} que reflejan la separación de
-responsabilidades del sistema, más una capa de controladores y servicios, según se detalla en la
-Tabla~\ref{tab:paquetes}.
-
-{\estilotabla
-\begin{longtable}{L{0.20\textwidth} L{0.38\textwidth} L{0.36\textwidth}}
-
-\caption{Paquetes del diagrama de clases y su responsabilidad}
-\label{tab:paquetes}
-\\
-
-\toprule
-\textbf{Paquete} & \textbf{Contenido} & \textbf{Responsabilidad} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Paquete} & \textbf{Contenido} & \textbf{Responsabilidad} \\
-\midrule
-\endhead
-
-\textbf{Seguridad y maestros} &
-\clase{Deposito}, \clase{Usuario}, \clase{Rol}, \clase{Permiso}, \clase{Cliente},
-\clase{Trabajador}, \clase{Cuadrilla}, \clase{TipoBulto} &
-Datos de configuración, relativamente estables, que parametrizan toda la operación. \\
-\midrule
-
-\textbf{Información de carga} &
-\clase{Manifiesto}, \clase{Contenedor}, \clase{LineaCarga}, \clase{OrigenDatos} &
-Representa lo que la nave \textbf{declara} que trae. Es la información de referencia contra la cual
-se contrasta la realidad. \\
-\midrule
-
-\textbf{Operación en terreno} &
-\clase{Faena}, \clase{EtapaFaena}, \clase{SelloSeguridad}, \clase{Fotografia},
-\clase{Incidencia} y sus enumeraciones &
-Representa lo que \textbf{efectivamente ocurrió}. Es el corazón del sistema y donde se acumula el
-valor probatorio. \\
-\midrule
-
-\textbf{Reportes y publicación} &
-\clase{Reporte}, \clase{EnvioReporte}, \clase{EstadoReporte} &
-Consolidación y difusión del expediente de la faena. \\
-\midrule
-
-\textbf{Controladores y servicios} &
-\clase{GestorManifiesto}, \clase{GestorProgramacion}, \clase{GestorFaena},
-\clase{GestorReportes}, \clase{SincronizadorOffline}, \clase{IServicioAduana},
-\clase{IPasarelaCorreo}, \clase{GeneradorPDF}, \clase{RepositorioFotos} &
-Capa de coordinación y de integración con el exterior. \\
-
-\bottomrule
-
-\end{longtable}
-}
+Las relaciones representan las decisiones de diseño más importantes: un manifiesto se compone de
+contenedores y cada contenedor de líneas de carga, cada una de las cuales pertenece a un cliente y
+a un tipo de bulto; una programación corresponde a un contenedor, se asigna a una cuadrilla y a un
+jefe tarjador (\clase{Trabajador}) y da origen a una operación; una cuadrilla agrupa a sus
+trabajadores; una operación se compone de fotografías, de un sello de seguridad y de las
+incidencias registradas, que se respaldan con fotografías; el sincronizador mantiene la cola de
+fotografías pendientes de envío; y un reporte se genera a partir de una operación y es aprobado
+por un usuario. Las operaciones de crear, consultar, editar, eliminar y cambiar estado de los datos
+maestros son las habituales de cada entidad y no se modelaron como controladores para no recargar
+el diagrama.
 
 \begin{landscape}
-
 \null\vfill
-
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{09-clases-diseno.png}
-    \caption[Diagrama de clases de diseño del sistema BeeTracer]
-    {Diagrama de clases de diseño del sistema BeeTracer. Fuente:
-    \texttt{diagramas/fuente/09-clases-diseno.puml}. Se recomienda consultar la versión vectorial
-    (\texttt{diagramas/svg/09-clases-diseno.svg}) para su lectura en detalle.}
+    \IfFileExists{Figuras/diagramas/21-diagrama-clases.png}{%
+        \includegraphics[width=\linewidth]{21-diagrama-clases.png}%
+    }{%
+        \fbox{\parbox[c][7cm][c]{0.85\linewidth}{\centering
+            \textbf{[Diagrama pendiente]}\\[4pt]
+            \texttt{Figuras/diagramas/21-diagrama-clases.png}}}%
+    }
+    \caption[Diagrama de clases]{Diagrama de clases del sistema BeeTracer.}
     \label{fig:clases}
 \end{figure}
-
 \vfill
-
 \end{landscape}
 
-\section{Decisiones de diseño relevantes}
-\label{sec:decisiones}
-
-\noindent \textbf{1. La dualidad declarado / recibido.} La separación entre el paquete \este{Información de
-carga} y el paquete \este{Operación en terreno} es la decisión estructural más importante del
-modelo. \clase{LineaCarga} guarda simultáneamente \clase{cantidadDeclarada} (lo que dice el
-manifiesto) y \clase{cantidadRecibida} (lo que contó el operario), y expone
-\clase{contrastarCantidad()}. \textbf{Toda la lógica de detección de faltantes y sobrantes nace de
-esa comparación}, que es precisamente el hecho que el sistema debe poder acreditar.
-
-\noindent \textbf{2. \clase{Faena} como agregado raíz.} \clase{Faena} compone (\texttt{*-\/-}) a
-\clase{EtapaFaena}, que a su vez compone a \clase{Fotografia}. La composición expresa que \textbf{la
-evidencia no tiene existencia independiente de la faena que la produjo}: eliminar una faena elimina
-su expediente completo. Esta es una restricción de integridad con implicancias legales, no solo
-técnicas.
-
-\noindent \textbf{3. Doble vía de asociación de las fotografías.} Una \clase{Fotografia} pertenece siempre a
-una \clase{EtapaFaena} (composición) y, adicionalmente, puede estar asociada a una
-\clase{Incidencia} (agregación \texttt{1..*}). Esto permite que el generador del PDF recorra la
-evidencia por etapa ---para el relato cronológico de la faena--- y por incidencia ---para destacar
-en rojo lo dañado--- sin duplicar el almacenamiento de imágenes.
-
-\noindent \textbf{4. Programación por interfaces en las integraciones externas.} \clase{IServicioAduana} e
-\clase{IPasarelaCorreo} son interfaces implementadas por \clase{ServicioAduanaWS} y
-\clase{ServicioCorreoSMTP}. Los controladores dependen de la abstracción, no de la implementación
-concreta (\este{inversión de dependencias}). Esto es lo que hace viable la internacionalización
-descrita en la Sección~\ref{sec:elsistema} y facilita las pruebas unitarias mediante dobles de
-prueba.
-
-\noindent \textbf{5. \clase{SincronizadorOffline} como controlador de infraestructura.} Mantiene
-\clase{colaPendientes} como estado propio y es el único objeto que conoce a
-\clase{RepositorioFotos}. Aísla la restricción de conectividad del patio
-(Sección~\ref{sec:restricciones}) en una sola clase, en lugar de dispersar la lógica de reintento
-por todo el modelo.
-
-\noindent \textbf{6. Estados modelados como enumeraciones explícitas.} \clase{EstadoFaena},
-\clase{EstadoFoto}, \clase{EstadoReporte}, \clase{EstadoSello}, \clase{TipoIncidencia},
-\clase{TipoEtapa} y \clase{OrigenDatos} se modelan como enumeraciones y no como cadenas libres,
-porque sobre esos valores se construyen las reglas de negocio del sistema (qué habilita el avance
-de etapa, qué se destaca en rojo, qué permite el envío).
-
-\noindent \textbf{7. Trazabilidad de la responsabilidad humana.} \clase{Faena} se asocia al \clase{Usuario}
-que la programó y \clase{Reporte} al \clase{Usuario} que lo aprobó. El sistema debe poder responder
-no solo \este{qué pasó}, sino \textbf{quién autorizó cada paso}: requisito derivado directamente
-del problema P4 (indefinición de responsabilidades ante los seguros).
-
-\noindent \textbf{8. Versionado del reporte.} \clase{Reporte} mantiene el atributo \clase{version} y la
-operación \clase{versionar()}, de modo que el ciclo de rechazo y recaptura (CU-19) no destruye el
-borrador anterior. La trazabilidad de las correcciones forma parte de la evidencia.
-
-\section{Restricciones de integridad del modelo}
-\label{sec:integridad}
-
-La Tabla~\ref{tab:integridad} recoge las reglas que el modelo debe garantizar y que no quedan
-expresadas gráficamente en la notación.
-
-{\estilotabla
-\begin{longtable}{C{0.07\textwidth} L{0.87\textwidth}}
-
-\caption{Restricciones de integridad del modelo de clases}
-\label{tab:integridad}
-\\
-
-\toprule
-\textbf{\#} & \textbf{Restricción} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{\#} & \textbf{Restricción} \\
-\midrule
-\endhead
-
-RI-1 & Una \clase{Faena} no puede pasar a estado \estado{FINALIZADA} si alguna \clase{EtapaFaena}
-obligatoria (\estado{APERTURA}, \estado{SEPARACION}, \estado{CIERRE}) no tiene al menos una
-\clase{Fotografia} en estado \estado{SUBIDA} o \estado{PENDIENTE}. \\
-\midrule
-
-RI-2 & Toda \clase{Incidencia} debe tener al menos una \clase{Fotografia} asociada
-(\texttt{1..*}). Una incidencia sin evidencia carece de valor probatorio. \\
-\midrule
-
-RI-3 & Un \clase{Reporte} no puede pasar a \estado{APROBADO} si contiene alguna \clase{Fotografia}
-en estado \estado{RECHAZADA} sin reemplazo. \\
-\midrule
-
-RI-4 & Un \clase{Reporte} no puede pasar a \estado{ENVIADO} sin estar previamente
-\estado{APROBADO}. \\
-\midrule
-
-RI-5 & Una \clase{Faena} solo puede asignarse a un \clase{Trabajador} como jefe tarjador si este
-pertenece a la \clase{Cuadrilla} asignada y está \clase{habilitado}. \\
-\midrule
-
-RI-6 & \clase{LineaCarga.cantidadRecibida} solo puede registrarse mientras la \clase{Faena} esté en
-estado \estado{EN\_EJECUCION}. \\
-\midrule
-
-RI-7 & Cuando \clase{Faena.modalidadIngreso = TARJA\_CIEGA}, \clase{LineaCarga.cantidadDeclarada}
-es nula y no se ejecuta el contraste de cantidades. \\
-\midrule
-
-RI-8 & Un \clase{SelloSeguridad} en estado \estado{ROTO} o \estado{NO\_COINCIDE} obliga a generar
-una \clase{Incidencia} antes de continuar con la etapa de separación. \\
-
-\bottomrule
-
-\end{longtable}
-}
-
-\begin{pendiente}[Por completar --- opcional]
-Estas restricciones pueden formalizarse en \textbf{OCL} si el profesor lo solicita. Ejemplo para
-RI-2: \texttt{context Incidencia inv: self.fotografias->size() >= 1}
-\end{pendiente}
+\fussy

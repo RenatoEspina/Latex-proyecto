@@ -1,79 +1,40 @@
 \chapter{Introducción}
 \label{cap:introduccion}
 
-El presente informe corresponde a la segunda entrega del proyecto semestral de la asignatura
-\textbf{ICI-3242 Modelamiento de Software}, y tiene por objetivo \textbf{modelar mediante UML} el
-sistema \textbf{BeeTracer}, una plataforma real de trazabilidad logística desarrollada por la
-empresa \textbf{Bilix Ingeniería} (Valparaíso, Chile) y actualmente operativa en terminales
-extraportuarios de la V Región.
+En el mundo empresarial actual, la logística se ha consolidado como un factor determinante para el
+éxito, la eficiencia operativa y la sostenibilidad de las organizaciones. La capacidad de optimizar
+procesos, reducir costos, mantener la trazabilidad de la carga y garantizar la transparencia frente
+a los clientes son exigencias fundamentales dentro de la cadena de suministro. Frente a estos
+desafíos, la digitalización se ha convertido en una respuesta esencial: reemplaza los registros
+manuales, centraliza la información y permite documentar las operaciones en el momento y el lugar
+en que ocurren.
 
-A diferencia de un proyecto de desarrollo convencional, este trabajo se aborda mediante
-\textbf{ingeniería inversa}: no se dispone del código fuente del sistema ni de su documentación
-técnica interna. El modelo aquí presentado se construyó a partir de tres fuentes de información:
+En este contexto surge \textbf{BeeTracer}, una solución tecnológica desarrollada por la empresa
+chilena Bilix Ingeniería (Valparaíso) y orientada a la gestión, consulta y trazabilidad de faenas
+logísticas, en particular las que se realizan en terminales extraportuarios. El sistema está
+compuesto por una \textbf{aplicación móvil}, que permite al personal de terreno registrar datos y
+evidencia fotográfica, y por una \textbf{plataforma web}, desde la cual se planifican, supervisan y
+reportan las operaciones. Su propuesta de valor central es dejar un registro verificable del estado
+de la carga en cada etapa crítica del proceso.
 
-\begin{enumerate}
-    \item \textbf{La charla técnica dictada por el equipo de BeeTracer}, en la que se explicó en
-          detalle el proceso logístico de importación, el flujo operativo del software y las
-          decisiones de arquitectura que lo condicionaron \parencite{charlabeetracer2026}.
-    \item \textbf{La información pública de la plataforma} (sitio web comercial de BeeTracer,
-          sección de características y preguntas frecuentes) \parencite{bilix_sf}.
-    \item \textbf{La inferencia y el modelado propio}, aplicando las técnicas de la asignatura para
-          deducir la estructura interna que explica de forma coherente el comportamiento observado.
-\end{enumerate}
+El presente informe corresponde a la segunda entrega de la asignatura Modelamiento de Software y
+tiene por objetivo comprender el funcionamiento de BeeTracer mediante un proceso de
+\textbf{ingeniería inversa}. No se dispone del código fuente ni de la documentación interna del
+sistema, por lo que el modelo se construyó a partir de tres fuentes: la charla técnica dictada por
+el equipo de BeeTracer \parencite{charlabeetracer2026}, la información pública de la plataforma
+\parencite{bilix_sf} y la inferencia propia, aplicando las técnicas de la asignatura para deducir
+la estructura que explica de forma coherente el comportamiento descrito.
 
-Mientras el \textbf{Informe 1} abordó el modelamiento estructurado del sistema (modelo ambiental,
-diagramas de flujo de datos y modelo de datos), este \textbf{Informe 2} traslada ese entendimiento
-al \textbf{paradigma orientado a objetos}, siguiendo el enfoque propuesto por \textcite{larman2003}
-y la notación estándar UML 2.5 \parencite{omg2017}. Concretamente, se desarrollan:
+Para ello se emplea el Lenguaje Unificado de Modelado (UML) \parencite{omg2017}, siguiendo el
+enfoque de \textcite{larman2003}. A lo largo del informe se identifican los clientes, usuarios y
+funciones del sistema; se representan sus funcionalidades mediante diagramas de casos de uso (de
+alto nivel, expandidos y narrativos); se modela su comportamiento dinámico con diagramas de
+secuencia y de colaboración; y se propone un diagrama de clases con su respectivo diccionario. Con
+estas herramientas se busca ofrecer una visión clara, ilustrativa y técnica de las interacciones
+que ocurren dentro del sistema.
 
-\begin{itemize}
-    \item La identificación de \textbf{clientes, usuarios y funciones del sistema} de alto nivel.
-    \item Los \textbf{diagramas de casos de uso}, en su versión gráfica y narrativa (alto nivel y
-          expandidos).
-    \item Los \textbf{diagramas de interacción} (secuencia y colaboración) de los casos de uso más
-          representativos.
-    \item El \textbf{diagrama de clases de diseño} y su correspondiente \textbf{diccionario de
-          clases}.
-\end{itemize}
-
-\section{Objetivos}
-\label{sec:objetivos}
-
-\textbf{Objetivo general.} Reconstruir y documentar, mediante modelos UML, la arquitectura
-funcional y estructural del sistema BeeTracer, de modo que el modelo resultante permita comprender
-su funcionamiento interno y sirva como base para su mantención o extensión.
-
-\textbf{Objetivos específicos.}
-
-\begin{itemize}
-    \item Identificar los actores del sistema y delimitar su frontera respecto de los sistemas
-          externos con los que interopera.
-    \item Levantar las funciones del sistema y clasificarlas según su visibilidad para el usuario.
-    \item Modelar los casos de uso del sistema, expandiendo narrativamente aquellos que concentran
-          el valor del negocio.
-    \item Representar la dinámica de los casos de uso críticos mediante diagramas de secuencia y de
-          colaboración.
-    \item Proponer un diagrama de clases de diseño consistente con los modelos anteriores y
-          documentarlo en un diccionario de clases.
-\end{itemize}
-
-\section{Alcance y limitaciones del modelo}
-\label{sec:alcance}
-
-El modelo presentado describe el \textbf{núcleo funcional} de BeeTracer: la ingesta de información
-de carga, la programación de faenas, la ejecución del desconsolidado en terreno con captura de
-evidencia fotográfica, y la generación, revisión y publicación del reporte final.
-
-Quedan \textbf{fuera del alcance} de este informe, por no disponerse de información suficiente:
-
-\begin{itemize}
-    \item Los módulos complementarios que la empresa comercializa por separado (visor 3D de patios
-          y aplicación de avisos de transporte para camioneros).
-    \item El detalle de la implementación física (esquema exacto de base de datos, \este{endpoints}
-          de la API, configuración de infraestructura y de los servidores externos contratados).
-    \item Los aspectos contractuales y de licenciamiento del producto.
-\end{itemize}
-
-Se deja constancia explícita de que las clases, atributos, operaciones y multiplicidades
-presentadas son una \textbf{propuesta de diseño inferida}, coherente con el comportamiento descrito
-por el equipo de BeeTracer, pero no necesariamente idéntica a la implementación real del producto.
+Cabe precisar que las clases, atributos, operaciones y multiplicidades presentadas constituyen una
+\textbf{propuesta de diseño inferida}, coherente con lo observado, pero no necesariamente idéntica
+a la implementación real. Quedan fuera del alcance los módulos complementarios que la empresa
+comercializa por separado (visor 3D de patios y aplicación de avisos de transporte) y el detalle de
+la infraestructura física, por no contarse con información suficiente.

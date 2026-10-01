@@ -1,0 +1,17 @@
+@startuml
+!include _estilo.iuml
+left to right direction
+actor "Jefe de faena" as JF
+rectangle ":GestorManifiesto" as GM
+rectangle ":ServicioAduana" as SA
+rectangle "m:Manifiesto" as M
+rectangle "c:Contenedor" as C
+rectangle ":LineaCarga" as L
+
+JF -- GM : "1: importarManifiesto(nave, viaje, fecha) →\n← 2: m (resumen)"
+GM -- SA : "1.1: descargarXML(nave, viaje, fecha) →\n← xml"
+GM -- M : "1.2: <<create>>(nave, viaje) →\n1.3: validarEsquema(xml) →\n1.4*[por cada contenedor]:\n   agregarContenedor(numero, tamano,\n   nroSelloDeclarado, fechaArribo) →"
+M -- C : "1.4.1: <<create>> →"
+GM -- C : "1.5*[por cada línea]:\n   agregarLinea(descripcion,\n   cantidadDeclarada, cliente, tipo) →"
+C -- L : "1.5.1: <<create>> →"
+@enduml

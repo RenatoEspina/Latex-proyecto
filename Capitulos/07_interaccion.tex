@@ -1,240 +1,100 @@
-\chapter{Diagramas de Secuencia y Colaboración}
+\chapter{Diagramas de secuencia y colaboración}
 \label{cap:interaccion}
 
-Los diagramas de interacción representan la \textbf{dinámica} del sistema: cómo colaboran los
-objetos para realizar un caso de uso. Se presentan ambas vistas del mismo comportamiento
----secuencia (énfasis en el \textbf{orden temporal}) y colaboración (énfasis en los \textbf{enlaces
-estructurales} entre objetos)--- para los casos de uso más representativos.
+Se presentan los diagramas de secuencia y de colaboración de cuatro casos de uso considerados los
+más relevantes del sistema: importar el manifiesto, crear una programación, registrar los datos de
+la operación en terreno y validar y enviar el reporte. Ambos tipos de diagrama describen la misma
+interacción: el de secuencia enfatiza el orden temporal de los mensajes y permite representar
+condiciones y repeticiones, mientras que el de colaboración enfatiza qué objetos se relacionan
+entre sí. Los objetos y mensajes utilizados corresponden a las clases y operaciones del diagrama de
+clases (Capítulo~\ref{cap:clases}) y del diccionario (Capítulo~\ref{cap:diccionario}).
 
-Para el diseño de las interacciones se adoptó una \textbf{arquitectura en tres capas} con
-separación de responsabilidades mediante los estereotipos de la Tabla~\ref{tab:estereotipos}.
-
-{\estilotabla
-\begin{longtable}{L{0.18\textwidth} L{0.32\textwidth} L{0.44\textwidth}}
-
-\caption{Estereotipos empleados en los diagramas de interacción}
-\label{tab:estereotipos}
-\\
-
-\toprule
-\textbf{Estereotipo} & \textbf{Rol} & \textbf{Ejemplos} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Estereotipo} & \textbf{Rol} & \textbf{Ejemplos} \\
-\midrule
-\endhead
-
-\ster{boundary} / frontera & Interfaz con el actor &
-\clase{VistaProgramacion}, \clase{PantallaFaenaMovil}, \clase{VistaRevisionReporte} \\
-\midrule
-
-\ster{control} / control & Coordina el caso de uso; no persiste estado del dominio &
-\clase{GestorManifiesto}, \clase{GestorProgramacion}, \clase{GestorFaena},
-\clase{GestorReportes}, \clase{SincronizadorOffline} \\
-\midrule
-
-\ster{entity} / entidad & Información persistente del dominio &
-\clase{Faena}, \clase{Contenedor}, \clase{Fotografia}, \clase{Incidencia}, \clase{Reporte} \\
-\midrule
-
-\ster{service} & Servicio técnico o integración externa &
-\clase{ServicioAduanaWS}, \clase{GeneradorPDF}, \clase{RepositorioFotos},
-\clase{ServicioCorreoSMTP} \\
-
-\bottomrule
-
-\end{longtable}
-}
-
-\section{Diagramas de Secuencia}
+\section{Diagramas de secuencia}
 \label{sec:secuencia}
 
-\subsection{CU-05 --- Importar manifiesto electrónico (XML)}
-\label{subsec:sec_cu05}
+Los diagramas de secuencia utilizan fragmentos combinados para representar las decisiones
+(\texttt{alt}), las acciones opcionales (\texttt{opt}) y las repeticiones (\texttt{loop}) que
+aparecen en los cursos alternos de los casos de uso narrativos.
 
-\figuradiagrama{0.88}{03-secuencia-cu05-importar-manifiesto.png}
-{Diagrama de secuencia del caso de uso CU-05}
-{Diagrama de secuencia del caso de uso CU-05. Fuente:
-\texttt{diagramas/fuente/03-secuencia-cu05-importar-manifiesto.puml}.}
-{fig:sec_cu05}
+\subsection{Importar manifiesto}
+\label{subsec:sec_manifiesto}
 
-\textbf{Comentario.} El \clase{GestorManifiesto} actúa como controlador del caso de uso y delega la
-comunicación externa en \clase{ServicioAduanaWS}, que implementa la interfaz
-\clase{IServicioAduana}. Esta indirección es deliberada: es el \textbf{único punto del sistema que
-debe modificarse para internacionalizar la plataforma}, ya que al operar en Perú, Argentina o
-Brasil solo cambian la dirección del \este{web service} y la conexión a la aduana local. Los dos
-bucles anidados reflejan la estructura jerárquica del manifiesto (manifiesto $\rightarrow$
-contenedores $\rightarrow$ líneas de carga). El fragmento \texttt{alt} recoge el curso alterno más
-relevante: cuando el manifiesto no está disponible, el sistema no falla, sino que habilita las
-modalidades alternativas de ingreso (CU-06 y CU-07).
+El Jefe de faena solicita el manifiesto al controlador \clase{GestorManifiesto}, que lo obtiene
+mediante \clase{ServicioAduana}. Si el servicio responde y el XML es válido, se crea el
+\clase{Manifiesto} y, por cada contenedor y línea de carga declarados, se crean los objetos
+\clase{Contenedor} y \clase{LineaCarga} (curso normal y cursos A1 a A3 de la
+Tabla~\ref{tab:cu_importar_manifiesto}).
 
-\subsection{CU-08 --- Programar faena de desconsolidado}
-\label{subsec:sec_cu08}
+\figuradiagrama{0.95}{13-sec-importar-manifiesto.png}
+{Diagrama de secuencia - Importar manifiesto}
+{Diagrama de secuencia - Importar manifiesto.}
+{fig:sec_manifiesto}
 
-\figuradiagrama{0.82}{04-secuencia-cu08-programar-faena.png}
-{Diagrama de secuencia del caso de uso CU-08}
-{Diagrama de secuencia del caso de uso CU-08. Fuente:
-\texttt{diagramas/fuente/04-secuencia-cu08-programar-faena.puml}.}
-{fig:sec_cu08}
+\subsection{Crear programación}
+\label{subsec:sec_programacion}
 
-\textbf{Comentario.} El caso de uso se resuelve en \textbf{dos interacciones con el actor}: primero
-la definición del horario y luego la asignación de la cuadrilla (CU-08 incluye a CU-09). El
-\clase{GestorProgramacion} valida en dos momentos distintos ---disponibilidad de horario y
-habilitación del trabajador designado--- antes de persistir. El cambio de estado de la faena a
-\estado{PROGRAMADA} es el evento que la hace visible en la aplicación móvil del jefe tarjador,
-conectando este caso de uso con CU-10.
+El Jefe de faena crea la programación de un contenedor y luego le asigna cuadrilla y jefe
+tarjador. El controlador \clase{GestorProgramacion} verifica el cruce de franjas y la
+disponibilidad de la cuadrilla y del jefe tarjador antes de asociarlos
+(Tabla~\ref{tab:cu_crear_programacion}).
 
-\subsection{CU-12 --- Registrar desconsolidado y separación por cliente (caso central)}
-\label{subsec:sec_cu12}
+\figuradiagrama{0.95}{14-sec-crear-programacion.png}
+{Diagrama de secuencia - Crear programación}
+{Diagrama de secuencia - Crear programación.}
+{fig:sec_programacion}
 
-\figuradiagrama{0.88}{05-secuencia-cu12-registrar-desconsolidado.png}
-{Diagrama de secuencia del caso de uso CU-12}
-{Diagrama de secuencia del caso de uso CU-12, incluyendo las etapas de apertura (CU-11) y cierre
-(CU-14) que lo enmarcan. Fuente:
-\texttt{diagramas/fuente/05-secuencia-cu12-registrar-desconsolidado.puml}.}
-{fig:sec_cu12}
+\subsection{Registrar datos de operación}
+\label{subsec:sec_operacion}
 
-\textbf{Comentario.} Este diagrama es el que mejor expresa las decisiones de diseño que hacen
-particular a BeeTracer:
+Es la interacción más extensa del sistema. El Jefe tarjador inicia la operación, verifica el sello,
+registra cada lote separado por cliente (repetición), registra una incidencia cuando existe
+diferencia o daño (opción) y cierra la faena. Cada fotografía se crea, se comprime y se encola en
+\clase{SincronizadorOffline}, que la envía si hay conectividad. Al cerrar, se genera el borrador del
+reporte (Tabla~\ref{tab:cu_registrar_datos}).
 
-\begin{itemize}
-    \item \textbf{La evidencia se sube foto a foto, dentro del bucle}, no al final del proceso. El
-          mensaje \texttt{encolarSubida(fotografia)} aparece inmediatamente después de cada
-          captura, reflejando la solución adoptada frente a las caídas que producía el envío en
-          lote.
-    \item \textbf{\clase{Fotografia.comprimir()} es un mensaje reflexivo} ejecutado en el propio
-          dispositivo antes de cualquier transferencia, conforme al atributo de calidad de imagen
-          definido en la Sección~\ref{sec:atributos}.
-    \item \textbf{\clase{SincronizadorOffline} desacopla la captura de la transmisión.} El
-          \clase{GestorFaena} nunca habla directamente con el repositorio en la nube: encola. Esto
-          es lo que permite que la faena continúe con normalidad sin conectividad.
-    \item \textbf{El fragmento \texttt{alt} de incidencia está anidado dentro del bucle de lotes},
-          expresando que CU-13 extiende a CU-12 en un punto de extensión concreto: la detección de
-          una diferencia o un daño durante el registro de un lote.
-    \item \textbf{El cierre de la faena dispara CU-17} de forma automática, sin intervención del
-          actor.
-\end{itemize}
+\figuradiagrama{0.80}{15-sec-registrar-desconsolidado.png}
+{Diagrama de secuencia - Registrar datos de operación}
+{Diagrama de secuencia - Registrar datos de operación.}
+{fig:sec_operacion}
 
-\subsection{CU-17 / CU-18 / CU-19 / CU-20 --- Generar, revisar y enviar el reporte}
+\subsection{Validar reporte y enviar PDF}
 \label{subsec:sec_reporte}
 
-\figuradiagrama{0.85}{06-secuencia-cu18-cu20-revisar-enviar-reporte.png}
-{Diagrama de secuencia del ciclo completo del reporte}
-{Diagrama de secuencia del ciclo completo del reporte, desde su generación automática hasta su
-envío al cliente. Fuente:
-\texttt{diagramas/fuente/06-secuencia-cu18-cu20-revisar-enviar-reporte.puml}.}
+El Supervisor del reporte abre el reporte y decide entre aprobarlo o rechazar una fotografía
+defectuosa, en cuyo caso el reporte pasa a corrección y se solicita la corrección de la evidencia
+al Jefe tarjador. Una vez aprobado, el Jefe de faena envía el PDF a los destinatarios del cliente
+desde la gestión de operaciones (Tablas~\ref{tab:cu_validar_reporte} y~\ref{tab:cu_enviar_pdf}).
+
+\figuradiagrama{0.95}{16-sec-revisar-reporte.png}
+{Diagrama de secuencia - Validar reporte y enviar PDF}
+{Diagrama de secuencia - Validar reporte y enviar PDF.}
 {fig:sec_reporte}
 
-\textbf{Comentario.} Se modelan en un solo diagrama los cuatro casos de uso porque forman un ciclo
-continuo disparado por un único evento: \texttt{faenaFinalizada}. Destacan tres aspectos:
-
-\begin{itemize}
-    \item \textbf{La generación del borrador no la inicia un actor humano}, sino la propia entidad
-          \clase{Faena} al cambiar de estado.
-    \item \textbf{El fragmento \texttt{alt} de recaptura (CU-19) involucra a un actor distinto del
-          iniciador}: el Supervisor rechaza, pero es el Jefe tarjador quien debe corregir. Este
-          ciclo puede repetirse y cada iteración \textbf{versiona} el reporte, preservando la
-          trazabilidad de las correcciones.
-    \item \textbf{El envío registra su resultado en ambos casos}, exitoso o fallido, porque el
-          acuse de envío forma parte del expediente probatorio tanto como las fotografías.
-\end{itemize}
-
-\section{Diagramas de Colaboración}
+\section{Diagramas de colaboración}
 \label{sec:colaboracion}
 
-\subsection{CU-12 --- Registrar desconsolidado y separación por cliente}
-\label{subsec:col_cu12}
+Como complemento, se presentan los diagramas de colaboración de los mismos cuatro casos de uso. En
+ellos los mensajes se numeran para indicar el orden, y la numeración decimal (por ejemplo, 3.1)
+indica que el mensaje se origina como consecuencia del mensaje 3; el asterisco indica una
+repetición. Se muestra el curso normal de cada caso, incluyendo las repeticiones necesarias, y se
+omiten los cursos alternos, que ya se detallan en los diagramas de secuencia.
 
-\figuradiagrama{1.0}{07-colaboracion-cu12-registrar-desconsolidado.png}
-{Diagrama de colaboración del caso de uso CU-12}
-{Diagrama de colaboración del caso de uso CU-12. Fuente:
-\texttt{diagramas/fuente/07-colaboracion-cu12-registrar-desconsolidado.puml}.}
-{fig:col_cu12}
+\figuradiagrama{0.95}{17-col-importar-manifiesto.png}
+{Diagrama de colaboración - Importar manifiesto}
+{Diagrama de colaboración - Importar manifiesto.}
+{fig:col_manifiesto}
 
-\textbf{Comentario.} La vista de colaboración hace evidente lo que la de secuencia disimula: la
-\textbf{topología de acoplamiento} del sistema. \clase{GestorFaena} es el centro de la colaboración
----recibe del \este{boundary} y distribuye hacia cinco objetos---, mientras que
-\clase{SincronizadorOffline} queda como un \textbf{nodo frontera} que aísla al resto del sistema
-del \clase{RepositorioFotos}. Ningún objeto del dominio conoce al repositorio externo. Los mensajes
-\texttt{12'} y \texttt{12''} de la nota representan la rama alterna sin conectividad, que no altera
-la estructura de enlaces, solo el momento de su ejecución.
+\figuradiagrama{0.95}{18-col-crear-programacion.png}
+{Diagrama de colaboración - Crear programación}
+{Diagrama de colaboración - Crear programación.}
+{fig:col_programacion}
 
-\subsection{CU-18 / CU-20 --- Revisar, aprobar y enviar el reporte}
-\label{subsec:col_reporte}
+\figuradiagrama{1.0}{19-col-registrar-desconsolidado.png}
+{Diagrama de colaboración - Registrar datos de operación}
+{Diagrama de colaboración - Registrar datos de operación.}
+{fig:col_operacion}
 
-\figuradiagrama{1.0}{08-colaboracion-cu18-revisar-enviar-reporte.png}
-{Diagrama de colaboración del ciclo de revisión, aprobación y envío del reporte}
-{Diagrama de colaboración del ciclo de revisión, aprobación y envío del reporte. Fuente:
-\texttt{diagramas/fuente/08-colaboracion-cu18-revisar-enviar-reporte.puml}.}
+\figuradiagrama{0.95}{20-col-revisar-reporte.png}
+{Diagrama de colaboración - Validar reporte y enviar PDF}
+{Diagrama de colaboración - Validar reporte y enviar PDF (curso de aprobación y envío).}
 {fig:col_reporte}
-
-\textbf{Comentario.} Se aprecia que \clase{GestorReportes} mantiene enlaces con \textbf{tres
-servicios técnicos distintos} (\clase{GeneradorPDF}, \clase{ServicioCorreo} y, a través de
-\clase{Fotografia}, el repositorio) además de con la entidad \clase{Reporte}. Es la clase con mayor
-responsabilidad del diseño y la primera candidata a refactorización si el sistema creciera: podría
-descomponerse en un generador, un aprobador y un publicador. La numeración jerárquica muestra
-además que el actor Jefe tarjador participa en el mensaje 9 sin ser el iniciador de la
-colaboración.
-
-\section{Interacciones pendientes de modelar}
-\label{sec:interacciones_pendientes}
-
-\begin{pendiente}
-Se modelaron los cuatro casos de uso de mayor valor. Si la pauta exige cobertura completa, faltan
-por construir los diagramas de secuencia y colaboración de los casos de uso listados en la
-Tabla~\ref{tab:interacciones_pendientes}.
-
-\medskip
-
-Los archivos fuente PlantUML de los diagramas existentes están en \texttt{diagramas/fuente/} y
-pueden usarse como plantilla. Para regenerar las imágenes:
-\texttt{plantuml -charset UTF-8 -tpng -o .. diagramas/fuente/*.puml}
-\end{pendiente}
-
-{\estilotabla
-\begin{longtable}{L{0.34\textwidth} C{0.18\textwidth} L{0.42\textwidth}}
-
-\caption{Diagramas de interacción pendientes de construir}
-\label{tab:interacciones_pendientes}
-\\
-
-\toprule
-\textbf{Caso de uso} & \textbf{Complejidad estimada} & \textbf{Observación} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Caso de uso} & \textbf{Complejidad estimada} & \textbf{Observación} \\
-\midrule
-\endhead
-
-CU-11 Registrar apertura de contenedor & Media &
-Parcialmente representado dentro de la Figura~\ref{fig:sec_cu12} (etapa 1); se puede extraer como
-diagrama propio. \\
-\midrule
-
-CU-14 Registrar cierre de faena & Baja &
-Parcialmente representado dentro de la Figura~\ref{fig:sec_cu12} (etapa 3). \\
-\midrule
-
-CU-01 Gestionar usuarios, roles y permisos & Baja &
-Interacción CRUD estándar. \\
-\midrule
-
-CU-07 Registrar carga en modalidad tarja ciega & Media &
-Variante de CU-12 sin el contraste contra lo declarado. \\
-\midrule
-
-CU-16 Sincronizar datos (modo offline) & Media &
-Merece diagrama propio: es donde reside la lógica de reintento y resolución de conflictos. \\
-\midrule
-
-CU-21 Consultar faenas históricas & Baja &
-Interacción de consulta. \\
-
-\bottomrule
-
-\end{longtable}
-}

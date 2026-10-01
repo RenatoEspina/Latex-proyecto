@@ -1,0 +1,16 @@
+@startuml
+!include _estilo.iuml
+left to right direction
+actor "Supervisor del reporte" as SUP
+actor "Jefe de faena" as JF
+rectangle ":GestorReportes" as GR
+rectangle "r:Reporte" as R
+rectangle ":Cliente" as CL
+rectangle ":ServicioCorreo" as SC
+
+SUP -- GR : "1: abrirReporte(idReporte) →\n2: aprobarReporte(idReporte, aprobador) →"
+JF -- GR : "3: enviarReporte(idReporte) →"
+GR -- R : "1.1: generarPDF() →\n2.1: aprobar(aprobador) →\n3.3: registrarEnvio(exitoso, destinatarios) →"
+GR -- CL : "3.1: obtenerDestinatarios() →"
+GR -- SC : "3.2: enviar(destinatarios, asunto, adjunto) →"
+@enduml

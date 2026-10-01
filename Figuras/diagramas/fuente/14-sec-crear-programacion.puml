@@ -1,0 +1,48 @@
+@startuml
+!include _estilo.iuml
+actor "Jefe de faena" as JF
+participant ":GestorProgramacion" as GP
+participant "p:Programacion" as P
+participant "c:Cuadrilla" as CU
+participant "jefe:Trabajador" as T
+
+JF -> GP : listarContenedoresPendientes()
+activate GP
+GP --> JF : Contenedor[]
+deactivate GP
+
+JF -> GP : crearProgramacion(idContenedor, fecha,\nhoraInicio, horaTermino)
+activate GP
+GP -> GP : hayConflicto(fecha, horaInicio, horaTermino)
+activate GP
+GP --> GP : boolean
+deactivate GP
+alt sin conflicto de agenda
+  create P
+  GP -> P : <<create>>(contenedor, fecha, horaInicio, horaTermino)
+  GP --> JF : p : Programacion (estado PROGRAMADA)
+else franja ocupada
+  GP --> JF : conflicto de agenda
+end
+deactivate GP
+
+JF -> GP : asignarCuadrilla(idProgramacion,\nidCuadrilla, idJefeTarjador)
+activate GP
+GP -> CU : estaDisponible(fecha, horaInicio, horaTermino)
+activate CU
+CU --> GP : boolean
+deactivate CU
+GP -> T : estaDisponible(fecha, horaInicio, horaTermino)
+activate T
+T --> GP : boolean
+deactivate T
+alt cuadrilla y jefe tarjador disponibles
+  GP -> P : asignarCuadrilla(c, jefe)
+  activate P
+  deactivate P
+  GP --> JF : programación asignada
+else alguno no disponible
+  GP --> JF : rechazo: cuadrilla o jefe tarjador no disponible
+end
+deactivate GP
+@enduml
