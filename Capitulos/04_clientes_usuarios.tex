@@ -1,166 +1,57 @@
 \chapter{Clientes y usuarios}
 \label{cap:clientes}
 
-\section{Cliente del sistema}
-\label{sec:clientesistema}
+En BeeTracer existen dos grandes grupos de personas según el rol que cumplen dentro del sistema:
+por una parte, los \textbf{trabajadores de la empresa de logística} que operan la plataforma web o
+la aplicación móvil y, por otra, los \textbf{clientes}, que esperan información sobre la mercancía
+que tienen en el depósito. Cada grupo cuenta con distintos perfiles y niveles de autorización, lo
+que permite organizar de mejor forma las funcionalidades y responsabilidades. Todos los perfiles,
+con excepción del Servicio Nacional de Aduanas, deben iniciar sesión con sus credenciales para
+acceder al sistema con los permisos de su rol.
 
-Es necesario distinguir dos acepciones del término «cliente», que en este dominio se solapan:
+\section{Usuarios trabajadores de la empresa de logística}
+\label{sec:usuarios_trabajadores}
 
-\begin{itemize}
-    \item \textbf{Cliente del sistema (quien adquiere la licencia):} el \textbf{terminal
-          extraportuario, depósito o bodega} que contrata BeeTracer bajo suscripción. Es quien
-          define los requisitos, sufre el problema descrito en el Capítulo~\ref{cap:problema} y
-          obtiene el beneficio legal y operativo.
-    \item \textbf{Cliente del depósito (quien recibe el servicio logístico):} la \textbf{empresa
-          importadora} ---zapatería, juguetería, ferretería--- cuya carga viene consignada dentro
-          del contenedor. Dentro del modelo UML este es un \textbf{actor del sistema}, no su
-          comprador: no opera la plataforma, pero es el destinatario final del reporte y, por
-          tanto, el beneficiario último de la trazabilidad.
-\end{itemize}
+\textbf{Administrador del depósito:} es el usuario con el nivel más alto de privilegios. Configura
+los usuarios, roles, clientes, trabajadores, cuadrillas y tipos de bulto de la plataforma, y define
+quién puede acceder a qué funcionalidades.
 
-En este informe se emplea \textbf{«Cliente del depósito»} para referirse al importador (actor) y
-\textbf{«Depósito»} o \textbf{«Terminal»} para referirse a la organización que adquiere el sistema.
+\textbf{Jefe de faena:} actúa como planificador de las operaciones. Desde la plataforma web importa
+los manifiestos, programa los desconsolidados, decide qué cuadrilla realizará cada faena y quién
+será el jefe tarjador, y supervisa el avance de las operaciones: las consulta, modifica su estado,
+visualiza o descarga su reporte PDF y, una vez aprobado, lo envía al cliente.
 
-\section{Usuarios y actores del sistema}
-\label{sec:actores}
+\textbf{Cuadrilla:} conjunto de cuatro a cinco trabajadores encargados de manipular físicamente los
+bultos del contenedor, separándolos por cliente y apartando los dañados. No opera el sistema
+directamente: su trabajo se registra a través del jefe tarjador, por lo que no se modela como
+actor.
 
-La Tabla~\ref{tab:actores} identifica los actores del sistema, distinguiendo entre actores
-principales ---los que inician casos de uso--- y secundarios ---los que participan en ellos sin
-iniciarlos, incluidos los sistemas externos---.
+\textbf{Jefe tarjador:} integrante de la cuadrilla que opera la aplicación móvil en terreno. Inicia
+y finaliza la faena y registra el sello, las cantidades, las incidencias y la evidencia
+fotográfica. Es el usuario más crítico del sistema, ya que con su registro se genera el reporte
+para cada cliente; trabaja con guantes y a la intemperie, por lo que requiere una interfaz simple
+y guiada.
 
-{\estilotabla
-\begin{longtable}{L{0.04\textwidth} L{0.17\textwidth} L{0.13\textwidth} L{0.13\textwidth} L{0.44\textwidth}}
+\textbf{Supervisor del reporte:} usuario interno que valida los reportes generados (datos y
+fotografías) antes de que lleguen al cliente. Verifica que la evidencia sea consistente y legible,
+marca la evidencia defectuosa, rechaza el reporte registrando una observación y solicitando la
+corrección, o lo aprueba para que pueda ser enviado.
 
-\caption{Actores del sistema BeeTracer}
-\label{tab:actores}
-\\
+\section{Clientes}
+\label{sec:clientes}
 
-\toprule
-\textbf{\#} & \textbf{Actor} & \textbf{Tipo} & \textbf{Plataforma} &
-\textbf{Perfil y responsabilidades} \\
-\midrule
-\endfirsthead
+\textbf{Empresa dueña del depósito:} es el cliente del sistema, es decir, la organización
+(terminal extraportuario o bodega) que contrata BeeTracer bajo suscripción para mejorar la
+eficiencia de su operación y protegerse ante reclamos. Sus trabajadores son los usuarios descritos
+en la sección anterior.
 
-\toprule
-\textbf{\#} & \textbf{Actor} & \textbf{Tipo} & \textbf{Plataforma} &
-\textbf{Perfil y responsabilidades} \\
-\midrule
-\endhead
+\textbf{Cliente del depósito:} son las empresas importadoras (zapaterías, jugueterías,
+ferreterías) cuya carga viene consignada en el contenedor. No configuran ni operan el sistema: su
+interacción es de consulta, visualizan el estado de sus operaciones y visualizan o descargan los
+reportes aprobados. Como no acceden a la evidencia en vivo, el terminal puede revisar la
+información antes de notificarla.
 
-A1 & \textbf{Administrador del depósito} & Principal (humano) & Web &
-Gestiona la configuración global del sistema: usuarios, roles y permisos, clientes, trabajadores,
-cuadrillas y tipos de bulto. Define \textbf{quién accede a qué funcionalidades}. Perfil
-administrativo, conocimiento medio-alto del sistema. \\
-
-\midrule
-
-A2 & \textbf{Jefe de faena} & Principal (humano) & Web &
-Opera la plataforma web desde la oficina. Recibe la información de los barcos, importa manifiestos,
-crea las programaciones de desconsolidado y asigna qué cuadrilla trabajará en qué contenedor y a
-qué hora. Coordina al personal. Perfil operativo-planificador. \\
-
-\midrule
-
-A3 & \textbf{Jefe tarjador} (operario de terreno) & Principal (humano) & Móvil &
-Líder de la cuadrilla física que abre el contenedor. Registra toda la evidencia en terreno:
-fotografías, número de sello, lotes por cliente e incidencias. \textbf{Usuario más crítico del
-sistema}: trabaja a la intemperie, con guantes y bajo presión de tiempo; requiere una interfaz
-simple, guiada paso a paso y tolerante a fallos de conectividad. No se le exigen conocimientos
-informáticos previos. \\
-
-\midrule
-
-A4 & \textbf{Supervisor / Revisor de reportes} & Principal (humano) & Web &
-Revisa en la plataforma web el borrador del PDF generado por la faena antes de su envío al cliente
-final. Puede rechazar fotografías defectuosas y solicitar su recaptura. Actúa como \textbf{control
-de calidad y filtro comercial}. \\
-
-\midrule
-
-A5 & \textbf{Cliente del depósito} (importador) & Secundario (humano) & Correo / consulta web &
-Usuario externo que espera su carga. Recibe el reporte PDF con el estado de su mercancía y puede
-consultar el histórico de sus faenas. No configura ni opera el sistema. \\
-
-\midrule
-
-A6 & \textbf{Ejecutivo comercial} & Secundario (humano) & Web &
-Recibe el llamado inicial de las empresas importadoras, les vende el servicio y agenda la llegada
-del contenedor. Alimenta y mantiene la ficha de clientes. \\
-
-\midrule
-
-A7 & \textbf{Servicio Nacional de Aduanas} & Secundario (sistema externo) & \este{Web service} &
-Sistema externo desde el cual BeeTracer descarga el manifiesto electrónico en formato XML. Estándar
-mundial, lo que permite replicar la integración en otros países cambiando únicamente la dirección
-del servicio. \\
-
-\midrule
-
-A8 & \textbf{Sistema del cliente (API)} & Secundario (sistema externo) & API &
-Sistema informático del propio cliente que se integra directamente con BeeTracer para transferirle
-la información de la carga. \\
-
-\midrule
-
-A9 & \textbf{Servidor de correo} & Secundario (sistema externo) & SMTP &
-Servicio a través del cual se despacha el reporte PDF aprobado a los destinatarios. \\
-
-\midrule
-
-A10 & \textbf{Repositorio de fotografías (nube)} & Secundario (sistema externo) & Almacenamiento &
-Servicio de almacenamiento externo donde se persisten las imágenes capturadas en terreno. \\
-
-\bottomrule
-
-\end{longtable}
-}
-
-\section{Matriz de usuario \texttimes{} módulo}
-\label{sec:matriz}
-
-La Tabla~\ref{tab:matriz} cruza los actores humanos con los módulos funcionales definidos en la
-Sección~\ref{sec:modulos}, indicando el nivel de acceso de cada perfil. Leyenda: \textbf{C} crear
-$\cdot$ \textbf{L} leer/consultar $\cdot$ \textbf{M} modificar $\cdot$ \textbf{A} aprobar $\cdot$
-\textbf{---} sin acceso.
-
-{\estilotabla
-\begin{longtable}{L{0.24\textwidth} C{0.11\textwidth} C{0.11\textwidth} C{0.12\textwidth} C{0.11\textwidth} C{0.11\textwidth} C{0.12\textwidth}}
-
-\caption{Matriz de acceso de usuarios por módulo}
-\label{tab:matriz}
-\\
-
-\toprule
-\textbf{Módulo} & \textbf{A1 Admin.} & \textbf{A2 Jefe faena} & \textbf{A3 Jefe tarjador} &
-\textbf{A4 Super\-visor} & \textbf{A5 Cliente} & \textbf{A6 Ejecutivo} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Módulo} & \textbf{A1 Admin.} & \textbf{A2 Jefe faena} & \textbf{A3 Jefe tarjador} &
-\textbf{A4 Super\-visor} & \textbf{A5 Cliente} & \textbf{A6 Ejecutivo} \\
-\midrule
-\endhead
-
-M1. Administrar maestros & C L M & L & --- & L & --- & C L M \este{(clientes)} \\
-\midrule
-M2. Ingesta de carga & L & C L M & C \este{(tarja ciega)} & L & --- & --- \\
-\midrule
-M3. Programar faenas & L & C L M & L \este{(su asignación)} & L & --- & L \\
-\midrule
-M4. Ejecutar operaciones & L & L & C L M & L & --- & --- \\
-\midrule
-M5. Gestión de reportes & L & L & M \este{(recaptura)} & L M \textbf{A} & --- & --- \\
-\midrule
-M6. Publicar y enviar & L & L & --- & C L & L \este{(sus faenas)} & L \\
-
-\bottomrule
-
-\end{longtable}
-}
-
-\begin{pendiente}[Por completar --- opcional]
-Si el equipo obtiene acceso a la plataforma, conviene validar esta matriz contra el catálogo real
-de permisos del módulo de administración, ya que BeeTracer permite definir roles a medida y no
-necesariamente coinciden con los seis perfiles tipo aquí descritos.
-\end{pendiente}
+\textbf{Servicio Nacional de Aduanas:} es un actor externo (sistema). Pone a disposición el
+manifiesto electrónico en formato XML que BeeTracer descarga para conocer el contenido de los
+contenedores antes de su arribo, y recibe la notificación del resultado de la importación. No
+inicia sesión en el sistema.

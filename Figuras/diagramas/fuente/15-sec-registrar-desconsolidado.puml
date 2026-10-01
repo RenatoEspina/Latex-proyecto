@@ -1,0 +1,101 @@
+@startuml
+!include _estilo.iuml
+actor "Jefe tarjador" as JT
+participant ":GestorOperacion" as GO
+participant "o:Operacion" as O
+participant ":SelloSeguridad" as SS
+participant ":LineaCarga" as LC
+participant "i:Incidencia" as I
+participant "f:Fotografia" as F
+participant ":SincronizadorOffline" as SO
+participant ":GestorReportes" as GR
+
+== Inicio ==
+JT -> GO : iniciarOperacion(idProgramacion)
+activate GO
+create O
+GO -> O : <<create>>
+GO -> O : iniciar()
+GO --> JT : o : Operacion
+deactivate GO
+
+== Apertura: sello de seguridad ==
+JT -> GO : registrarSello(idOperacion, nroSello, imagen)
+activate GO
+create F
+GO -> F : <<create>>(imagen)
+F -> F : comprimir()
+GO -> O : agregarFotografia(f)
+GO -> SO : encolar(f)
+create SS
+GO -> SS : <<create>>(nroSello)
+GO -> SS : verificar(declarado)
+activate SS
+SS --> GO : EstadoSello
+deactivate SS
+GO --> JT : EstadoSello
+deactivate GO
+opt EstadoSello ≠ INTACTO
+  ref over JT, SO : Registrar incidencia (tipo SELLO_ALTERADO), igual al fragmento del lote
+end
+
+== Separación por cliente ==
+loop por cada lote separado por cliente
+  JT -> GO : registrarLote(idOperacion, idLinea,\ncantidadRecibida, imagen)
+  activate GO
+  GO -> LC : contrastarCantidad(cantidadRecibida)
+  activate LC
+  LC --> GO : diferencia : int
+  deactivate LC
+  GO -> F : <<create>>(imagen)
+  F -> F : comprimir()
+  GO -> O : agregarFotografia(f)
+  GO -> SO : encolar(f)
+  GO --> JT : diferencia : int
+  deactivate GO
+  opt diferencia ≠ 0 o daño visible
+    JT -> GO : registrarIncidencia(idOperacion, idLinea, tipo,\ncantidadAfectada, imagenes)
+    activate GO
+    create I
+    GO -> I : <<create>>(tipo, cantidadAfectada)
+    loop por cada imagen
+      GO -> F : <<create>>(imagen)
+      F -> F : comprimir()
+      GO -> I : adjuntarFotografia(f)
+      GO -> SO : encolar(f)
+    end
+    GO --> JT : i : Incidencia
+    deactivate GO
+  end
+end
+
+== Cierre ==
+JT -> GO : cerrarOperacion(idOperacion, imagenVacio)
+activate GO
+GO -> F : <<create>>(imagenVacio)
+F -> F : comprimir()
+GO -> O : agregarFotografia(f)
+GO -> SO : encolar(f)
+GO -> SO : hayConectividad()
+activate SO
+SO --> GO : boolean
+deactivate SO
+alt hay conectividad
+  GO -> SO : sincronizarPendientes()
+  activate SO
+  loop por cada fotografía pendiente
+    SO -> F : marcarSubida(url)
+  end
+  SO --> GO : cantidad : int
+  deactivate SO
+else sin conectividad
+  note over GO, SO : las fotografías permanecen en la cola y se envían al recuperar la señal
+end
+GO -> O : cerrar()
+GO -> GR : generarBorrador(idOperacion)
+activate GR
+GR --> GO : Reporte
+deactivate GR
+GO --> JT : faena cerrada
+deactivate GO
+@enduml

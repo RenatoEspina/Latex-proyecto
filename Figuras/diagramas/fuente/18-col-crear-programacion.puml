@@ -1,0 +1,15 @@
+@startuml
+!include _estilo.iuml
+left to right direction
+actor "Jefe de faena" as JF
+rectangle ":GestorProgramacion" as GP
+rectangle "p:Programacion" as P
+rectangle "c:Cuadrilla" as CU
+rectangle "jefe:Trabajador" as T
+
+JF -- GP : "1: crearProgramacion(idContenedor, fecha,\n   horaInicio, horaTermino) →\n2: asignarCuadrilla(idProgramacion,\n   idCuadrilla, idJefeTarjador) →"
+GP -- GP : "1.1: hayConflicto(fecha,\n   horaInicio, horaTermino)"
+GP -- P : "1.2 [sin conflicto]: <<create>> →\n2.3 [ambos disponibles]:\n   asignarCuadrilla(c, jefe) →"
+GP -- CU : "2.1: estaDisponible(fecha,\n   horaInicio, horaTermino) →"
+GP -- T : "2.2: estaDisponible(fecha,\n   horaInicio, horaTermino) →"
+@enduml

@@ -1,0 +1,49 @@
+@startuml
+!include _estilo.iuml
+actor "Jefe de faena" as JF
+participant ":GestorManifiesto" as GM
+participant ":ServicioAduana" as SA
+participant "m:Manifiesto" as M
+participant "c:Contenedor" as C
+participant ":LineaCarga" as L
+
+JF -> GM : importarManifiesto(nave, viaje, fecha)
+activate GM
+GM -> SA : descargarXML(nave, viaje, fecha)
+activate SA
+SA --> GM : xml : String
+deactivate SA
+
+alt servicio responde con el manifiesto
+  create M
+  GM -> M : <<create>>(nave, viaje)
+  GM -> M : validarEsquema(xml)
+  activate M
+  M --> GM : boolean
+  deactivate M
+  alt esquema válido
+    loop por cada contenedor declarado
+      GM -> M : agregarContenedor(numero, tamano,\nnroSelloDeclarado, fechaArribo)
+      activate M
+      create C
+      M -> C : <<create>>
+      M --> GM : c : Contenedor
+      deactivate M
+      loop por cada línea de carga del contenedor
+        GM -> C : agregarLinea(descripcion, cantidadDeclarada,\ncliente, tipo)
+        activate C
+        create L
+        C -> L : <<create>>
+        C --> GM : LineaCarga
+        deactivate C
+      end
+    end
+    GM --> JF : m : Manifiesto (resumen de la importación)
+  else esquema inválido
+    GM --> JF : error de formato (no se registra información parcial)
+  end
+else servicio no disponible o manifiesto inexistente
+  GM --> JF : manifiesto no disponible
+end
+deactivate GM
+@enduml

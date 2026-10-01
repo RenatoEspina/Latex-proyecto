@@ -1,0 +1,303 @@
+@startuml
+hide empty members
+
+  class Usuario {
+   - idUsuario: int
+   - nombre: String
+   - email: String
+   - passwordHash: String
+   - activo: boolean
+   - rol: Rol
+   + iniciarSesion(password: String): boolean
+   + cerrarSesion(): void
+   + cambiarPassword(nueva: String): void
+   + tienePermiso(codigo: String): boolean
+  }
+
+  class Rol {
+   - idRol: int
+   - nombre: String
+   - activo: boolean
+   + agregarPermiso(p: Permiso): void
+   + tienePermiso(codigo: String): boolean
+  }
+
+  class Permiso {
+   - idPermiso: int
+   - codigo: String
+   - descripcion: String
+  }
+
+  class Cliente {
+   - idCliente: int
+   - rut: String
+   - razonSocial: String
+   - email: String
+   - activo: boolean
+
+   + obtenerDestinatarios(): String[]
+  }
+
+  class Trabajador {
+   - idTrabajador: int
+   - rut: String
+   - nombre: String
+   - cargo: String
+   - habilitado: boolean
+   + estaDisponible(fecha: Date, horaInicio: Time, horaTermino: Time): boolean
+  }
+
+  class Cuadrilla {
+   - idCuadrilla: int
+   - nombre: String
+   - integrantes: Trabajador[]
+   + agregarTrabajador(t: Trabajador): void
+   + estaDisponible(fecha: Date, horaInicio: Time, horaTermino: Time): boolean
+  }
+
+  class TipoBulto {
+   - idTipoBulto: int
+   - nombre: String
+   - codigo: String
+   - activo: boolean
+  }
+
+  class Manifiesto {
+   - idManifiesto: int
+   - numero: String
+   - nave: String
+   - viaje: String
+   - fechaRecepcion: DateTime
+   + validarEsquema(xml: String): boolean
+   + agregarContenedor(numero: String, tamano: String, nroSelloDeclarado: String, fechaArribo: Date): Contenedor
+  }
+
+  class Contenedor {
+   - idContenedor: int
+   - numero: String
+   - tamano: String
+   - nroSelloDeclarado: String
+   - fechaArribo: Date
+   + agregarLinea(descripcion: String, cantidadDeclarada: int, cliente: Cliente, tipo: TipoBulto): LineaCarga
+   + totalBultosDeclarados(): int
+  }
+
+  class LineaCarga {
+   - idLinea: int
+   - descripcion: String
+   - cantidadDeclarada: int
+   - cantidadRecibida: int
+   + contrastarCantidad(recibida: int): int
+   + tieneDiferencia(): boolean
+  }
+
+  class Programacion {
+   - idProgramacion: int
+   - fecha: Date
+   - horaInicio: Time
+   - horaTermino: Time
+   - estado: EstadoProgramacion
+
+   + asignarCuadrilla(c: Cuadrilla, jefe: Trabajador): void
+   + reprogramar(fecha: Date, horaInicio: Time, horaTermino: Time): void
+   + anular(): void
+  }
+
+  class Operacion {
+   - idOperacion: int
+   - horaInicio: DateTime
+   - horaFin: DateTime
+   - estado: EstadoOperacion
+   - modalidadIngreso: OrigenDatos
+
+   + iniciar(): void
+   + cerrar(): void
+   + obtenerEstado(): EstadoOperacion
+   + agregarFotografia(f: Fotografia): void
+  }
+
+  class SelloSeguridad {
+   - numeroDigitado: String
+   - estado: EstadoSello
+   - fechaVerificacion: DateTime
+
+   + verificar(declarado: String): EstadoSello
+  }
+
+  class Incidencia {
+   - idIncidencia: int
+   - tipo: TipoIncidencia
+   - descripcion: String
+   - cantidadAfectada: int
+   - fechaHora: DateTime
+   + adjuntarFotografia(f: Fotografia): void
+  }
+
+  class Fotografia {
+   - idFoto: int
+   - uuid: String
+   - fechaHoraCaptura: DateTime
+   - latitud: double
+   - longitud: double
+   - url: String
+   - estado: EstadoFoto
+   - motivoRechazo: String
+   + comprimir(): void
+   + marcarSubida(url: String): void
+   + marcarRechazada(motivo: String): void
+  }
+
+  class Reporte {
+   - idReporte: int
+   - folio: String
+   - version: int
+   - estado: EstadoReporte
+   - fechaGeneracion: DateTime
+   - fechaAprobacion: DateTime
+   - aprobadoPor: Usuario
+   - estadoEnvio: EstadoEnvio
+
+   + generarPDF(): File
+   + aprobar(aprobador: Usuario): void
+   + pasarACorreccion(): void
+   + versionar(): void
+   + registrarEnvio(exitoso: boolean, destinatarios: String[]): void
+  }
+
+  class GestorManifiesto {
+   + importarManifiesto(nave: String, viaje: String, fecha: Date): Manifiesto
+  }
+
+  class GestorProgramacion {
+   + listarContenedoresPendientes(): Contenedor[]
+   + crearProgramacion(idContenedor: int, fecha: Date, horaInicio: Time, horaTermino: Time): Programacion
+   + hayConflicto(fecha: Date, horaInicio: Time, horaTermino: Time): boolean
+   + asignarCuadrilla(idProgramacion: int, idCuadrilla: int, idJefeTarjador: int): void
+  }
+
+  class GestorOperacion {
+   + iniciarOperacion(idProgramacion: int): Operacion
+   + registrarSello(idOperacion: int, nroSello: String, imagen: Imagen): EstadoSello
+   + registrarLote(idOperacion: int, idLinea: int, cantidadRecibida: int, imagen: Imagen): int
+   + registrarIncidencia(idOperacion: int, idLinea: int, tipo: TipoIncidencia, cantidadAfectada: int, imagenes: Imagen[]): Incidencia
+   + cerrarOperacion(idOperacion: int, imagenVacio: Imagen): void
+   + buscarOperaciones(idCliente: int, filtros: Filtro): Operacion[]
+  }
+
+  class GestorReportes {
+   + generarBorrador(idOperacion: int): Reporte
+   + abrirReporte(idReporte: int): Reporte
+   + aprobarReporte(idReporte: int, aprobador: Usuario): void
+   + rechazarFotografia(idReporte: int, idFoto: int, motivo: String): void
+   + enviarReporte(idReporte: int): boolean
+  }
+
+  class ServicioAduana {
+   - urlWebService: String
+   + descargarXML(nave: String, viaje: String, fecha: Date): String
+  }
+
+  class ServicioCorreo {
+   - servidor: String
+   - puerto: int
+   + enviar(destinatarios: String[], asunto: String, adjunto: File): boolean
+  }
+
+  class SincronizadorOffline {
+   - colaPendientes: Fotografia[]
+   + encolar(f: Fotografia): void
+   + hayConectividad(): boolean
+   + sincronizarPendientes(): int
+  }
+
+  enum EstadoProgramacion {
+   PROGRAMADA
+   EN_EJECUCION
+   FINALIZADA
+   ANULADA
+  }
+
+  enum EstadoOperacion {
+   EN_EJECUCION
+   FINALIZADA
+  }
+
+  enum OrigenDatos {
+   MANIFIESTO_XML
+   TARJA_CIEGA
+  }
+
+  enum EstadoSello {
+   INTACTO
+   ROTO
+   NO_COINCIDE
+  }
+
+  enum TipoIncidencia {
+   DANO
+   FALTANTE
+   SOBRANTE
+   MAL_EMBALAJE
+   SELLO_ALTERADO
+  }
+
+  enum EstadoFoto {
+   PENDIENTE
+   SUBIDA
+   RECHAZADA
+   REEMPLAZADA
+  }
+
+  enum EstadoReporte {
+   BORRADOR
+   EN_CORRECCION
+   APROBADO
+  }
+
+  enum EstadoEnvio {
+   PENDIENTE
+   ENVIADO
+   FALLIDO
+  }
+
+  Usuario --> "1" Rol
+  Rol --> "*" Permiso
+  Cuadrilla o-- "*" Trabajador
+
+  Manifiesto *-- "*" Contenedor
+  Contenedor *-- "*" LineaCarga
+  LineaCarga --> "1" Cliente
+  LineaCarga --> "1" TipoBulto
+
+  Programacion --> "1" Contenedor
+  Programacion --> "1" Operacion
+  Programacion --> "1" Cuadrilla
+  Programacion --> "1" Trabajador
+
+  Operacion *-- "1" SelloSeguridad
+  Operacion *-- "*" Fotografia
+  Operacion *-- "*" Incidencia
+  Incidencia *-- "*" Fotografia
+
+  Reporte --> "1" Operacion
+  Reporte --> "1" Usuario
+  SincronizadorOffline o-- "*" Fotografia
+
+  GestorManifiesto ..> ServicioAduana
+  GestorReportes ..> ServicioCorreo
+
+  GestorManifiesto ..> Manifiesto
+  GestorProgramacion ..> Programacion
+  GestorProgramacion ..> Contenedor
+  GestorOperacion ..> Operacion
+  GestorReportes ..> Reporte
+
+  Programacion --> EstadoProgramacion
+  Operacion --> EstadoOperacion
+  Operacion --> OrigenDatos
+  SelloSeguridad --> EstadoSello
+  Incidencia --> TipoIncidencia
+  Fotografia --> EstadoFoto
+  Reporte --> EstadoReporte
+  Reporte --> EstadoEnvio
+@enduml

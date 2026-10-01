@@ -1,298 +1,51 @@
 \chapter{Descripción general}
 \label{cap:descripcion}
 
-\section{El sistema}
-\label{sec:elsistema}
-
-\textbf{BeeTracer} es una plataforma de trazabilidad logística desarrollada por \textbf{Bilix
-Ingeniería} (Valparaíso, 2015) que digitaliza el ciclo completo de una operación de recepción y
-despacho de carga en terminales extraportuarios y bodegas. Su propuesta de valor central es la
-\textbf{evidencia fotográfica obligatoria}: el sistema no permite avanzar de una etapa a la
+BeeTracer es una plataforma de trazabilidad logística desarrollada por Bilix Ingeniería que
+digitaliza el ciclo de una operación de recepción y despacho de carga en terminales extraportuarios
+y bodegas. Funciona como un servicio de suscripción para las empresas y su propuesta central es la
+\textbf{evidencia fotográfica obligatoria}: la aplicación no permite avanzar de una etapa a la
 siguiente sin haber capturado el registro visual correspondiente, de modo que al cerrar la faena se
-dispone automáticamente de un expediente completo de lo ocurrido ---\textbf{quién, cuándo y
-cómo}---.
+dispone de un expediente completo de lo ocurrido. El sistema se basa en una arquitectura
+cliente-servidor y se divide en dos partes que trabajan en conjunto:
 
-El sistema se comercializa bajo un modelo de \textbf{licencia por suscripción} (mensual,
-trimestral o anual) y se encuentra operativo en Chile, con prospectos en Perú, Argentina y Brasil.
-Dado que el formato XML del manifiesto es un estándar mundial, la internacionalización requiere
-únicamente adaptar la dirección del \este{web service} de la aduana local.
+\begin{itemize}
+    \item \textbf{Aplicación móvil:} herramienta de uso en patio, pensada para tablet o celular,
+          con la que el personal de terreno captura datos (número de sello, cantidades,
+          incidencias) y fotografías de la carga. Puede operar sin conexión y sincroniza la
+          información cuando recupera señal.
+    \item \textbf{Plataforma web:} centro de control operado desde la oficina, donde se configuran
+          los datos maestros, se importan los manifiestos, se programan las faenas, se revisan y
+          aprueban los reportes y se consulta el estado de las operaciones. Su aplicación, base de
+          datos y repositorio de imágenes se alojan en servidores externos contratados, y las
+          transacciones se protegen con certificados SSL.
+\end{itemize}
 
-\section{Arquitectura general}
-\label{sec:arquitectura}
-
-BeeTracer se estructura en \textbf{dos frentes que se sincronizan en tiempo real}, descritos en la
-Tabla~\ref{tab:arquitectura}.
-
-{\estilotabla
-\begin{longtable}{L{0.17\textwidth} L{0.20\textwidth} L{0.21\textwidth} L{0.33\textwidth}}
-
-\caption{Componentes de la arquitectura general de BeeTracer}
-\label{tab:arquitectura}
-\\
-
-\toprule
-\textbf{Componente} & \textbf{Tecnología} & \textbf{Usuarios} & \textbf{Función} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Componente} & \textbf{Tecnología} & \textbf{Usuarios} & \textbf{Función} \\
-\midrule
-\endhead
-
-\textbf{Plataforma Web} &
-Node.js (versión original en Java) &
-Administrador, Jefe de faena, Supervisor &
-Centro de control, configuración, planificación, revisión y análisis. Operada desde oficina. \\
-
-\midrule
-
-\textbf{Aplicación Móvil} &
-Ionic (multiplataforma) &
-Jefe tarjador / operario de terreno &
-Captura de datos y evidencia fotográfica en patio. Diseñada para uso rudo sobre tablet o
-celular. \\
-
-\midrule
-
-\textbf{Servidores} &
-Servicio externo contratado &
---- &
-Alojamiento de aplicación, base de datos y repositorio de imágenes. SLA de resolución estimado en
-30 minutos ante caídas. \\
-
-\midrule
-
-\textbf{Seguridad} &
-Certificados SSL, encriptación &
---- &
-Protección de las transacciones y del acceso. \\
-
-\bottomrule
-
-\end{longtable}
-}
-
-\begin{nota}
-\textbf{Nota histórica.} La primera versión del sistema se construyó en \textbf{Java}, con
-\textbf{JasperReports} para la generación de los PDF y \textbf{SQL Server} como motor de base de
-datos (exigencia del primer gran cliente). El núcleo tardó entre 3 y 4 meses en desarrollarse. La
-versión moderna migró a \textbf{Node.js} en la web y a \textbf{Ionic} en el móvil.
-\end{nota}
-
-\section{Módulos funcionales}
-\label{sec:modulos}
-
-El sistema se organiza en \textbf{seis módulos}, presentados en la Tabla~\ref{tab:modulos}.
-
-{\estilotabla
-\begin{longtable}{L{0.28\textwidth} L{0.66\textwidth}}
-
-\caption{Módulos funcionales del sistema}
-\label{tab:modulos}
-\\
-
-\toprule
-\textbf{Módulo} & \textbf{Descripción} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Módulo} & \textbf{Descripción} \\
-\midrule
-\endhead
-
-\textbf{M1. Administrar maestros} &
-Configuración global del depósito: usuarios ilimitados con roles y permisos, clientes,
-trabajadores, cuadrillas y tipos de bulto para parametrizar las operaciones. \\
-
-\midrule
-
-\textbf{M2. Ingesta de información de carga} &
-Alimentación del sistema con el detalle de lo que viene dentro del contenedor, por tres vías
-alternativas (ver Sección~\ref{sec:modalidades}). \\
-
-\midrule
-
-\textbf{M3. Programar faenas} &
-Planificación de la agenda de desconsolidados: asignación de contenedor, fecha, franja horaria,
-cuadrilla y jefe tarjador responsable. \\
-
-\midrule
-
-\textbf{M4. Ejecutar operaciones} &
-Registro paso a paso de la faena en terreno desde la aplicación móvil, con captura obligatoria de
-evidencia fotográfica en cada etapa crítica. \\
-
-\midrule
-
-\textbf{M5. Gestión de reportes} &
-Compilación automática de datos y fotografías en un reporte PDF, y flujo de revisión y aprobación
-en escritorio antes de su publicación. \\
-
-\midrule
-
-\textbf{M6. Publicar y enviar} &
-Envío del reporte aprobado al cliente por correo electrónico y consulta histórica de faenas por
-evento o por cliente. \\
-
-\bottomrule
-
-\end{longtable}
-}
-
-\section{Modalidades de ingreso de la información de carga}
-\label{sec:modalidades}
-
-Antes de abrir un contenedor, el sistema necesita saber qué hay dentro. BeeTracer ofrece
-\textbf{tres vías}, en orden de preferencia:
+El flujo de trabajo general se compone de cuatro fases:
 
 \begin{enumerate}
-    \item \textbf{Vía manifiesto electrónico (XML)} ---\este{modalidad ideal}---. El sistema se
-          conecta al \este{web service} del Servicio Nacional de Aduanas, descarga el XML del
-          manifiesto que envió la nave y precarga automáticamente contenedores, líneas de carga,
-          consignatarios y cantidades declaradas. Permite conocer el contenido \textbf{antes de que
-          el barco recale en el puerto}.
-    \item \textbf{Integración directa (API)}: el sistema del propio cliente se conecta vía API con
-          BeeTracer y le transfiere la información de la carga.
-    \item \textbf{Tarja ciega} ---\este{modalidad de contingencia}---. Cuando no se recibió
-          información previa, la aplicación móvil arranca «en blanco» y el operario ingresa
-          manualmente la descripción de cada lote, leyendo las viñetas y facturas adheridas a las
-          propias cajas a medida que las descarga.
+    \item \textbf{Ingreso de la información de carga (web).} Antes de abrir un contenedor, el
+          sistema necesita saber qué hay dentro. La vía preferente es importar el manifiesto
+          electrónico (XML) desde el \este{web service} del Servicio Nacional de Aduanas, lo que
+          permite conocer el contenido antes de que la nave recale. Como contingencia existe la
+          \textbf{tarja ciega}, en que el operario ingresa manualmente cada lote leyendo las
+          viñetas de las cajas.
+    \item \textbf{Planificación (web).} El Jefe de faena programa el desconsolidado de cada
+          contenedor, asignando fecha, franja horaria, una cuadrilla de cuatro a cinco personas y,
+          entre ellas, al jefe tarjador que operará la aplicación móvil.
+    \item \textbf{Ejecución en terreno (móvil).} El jefe tarjador sigue un flujo guiado: registra
+          el sello y la apertura, fotografía cada lote separado por cliente, registra las
+          incidencias (daño, faltante, sobrante) con fotografías exclusivas y cierra la faena
+          fotografiando el contenedor vacío.
+    \item \textbf{Revisión y envío del reporte (web).} Al cerrar la faena, el sistema compila datos
+          y fotografías en un reporte PDF que el Supervisor del reporte valida. Si detecta
+          evidencia defectuosa, rechaza el reporte y solicita su corrección; una vez aprobado, el
+          Jefe de faena envía el reporte al cliente por correo electrónico.
 \end{enumerate}
 
-\section{El flujo operativo (\este{core} del sistema)}
-\label{sec:flujo}
-
-\textbf{Fase A --- Ingreso de información (Web).} Se carga el detalle de la carga por alguna de las
-tres vías anteriores.
-
-\noindent \textbf{Fase B --- Planificación (Web).} El Jefe de faena revisa los contenedores por arribar y
-programa los desconsolidados, asignando franja horaria (p. ej. de 10:00 a 12:00) y una cuadrilla de
-cuatro a cinco personas. A uno de sus integrantes se le asigna la responsabilidad de operar la
-aplicación móvil: el \textbf{jefe tarjador}.
-
-\noindent \textbf{Fase C --- Ejecución en terreno (App móvil).} El jefe tarjador sigue un flujo estricto que
-la aplicación impone, detallado en la Tabla~\ref{tab:etapasterreno}.
-
-{\estilotabla
-\begin{longtable}{L{0.28\textwidth} L{0.66\textwidth}}
-
-\caption{Etapas de la ejecución en terreno y evidencia exigida}
-\label{tab:etapasterreno}
-\\
-
-\toprule
-\textbf{Etapa} & \textbf{Registro exigido por el sistema} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Etapa} & \textbf{Registro exigido por el sistema} \\
-\midrule
-\endhead
-
-\textbf{1. Antes de abrir} &
-Fotografía de las puertas, del candado y del sello de seguridad, más la \textbf{digitación
-obligatoria del número de sello}. \\
-
-\midrule
-
-\textbf{2. Apertura} &
-Fotografías panorámicas de la mercancía con el contenedor recién abierto, \textbf{antes de ser
-manipulada}. \\
-
-\midrule
-
-\textbf{3. Separación} &
-A medida que la cuadrilla descarga, el operario agrupa la mercancía por cliente y fotografía
-\textbf{cada lote individualmente} (p. ej., las 200 cajas de zapatos). \\
-
-\midrule
-
-\textbf{4. Control de incidencias} &
-Ante una diferencia de cantidad (faltante o sobrante) o una caja dañada, se separa la unidad
-afectada y se le toman \textbf{fotografías exclusivas}. \\
-
-\midrule
-
-\textbf{5. Cierre} &
-Fotografía del contenedor \textbf{completamente vacío}, para demostrar que no quedó carga
-dentro. \\
-
-\bottomrule
-
-\end{longtable}
-}
-
-\noindent \textbf{Fase D --- Control y envío del reporte (Web).} Al cerrar la faena, el sistema compila
-automáticamente todos los datos y fotografías en un \textbf{reporte PDF} con encabezado (fecha,
-hora, cuadrilla a cargo) y desglose de fotografías y detalle por cliente, \textbf{destacando en
-rojo} la mercancía reportada como dañada. El Supervisor revisa este borrador en la plataforma web;
-si detecta una fotografía defectuosa ---borrosa, apuntando al cielo, o que muestra un detalle menor
-que el terminal prefiere resolver internamente--- puede solicitar su eliminación y recaptura. Una
-vez aprobado, el PDF completo se envía al cliente con un solo botón.
-
-\begin{nota}
-\textbf{Decisión de diseño relevante.} Originalmente el cliente accedía a un enlace y veía las
-fotografías \textbf{en vivo}, a medida que se subían. Esta funcionalidad se sustituyó por el flujo
-de revisión en escritorio, precisamente por los problemas de calidad y de exposición comercial
-descritos en la Sección~\ref{sec:restricciones}.
-\end{nota}
-
-\section{Soluciones técnicas al entorno adverso}
-\label{sec:soluciones}
-
-{\estilotabla
-\begin{longtable}{L{0.30\textwidth} L{0.64\textwidth}}
-
-\caption{Soluciones técnicas adoptadas frente a las restricciones del entorno}
-\label{tab:solucionestecnicas}
-\\
-
-\toprule
-\textbf{Desafío} & \textbf{Solución implementada} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Desafío} & \textbf{Solución implementada} \\
-\midrule
-\endhead
-
-Wi-Fi bloqueado por los contenedores metálicos &
-Envío \textbf{incremental}: la aplicación sube cada fotografía \textbf{una por una, inmediatamente
-después de ser tomada}, transfiriendo pocos \este{bytes} a la vez, en lugar de enviar el lote
-completo al final (lo que provocaba caídas). \\
-
-\midrule
-
-Peso de las imágenes &
-\textbf{Compresión estratégica} en el dispositivo, buscando el punto de equilibrio entre bajo peso
-y legibilidad suficiente para servir como evidencia. \\
-
-\midrule
-
-Ausencia total de señal &
-\textbf{Modo offline 100\,\%}: la aplicación mantiene una base de datos local en el dispositivo y
-sincroniza al recuperar conectividad o al llegar a una oficina con internet. \\
-
-\bottomrule
-
-\end{longtable}
-}
-
-\begin{nota}
-En la práctica, la solución definitiva en la mayoría de los casos fue que los propios terminales
-mejoraran la iluminación y la infraestructura Wi-Fi de sus patios.
-\end{nota}
-
-\section{Valor para el negocio}
-\label{sec:valor}
-
-Más allá de la eficiencia operativa, la función crítica del sistema es de \textbf{protección
-legal}. Cuando el operario abre el contenedor y fotografía de inmediato el estado de la mercancía,
-el depósito puede demostrar si la carga \textbf{ya venía dañada desde el barco} o si el daño
-ocurrió accidentalmente durante sus propias maniobras de desconsolidado. Esto permite
-\textbf{determinar responsabilidades ante los seguros de forma rápida y objetiva}, que es
-precisamente lo que el proceso manual no permitía.
+Para enfrentar el entorno adverso del patio, la aplicación sube cada fotografía de forma individual
+e inmediata (en lugar de enviar un lote al final), comprime las imágenes en el dispositivo y
+mantiene una base de datos local que le permite trabajar 100\,\% sin conexión. Todo ello sirve a
+un objetivo mayor: \textbf{proteger legalmente al depósito}, ya que permite demostrar si la carga
+venía dañada desde el barco o si el daño ocurrió durante las maniobras, y así determinar
+responsabilidades ante los seguros de forma rápida y objetiva.

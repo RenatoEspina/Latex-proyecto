@@ -1,802 +1,606 @@
-\chapter{Diccionario de Clases}
+\chapter{Diccionario de clases}
 \label{cap:diccionario}
 
-Se documenta cada clase del diagrama de diseño indicando su responsabilidad, sus atributos y sus
-operaciones principales. La notación de visibilidad sigue el estándar UML: \texttt{-} privado,
-\texttt{+} público, \texttt{\#} protegido.
+A continuación se define brevemente el propósito de cada clase del diagrama de clases
+(Figura~\ref{fig:clases}), junto con sus atributos y operaciones. Los tipos enumerados utilizados
+se describen al final del capítulo.
 
-En cada tabla, el bloque \textbf{Atributos} indica nombre, tipo y descripción, y el bloque
-\textbf{Operaciones} presenta la firma completa y su descripción.
+\section{Clase: Usuario}
+\label{sec:cls_usuario}
 
-\section{Paquete «Seguridad y maestros»}
-\label{sec:pkg_maestros}
-
-\subsection{Clase \clase{Deposito}}
-
-\textbf{Responsabilidad:} representa al terminal extraportuario, depósito o bodega que opera el
-sistema. Es la raíz de la configuración: todos los maestros y operaciones le pertenecen.
+Representa a una persona con cuenta en el sistema (administrador, jefe de faena, jefe tarjador, supervisor o cliente). Se limita a la autenticación y a consultar los permisos de su rol; la lógica de cada módulo reside en los controladores.
 
 {\estilotabla
-\begin{longtable}{L{0.26\textwidth} L{0.12\textwidth} L{0.54\textwidth}}
-\caption{Clase \clase{Deposito}: atributos y operaciones}\label{tab:cls_deposito}\\
-\toprule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Atributos}} \\
-\midrule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endhead
-\clase{idDeposito} & int & Identificador único del depósito. \\
-\clase{rut} & String & Identificación tributaria de la organización. \\
-\clase{razonSocial} & String & Nombre legal del terminal o bodega. \\
-\clase{direccion} & String & Ubicación física del recinto. \\
-\clase{zonaHoraria} & String & Zona horaria de operación. Relevante para la
-internacionalización. \\
-\midrule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Operaciones}} \\
-\midrule
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ obtenerParametros() : Parametro[]}} &
-Recupera la parametrización vigente del depósito. \\
-\bottomrule
-\end{longtable}
-}
-
-\subsection{Clase \clase{Usuario}}
-
-\textbf{Responsabilidad:} representa a una persona con acceso al sistema, en web o móvil.
-Concentra la autenticación y la resolución de permisos.
-
-{\estilotabla
-\begin{longtable}{L{0.26\textwidth} L{0.12\textwidth} L{0.54\textwidth}}
-\caption{Clase \clase{Usuario}: atributos y operaciones}\label{tab:cls_usuario}\\
-\toprule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Atributos}} \\
-\midrule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endhead
-\clase{idUsuario} & int & Identificador único. \\
-\clase{nombre} & String & Nombre completo del usuario. \\
-\clase{email} & String & Correo electrónico; actúa como identificador de acceso. \\
-\clase{passwordHash} & String & Resumen criptográfico de la contraseña. Nunca se almacena en
-claro. \\
-\clase{activo} & boolean & Indica si la cuenta está habilitada. \\
-\clase{ultimoAcceso} & DateTime & Fecha y hora del último ingreso, para la bitácora. \\
-\midrule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Operaciones}} \\
-\midrule
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ autenticar(pass : String) : boolean}} &
-Valida las credenciales y establece la sesión (CU-22). \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ tienePermiso(codigo : String) : boolean}} &
-Resuelve si el usuario puede ejecutar una acción, recorriendo sus roles. \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ cambiarPassword(nueva : String) : void}} &
-Actualiza la contraseña aplicando la función de resumen. \\
-\bottomrule
-\end{longtable}
-}
-
-\subsection{Clase \clase{Rol}}
-
-\textbf{Responsabilidad:} agrupa un conjunto de permisos bajo un nombre, para asignarlos en bloque.
-Permite definir perfiles a medida (administrador, jefe de faena, jefe tarjador, supervisor).
-
-{\estilotabla
-\begin{longtable}{L{0.26\textwidth} L{0.12\textwidth} L{0.54\textwidth}}
-\caption{Clase \clase{Rol}: atributos y operaciones}\label{tab:cls_rol}\\
-\toprule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Atributos}} \\
-\midrule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endhead
-\clase{idRol} & int & Identificador único. \\
-\clase{nombre} & String & Denominación del perfil. \\
-\clase{descripcion} & String & Alcance del rol. \\
-\midrule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Operaciones}} \\
-\midrule
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ agregarPermiso(p : Permiso) : void}} &
-Incorpora un permiso al rol. \\
-\bottomrule
-\end{longtable}
-}
-
-\subsection{Clase \clase{Permiso}}
-
-\textbf{Responsabilidad:} representa la autorización atómica para ejecutar una funcionalidad
-concreta.
-
-{\estilotabla
-\begin{longtable}{L{0.26\textwidth} L{0.12\textwidth} L{0.54\textwidth}}
-\caption{Clase \clase{Permiso}: atributos}\label{tab:cls_permiso}\\
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endhead
-\clase{idPermiso} & int & Identificador único. \\
-\clase{codigo} & String & Clave interna de la funcionalidad protegida (p. ej.
-\estado{REPORTE\_APROBAR}). \\
-\clase{descripcion} & String & Explicación legible del permiso. \\
-\bottomrule
-\end{longtable}
-}
-
-\subsection{Clase \clase{Cliente}}
-
-\textbf{Responsabilidad:} representa a la empresa importadora consignataria de la carga. Es el
-destinatario del reporte.
-
-{\estilotabla
-\begin{longtable}{L{0.26\textwidth} L{0.12\textwidth} L{0.54\textwidth}}
-\caption{Clase \clase{Cliente}: atributos y operaciones}\label{tab:cls_cliente}\\
-\toprule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Atributos}} \\
-\midrule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endhead
-\clase{idCliente} & int & Identificador único. \\
-\clase{rut} & String & Identificación tributaria del importador. \\
-\clase{razonSocial} & String & Nombre legal de la empresa. \\
-\clase{emailContacto} & String & Correo principal de contacto. \\
-\clase{telefono} & String & Teléfono de contacto. \\
-\clase{activo} & boolean & Indica si el cliente está vigente. \\
-\midrule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Operaciones}} \\
-\midrule
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ obtenerDestinatarios() : String[]}} &
-Devuelve las direcciones de correo a las que debe enviarse el reporte (CU-20). \\
-\bottomrule
-\end{longtable}
-}
-
-\subsection{Clase \clase{Trabajador}}
-
-\textbf{Responsabilidad:} representa al personal operativo del depósito que conforma las
-cuadrillas.
-
-{\estilotabla
-\begin{longtable}{L{0.26\textwidth} L{0.12\textwidth} L{0.54\textwidth}}
-\caption{Clase \clase{Trabajador}: atributos y operaciones}\label{tab:cls_trabajador}\\
-\toprule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Atributos}} \\
-\midrule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endhead
-\clase{idTrabajador} & int & Identificador único. \\
-\clase{rut} & String & Identificación del trabajador. \\
-\clase{nombre} & String & Nombre completo. \\
-\clase{cargo} & String & Función que desempeña (p. ej. jefe tarjador, estibador). \\
-\clase{habilitado} & boolean & Indica si puede ser asignado a faenas. \\
-\midrule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Operaciones}} \\
-\midrule
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ estaDisponible(f : Date, h : Time) : boolean}} &
-Verifica que no tenga otra faena asignada en la franja indicada (CU-09). \\
-\bottomrule
-\end{longtable}
-}
-
-\subsection{Clase \clase{Cuadrilla}}
-
-\textbf{Responsabilidad:} agrupa a los cuatro o cinco trabajadores que ejecutan físicamente una
-faena de desconsolidado, uno de los cuales opera la aplicación móvil.
-
-{\estilotabla
-\begin{longtable}{L{0.26\textwidth} L{0.12\textwidth} L{0.54\textwidth}}
-\caption{Clase \clase{Cuadrilla}: atributos y operaciones}\label{tab:cls_cuadrilla}\\
-\toprule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Atributos}} \\
-\midrule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endhead
-\clase{idCuadrilla} & int & Identificador único. \\
-\clase{nombre} & String & Denominación de la cuadrilla. \\
-\clase{turno} & String & Turno de trabajo asociado. \\
-\midrule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Operaciones}} \\
-\midrule
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ agregarTrabajador(t : Trabajador) : void}} &
-Incorpora un integrante a la cuadrilla. \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ obtenerJefeTarjador() : Trabajador}} &
-Devuelve al integrante designado como responsable de la aplicación móvil. \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ estaDisponible(f : Date, h : Time) : boolean}} &
-Verifica la disponibilidad del equipo completo para la franja indicada. \\
-\bottomrule
-\end{longtable}
-}
-
-\subsection{Clase \clase{TipoBulto}}
-
-\textbf{Responsabilidad:} parametriza las unidades con que se registra la carga (caja, pallet,
-atado, bobina), permitiendo adaptar el sistema a la operación de cada depósito.
-
-{\estilotabla
-\begin{longtable}{L{0.26\textwidth} L{0.12\textwidth} L{0.54\textwidth}}
-\caption{Clase \clase{TipoBulto}: atributos}\label{tab:cls_tipobulto}\\
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endhead
-\clase{idTipoBulto} & int & Identificador único. \\
-\clase{nombre} & String & Denominación del tipo de bulto. \\
-\clase{descripcion} & String & Detalle del tipo. \\
-\clase{unidadMedida} & String & Unidad en que se cuantifica. \\
-\bottomrule
-\end{longtable}
-}
-
-\section{Paquete «Información de carga»}
-\label{sec:pkg_carga}
-
-\subsection{Clase \clase{Manifiesto}}
-
-\textbf{Responsabilidad:} representa el documento oficial que declara la totalidad de la carga que
-transporta una nave. Es la fuente de verdad de referencia del sistema.
-
-{\estilotabla
-\begin{longtable}{L{0.26\textwidth} L{0.12\textwidth} L{0.54\textwidth}}
-\caption{Clase \clase{Manifiesto}: atributos y operaciones}\label{tab:cls_manifiesto}\\
-\toprule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Atributos}} \\
-\midrule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endhead
-\clase{idManifiesto} & int & Identificador único. \\
-\clase{numeroManifiesto} & String & Folio oficial asignado por Aduanas. \\
-\clase{nave} & String & Nombre de la nave que transporta la carga. \\
-\clase{viaje} & String & Identificador del viaje. \\
-\clase{fechaRecepcion} & DateTime & Momento en que el sistema descargó el documento. \\
-\clase{origenDatos} & OrigenDatos & Vía por la que ingresó la información (XML, API o tarja
-ciega). \\
-\midrule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Operaciones}} \\
-\midrule
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ cargarDesdeXML(xml : String) : boolean}} &
-Interpreta el documento XML y construye la jerarquía de contenedores y líneas de carga
-(CU-05). \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ validarEsquema() : boolean}} &
-Verifica que el XML cumpla el estándar esperado antes de procesarlo. \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ agregarContenedor(c : Contenedor) : void}} &
-Asocia un contenedor al manifiesto. \\
-\bottomrule
-\end{longtable}
-}
-
-\subsection{Clase \clase{Contenedor}}
-
-\textbf{Responsabilidad:} representa la unidad física de transporte que será desconsolidada.
-
-{\estilotabla
-\begin{longtable}{L{0.26\textwidth} L{0.12\textwidth} L{0.54\textwidth}}
-\caption{Clase \clase{Contenedor}: atributos y operaciones}\label{tab:cls_contenedor}\\
-\toprule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Atributos}} \\
-\midrule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endhead
-\clase{idContenedor} & int & Identificador único interno. \\
-\clase{sigla} & String & Prefijo del propietario del contenedor (estándar ISO). \\
-\clase{numero} & String & Número identificador del contenedor. \\
-\clase{tipo} & String & Tipo de contenedor (\este{dry}, \este{reefer}, \este{open top}). \\
-\clase{tamano} & String & Dimensión (20', 40', 40'HC). \\
-\clase{nroSelloDeclarado} & String & Número de sello de seguridad según el manifiesto. Se contrasta
-en terreno. \\
-\clase{fechaArribo} & Date & Fecha estimada o efectiva de llegada. \\
-\midrule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Operaciones}} \\
-\midrule
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ agregarLinea(l : LineaCarga) : void}} &
-Asocia una línea de carga al contenedor. \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ totalBultosDeclarados() : int}} &
-Suma las cantidades declaradas de todas sus líneas. \\
-\bottomrule
-\end{longtable}
-}
-
-\subsection{Clase \clase{LineaCarga}}
-
-\textbf{Responsabilidad:} representa el lote de mercancía consignado a un cliente específico dentro
-de un contenedor. \textbf{Es la clase donde se materializa el contraste entre lo declarado y lo
-recibido.}
-
-{\estilotabla
-\begin{longtable}{L{0.26\textwidth} L{0.12\textwidth} L{0.54\textwidth}}
-\caption{Clase \clase{LineaCarga}: atributos y operaciones}\label{tab:cls_lineacarga}\\
-\toprule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Atributos}} \\
-\midrule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endhead
-\clase{idLinea} & int & Identificador único. \\
-\clase{blConocimiento} & String & Número del conocimiento de embarque (\este{Bill of Lading}). \\
-\clase{descripcion} & String & Descripción de la mercancía. \\
-\clase{marcas} & String & Marcas y contramarcas impresas en los bultos. \\
-\clase{cantidadDeclarada} & int & Número de bultos según el manifiesto. Nulo en modalidad tarja
-ciega. \\
-\clase{cantidadRecibida} & int & Número de bultos efectivamente contados en terreno. \\
-\clase{pesoKg} & decimal & Peso declarado del lote. \\
-\midrule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Operaciones}} \\
-\midrule
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ contrastarCantidad(recibida : int) : int}} &
-Registra la cantidad recibida y devuelve la diferencia respecto de la declarada. \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ tieneDiferencia() : boolean}} &
-Indica si existe faltante o sobrante, disparando la creación de una incidencia. \\
-\bottomrule
-\end{longtable}
-}
-
-\subsection{Enumeración \clase{OrigenDatos}}
-
-\clase{MANIFIESTO\_XML} $\cdot$ \clase{INTEGRACION\_API} $\cdot$ \clase{TARJA\_CIEGA}: identifica la
-vía por la que ingresó la información de la carga. Condiciona si el contraste de cantidades es
-aplicable.
-
-\section{Paquete «Operación en terreno»}
-\label{sec:pkg_terreno}
-
-\subsection{Clase \clase{Faena}}
-
-\textbf{Responsabilidad: clase central del modelo.} Representa la operación programada de
-desconsolidado de un contenedor: su planificación, ejecución y cierre. Actúa como agregado raíz del
-expediente probatorio.
-
-{\estilotabla
-\begin{longtable}{L{0.26\textwidth} L{0.12\textwidth} L{0.54\textwidth}}
-\caption{Clase \clase{Faena}: atributos y operaciones}\label{tab:cls_faena}\\
-\toprule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Atributos}} \\
-\midrule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endhead
-\clase{idFaena} & int & Identificador único. \\
-\clase{folio} & String & Número de faena visible para el usuario y en el reporte. \\
-\clase{fechaProgramada} & Date & Día en que se ejecutará el desconsolidado. \\
-\clase{horaInicio} & Time & Inicio de la franja horaria asignada. \\
-\clase{horaTermino} & Time & Término de la franja horaria asignada. \\
-\clase{estado} & EstadoFaena & Situación actual de la faena. \\
-\clase{modalidadIngreso} & OrigenDatos & Vía por la que se obtuvo la información de la carga. \\
-\midrule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Operaciones}} \\
-\midrule
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ programar(f : Date, hi : Time, ht : Time) : void}} &
-Fija fecha y franja horaria (CU-08). \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ asignarCuadrilla(c : Cuadrilla,
-jt : Trabajador) : void}} &
-Asocia el equipo de trabajo y designa al responsable de la aplicación móvil (CU-09). \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ iniciar() : void}} &
-Marca el comienzo efectivo de la faena en terreno. \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ registrarEtapa(tipo : TipoEtapa) : EtapaFaena}} &
-Abre una nueva etapa del proceso. \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ cerrar() : void}} &
-Valida la completitud de la evidencia, finaliza la faena y dispara la generación del reporte
-(CU-14, CU-17). \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ cambiarEstado(e : EstadoFaena) : void}} &
-Transiciona el estado respetando las reglas de negocio. \\
-\bottomrule
-\end{longtable}
-}
-
-\subsection{Clase \clase{EtapaFaena}}
-
-\textbf{Responsabilidad:} representa cada uno de los momentos críticos del proceso en los que el
-sistema exige evidencia. Impone el orden del flujo en terreno.
-
-{\estilotabla
-\begin{longtable}{L{0.26\textwidth} L{0.12\textwidth} L{0.54\textwidth}}
-\caption{Clase \clase{EtapaFaena}: atributos y operaciones}\label{tab:cls_etapafaena}\\
-\toprule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Atributos}} \\
-\midrule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endhead
-\clase{idEtapa} & int & Identificador único. \\
-\clase{tipo} & TipoEtapa & Momento del proceso que representa. \\
-\clase{fechaHoraInicio} & DateTime & Marca de tiempo de apertura de la etapa. \\
-\clase{fechaHoraFin} & DateTime & Marca de tiempo de cierre de la etapa. \\
-\clase{observacion} & String & Comentario libre del operario. \\
-\midrule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Operaciones}} \\
-\midrule
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ agregarEvidencia(f : Fotografia) : void}} &
-Asocia una fotografía a la etapa. \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ estaCompleta() : boolean}} &
-Verifica que la etapa cuente con la evidencia obligatoria antes de permitir el avance. \\
-\bottomrule
-\end{longtable}
-}
-
-\subsection{Clase \clase{SelloSeguridad}}
-
-\textbf{Responsabilidad:} registra la verificación del sello del contenedor, uno de los elementos
-de mayor valor probatorio de toda la faena.
-
-{\estilotabla
-\begin{longtable}{L{0.26\textwidth} L{0.12\textwidth} L{0.54\textwidth}}
-\caption{Clase \clase{SelloSeguridad}: atributos y operaciones}\label{tab:cls_sello}\\
-\toprule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Atributos}} \\
-\midrule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endhead
-\clase{idSello} & int & Identificador único. \\
-\clase{numeroDigitado} & String & Número que el operario leyó y digitó en terreno. \\
-\clase{estado} & EstadoSello & Resultado de la verificación. \\
-\clase{fechaVerificacion} & DateTime & Momento de la verificación. \\
-\midrule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Operaciones}} \\
-\midrule
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ verificarContraDeclarado(dec : String) :
-EstadoSello}} &
-Compara el número digitado contra el declarado en el manifiesto y determina si el sello está
-intacto, roto o no coincide. \\
-\bottomrule
-\end{longtable}
-}
-
-\subsection{Clase \clase{Fotografia}}
-
-\textbf{Responsabilidad: unidad de evidencia del sistema.} Encapsula la imagen capturada en terreno
-junto con los metadatos que le otorgan valor probatorio, y gestiona su ciclo de compresión y
-subida.
-
-{\estilotabla
-\begin{longtable}{L{0.26\textwidth} L{0.12\textwidth} L{0.54\textwidth}}
-\caption{Clase \clase{Fotografia}: atributos y operaciones}\label{tab:cls_fotografia}\\
-\toprule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Atributos}} \\
-\midrule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endhead
-\clase{idFoto} & int & Identificador único. \\
-\clase{uuid} & String & Identificador universal generado en el dispositivo, previo a la subida. \\
-\clase{nombreArchivo} & String & Nombre del archivo de imagen. \\
-\clase{url} & String & Dirección en el repositorio en la nube, una vez subida. \\
-\clase{fechaHoraCaptura} & DateTime & Momento exacto de la captura. Elemento probatorio clave. \\
-\clase{latitud} & decimal & Latitud de la captura. \\
-\clase{longitud} & decimal & Longitud de la captura. \\
-\clase{tamanoBytes} & long & Peso del archivo tras la compresión. \\
-\clase{hash} & String & Resumen criptográfico de la imagen, para verificar su integridad. \\
-\clase{estado} & EstadoFoto & Situación de la fotografía en su ciclo de vida. \\
-\clase{motivoRechazo} & String & Razón indicada por el Supervisor al rechazarla (CU-19). \\
-\midrule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Operaciones}} \\
-\midrule
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ comprimir() : void}} &
-Reduce el peso de la imagen en el dispositivo manteniendo legibilidad suficiente como
-evidencia. \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ subir() : boolean}} &
-Transfiere la imagen al repositorio en la nube. \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ marcarSubida(url : String) : void}} &
-Confirma la subida y registra la dirección definitiva. \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ marcarRechazada(motivo : String) : void}} &
-Invalida la fotografía y registra el motivo, solicitando recaptura. \\
-\bottomrule
-\end{longtable}
-}
-
-\subsection{Clase \clase{Incidencia}}
-
-\textbf{Responsabilidad:} documenta toda anomalía detectada en la carga. Es la información que
-activa los seguros y delimita las responsabilidades entre naviera, terminal e importador.
-
-{\estilotabla
-\begin{longtable}{L{0.26\textwidth} L{0.12\textwidth} L{0.54\textwidth}}
-\caption{Clase \clase{Incidencia}: atributos y operaciones}\label{tab:cls_incidencia}\\
-\toprule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Atributos}} \\
-\midrule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endhead
-\clase{idIncidencia} & int & Identificador único. \\
-\clase{tipo} & TipoIncidencia & Naturaleza de la anomalía. \\
-\clase{descripcion} & String & Relato del operario sobre lo observado. \\
-\clase{cantidadAfectada} & int & Número de bultos comprometidos. \\
-\clase{gravedad} & String & Clasificación de severidad del hecho. \\
-\clase{fechaHora} & DateTime & Momento de la detección. \\
-\midrule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Operaciones}} \\
-\midrule
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ adjuntarFotografia(f : Fotografia) : void}} &
-Asocia evidencia exclusiva a la incidencia. Obligatorio (RI-2). \\
-\bottomrule
-\end{longtable}
-}
-
-\subsection{Enumeraciones del paquete}
-
-{\estilotabla
-\begin{longtable}{L{0.18\textwidth} L{0.40\textwidth} L{0.36\textwidth}}
-
-\caption{Enumeraciones del paquete «Operación en terreno»}
-\label{tab:enum_terreno}
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase Usuario.}
+\label{tab:cls_usuario}
 \\
-
 \toprule
-\textbf{Enumeración} & \textbf{Valores} & \textbf{Uso} \\
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
 \midrule
-\endfirsthead
-
-\toprule
-\textbf{Enumeración} & \textbf{Valores} & \textbf{Uso} \\
+\clase{idUsuario} & \clase{int} & Identificador único del usuario. \\
+\clase{nombre} & \clase{String} & Nombre completo. \\
+\clase{email} & \clase{String} & Correo, usado también como credencial de acceso. \\
+\clase{passwordHash} & \clase{String} & Resumen criptográfico de la contraseña. \\
+\clase{activo} & \clase{boolean} & Indica si la cuenta puede iniciar sesión. \\
+\clase{rol} & \clase{Rol} & Rol asignado, que define sus permisos. \\
 \midrule
-\endhead
-
-\clase{EstadoFaena} &
-\estado{PROGRAMADA} $\cdot$ \estado{EN\_EJECUCION} $\cdot$ \estado{FINALIZADA} $\cdot$
-\estado{ANULADA} &
-Ciclo de vida de la operación. \\
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
 \midrule
-
-\clase{TipoEtapa} &
-\estado{APERTURA} $\cdot$ \estado{SEPARACION} $\cdot$ \estado{INCIDENCIA} $\cdot$
-\estado{CIERRE} &
-Momentos críticos que exigen evidencia. \\
-\midrule
-
-\clase{EstadoSello} &
-\estado{INTACTO} $\cdot$ \estado{ROTO} $\cdot$ \estado{NO\_COINCIDE} &
-Resultado de la verificación del sello. \\
-\midrule
-
-\clase{EstadoFoto} &
-\estado{PENDIENTE} $\cdot$ \estado{SUBIDA} $\cdot$ \estado{RECHAZADA} $\cdot$
-\estado{REEMPLAZADA} &
-Ciclo de vida de la evidencia, incluyendo el modo offline y la recaptura. \\
-\midrule
-
-\clase{TipoIncidencia} &
-\estado{DANO} $\cdot$ \estado{FALTANTE} $\cdot$ \estado{SOBRANTE} $\cdot$
-\estado{MAL\_EMBALADO} &
-Clasificación de las anomalías. \\
-
-\bottomrule
-
-\end{longtable}
-}
-
-\section{Paquete «Reportes y publicación»}
-\label{sec:pkg_reportes}
-
-\subsection{Clase \clase{Reporte}}
-
-\textbf{Responsabilidad:} consolida el expediente completo de una faena en un documento PDF
-verificable y gestiona su ciclo de revisión, aprobación y publicación.
-
-{\estilotabla
-\begin{longtable}{L{0.26\textwidth} L{0.12\textwidth} L{0.54\textwidth}}
-\caption{Clase \clase{Reporte}: atributos y operaciones}\label{tab:cls_reporte}\\
-\toprule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Atributos}} \\
-\midrule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endhead
-\clase{idReporte} & int & Identificador único. \\
-\clase{folio} & String & Número visible del reporte. \\
-\clase{version} & int & Número de versión, que se incrementa tras cada ciclo de recaptura. \\
-\clase{fechaGeneracion} & DateTime & Momento de generación del borrador. \\
-\clase{fechaAprobacion} & DateTime & Momento de la aprobación por el Supervisor. \\
-\clase{estado} & EstadoReporte & Situación del reporte en su flujo. \\
-\clase{urlPdf} & String & Ubicación del archivo PDF generado. \\
-\midrule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Operaciones}} \\
-\midrule
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ generarPDF() : Archivo}} &
-Solicita la composición del documento a partir de los datos y fotografías de la faena (CU-17). \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ versionar() : void}} &
-Incrementa la versión preservando el historial tras una corrección. \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ aprobar(s : Usuario, fh : DateTime) : void}} &
-Registra quién aprobó el reporte y cuándo, habilitando su envío (CU-18). \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ obtenerDestinatarios() : String[]}} &
-Reúne los correos de todos los clientes involucrados en la faena. \\
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ registrarEnvio(e : EnvioReporte) : void}} &
-Deja constancia del despacho del documento. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{iniciarSesion(\allowbreak{}password: String): boolean}} & Autentica al usuario; retorna verdadero si las credenciales son correctas y la cuenta está activa. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{cerrarSesion(\allowbreak{}): void}} & Finaliza la sesión activa. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{cambiarPassword(\allowbreak{}nueva: String): void}} & Reemplaza la contraseña almacenada. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{tienePermiso(\allowbreak{}codigo: String): boolean}} & Consulta a su rol si posee el permiso indicado. \\
 \bottomrule
 \end{longtable}
 }
 
-\subsection{Clase \clase{EnvioReporte}}
+\section{Clase: Rol}
+\label{sec:cls_rol}
 
-\textbf{Responsabilidad:} registra cada intento de despacho del reporte, exitoso o fallido, como
-parte del expediente probatorio.
-
-{\estilotabla
-\begin{longtable}{L{0.26\textwidth} L{0.12\textwidth} L{0.54\textwidth}}
-\caption{Clase \clase{EnvioReporte}: atributos y operaciones}\label{tab:cls_envioreporte}\\
-\toprule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Atributos}} \\
-\midrule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Nombre} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\endhead
-\clase{idEnvio} & int & Identificador único. \\
-\clase{fechaHoraEnvio} & DateTime & Momento del intento de envío. \\
-\clase{destinatarios} & String & Direcciones a las que se despachó el documento. \\
-\clase{estadoEnvio} & String & Resultado del intento (\estado{ENVIADO} / \estado{FALLIDO}). \\
-\clase{mensajeError} & String & Detalle del fallo, cuando corresponde. \\
-\clase{intentos} & int & Número de reintentos acumulados. \\
-\midrule
-\multicolumn{3}{l}{\cellcolor{filacabecera}\textbf{Operaciones}} \\
-\midrule
-\multicolumn{2}{L{0.40\textwidth}}{\clase{+ reintentar() : boolean}} &
-Vuelve a despachar el documento tras un fallo. \\
-\bottomrule
-\end{longtable}
-}
-
-\subsection{Enumeración \clase{EstadoReporte}}
-
-\estado{BORRADOR} $\cdot$ \estado{EN\_CORRECCION} $\cdot$ \estado{APROBADO} $\cdot$
-\estado{ENVIADO}: refleja el flujo de control de calidad descrito en CU-18 y CU-19.
-
-\section{Paquete «Controladores y servicios»}
-\label{sec:pkg_controladores}
+Perfil que agrupa un conjunto de permisos (por ejemplo, Administrador o Supervisor). Se asocia con los permisos (\clase{Permiso}) que otorga.
 
 {\estilotabla
-\begin{longtable}{L{0.17\textwidth} L{0.10\textwidth} L{0.37\textwidth} L{0.28\textwidth}}
-
-\caption{Controladores, interfaces y servicios del diseño}
-\label{tab:controladores}
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase Rol.}
+\label{tab:cls_rol}
 \\
-
 \toprule
-\textbf{Clase} & \textbf{Estereo\-tipo} & \textbf{Responsabilidad} &
-\textbf{Operaciones principales} \\
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
 \midrule
-\endfirsthead
-
-\toprule
-\textbf{Clase} & \textbf{Estereo\-tipo} & \textbf{Responsabilidad} &
-\textbf{Operaciones principales} \\
+\clase{idRol} & \clase{int} & Identificador único del rol. \\
+\clase{nombre} & \clase{String} & Nombre del rol. \\
+\clase{activo} & \clase{boolean} & Indica si el rol puede asignarse a nuevos usuarios. \\
 \midrule
-\endhead
-
-\clase{Gestor\-Manifiesto} & \ster{control} &
-Coordina la ingesta de información de carga por sus tres vías. &
-\clase{importarManifiesto()}, \clase{recibirDesdeAPI()}, \clase{declararTarjaCiega()} \\
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
 \midrule
-
-\clase{Gestor\-Programacion} & \ster{control} &
-Coordina la planificación de faenas y la asignación de recursos. &
-\clase{listarContenedoresPendientes()}, \clase{programarFaena()}, \clase{asignarCuadrilla()},
-\clase{validarDisponibilidadHorario()} \\
-\midrule
-
-\clase{GestorFaena} & \ster{control} &
-Coordina la ejecución de la faena en terreno. Es el controlador con mayor tráfico de mensajes del
-sistema. &
-\clase{iniciarFaena()}, \clase{verificarSello()}, \clase{registrarLote()},
-\clase{registrarIncidencia()}, \clase{registrarEvidencia()}, \clase{cerrarFaena()} \\
-\midrule
-
-\clase{Gestor\-Reportes} & \ster{control} &
-Coordina la generación, revisión, aprobación y publicación del reporte. &
-\clase{generarBorrador()}, \clase{rechazarFotografia()}, \clase{aprobarReporte()},
-\clase{enviarReporte()} \\
-\midrule
-
-\clase{Sincronizador\-Offline} & \ster{control} &
-Desacopla la captura de evidencia de su transmisión. Mantiene la cola de pendientes y gestiona los
-reintentos. Es el único objeto que conoce el repositorio externo. &
-\clase{encolarSubida()}, \clase{hayConectividad()}, \clase{sincronizarPendientes()},
-\clase{persistirLocal()} \\
-\midrule
-
-\clase{IServicio\-Aduana} & \ster{interface} &
-Abstrae la comunicación con la aduana, permitiendo la internacionalización sin modificar el resto
-del sistema. &
-\clase{descargarXML()} \\
-\midrule
-
-\clase{Servicio\-AduanaWS} & --- &
-Implementación concreta del \este{web service} del Servicio Nacional de Aduanas de Chile. &
-\clase{descargarXML()} \\
-\midrule
-
-\clase{IPasarela\-Correo} & \ster{interface} &
-Abstrae el despacho de correo electrónico. &
-\clase{enviar()} \\
-\midrule
-
-\clase{Servicio\-CorreoSMTP} & --- &
-Implementación concreta sobre protocolo SMTP. &
-\clase{enviar()} \\
-\midrule
-
-\clase{GeneradorPDF} & \ster{service} &
-Compone el documento PDF a partir de datos y fotografías, destacando las incidencias. Corresponde
-al rol que cumplía JasperReports en la versión original del sistema. &
-\clase{armarReporte()}, \clase{destacarIncidencias()} \\
-\midrule
-
-\clase{Repositorio\-Fotos} & \ster{service} &
-Almacenamiento externo de las imágenes capturadas en terreno. &
-\clase{subir()}, \clase{obtenerURL()}, \clase{eliminar()} \\
-
+\multicolumn{2}{L{0.56\textwidth}}{\clase{agregarPermiso(\allowbreak{}p: Permiso): void}} & Añade un permiso al rol. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{tienePermiso(\allowbreak{}codigo: String): boolean}} & Retorna verdadero si el rol incluye el permiso con ese código. \\
 \bottomrule
+\end{longtable}
+}
 
+\section{Clase: Permiso}
+\label{sec:cls_permiso}
+
+Autorización para ejecutar una función del sistema.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase Permiso.}
+\label{tab:cls_permiso}
+\\
+\toprule
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
+\midrule
+\clase{idPermiso} & \clase{int} & Identificador único. \\
+\clase{codigo} & \clase{String} & Código de la función autorizada (por ejemplo, PROGRAMAR\_FAENA). \\
+\clase{descripcion} & \clase{String} & Explicación del permiso. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: Cliente}
+\label{sec:cls_cliente}
+
+Empresa importadora cuya carga viene consignada en un contenedor y que consulta el estado de sus operaciones.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase Cliente.}
+\label{tab:cls_cliente}
+\\
+\toprule
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
+\midrule
+\clase{idCliente} & \clase{int} & Identificador único. \\
+\clase{rut} & \clase{String} & RUT de la empresa. \\
+\clase{razonSocial} & \clase{String} & Razón social. \\
+\clase{email} & \clase{String} & Correo(s) de contacto, destino de los reportes. \\
+\clase{activo} & \clase{boolean} & Indica si el cliente está habilitado. \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\clase{obtenerDestinatarios(\allowbreak{}): String[\,]}} & Retorna las direcciones de correo a las que se envían sus reportes. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: Trabajador}
+\label{sec:cls_trabajador}
+
+Persona del personal operativo que integra las cuadrillas y que puede ser designada jefe tarjador de una programación.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase Trabajador.}
+\label{tab:cls_trabajador}
+\\
+\toprule
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
+\midrule
+\clase{idTrabajador} & \clase{int} & Identificador único. \\
+\clase{rut} & \clase{String} & RUT del trabajador. \\
+\clase{nombre} & \clase{String} & Nombre completo. \\
+\clase{cargo} & \clase{String} & Cargo dentro de la cuadrilla. \\
+\clase{habilitado} & \clase{boolean} & Indica si puede ser asignado a faenas. \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\clase{estaDisponible(\allowbreak{}fecha: Date,\allowbreak{} horaInicio: Time,\allowbreak{} horaTermino: Time): boolean}} & Retorna verdadero si está habilitado y no tiene otra faena en esa franja. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: Cuadrilla}
+\label{sec:cls_cuadrilla}
+
+Grupo de cuatro a cinco trabajadores que ejecuta físicamente un desconsolidado.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase Cuadrilla.}
+\label{tab:cls_cuadrilla}
+\\
+\toprule
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
+\midrule
+\clase{idCuadrilla} & \clase{int} & Identificador único. \\
+\clase{nombre} & \clase{String} & Nombre o número de la cuadrilla. \\
+\clase{integrantes} & \clase{Trabajador[\,]} & Trabajadores que la componen. \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\clase{agregarTrabajador(\allowbreak{}t: Trabajador): void}} & Incorpora un trabajador a la cuadrilla. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{estaDisponible(\allowbreak{}fecha: Date,\allowbreak{} horaInicio: Time,\allowbreak{} horaTermino: Time): boolean}} & Retorna verdadero si todos sus integrantes están disponibles en la franja. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: TipoBulto}
+\label{sec:cls_tipobulto}
+
+Catálogo de unidades de carga con que se registra la mercancía (caja, pallet, atado).
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase TipoBulto.}
+\label{tab:cls_tipobulto}
+\\
+\toprule
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
+\midrule
+\clase{idTipoBulto} & \clase{int} & Identificador único. \\
+\clase{nombre} & \clase{String} & Nombre del tipo de bulto. \\
+\clase{codigo} & \clase{String} & Código corto usado en la aplicación móvil. \\
+\clase{activo} & \clase{boolean} & Indica si puede utilizarse en nuevas operaciones. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: Manifiesto}
+\label{sec:cls_manifiesto}
+
+Documento electrónico de la carga de una nave, importado desde el Servicio Nacional de Aduanas.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase Manifiesto.}
+\label{tab:cls_manifiesto}
+\\
+\toprule
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
+\midrule
+\clase{idManifiesto} & \clase{int} & Identificador único. \\
+\clase{numero} & \clase{String} & Número del manifiesto. \\
+\clase{nave} & \clase{String} & Nombre de la nave. \\
+\clase{viaje} & \clase{String} & Identificador del viaje. \\
+\clase{fechaRecepcion} & \clase{DateTime} & Fecha y hora en que se importó. \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\clase{validarEsquema(\allowbreak{}xml: String): boolean}} & Verifica que la estructura y los datos del XML cumplan el formato esperado. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{agregarContenedor(\allowbreak{}numero: String,\allowbreak{} tamano: String,\allowbreak{} nroSelloDeclarado: String,\allowbreak{} fechaArribo: Date): Contenedor}} & Crea y agrega un contenedor declarado en el manifiesto. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: Contenedor}
+\label{sec:cls_contenedor}
+
+Unidad de transporte declarada en el manifiesto y que se abre en el desconsolidado.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase Contenedor.}
+\label{tab:cls_contenedor}
+\\
+\toprule
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
+\midrule
+\clase{idContenedor} & \clase{int} & Identificador único. \\
+\clase{numero} & \clase{String} & Número del contenedor. \\
+\clase{tamano} & \clase{String} & Tamaño (por ejemplo, 20 o 40 pies). \\
+\clase{nroSelloDeclarado} & \clase{String} & Número de sello declarado por el naviero. \\
+\clase{fechaArribo} & \clase{Date} & Fecha estimada de arribo al terminal. \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\clase{agregarLinea(\allowbreak{}descripcion: String,\allowbreak{} cantidadDeclarada: int,\allowbreak{} cliente: Cliente,\allowbreak{} tipo: TipoBulto): LineaCarga}} & Crea y agrega una línea de carga declarada. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{totalBultosDeclarados(\allowbreak{}): int}} & Retorna la suma de las cantidades declaradas de todas sus líneas. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: LineaCarga}
+\label{sec:cls_lineacarga}
+
+Parte de la carga de un contenedor destinada a un mismo cliente y de un mismo tipo de bulto.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase LineaCarga.}
+\label{tab:cls_lineacarga}
+\\
+\toprule
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
+\midrule
+\clase{idLinea} & \clase{int} & Identificador único. \\
+\clase{descripcion} & \clase{String} & Descripción de la mercancía. \\
+\clase{cantidadDeclarada} & \clase{int} & Cantidad de bultos declarada en el manifiesto. \\
+\clase{cantidadRecibida} & \clase{int} & Cantidad contada en terreno. \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\clase{contrastarCantidad(\allowbreak{}recibida: int): int}} & Registra la cantidad recibida y retorna la diferencia respecto a la declarada (0 si coincide). \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{tieneDiferencia(\allowbreak{}): boolean}} & Retorna verdadero si la cantidad recibida difiere de la declarada. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: Programacion}
+\label{sec:cls_programacion}
+
+Planificación del desconsolidado de un contenedor en una fecha y franja horaria, con su cuadrilla y jefe tarjador.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase Programacion.}
+\label{tab:cls_programacion}
+\\
+\toprule
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
+\midrule
+\clase{idProgramacion} & \clase{int} & Identificador único. \\
+\clase{fecha} & \clase{Date} & Fecha planificada. \\
+\clase{horaInicio} & \clase{Time} & Inicio de la franja. \\
+\clase{horaTermino} & \clase{Time} & Término de la franja. \\
+\clase{estado} & \clase{EstadoProgramacion} & Estado de la programación. \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\clase{asignarCuadrilla(\allowbreak{}c: Cuadrilla,\allowbreak{} jefe: Trabajador): void}} & Asocia la cuadrilla y el jefe tarjador y deja la faena disponible en la aplicación móvil. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{reprogramar(\allowbreak{}fecha: Date,\allowbreak{} horaInicio: Time,\allowbreak{} horaTermino: Time): void}} & Modifica la fecha y franja de la programación. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{anular(\allowbreak{}): void}} & Cambia el estado a anulada sin eliminar el registro. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: Operacion}
+\label{sec:cls_operacion}
+
+Ejecución en terreno de una programación: registra el avance de la faena desde su inicio hasta su cierre.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase Operacion.}
+\label{tab:cls_operacion}
+\\
+\toprule
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
+\midrule
+\clase{idOperacion} & \clase{int} & Identificador único. \\
+\clase{horaInicio} & \clase{DateTime} & Momento en que se inició la faena. \\
+\clase{horaFin} & \clase{DateTime} & Momento en que se cerró. \\
+\clase{estado} & \clase{EstadoOperacion} & Estado de la operación. \\
+\clase{modalidadIngreso} & \clase{OrigenDatos} & Indica si la carga proviene de manifiesto o de tarja ciega. \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\clase{iniciar(\allowbreak{}): void}} & Cambia el estado a en ejecución y registra la hora de inicio. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{cerrar(\allowbreak{}): void}} & Cambia el estado a finalizada y registra la hora de cierre. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{obtenerEstado(\allowbreak{}): EstadoOperacion}} & Retorna el estado actual. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{agregarFotografia(\allowbreak{}f: Fotografia): void}} & Agrega una fotografía a la evidencia de la operación. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: SelloSeguridad}
+\label{sec:cls_selloseguridad}
+
+Sello del contenedor verificado al momento de la apertura.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase SelloSeguridad.}
+\label{tab:cls_selloseguridad}
+\\
+\toprule
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
+\midrule
+\clase{numeroDigitado} & \clase{String} & Número ingresado por el jefe tarjador. \\
+\clase{estado} & \clase{EstadoSello} & Resultado de la verificación. \\
+\clase{fechaVerificacion} & \clase{DateTime} & Momento de la verificación. \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\clase{verificar(\allowbreak{}declarado: String): EstadoSello}} & Compara el número digitado con el declarado y retorna el estado (intacto, roto o no coincide). \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: Incidencia}
+\label{sec:cls_incidencia}
+
+Hallazgo que altera lo declarado o el estado de la carga: daño, faltante, sobrante, mal embalaje o sello alterado.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase Incidencia.}
+\label{tab:cls_incidencia}
+\\
+\toprule
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
+\midrule
+\clase{idIncidencia} & \clase{int} & Identificador único. \\
+\clase{tipo} & \clase{TipoIncidencia} & Clasificación de la incidencia. \\
+\clase{descripcion} & \clase{String} & Detalle del hallazgo. \\
+\clase{cantidadAfectada} & \clase{int} & Cantidad de bultos afectados. \\
+\clase{fechaHora} & \clase{DateTime} & Momento del registro. \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\clase{adjuntarFotografia(\allowbreak{}f: Fotografia): void}} & Asocia una fotografía como respaldo de la incidencia. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: Fotografia}
+\label{sec:cls_fotografia}
+
+Evidencia visual capturada en terreno, comprimida y sellada con fecha, hora y geoposición.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase Fotografia.}
+\label{tab:cls_fotografia}
+\\
+\toprule
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
+\midrule
+\clase{idFoto} & \clase{int} & Identificador único. \\
+\clase{uuid} & \clase{String} & Identificador universal generado en el dispositivo. \\
+\clase{fechaHoraCaptura} & \clase{DateTime} & Momento de la captura. \\
+\clase{latitud} & \clase{double} & Latitud de la captura. \\
+\clase{longitud} & \clase{double} & Longitud de la captura. \\
+\clase{url} & \clase{String} & Ubicación en el almacenamiento una vez subida. \\
+\clase{estado} & \clase{EstadoFoto} & Estado de la fotografía. \\
+\clase{motivoRechazo} & \clase{String} & Motivo (observación) indicado por el supervisor si fue rechazada. \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\clase{comprimir(\allowbreak{}): void}} & Reduce el tamaño de la imagen antes de su envío. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{marcarSubida(\allowbreak{}url: String): void}} & Registra la ubicación en el almacenamiento y cambia el estado a subida. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{marcarRechazada(\allowbreak{}motivo: String): void}} & Marca la fotografía como rechazada y guarda el motivo. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: Reporte}
+\label{sec:cls_reporte}
+
+Documento PDF de una operación finalizada, con datos y fotografías por etapa y cliente.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase Reporte.}
+\label{tab:cls_reporte}
+\\
+\toprule
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
+\midrule
+\clase{idReporte} & \clase{int} & Identificador único. \\
+\clase{folio} & \clase{String} & Folio del reporte. \\
+\clase{version} & \clase{int} & Número de versión (aumenta con cada corrección). \\
+\clase{estado} & \clase{EstadoReporte} & Estado del reporte. \\
+\clase{fechaGeneracion} & \clase{DateTime} & Momento de generación del borrador. \\
+\clase{fechaAprobacion} & \clase{DateTime} & Momento de la aprobación. \\
+\clase{aprobadoPor} & \clase{Usuario} & Supervisor que lo aprobó. \\
+\clase{estadoEnvio} & \clase{EstadoEnvio} & Resultado del envío al cliente. \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\clase{generarPDF(\allowbreak{}): File}} & Compila los datos y fotografías de la operación en el documento PDF. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{aprobar(\allowbreak{}aprobador: Usuario): void}} & Registra al aprobador y la fecha, y cambia el estado a aprobado. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{pasarACorreccion(\allowbreak{}): void}} & Cambia el estado a en corrección. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{versionar(\allowbreak{}): void}} & Incrementa la versión y vuelve el estado a borrador. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{registrarEnvio(\allowbreak{}exitoso: boolean,\allowbreak{} destinatarios: String[\,]): void}} & Registra el resultado del envío por correo. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: GestorManifiesto}
+\label{sec:cls_gestormanifiesto}
+
+Controlador del caso de uso Importar manifiesto.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase GestorManifiesto.}
+\label{tab:cls_gestormanifiesto}
+\\
+\toprule
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\clase{importarManifiesto(\allowbreak{}nave: String,\allowbreak{} viaje: String,\allowbreak{} fecha: Date): Manifiesto}} & Obtiene el XML mediante \clase{ServicioAduana}, lo valida y crea el manifiesto con sus contenedores y líneas. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: GestorProgramacion}
+\label{sec:cls_gestorprogramacion}
+
+Controlador de los casos de uso de programación de faenas.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase GestorProgramacion.}
+\label{tab:cls_gestorprogramacion}
+\\
+\toprule
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\clase{listarContenedoresPendientes(\allowbreak{}): Contenedor[\,]}} & Retorna los contenedores importados que aún no tienen programación. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{crearProgramacion(\allowbreak{}idContenedor: int,\allowbreak{} fecha: Date,\allowbreak{} horaInicio: Time,\allowbreak{} horaTermino: Time): Programacion}} & Crea la programación si no hay cruce de franjas. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{hayConflicto(\allowbreak{}fecha: Date,\allowbreak{} horaInicio: Time,\allowbreak{} horaTermino: Time): boolean}} & Verifica si la franja se cruza con otra programación. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{asignarCuadrilla(\allowbreak{}idProgramacion: int,\allowbreak{} idCuadrilla: int,\allowbreak{} idJefeTarjador: int): void}} & Valida disponibilidad y asigna la cuadrilla y el jefe tarjador. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: GestorOperacion}
+\label{sec:cls_gestoroperacion}
+
+Controlador de los casos de uso de ejecución en terreno y de consulta de operaciones.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase GestorOperacion.}
+\label{tab:cls_gestoroperacion}
+\\
+\toprule
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\clase{iniciarOperacion(\allowbreak{}idProgramacion: int): Operacion}} & Crea la operación en ejecución a partir de la programación. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{registrarSello(\allowbreak{}idOperacion: int,\allowbreak{} nroSello: String,\allowbreak{} imagen: Imagen): EstadoSello}} & Crea la fotografía del sello, la encola y verifica el número contra el declarado. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{registrarLote(\allowbreak{}idOperacion: int,\allowbreak{} idLinea: int,\allowbreak{} cantidadRecibida: int,\allowbreak{} imagen: Imagen): int}} & Contrasta la cantidad del lote, registra su fotografía y retorna la diferencia. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{registrarIncidencia(\allowbreak{}idOperacion: int,\allowbreak{} idLinea: int,\allowbreak{} tipo: TipoIncidencia,\allowbreak{} cantidadAfectada: int,\allowbreak{} imagenes: Imagen[\,]): Incidencia}} & Crea la incidencia con sus fotografías de respaldo. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{cerrarOperacion(\allowbreak{}idOperacion: int,\allowbreak{} imagenVacio: Imagen): void}} & Registra la fotografía final, sincroniza pendientes, cierra la operación y solicita el borrador del reporte. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{buscarOperaciones(\allowbreak{}idCliente: int,\allowbreak{} filtros: Filtro): Operacion[\,]}} & Retorna las operaciones del cliente que cumplen los filtros. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: GestorReportes}
+\label{sec:cls_gestorreportes}
+
+Controlador de los casos de uso de validación y envío de reportes.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase GestorReportes.}
+\label{tab:cls_gestorreportes}
+\\
+\toprule
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\clase{generarBorrador(\allowbreak{}idOperacion: int): Reporte}} & Crea el reporte en borrador de una operación finalizada. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{abrirReporte(\allowbreak{}idReporte: int): Reporte}} & Retorna el reporte con su contenido para su revisión. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{aprobarReporte(\allowbreak{}idReporte: int,\allowbreak{} aprobador: Usuario): void}} & Aprueba el reporte. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{rechazarFotografia(\allowbreak{}idReporte: int,\allowbreak{} idFoto: int,\allowbreak{} motivo: String): void}} & Rechaza la fotografía, pasa el reporte a corrección y solicita la corrección de la evidencia. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{enviarReporte(\allowbreak{}idReporte: int): boolean}} & Envía el reporte aprobado a los destinatarios del cliente y registra el resultado. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: ServicioAduana}
+\label{sec:cls_servicioaduana}
+
+Interfaz con el \este{web service} del Servicio Nacional de Aduanas.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase ServicioAduana.}
+\label{tab:cls_servicioaduana}
+\\
+\toprule
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
+\midrule
+\clase{urlWebService} & \clase{String} & Dirección del servicio. \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\clase{descargarXML(\allowbreak{}nave: String,\allowbreak{} viaje: String,\allowbreak{} fecha: Date): String}} & Retorna el manifiesto en formato XML. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: ServicioCorreo}
+\label{sec:cls_serviciocorreo}
+
+Interfaz con el servidor de correo electrónico.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase ServicioCorreo.}
+\label{tab:cls_serviciocorreo}
+\\
+\toprule
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
+\midrule
+\clase{servidor} & \clase{String} & Servidor de correo saliente. \\
+\clase{puerto} & \clase{int} & Puerto de conexión. \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\clase{enviar(\allowbreak{}destinatarios: String[\,],\allowbreak{} asunto: String,\allowbreak{} adjunto: File): boolean}} & Envía un correo con adjunto; retorna verdadero si el servidor lo acepta. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Clase: SincronizadorOffline}
+\label{sec:cls_sincronizadoroffline}
+
+Gestiona la cola local de fotografías del dispositivo móvil y su envío cuando hay conectividad.
+
+{\estilotabla
+\begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
+\caption{Diccionario de clases - Clase SincronizadorOffline.}
+\label{tab:cls_sincronizadoroffline}
+\\
+\toprule
+\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
+\midrule
+\clase{colaPendientes} & \clase{Fotografia[\,]} & Fotografías aún no enviadas. \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
+\midrule
+\multicolumn{2}{L{0.56\textwidth}}{\clase{encolar(\allowbreak{}f: Fotografia): void}} & Agrega una fotografía a la cola de envío. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{hayConectividad(\allowbreak{}): boolean}} & Indica si el dispositivo tiene conexión. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{sincronizarPendientes(\allowbreak{}): int}} & Envía las fotografías pendientes y retorna la cantidad enviada. \\
+\bottomrule
+\end{longtable}
+}
+
+\section{Tipos enumerados}
+\label{sec:enumerados}
+
+{\estilotabla
+\begin{longtable}{L{0.30\textwidth} L{0.64\textwidth}}
+\caption{Diccionario de clases - Tipos enumerados.}
+\label{tab:cls_enumerados}
+\\
+\toprule
+\textbf{Tipo} & \textbf{Valores} \\
+\midrule
+\clase{EstadoProgramacion} & \estado{PROGRAMADA, EN\_EJECUCION, FINALIZADA, ANULADA} \\
+\clase{EstadoOperacion} & \estado{EN\_EJECUCION, FINALIZADA} \\
+\clase{OrigenDatos} & \estado{MANIFIESTO\_XML, TARJA\_CIEGA} \\
+\clase{EstadoSello} & \estado{INTACTO, ROTO, NO\_COINCIDE} \\
+\clase{TipoIncidencia} & \estado{DANO, FALTANTE, SOBRANTE, MAL\_EMBALAJE, SELLO\_ALTERADO} \\
+\clase{EstadoFoto} & \estado{PENDIENTE, SUBIDA, RECHAZADA, REEMPLAZADA} \\
+\clase{EstadoReporte} & \estado{BORRADOR, EN\_CORRECCION, APROBADO} \\
+\clase{EstadoEnvio} & \estado{PENDIENTE, ENVIADO, FALLIDO} \\
+\bottomrule
 \end{longtable}
 }

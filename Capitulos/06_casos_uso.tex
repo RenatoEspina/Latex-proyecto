@@ -1,1170 +1,461 @@
-\chapter{Diagrama de Casos de Uso}
+\chapter{Diagramas de casos de uso}
 \label{cap:casosuso}
 
-\section{Diagrama gráfico de alto nivel}
-\label{sec:cu_altonivel}
+En este capítulo se presentan los casos de uso del sistema, que ilustran las interacciones entre
+los actores y BeeTracer. Primero se muestran los diagramas gráficos (de alto nivel y expandidos) y
+luego los casos de uso narrativos, que describen los cursos normal y alterno de los eventos.
 
-\figuradiagrama{1.0}{01-casos-uso-alto-nivel.png}
-{Diagrama de casos de uso de alto nivel del sistema BeeTracer}
-{Diagrama de casos de uso de alto nivel del sistema BeeTracer, organizado por módulos.
-Fuente PlantUML: \texttt{diagramas/fuente/01-casos-uso-alto-nivel.puml}.}
+\section{Diagramas de caso de uso gráficos}
+\label{sec:cu_graficos}
+
+\subsection{Diagrama de caso de uso de alto nivel}
+\label{subsec:cu_altonivel}
+
+El diagrama de alto nivel (Figura~\ref{fig:cu_altonivel}) muestra los once casos de uso que
+corresponden uno a uno con las funciones descritas en el Capítulo~\ref{cap:funciones}, junto con
+los actores que participan en cada uno. Cada caso de uso se detalla en los diagramas expandidos de
+la sección siguiente.
+
+\figuradiagrama{0.8}{01-cu-alto-nivel.jpg}
+{Diagrama de caso de uso de alto nivel}
+{Diagrama de caso de uso de alto nivel del sistema BeeTracer.}
 {fig:cu_altonivel}
 
-\begin{nota}
-El caso de uso \textbf{CU-22 Autenticar usuario} es incluido (\ster{include}) por la totalidad de
-los casos de uso del sistema. Se omite del diagrama general por legibilidad.
-\end{nota}
+\subsection{Diagramas de caso de uso expandidos}
+\label{subsec:cu_expandidos}
 
-\section{Diagrama gráfico expandido: subsistema de ejecución en terreno}
-\label{sec:cu_terreno}
+Cada diagrama expandido descompone un caso de uso de alto nivel en los casos de uso que lo
+componen. La relación \ster{extend} indica un comportamiento opcional que ocurre solo bajo cierta
+condición (por ejemplo, editar un usuario una vez que se ha consultado); la relación
+\ster{include} indica un comportamiento obligatorio que forma parte del caso de uso base (por
+ejemplo, asignar un rol al crear un usuario).
 
-El módulo \textbf{M4. Ejecutar operaciones} concentra el valor del sistema y la mayor densidad de
-relaciones \ster{include} y \ster{extend}, por lo que se presenta en un diagrama aparte con mayor
-nivel de detalle.
+\figuradiagrama{0.7}{02-cu-gestionar-usuarios.jpg}
+{Gestionar usuarios - Diag. expandido}
+{Gestionar usuarios - Diagrama expandido.}
+{fig:cu_usuarios}
 
-\figuradiagrama{1.0}{02-casos-uso-ejecucion-terreno.png}
-{Casos de uso del subsistema de ejecución en terreno}
-{Casos de uso del subsistema de ejecución en terreno (aplicación móvil).
-Fuente PlantUML: \texttt{diagramas/fuente/02-casos-uso-ejecucion-terreno.puml}.}
-{fig:cu_terreno}
+\figuradiagrama{0.7}{03-cu-gestionar-roles.jpg}
+{Gestionar roles - Diag. expandido}
+{Gestionar roles - Diagrama expandido.}
+{fig:cu_roles}
 
-\section{Casos de uso de alto nivel (narrativos)}
+\figuradiagrama{0.7}{04-cu-gestionar-tipos-bulto.png}
+{Gestionar tipos de bulto - Diag. expandido}
+{Gestionar tipos de bulto - Diagrama expandido.}
+{fig:cu_tiposbulto}
+
+\figuradiagrama{0.7}{05-cu-gestionar-clientes.jpg}
+{Gestionar clientes - Diag. expandido}
+{Gestionar clientes - Diagrama expandido.}
+{fig:cu_clientes}
+
+\figuradiagrama{0.7}{06-cu-gestionar-trabajadores.jpg}
+{Gestionar trabajadores - Diag. expandido}
+{Gestionar trabajadores - Diagrama expandido.}
+{fig:cu_trabajadores}
+
+\figuradiagrama{0.85}{07-cu-importar-manifiesto.jpg}
+{Importar manifiesto - Diag. expandido}
+{Importar manifiesto - Diagrama expandido.}
+{fig:cu_manifiesto}
+
+\figuradiagrama{0.75}{08-cu-gestionar-programaciones.jpg}
+{Gestionar programaciones - Diag. expandido}
+{Gestionar programaciones - Diagrama expandido.}
+{fig:cu_programaciones}
+
+\figuradiagrama{0.75}{09-cu-gestionar-operaciones.jpg}
+{Gestionar operaciones - Diag. expandido}
+{Gestionar operaciones - Diagrama expandido.}
+{fig:cu_operaciones}
+
+\figuradiagrama{0.78}{10-cu-completar-informacion.jpg}
+{Completar información de consolidado/desconsolidado - Diag. expandido}
+{Completar información de consolidado/desconsolidado - Diagrama expandido.}
+{fig:cu_completar}
+
+\figuradiagrama{0.82}{11-cu-aprobar-reporte.jpg}
+{Aprobar reporte - Diag. expandido}
+{Aprobar reporte - Diagrama expandido.}
+{fig:cu_aprobar}
+
+\figuradiagrama{0.68}{12-cu-visualizar-estado.jpg}
+{Visualizar estado - Diag. expandido}
+{Visualizar estado - Diagrama expandido.}
+{fig:cu_visualizar}
+
+\section{Diagramas de caso de uso narrativos}
 \label{sec:cu_narrativos}
 
-La Tabla~\ref{tab:cu_altonivel} presenta los casos de uso en formato breve según Larman:
-identificador, actores, tipo y descripción en un párrafo.
+A continuación se describen, en formato narrativo extendido, los casos de uso más relevantes del
+sistema. Los casos de tipo \textit{Principal} representan el objetivo de un actor; los de tipo
+\textit{Extensión} son opcionales y se activan a partir de otro caso de uso
+(Figuras~\ref{fig:cu_usuarios} a~\ref{fig:cu_visualizar}). Cada tabla incluye el curso normal de
+los eventos y los cursos alternos que pueden presentarse. Las operaciones de crear, editar,
+eliminar y cambiar el estado de los demás datos maestros (roles, tipos de bulto, clientes y
+trabajadores) siguen la misma secuencia que las de los usuarios; en la creación, el rol incluye la
+asignación de sus permisos, el cliente el registro de su contacto y el trabajador su asignación a
+una cuadrilla.
 
 {\estilotabla
-\begin{longtable}{L{0.06\textwidth} L{0.18\textwidth} L{0.14\textwidth} L{0.11\textwidth} L{0.41\textwidth}}
-
-\caption{Casos de uso de alto nivel del sistema BeeTracer}
-\label{tab:cu_altonivel}
+\begin{longtable}{L{0.45\textwidth} L{0.49\textwidth}}
+\caption{Caso de uso extendido - Crear usuario.}
+\label{tab:cu_crear_usuario}
 \\
-
 \toprule
-\textbf{ID} & \textbf{Caso de uso} & \textbf{Actores} & \textbf{Tipo} & \textbf{Descripción} \\
+\textbf{Caso de uso} & Crear usuario \\
 \midrule
-\endfirsthead
-
-\toprule
-\textbf{ID} & \textbf{Caso de uso} & \textbf{Actores} & \textbf{Tipo} & \textbf{Descripción} \\
+\textbf{Actores} & Administrador del depósito \\
 \midrule
-\endhead
-
-CU-01 & Gestionar usuarios, roles y permisos & Administrador del depósito & Primario, esencial &
-El Administrador crea, modifica o desactiva cuentas de usuario, define roles y les asigna permisos
-granulares sobre las funcionalidades del sistema. El sistema valida la unicidad de las credenciales
-y persiste la configuración. \\
+\textbf{Propósito} & Registrar a una persona como usuario del sistema y asignarle un rol, para controlar sus permisos de acceso. \\
 \midrule
-
-CU-02 & Gestionar clientes & Administrador, Ejecutivo comercial & Primario, esencial &
-Se registra o actualiza la ficha de una empresa importadora, incluyendo su identificación
-tributaria y los correos destinatarios a los que se enviarán sus reportes. El sistema valida los
-datos y los deja disponibles para asociarlos a las líneas de carga. \\
+\textbf{Tipo} & Principal \\
 \midrule
-
-CU-03 & Gestionar trabajadores y cuadrillas & Administrador del depósito & Primario, esencial &
-Se registran los trabajadores del depósito y se los agrupa en cuadrillas de cuatro a cinco
-personas, designando quiénes pueden actuar como jefe tarjador. El sistema deja las cuadrillas
-disponibles para su asignación a faenas. \\
+\textbf{Descripción} & El Administrador ingresa los datos de una persona y le asigna un rol previamente definido, de modo que pueda iniciar sesión y acceder solo a las funciones de su perfil. \\
 \midrule
-
-CU-04 & Gestionar tipos de bulto y parámetros & Administrador del depósito & Primario, secundario &
-Se parametrizan los tipos de bulto y unidades de medida con los que se registrará la carga,
-ajustando el sistema a la operación particular del depósito. \\
+\textbf{Referencias cruzadas} & Pertenece al caso de uso de alto nivel \textit{Gestionar usuarios} (Figura~\ref{fig:cu_usuarios}) e incluye \textit{Asignar rol al usuario}. Requiere que exista al menos un rol creado en \textit{Gestionar roles}. \\
 \midrule
-
-CU-05 & Importar manifiesto electrónico (XML) & Jefe de faena, Servicio Nacional de Aduanas &
-Primario, esencial &
-El Jefe de faena solicita la importación del manifiesto de una nave. El sistema se conecta al
-\este{web service} de Aduanas, descarga el XML, valida su esquema, lo interpreta y persiste
-contenedores, líneas de carga, consignatarios y cantidades declaradas, quedando disponible el
-contenido del contenedor antes de su arribo. \\
+\multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Curso normal de los eventos}} \\
 \midrule
-
-CU-06 & Recibir carga vía integración API & Sistema del cliente (API) & Primario, esencial &
-El sistema informático del cliente se conecta a la API de BeeTracer y transfiere directamente la
-información de la carga, que el sistema valida y persiste. \\
+\textbf{Acción del actor} & \textbf{Respuesta del sistema} \\
 \midrule
-
-CU-07 & Registrar carga en modalidad tarja ciega & Jefe tarjador & Primario, esencial &
-Cuando no existe información previa de la carga, la aplicación móvil arranca en blanco y el
-operario ingresa manualmente la descripción de cada lote leyendo las viñetas y facturas adheridas a
-las cajas a medida que las descarga. \\
+1. El Administrador selecciona la opción «Usuarios» y presiona «Crear usuario». & 2. El sistema muestra un formulario que solicita nombre, correo, contraseña y rol. \\
 \midrule
-
-CU-08 & Programar faena de desconsolidado & Jefe de faena & Primario, esencial &
-El Jefe de faena consulta los contenedores por arribar, selecciona uno y define fecha y franja
-horaria para su desconsolidado. El sistema valida la disponibilidad y registra la faena en estado
-programada. \\
+3. El Administrador completa los datos y selecciona un rol (\textit{Asignar rol al usuario}). &  \\
 \midrule
-
-CU-09 & Asignar cuadrilla y jefe tarjador & Jefe de faena & Primario, esencial &
-Sobre una faena programada, el Jefe de faena selecciona la cuadrilla que la ejecutará y designa al
-integrante responsable de operar la aplicación móvil. El sistema valida disponibilidad y publica la
-faena en el dispositivo del operario designado. \\
+4. El Administrador presiona «Guardar». & 5. El sistema verifica que los campos obligatorios estén completos y que el correo no esté registrado. \\
 \midrule
-
-CU-10 & Consultar programación (móvil) & Jefe tarjador, Jefe de faena & Primario, esencial &
-Al iniciar sesión en la aplicación móvil, el operario visualiza las faenas que le fueron asignadas,
-con su contenedor, horario y contenido declarado. \\
+ & 6. El sistema almacena la contraseña como un resumen criptográfico y crea el usuario en estado activo. \\
 \midrule
-
-CU-11 & Registrar apertura de contenedor & Jefe tarjador & Primario, esencial &
-Antes de abrir, el operario fotografía puertas, candado y sello, y digita el número de sello. El
-sistema contrasta el número contra el declarado, registra el estado del sello y solo entonces
-habilita la etapa siguiente. \\
+ & 7. El sistema informa que el usuario fue creado y lo muestra en la lista de usuarios. \\
 \midrule
-
-CU-12 & Registrar desconsolidado y separación por cliente & Jefe tarjador, Cuadrilla &
-Primario, esencial &
-A medida que la cuadrilla extrae la mercancía, el operario la agrupa por cliente, registra tipo de
-bulto y cantidad recibida de cada lote y lo fotografía. El sistema contrasta la cantidad recibida
-contra la declarada y registra las diferencias. \\
+\multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Cursos alternos}} \\
 \midrule
-
-CU-13 & Registrar incidencia & Jefe tarjador & Primario, esencial &
-Ante una caja dañada o una diferencia de cantidad, el operario separa la unidad afectada, clasifica
-la incidencia y le toma fotografías exclusivas. El sistema asocia la incidencia al lote y al
-cliente correspondiente. \\
+\textbf{Situación} & \textbf{Respuesta del sistema} \\
 \midrule
-
-CU-14 & Registrar cierre de faena & Jefe tarjador & Primario, esencial &
-El operario fotografía el contenedor completamente vacío. El sistema verifica que toda la evidencia
-obligatoria esté completa y sincronizada, cierra la faena y dispara la generación del reporte. \\
+A1. En el paso 4 quedan campos obligatorios vacíos. & El sistema indica los campos faltantes y no crea el usuario. \\
 \midrule
-
-CU-15 & Capturar y subir evidencia fotográfica & Jefe tarjador & Secundario, esencial &
-El sistema captura la imagen desde la cámara, la comprime, la sella con fecha, hora y
-geoposición, y la sube individualmente al repositorio inmediatamente después de tomada. \\
+A2. En el paso 4 el correo ingresado ya pertenece a otro usuario. & El sistema informa que el correo ya está registrado y no permite crear un duplicado. \\
 \midrule
-
-CU-16 & Sincronizar datos (modo offline) & --- \este{(disparado por el sistema)} &
-Secundario, esencial &
-Sin conectividad, el sistema persiste las capturas en la base de datos local del dispositivo y las
-encola; al detectar señal, sincroniza la cola de pendientes y confirma la subida. \\
-\midrule
-
-CU-17 & Generar reporte PDF de la faena & --- \este{(disparado por el sistema)} &
-Secundario, esencial &
-Al cerrarse una faena, el sistema compila automáticamente datos y fotografías en un PDF con
-encabezado, desglose por cliente e incidencias destacadas en rojo, y lo deja en estado borrador. \\
-\midrule
-
-CU-18 & Revisar y aprobar reporte & Supervisor de reportes & Primario, esencial &
-El Supervisor abre el borrador en la plataforma web, lo revisa visualmente y lo aprueba. El sistema
-registra quién aprobó y cuándo, y habilita su publicación. \\
-\midrule
-
-CU-19 & Solicitar recaptura de fotografía & Supervisor de reportes & Primario, esencial &
-Ante una fotografía defectuosa, el Supervisor la rechaza indicando el motivo. El sistema la marca
-como rechazada, notifica al jefe tarjador y, tras recibir el reemplazo, regenera y versiona el
-reporte. \\
-\midrule
-
-CU-20 & Enviar reporte al cliente & Supervisor de reportes, Servidor de correo &
-Primario, esencial &
-Aprobado el reporte, el sistema obtiene los destinatarios del cliente y despacha el PDF por correo
-electrónico, registrando el acuse de envío y reintentando ante fallo. \\
-\midrule
-
-CU-21 & Consultar faenas históricas y trazabilidad &
-Jefe de faena, Supervisor, Cliente del depósito & Primario, esencial &
-El usuario consulta faenas en proceso o históricas, filtrando por evento, cliente o fecha, y
-recupera sus imágenes y su reporte PDF. \\
-\midrule
-
-CU-22 & Autenticar usuario & Todos los actores humanos & Secundario, esencial &
-El sistema valida las credenciales del usuario, establece su sesión y determina los permisos
-asociados a su rol. \\
-
+A3. En el paso 4 la contraseña no cumple la política mínima. & El sistema rechaza la contraseña e indica los requisitos que debe cumplir. \\
 \bottomrule
-
-\end{longtable}
-}
-
-\section{Casos de uso expandidos}
-\label{sec:cu_expandidos}
-
-\subsection{CU-05 --- Importar manifiesto electrónico (XML)}
-\label{subsec:cu05}
-
-{\estilotabla
-\begin{longtable}{L{0.25\textwidth} L{0.69\textwidth}}
-
-\caption{CU-05 Importar manifiesto electrónico (XML): descripción expandida}
-\label{tab:cu05_desc}
-\\
-
-\toprule
-\textbf{Campo} & \textbf{Contenido} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Campo} & \textbf{Contenido} \\
-\midrule
-\endhead
-
-\textbf{Caso de uso} & CU-05 Importar manifiesto electrónico (XML) \\
-\midrule
-\textbf{Actores} & Jefe de faena \este{(iniciador)}, Servicio Nacional de Aduanas
-\este{(sistema externo)} \\
-\midrule
-\textbf{Propósito} & Conocer el detalle exacto de la carga que transporta un contenedor
-\textbf{antes de que la nave recale en el puerto}, precargando el sistema con información
-oficial. \\
-\midrule
-\textbf{Tipo} & Primario $\cdot$ Esencial \\
-\midrule
-\textbf{Referencias cruzadas} & Funciones R2.1, R2.2, R2.3, R2.4, R2.7 $\cdot$
-Casos de uso CU-06, CU-07, CU-08, CU-22 \\
-\midrule
-\textbf{Precondiciones} & El Jefe de faena está autenticado y posee el permiso de ingesta de carga.
-El sistema tiene configurada y vigente la conexión al \este{web service} de Aduanas. \\
-\midrule
-\textbf{Postcondiciones} & El manifiesto, sus contenedores y sus líneas de carga quedan persistidos
-y asociados a los clientes correspondientes, disponibles para programar faenas. \\
-
-\bottomrule
-
 \end{longtable}
 }
 
 {\estilotabla
-\begin{longtable}{C{0.04\textwidth} L{0.44\textwidth} L{0.44\textwidth}}
-
-\caption{CU-05: curso normal de los eventos}
-\label{tab:cu05_normal}
+\begin{longtable}{L{0.45\textwidth} L{0.49\textwidth}}
+\caption{Caso de uso extendido - Editar usuario.}
+\label{tab:cu_editar_usuario}
 \\
-
 \toprule
-\textbf{\#} & \textbf{Acción de los actores} & \textbf{Respuesta del sistema} \\
+\textbf{Caso de uso} & Editar usuario \\
 \midrule
-\endfirsthead
-
-\toprule
-\textbf{\#} & \textbf{Acción de los actores} & \textbf{Respuesta del sistema} \\
+\textbf{Actores} & Administrador del depósito \\
 \midrule
-\endhead
-
-1 & El Jefe de faena ingresa a la opción de importación de manifiestos e indica nave, viaje y
-fecha. & \\
+\textbf{Propósito} & Actualizar los datos o el rol de un usuario existente. \\
 \midrule
-2 & & El sistema se conecta al \este{web service} del Servicio Nacional de Aduanas. \\
+\textbf{Tipo} & Extensión \\
 \midrule
-3 & & El sistema solicita y descarga el documento XML correspondiente. \\
+\textbf{Descripción} & Una vez localizado un usuario mediante la consulta, el Administrador modifica su nombre, correo o rol para reflejar cambios en el personal. \\
 \midrule
-4 & & El sistema valida el esquema del XML recibido. \\
+\textbf{Referencias cruzadas} & Extiende el caso de uso \textit{Consultar usuario} (Figura~\ref{fig:cu_usuarios}): solo puede ejecutarse después de encontrar al usuario. \\
 \midrule
-5 & & El sistema interpreta el documento y crea el registro del manifiesto (número, nave, viaje,
-fecha de recepción). \\
+\multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Curso normal de los eventos}} \\
 \midrule
-6 & & Por cada contenedor declarado, el sistema crea el registro del contenedor con su sigla,
-número, tipo, tamaño y número de sello declarado. \\
+\textbf{Acción del actor} & \textbf{Respuesta del sistema} \\
 \midrule
-7 & & Por cada línea de carga de cada contenedor, el sistema registra el conocimiento de embarque,
-la descripción, las marcas, la cantidad declarada, el peso y el tipo de bulto, asociándola al
-cliente consignatario. \\
+1. El Administrador selecciona la opción «Usuarios» e ingresa un nombre o correo en el buscador (\textit{Consultar usuario}). & 2. El sistema muestra la lista de usuarios que coinciden con la búsqueda. \\
 \midrule
-8 & & El sistema persiste la información y marca el origen de los datos como
-\estado{MANIFIESTO\_XML}. \\
+3. El Administrador selecciona el usuario y presiona «Editar». & 4. El sistema muestra un formulario con los datos actuales del usuario. \\
 \midrule
-9 & & El sistema presenta un resumen de la importación: cantidad de contenedores y de líneas de
-carga incorporadas. \\
+5. El Administrador modifica los campos deseados y presiona «Guardar». & 6. El sistema valida los datos modificados. \\
 \midrule
-10 & El Jefe de faena verifica el resumen y continúa con la programación de faenas (CU-08). & \\
-
+ & 7. El sistema actualiza el registro, informa que los cambios fueron guardados y los refleja en la lista. \\
+\midrule
+\multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Cursos alternos}} \\
+\midrule
+\textbf{Situación} & \textbf{Respuesta del sistema} \\
+\midrule
+A1. En el paso 2 la búsqueda no arroja coincidencias. & El sistema informa que no se encontraron usuarios y permite intentar con otro criterio. \\
+\midrule
+A2. En el paso 5 el nuevo correo ya pertenece a otro usuario. & El sistema informa el conflicto y no guarda los cambios. \\
+\midrule
+A3. En el paso 5 se deja vacío un campo obligatorio. & El sistema indica el campo faltante y mantiene el formulario abierto. \\
 \bottomrule
-
 \end{longtable}
 }
 
 {\estilotabla
-\begin{longtable}{C{0.06\textwidth} L{0.38\textwidth} L{0.48\textwidth}}
-
-\caption{CU-05: cursos alternos}
-\label{tab:cu05_alt}
+\begin{longtable}{L{0.45\textwidth} L{0.49\textwidth}}
+\caption{Caso de uso extendido - Importar manifiesto.}
+\label{tab:cu_importar_manifiesto}
 \\
-
 \toprule
-\textbf{Paso} & \textbf{Situación} & \textbf{Tratamiento} \\
+\textbf{Caso de uso} & Importar manifiesto \\
 \midrule
-\endfirsthead
-
-\toprule
-\textbf{Paso} & \textbf{Situación} & \textbf{Tratamiento} \\
+\textbf{Actores} & Jefe de faena (principal); Servicio Nacional de Aduanas (secundario) \\
 \midrule
-\endhead
-
-2 & El \este{web service} de Aduanas no responde o la conexión falla. &
-El sistema informa la indisponibilidad del servicio y ofrece reintentar. El Jefe de faena puede
-optar por CU-06 (integración API) o declarar tarja ciega (CU-07). \\
+\textbf{Propósito} & Registrar en el sistema los contenedores y las líneas de carga declaradas en el manifiesto electrónico, antes del arribo de la nave. \\
 \midrule
-
-3 & No existe manifiesto para la nave y viaje indicados. &
-El sistema informa que el manifiesto aún no ha sido transmitido por la nave y sugiere reintentar
-más cerca de la fecha de arribo. \\
+\textbf{Tipo} & Principal \\
 \midrule
-
-4 & El XML no cumple el esquema esperado. &
-El sistema rechaza el documento, registra el error en la bitácora y notifica al Jefe de faena. No
-se persiste información parcial. \\
+\textbf{Descripción} & El Jefe de faena carga el manifiesto de una nave y viaje; el sistema obtiene el archivo XML desde el \este{web service} de Aduanas, valida su estructura y datos, lo registra desglosado en contenedores y líneas de carga asociadas a cada cliente consignatario y notifica el resultado de la importación. \\
 \midrule
-
-7 & Una línea de carga referencia un consignatario que no existe como cliente registrado. &
-El sistema crea el cliente en estado \este{pendiente de completar} y advierte al Jefe de faena para
-que complete su ficha (CU-02) antes de emitir reportes. \\
+\textbf{Referencias cruzadas} & Pertenece al caso de uso de alto nivel \textit{Importar manifiesto} (Figura~\ref{fig:cu_manifiesto}). \textit{Cargar archivo de manifiesto} incluye \textit{Validar estructura y datos}, que incluye \textit{Registrar manifiesto}, que a su vez incluye \textit{Notificar resultado de importación}; \textit{Generar reporte de errores} extiende la validación. Sus resultados son la base del caso de uso \textit{Crear programación}. \\
 \midrule
-
-5--8 & El manifiesto ya fue importado previamente. &
-El sistema detecta el número de manifiesto duplicado y ofrece \textbf{actualizar} la información
-existente en lugar de duplicarla. \\
-
+\multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Curso normal de los eventos}} \\
+\midrule
+\textbf{Acción del actor} & \textbf{Respuesta del sistema} \\
+\midrule
+1. El Jefe de faena selecciona «Importar manifiesto» e ingresa nave, viaje y fecha (\textit{Cargar archivo de manifiesto}). & 2. El sistema solicita el archivo del manifiesto al \este{web service} del Servicio Nacional de Aduanas. \\
+\midrule
+3. El Servicio Nacional de Aduanas entrega el manifiesto en formato XML. & 4. El sistema valida que la estructura y los datos del XML cumplan el esquema esperado (\textit{Validar estructura y datos}). \\
+\midrule
+ & 5. El sistema registra el manifiesto y, por cada contenedor declarado, su número, tamaño y sello declarado; por cada línea de carga, su descripción, cantidad, tipo de bulto y cliente consignatario (\textit{Registrar manifiesto}). \\
+\midrule
+ & 6. El sistema notifica el resultado de la importación al Servicio Nacional de Aduanas y muestra al Jefe de faena un resumen con la cantidad de contenedores y líneas importadas (\textit{Notificar resultado de importación}). \\
+\midrule
+7. El Jefe de faena revisa el resumen y finaliza la importación. &  \\
+\midrule
+\multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Cursos alternos}} \\
+\midrule
+\textbf{Situación} & \textbf{Respuesta del sistema} \\
+\midrule
+A1. En el paso 3 el \este{web service} de Aduanas no responde. & El sistema informa que el servicio no está disponible, permite reintentar y sugiere ingresar la carga en modalidad tarja ciega durante la faena. \\
+\midrule
+A2. En el paso 3 no existe un manifiesto para la nave y viaje indicados. & El sistema informa que no se encontró el manifiesto y permite corregir los datos ingresados. \\
+\midrule
+A3. En el paso 4 el XML no cumple el esquema. & El sistema rechaza el archivo, no registra información parcial y genera un reporte con los errores encontrados (\textit{Generar reporte de errores}). \\
+\midrule
+A4. En el paso 5 un consignatario no existe en la base de clientes. & El sistema lo registra con los datos mínimos del manifiesto (RUT y razón social) y advierte que debe completarse su ficha. \\
+\midrule
+A5. En el paso 2 el manifiesto ya había sido importado. & El sistema informa la situación y ofrece cancelar o reemplazar la importación anterior. \\
 \bottomrule
-
-\end{longtable}
-}
-
-\subsection{CU-08 --- Programar faena de desconsolidado}
-\label{subsec:cu08}
-
-{\estilotabla
-\begin{longtable}{L{0.25\textwidth} L{0.69\textwidth}}
-
-\caption{CU-08 Programar faena de desconsolidado: descripción expandida}
-\label{tab:cu08_desc}
-\\
-
-\toprule
-\textbf{Campo} & \textbf{Contenido} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Campo} & \textbf{Contenido} \\
-\midrule
-\endhead
-
-\textbf{Caso de uso} & CU-08 Programar faena de desconsolidado \\
-\midrule
-\textbf{Actores} & Jefe de faena \este{(iniciador)} \\
-\midrule
-\textbf{Propósito} & Planificar la agenda de apertura de contenedores, asignando franja horaria y
-equipo de trabajo, de modo que la operación del patio se ejecute de forma ordenada y sin tiempos
-muertos. \\
-\midrule
-\textbf{Tipo} & Primario $\cdot$ Esencial \\
-\midrule
-\textbf{Referencias cruzadas} & Funciones R3.1 a R3.6 $\cdot$ Casos de uso CU-05, CU-09, CU-10,
-CU-22 \\
-\midrule
-\textbf{Precondiciones} & Existe al menos un contenedor con información de carga cargada y sin
-faena asignada. Existen cuadrillas conformadas y trabajadores habilitados. \\
-\midrule
-\textbf{Postcondiciones} & La faena queda registrada en estado \estado{PROGRAMADA}, con contenedor,
-horario, cuadrilla y jefe tarjador asignados, y visible en la aplicación móvil del operario
-designado. \\
-
-\bottomrule
-
 \end{longtable}
 }
 
 {\estilotabla
-\begin{longtable}{C{0.04\textwidth} L{0.44\textwidth} L{0.44\textwidth}}
-
-\caption{CU-08: curso normal de los eventos}
-\label{tab:cu08_normal}
+\begin{longtable}{L{0.45\textwidth} L{0.49\textwidth}}
+\caption{Caso de uso extendido - Crear programación.}
+\label{tab:cu_crear_programacion}
 \\
-
 \toprule
-\textbf{\#} & \textbf{Acción de los actores} & \textbf{Respuesta del sistema} \\
+\textbf{Caso de uso} & Crear programación \\
 \midrule
-\endfirsthead
-
-\toprule
-\textbf{\#} & \textbf{Acción de los actores} & \textbf{Respuesta del sistema} \\
+\textbf{Actores} & Jefe de faena \\
 \midrule
-\endhead
-
-1 & El Jefe de faena abre el módulo de programación. & \\
+\textbf{Propósito} & Planificar el desconsolidado de un contenedor asignándole fecha, franja horaria, cuadrilla y jefe tarjador. \\
 \midrule
-2 & & El sistema lista los contenedores por arribar que aún no tienen faena asignada, con su
-contenido declarado y fecha estimada de arribo. \\
+\textbf{Tipo} & Principal \\
 \midrule
-3 & El Jefe de faena selecciona un contenedor. & \\
+\textbf{Descripción} & El Jefe de faena selecciona un contenedor importado que aún no tiene programación, define cuándo se abrirá y designa a la cuadrilla y al jefe tarjador responsables. La faena queda disponible en la aplicación móvil de ese jefe tarjador. \\
 \midrule
-4 & & El sistema muestra el detalle del contenedor y sus líneas de carga por cliente. \\
+\textbf{Referencias cruzadas} & Pertenece al caso de uso de alto nivel \textit{Gestionar programaciones} (Figura~\ref{fig:cu_programaciones}). Depende de \textit{Importar manifiesto} y de que existan trabajadores asignados a cuadrillas en \textit{Gestionar trabajadores}. Una vez creada, la programación se gestiona mediante \textit{Buscar programación} y sus extensiones. \\
 \midrule
-5 & El Jefe de faena define la fecha y la franja horaria de la faena (p. ej., 10:00 a 12:00). & \\
+\multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Curso normal de los eventos}} \\
 \midrule
-6 & & El sistema valida que no exista conflicto de agenda para esa franja en el patio. \\
+\textbf{Acción del actor} & \textbf{Respuesta del sistema} \\
 \midrule
-7 & & El sistema crea la faena, le asigna folio y la deja en estado \estado{PROGRAMADA}. \\
+1. El Jefe de faena selecciona «Programaciones» y presiona «Crear programación». & 2. El sistema muestra los contenedores importados que no tienen programación, con su fecha de arribo y su contenido declarado. \\
 \midrule
-8 & & El sistema lista las cuadrillas disponibles en esa fecha y horario. \\
+3. El Jefe de faena selecciona un contenedor e ingresa la fecha y la franja horaria. & 4. El sistema verifica que la franja no se cruce con otra programación. \\
 \midrule
-9 & El Jefe de faena selecciona una cuadrilla y designa al jefe tarjador responsable
-\este{(CU-09)}. & \\
+ & 5. El sistema crea la programación en estado \estado{PROGRAMADA} y muestra las cuadrillas disponibles en esa franja. \\
 \midrule
-10 & & El sistema valida que el trabajador designado esté habilitado como jefe tarjador y
-disponible. \\
+6. El Jefe de faena selecciona una cuadrilla y designa al jefe tarjador. & 7. El sistema verifica que la cuadrilla esté disponible y que el jefe tarjador esté habilitado. \\
 \midrule
-11 & & El sistema asocia cuadrilla y jefe tarjador a la faena y persiste los cambios. \\
+ & 8. El sistema asocia la cuadrilla y el jefe tarjador a la programación, la publica en la aplicación móvil de este último y confirma el registro. \\
 \midrule
-12 & & El sistema publica la faena en la aplicación móvil del operario designado y confirma la
-programación. \\
-
+\multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Cursos alternos}} \\
+\midrule
+\textbf{Situación} & \textbf{Respuesta del sistema} \\
+\midrule
+A1. En el paso 2 no existen contenedores sin programar. & El sistema informa que no hay contenedores pendientes y sugiere importar un manifiesto. \\
+\midrule
+A2. En el paso 4 la franja se cruza con otra programación. & El sistema informa el conflicto, no crea la programación y solicita elegir otra franja. \\
+\midrule
+A3. En el paso 5 no hay cuadrillas disponibles. & El sistema mantiene la programación sin cuadrilla y la marca como pendiente de asignación. \\
+\midrule
+A4. En el paso 7 el jefe tarjador designado no está habilitado o ya tiene otra faena en esa franja. & El sistema rechaza la designación y solicita seleccionar a otro trabajador. \\
+\midrule
+A5. En el paso 8 el dispositivo del jefe tarjador no tiene conexión. & El sistema conserva la programación y esta se descarga en el dispositivo cuando este se conecta. \\
 \bottomrule
-
 \end{longtable}
 }
 
 {\estilotabla
-\begin{longtable}{C{0.06\textwidth} L{0.38\textwidth} L{0.48\textwidth}}
-
-\caption{CU-08: cursos alternos}
-\label{tab:cu08_alt}
+\begin{longtable}{L{0.45\textwidth} L{0.49\textwidth}}
+\caption{Caso de uso extendido - Registrar datos de operación.}
+\label{tab:cu_registrar_datos}
 \\
-
 \toprule
-\textbf{Paso} & \textbf{Situación} & \textbf{Tratamiento} \\
+\textbf{Caso de uso} & Registrar datos de operación \\
 \midrule
-\endfirsthead
-
-\toprule
-\textbf{Paso} & \textbf{Situación} & \textbf{Tratamiento} \\
+\textbf{Actores} & Jefe tarjador \\
 \midrule
-\endhead
-
-2 & No hay contenedores pendientes. &
-El sistema informa que no existen contenedores por programar y ofrece importar un manifiesto
-(CU-05). \\
+\textbf{Propósito} & Documentar en terreno, con datos y evidencia fotográfica, la apertura del contenedor, la separación de la carga por cliente y el cierre de la faena. \\
 \midrule
-
-6 & La franja horaria está ocupada o excede la capacidad del patio. &
-El sistema informa el conflicto, muestra las faenas que colisionan y solicita una nueva franja. \\
+\textbf{Tipo} & Principal \\
 \midrule
-
-8 & No hay cuadrillas disponibles en el horario indicado. &
-El sistema advierte la falta de disponibilidad y permite guardar la faena sin cuadrilla, en estado
-\estado{PROGRAMADA} pendiente de asignación. \\
+\textbf{Descripción} & Desde la aplicación móvil, el Jefe tarjador sigue un flujo guiado en tres etapas: verificación del sello y apertura, registro de cada lote separado por cliente y cierre con el contenedor vacío. No puede avanzar de una etapa a otra sin capturar la fotografía correspondiente. \\
 \midrule
-
-10 & El trabajador designado no está habilitado o ya está asignado a otra faena en el mismo
-horario. &
-El sistema rechaza la designación e indica el motivo, solicitando elegir otro integrante. \\
+\textbf{Referencias cruzadas} & Pertenece al caso de uso de alto nivel \textit{Completar información de consolidado/desconsolidado} (Figura~\ref{fig:cu_completar}). Se alcanza desde \textit{Iniciar sesión App}, que incluye \textit{Selección operación asignada} (extendida por \textit{Buscar/Filtrar operación}); incluye \textit{Capturar evidencia fotográfica} y se extiende con \textit{Registrar incidencias}. \\
 \midrule
-
-12 & El operario no tiene conectividad en ese momento. &
-La faena queda encolada y se descarga en el dispositivo la próxima vez que la aplicación
-sincronice. \\
+\multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Curso normal de los eventos}} \\
 \midrule
-
---- & El contenedor cambia de fecha de arribo o se anula la operación. &
-El Jefe de faena reprograma o anula la faena (R3.6); el sistema deja registro del cambio y notifica
-al operario asignado. \\
-
+\textbf{Acción del actor} & \textbf{Respuesta del sistema} \\
+\midrule
+1. El Jefe tarjador inicia sesión en la aplicación móvil y selecciona la operación que le fue asignada, pudiendo buscarla o filtrarla (\textit{Selección operación asignada}). & 2. El sistema carga los datos del contenedor y de sus líneas de carga declaradas, e inicia la operación en estado \estado{EN\_EJECUCION}. \\
+\midrule
+3. El Jefe tarjador fotografía las puertas, el candado y el sello, y digita el número del sello (\textit{Capturar evidencia fotográfica}). & 4. El sistema comprime la fotografía, le registra fecha, hora y geoposición, la envía al almacenamiento y compara el número digitado con el sello declarado. \\
+\midrule
+5. El Jefe tarjador abre el contenedor y fotografía la carga sin alterar. & 6. El sistema registra y envía la fotografía, y habilita el registro de lotes. \\
+\midrule
+7. Por cada lote separado, el Jefe tarjador selecciona la línea de carga correspondiente al cliente, ingresa la cantidad recibida y fotografía el lote. & 8. El sistema contrasta la cantidad recibida con la declarada, registra la fotografía y confirma el lote. \\
+\midrule
+9. El Jefe tarjador fotografía el contenedor vacío y presiona «Cerrar faena». & 10. El sistema verifica que exista la evidencia obligatoria, sincroniza los datos pendientes, cambia la operación a \estado{FINALIZADA} y genera el borrador del reporte. \\
+\midrule
+\multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Cursos alternos}} \\
+\midrule
+\textbf{Situación} & \textbf{Respuesta del sistema} \\
+\midrule
+A1. En el paso 4 el sello no coincide con el declarado o está roto. & El sistema exige registrar una incidencia de sello alterado, con fotografías, antes de permitir la apertura (\textit{Registrar incidencias}). \\
+\midrule
+A2. En el paso 8 la cantidad recibida difiere de la declarada, o el lote tiene daño visible. & El sistema solicita registrar una incidencia (faltante, sobrante o daño) con fotografías exclusivas del problema (\textit{Registrar incidencias}) y luego permite continuar con el siguiente lote. \\
+\midrule
+A3. En los pasos 3, 5, 7 o 9 la fotografía no se puede tomar o está defectuosa. & El sistema no permite avanzar hasta capturar una fotografía válida. \\
+\midrule
+A4. En cualquier paso el dispositivo no tiene conexión. & El sistema guarda los datos en el dispositivo, encola las fotografías y las envía automáticamente cuando recupera la señal; el operario continúa trabajando. \\
+\midrule
+A5. En el paso 2 la operación no tiene carga declarada (no se importó el manifiesto). & El sistema inicia la operación en modalidad tarja ciega: el Jefe tarjador ingresa manualmente cada lote (descripción, cantidad, tipo de bulto y cliente) y no se realiza el contraste de cantidades. \\
+\midrule
+A6. En el paso 9 existe una línea de carga declarada sin lote registrado. & El sistema solicita confirmar el cierre y, de confirmarse, registra la línea como faltante. \\
 \bottomrule
-
-\end{longtable}
-}
-
-\subsection{CU-12 --- Registrar desconsolidado y separación por cliente}
-\label{subsec:cu12}
-
-\begin{nota}
-\textbf{Caso de uso central del sistema.} Concentra la propuesta de valor de BeeTracer: la
-generación de evidencia verificable en el momento y lugar exactos en que la mercancía cambia de
-custodia.
-\end{nota}
-
-{\estilotabla
-\begin{longtable}{L{0.25\textwidth} L{0.69\textwidth}}
-
-\caption{CU-12 Registrar desconsolidado y separación por cliente: descripción expandida}
-\label{tab:cu12_desc}
-\\
-
-\toprule
-\textbf{Campo} & \textbf{Contenido} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Campo} & \textbf{Contenido} \\
-\midrule
-\endhead
-
-\textbf{Caso de uso} & CU-12 Registrar desconsolidado y separación por cliente \\
-\midrule
-\textbf{Actores} & Jefe tarjador \este{(iniciador)}, Cuadrilla, Repositorio de fotografías
-\este{(sistema externo)} \\
-\midrule
-\textbf{Propósito} & Documentar fotográfica y cuantitativamente la extracción de la mercancía del
-contenedor y su separación por cliente destinatario, dejando constancia irrefutable de qué salió,
-en qué cantidad y en qué estado. \\
-\midrule
-\textbf{Tipo} & Primario $\cdot$ Esencial \\
-\midrule
-\textbf{Referencias cruzadas} & Funciones R4.6 a R4.11, R5.1 a R5.7 $\cdot$ Casos de uso CU-07,
-CU-10, CU-11, CU-13, CU-14, CU-15, CU-16, CU-17 \\
-\midrule
-\textbf{Precondiciones} & La faena está en estado \estado{EN\_EJECUCION}. Se completó CU-11
-(apertura registrada y sello verificado). El operario tiene sesión activa en la aplicación
-móvil. \\
-\midrule
-\textbf{Postcondiciones} & Cada lote extraído queda registrado con su cliente, tipo de bulto,
-cantidad recibida y fotografía asociada. Las diferencias respecto de lo declarado quedan calculadas
-y, cuando corresponde, escaladas a incidencia. Toda la evidencia queda subida o encolada para
-sincronización. \\
-
-\bottomrule
-
 \end{longtable}
 }
 
 {\estilotabla
-\begin{longtable}{C{0.04\textwidth} L{0.44\textwidth} L{0.44\textwidth}}
-
-\caption{CU-12: curso normal de los eventos}
-\label{tab:cu12_normal}
+\begin{longtable}{L{0.45\textwidth} L{0.49\textwidth}}
+\caption{Caso de uso extendido - Validar reporte.}
+\label{tab:cu_validar_reporte}
 \\
-
 \toprule
-\textbf{\#} & \textbf{Acción de los actores} & \textbf{Respuesta del sistema} \\
+\textbf{Caso de uso} & Validar reporte \\
 \midrule
-\endfirsthead
-
-\toprule
-\textbf{\#} & \textbf{Acción de los actores} & \textbf{Respuesta del sistema} \\
+\textbf{Actores} & Supervisor del reporte \\
 \midrule
-\endhead
-
-1 & El Jefe tarjador selecciona la faena en curso e ingresa a la etapa de separación. & \\
+\textbf{Propósito} & Verificar los datos y la evidencia del reporte generado en terreno y aprobarlo, o rechazarlo y solicitar la corrección de la evidencia defectuosa. \\
 \midrule
-2 & & El sistema abre la etapa \estado{SEPARACION}, registra su hora de inicio y presenta las
-líneas de carga declaradas agrupadas por cliente. \\
+\textbf{Tipo} & Principal \\
 \midrule
-3 & La cuadrilla extrae mercancía del contenedor y la agrupa en el piso por cliente
-destinatario. & \\
+\textbf{Descripción} & El Supervisor revisa los datos registrados y la evidencia fotográfica del reporte de una operación finalizada. Si la información es consistente lo aprueba, quedando disponible para su envío al cliente; si detecta evidencia defectuosa, la marca y rechaza el reporte, registrando una observación y solicitando su corrección al Jefe tarjador. \\
 \midrule
-4 & El Jefe tarjador selecciona el cliente, el tipo de bulto e ingresa la cantidad recibida del
-lote. & \\
+\textbf{Referencias cruzadas} & Pertenece al caso de uso de alto nivel \textit{Aprobar reporte} (Figura~\ref{fig:cu_aprobar}). Incluye \textit{Revisar datos registrados} y \textit{Revisar evidencia fotográfica} (extendida por \textit{Marcar evidencia defectuosa}); se extiende con \textit{Aprobar reporte} y \textit{Rechazar reporte}, que incluye \textit{Solicitar corrección de evidencia} y \textit{Registrar observación}. Depende del cierre de la operación en \textit{Registrar datos de operación}; el envío al cliente se realiza en \textit{Enviar PDF}. \\
 \midrule
-5 & & El sistema contrasta la cantidad recibida contra la cantidad declarada en el manifiesto y
-calcula la diferencia. \\
+\multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Curso normal de los eventos}} \\
 \midrule
-6 & & El sistema solicita la captura fotográfica obligatoria del lote. \\
+\textbf{Acción del actor} & \textbf{Respuesta del sistema} \\
 \midrule
-7 & El Jefe tarjador toma la fotografía del lote. & \\
+1. El Supervisor accede a la bandeja de reportes pendientes. & 2. El sistema lista los reportes en estado \estado{BORRADOR} con su folio, operación y fecha. \\
 \midrule
-8 & & El sistema comprime la imagen, la sella con fecha, hora y geoposición, y la asocia a la etapa
-y al lote \este{(CU-15)}. \\
+3. El Supervisor selecciona un reporte. & 4. El sistema muestra el reporte con los datos de la faena y las fotografías ordenadas por etapa y cliente. \\
 \midrule
-9 & & El sistema encola la fotografía y la sube individualmente al repositorio en la nube. \\
+5. El Supervisor revisa los datos registrados y la evidencia fotográfica, y presiona «Aprobar» (\textit{Aprobar reporte}). & 6. El sistema registra al aprobador y la fecha, cambia el estado del reporte a \estado{APROBADO} y lo deja disponible para su envío al cliente. \\
 \midrule
-10 & & El sistema confirma el registro del lote y actualiza el avance de la faena. \\
+\multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Cursos alternos}} \\
 \midrule
-11 & Se repiten los pasos 3 a 10 por cada lote extraído del contenedor. & \\
+\textbf{Situación} & \textbf{Respuesta del sistema} \\
 \midrule
-12 & El Jefe tarjador indica que el contenedor quedó vacío. & \\
+A1. En el paso 5 el Supervisor marca una fotografía como defectuosa y rechaza el reporte registrando una observación con el motivo (\textit{Rechazar reporte}). & El sistema marca la fotografía como rechazada, guarda el motivo, cambia el reporte a \estado{EN\_CORRECCION} y solicita al Jefe tarjador la corrección de la evidencia. Al recibir la fotografía de reemplazo, el sistema genera una nueva versión del reporte que vuelve a revisión. \\
 \midrule
-13 & & El sistema verifica que todos los clientes declarados tengan al menos un lote registrado y
-su evidencia asociada, cierra la etapa \estado{SEPARACION} y habilita la etapa de cierre
-\este{(CU-14)}. \\
-
+A2. En el paso 5 falta evidencia obligatoria en el reporte. & El sistema impide la aprobación e indica qué etapa carece de fotografías. \\
 \bottomrule
-
 \end{longtable}
 }
 
 {\estilotabla
-\begin{longtable}{C{0.06\textwidth} L{0.38\textwidth} L{0.48\textwidth}}
-
-\caption{CU-12: cursos alternos}
-\label{tab:cu12_alt}
+\begin{longtable}{L{0.45\textwidth} L{0.49\textwidth}}
+\caption{Caso de uso extendido - Enviar PDF.}
+\label{tab:cu_enviar_pdf}
 \\
-
 \toprule
-\textbf{Paso} & \textbf{Situación} & \textbf{Tratamiento} \\
+\textbf{Caso de uso} & Enviar PDF \\
 \midrule
-\endfirsthead
-
-\toprule
-\textbf{Paso} & \textbf{Situación} & \textbf{Tratamiento} \\
+\textbf{Actores} & Jefe de faena \\
 \midrule
-\endhead
-
-2 & No existe información declarada de la carga (\textbf{tarja ciega}, CU-07). &
-La aplicación arranca en blanco y el operario debe ingresar manualmente la descripción, el cliente
-y la cantidad de cada lote leyendo viñetas y facturas adheridas a las cajas. El sistema omite el
-contraste del paso 5 y marca el origen de datos como \estado{TARJA\_CIEGA}. \\
+\textbf{Propósito} & Hacer llegar al cliente, por correo electrónico, el reporte PDF aprobado de una operación. \\
 \midrule
-
-5 & La cantidad recibida difiere de la declarada (faltante o sobrante). &
-El sistema levanta automáticamente una incidencia de tipo \estado{FALTANTE} o \estado{SOBRANTE} y
-exige fotografías exclusivas del hecho \este{(CU-13)}. \\
+\textbf{Tipo} & Extensión \\
 \midrule
-
-5 & El operario detecta mercancía dañada o mal embalada. &
-El operario separa la unidad afectada y registra una incidencia de tipo \estado{DANO} o
-\estado{MAL\_EMBALADO}, con fotografías exclusivas \este{(CU-13)}. La mercancía quedará destacada
-en rojo en el reporte. \\
+\textbf{Descripción} & Una vez localizada una operación finalizada cuyo reporte fue aprobado, el Jefe de faena lo envía a los correos registrados del cliente y el sistema deja constancia del resultado del envío. \\
 \midrule
-
-7 & La cámara del dispositivo falla o la fotografía sale inutilizable. &
-El sistema permite descartar y repetir la captura. \textbf{No permite avanzar sin evidencia.} \\
+\textbf{Referencias cruzadas} & Extiende el caso de uso \textit{Consultar operación} del caso de uso de alto nivel \textit{Gestionar operaciones} (Figura~\ref{fig:cu_operaciones}). Requiere que el reporte haya sido aprobado en \textit{Validar reporte} y que el cliente tenga su contacto registrado en \textit{Gestionar clientes}. \\
 \midrule
-
-9 & No hay conectividad en el patio. &
-El sistema persiste la fotografía en la base de datos local del dispositivo y la mantiene en la
-cola de pendientes; el operario continúa trabajando con normalidad. Al recuperar señal, el
-sincronizador sube automáticamente los pendientes \este{(CU-16)}. \\
+\multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Curso normal de los eventos}} \\
 \midrule
-
-9 & La subida de una fotografía falla por caída de la conexión. &
-El sistema marca la fotografía como pendiente y reintenta la subida, sin bloquear la operación. \\
+\textbf{Acción del actor} & \textbf{Respuesta del sistema} \\
 \midrule
-
-13 & Un cliente declarado no tiene lote registrado. &
-El sistema advierte la omisión y solicita confirmación explícita del operario antes de permitir el
-cierre, generando una incidencia de tipo \estado{FALTANTE} por la totalidad del lote. \\
+1. El Jefe de faena selecciona «Operaciones» y busca una operación por fecha, cliente o contenedor (\textit{Consultar operación}). & 2. El sistema muestra las operaciones que coinciden, con su estado y el estado de su reporte. \\
 \midrule
-
---- & Se detecta mercancía no declarada o presuntamente ilícita. &
-El operario registra una incidencia de tipo \estado{SOBRANTE} con fotografías, y el procedimiento
-continúa según los protocolos de fiscalización del terminal (Aduana, PDI), fuera del alcance del
-sistema. \\
-
+3. El Jefe de faena selecciona una operación finalizada con reporte aprobado y presiona «Enviar PDF». & 4. El sistema obtiene los correos del cliente, adjunta el reporte en PDF y lo entrega al servidor de correo. \\
+\midrule
+ & 5. El sistema registra el envío como exitoso y lo confirma al Jefe de faena. \\
+\midrule
+\multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Cursos alternos}} \\
+\midrule
+\textbf{Situación} & \textbf{Respuesta del sistema} \\
+\midrule
+A1. En el paso 3 el reporte aún no está aprobado. & El sistema no ofrece la opción de envío e indica que el reporte está pendiente de validación. \\
+\midrule
+A2. En el paso 4 el cliente no tiene correo registrado. & El sistema informa que no es posible enviar el reporte y solicita completar la ficha del cliente. \\
+\midrule
+A3. En el paso 4 el servidor de correo rechaza el envío. & El sistema registra el envío como fallido, lo informa al Jefe de faena y permite reintentarlo. \\
 \bottomrule
-
-\end{longtable}
-}
-
-\subsection{CU-13 --- Registrar incidencia}
-\label{subsec:cu13}
-
-{\estilotabla
-\begin{longtable}{L{0.25\textwidth} L{0.69\textwidth}}
-
-\caption{CU-13 Registrar incidencia: descripción expandida}
-\label{tab:cu13_desc}
-\\
-
-\toprule
-\textbf{Campo} & \textbf{Contenido} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Campo} & \textbf{Contenido} \\
-\midrule
-\endhead
-
-\textbf{Caso de uso} & CU-13 Registrar incidencia (daño, faltante, sobrante o mal embalaje) \\
-\midrule
-\textbf{Actores} & Jefe tarjador \este{(iniciador)} \\
-\midrule
-\textbf{Propósito} & Dejar constancia fotográfica y descriptiva de toda anomalía detectada en la
-carga, de modo que el terminal pueda \textbf{acreditar el momento y las condiciones en que se
-produjo} y se puedan determinar responsabilidades ante los seguros. \\
-\midrule
-\textbf{Tipo} & Primario $\cdot$ Esencial \\
-\midrule
-\textbf{Referencias cruzadas} & Funciones R4.9, R5.1 a R5.4, R6.4 $\cdot$ Casos de uso CU-12
-\este{(lo extiende)}, CU-15, CU-17 \\
-\midrule
-\textbf{Precondiciones} & La faena está en ejecución y existe un lote o línea de carga en proceso
-de registro. \\
-\midrule
-\textbf{Postcondiciones} & La incidencia queda registrada con su tipo, cantidad afectada,
-descripción y al menos una fotografía exclusiva, asociada al lote y al cliente correspondiente. El
-reporte final la destacará en rojo. \\
-
-\bottomrule
-
 \end{longtable}
 }
 
 {\estilotabla
-\begin{longtable}{C{0.04\textwidth} L{0.44\textwidth} L{0.44\textwidth}}
-
-\caption{CU-13: curso normal de los eventos}
-\label{tab:cu13_normal}
+\begin{longtable}{L{0.45\textwidth} L{0.49\textwidth}}
+\caption{Caso de uso extendido - Consultar estado.}
+\label{tab:cu_consultar_estado}
 \\
-
 \toprule
-\textbf{\#} & \textbf{Acción de los actores} & \textbf{Respuesta del sistema} \\
+\textbf{Caso de uso} & Consultar estado \\
 \midrule
-\endfirsthead
-
-\toprule
-\textbf{\#} & \textbf{Acción de los actores} & \textbf{Respuesta del sistema} \\
+\textbf{Actores} & Cliente del depósito \\
 \midrule
-\endhead
-
-1 & El Jefe tarjador detecta una anomalía y separa físicamente la unidad afectada del resto del
-lote. & \\
+\textbf{Propósito} & Permitir al cliente consultar el estado de las operaciones que involucran su mercancía y visualizar o descargar el reporte una vez aprobado. \\
 \midrule
-2 & El Jefe tarjador selecciona la opción de registrar incidencia sobre el lote en curso. & \\
+\textbf{Tipo} & Principal \\
 \midrule
-3 & & El sistema presenta los tipos de incidencia disponibles: daño, faltante, sobrante y mal
-embalaje. \\
+\textbf{Descripción} & El cliente inicia sesión, busca sus operaciones por fecha o número de contenedor, selecciona una y consulta su estado. Solo ve las operaciones donde existe carga consignada a su empresa y solo puede visualizar o descargar reportes ya aprobados. \\
 \midrule
-4 & El Jefe tarjador selecciona el tipo, indica la cantidad afectada y describe lo observado. & \\
+\textbf{Referencias cruzadas} & Pertenece al caso de uso de alto nivel \textit{Visualizar estado} (Figura~\ref{fig:cu_visualizar}). Incluye \textit{Seleccionar operación}, que se extiende con \textit{Visualizar PDF} y \textit{Descargar PDF}. \\
 \midrule
-5 & & El sistema crea la incidencia, la asocia a la línea de carga y al cliente, y \textbf{exige al
-menos una fotografía exclusiva}. \\
+\multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Curso normal de los eventos}} \\
 \midrule
-6 & El Jefe tarjador toma una o más fotografías dedicadas de la unidad afectada. & \\
+\textbf{Acción del actor} & \textbf{Respuesta del sistema} \\
 \midrule
-7 & & El sistema comprime, sella y sube cada fotografía, asociándolas a la incidencia
-\este{(CU-15)}. \\
+1. El cliente inicia sesión en la plataforma web. & 2. El sistema valida las credenciales y muestra el menú del cliente. \\
 \midrule
-8 & & El sistema confirma el registro y devuelve al operario al flujo de separación
-\este{(CU-12)}. \\
-
+3. El cliente selecciona «Operaciones» e ingresa un rango de fechas o un número de contenedor. & 4. El sistema muestra las operaciones del cliente que coinciden, con su estado. \\
+\midrule
+5. El cliente selecciona una operación (\textit{Seleccionar operación}). & 6. El sistema muestra el estado actual de la operación y, si el reporte fue aprobado, las opciones de visualizarlo y descargarlo. \\
+\midrule
+7. El cliente presiona «Descargar PDF» (\textit{Descargar PDF}). & 8. El sistema entrega el reporte en formato PDF. \\
+\midrule
+\multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Cursos alternos}} \\
+\midrule
+\textbf{Situación} & \textbf{Respuesta del sistema} \\
+\midrule
+A1. En el paso 2 las credenciales son incorrectas. & El sistema informa el error y no permite el acceso. \\
+\midrule
+A2. En el paso 4 no existen operaciones que coincidan con la búsqueda. & El sistema informa que no se encontraron resultados y permite modificar los filtros. \\
+\midrule
+A3. En el paso 6 el reporte aún no está aprobado. & El sistema muestra el estado de la operación pero no ofrece visualizar ni descargar el reporte. \\
+\midrule
+A4. En el paso 7 el cliente presiona «Visualizar PDF» (\textit{Visualizar PDF}). & El sistema muestra el reporte en pantalla sin descargarlo. \\
 \bottomrule
-
-\end{longtable}
-}
-
-{\estilotabla
-\begin{longtable}{C{0.06\textwidth} L{0.38\textwidth} L{0.48\textwidth}}
-
-\caption{CU-13: cursos alternos}
-\label{tab:cu13_alt}
-\\
-
-\toprule
-\textbf{Paso} & \textbf{Situación} & \textbf{Tratamiento} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Paso} & \textbf{Situación} & \textbf{Tratamiento} \\
-\midrule
-\endhead
-
-4 & La incidencia fue generada automáticamente por diferencia de cantidad (paso 5 de CU-12). &
-El sistema precarga el tipo (\estado{FALTANTE} / \estado{SOBRANTE}) y la cantidad afectada; el
-operario solo describe y fotografía. \\
-\midrule
-
-6 & El operario intenta continuar sin fotografiar. &
-El sistema \textbf{bloquea el avance}: una incidencia sin evidencia fotográfica carece de valor
-probatorio. \\
-\midrule
-
-7 & No hay conectividad. &
-Las fotografías se persisten localmente y se encolan para sincronización \este{(CU-16)}, sin
-interrumpir la faena. \\
-\midrule
-
---- & El daño afecta a varios clientes del mismo contenedor. &
-Se registra una incidencia por cada línea de carga afectada, cada una con su evidencia propia, de
-modo que cada cliente reciba en su reporte únicamente lo que le concierne. \\
-
-\bottomrule
-
-\end{longtable}
-}
-
-\subsection{CU-18 --- Revisar y aprobar reporte}
-\label{subsec:cu18}
-
-{\estilotabla
-\begin{longtable}{L{0.25\textwidth} L{0.69\textwidth}}
-
-\caption{CU-18 Revisar y aprobar reporte: descripción expandida}
-\label{tab:cu18_desc}
-\\
-
-\toprule
-\textbf{Campo} & \textbf{Contenido} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Campo} & \textbf{Contenido} \\
-\midrule
-\endhead
-
-\textbf{Caso de uso} & CU-18 Revisar y aprobar reporte \\
-\midrule
-\textbf{Actores} & Supervisor de reportes \este{(iniciador)}, Jefe tarjador \este{(participante en
-el curso alterno de recaptura)} \\
-\midrule
-\textbf{Propósito} & Controlar la calidad técnica y la pertinencia comercial de la evidencia antes
-de que llegue al cliente final, evitando que se publiquen fotografías inutilizables o detalles
-operativos internos que el terminal prefiere resolver antes de notificar. \\
-\midrule
-\textbf{Tipo} & Primario $\cdot$ Esencial \\
-\midrule
-\textbf{Referencias cruzadas} & Funciones R6.5 a R6.9 $\cdot$ Casos de uso CU-17, CU-19, CU-20,
-CU-22 \\
-\midrule
-\textbf{Precondiciones} & Existe un reporte en estado \estado{BORRADOR}, generado automáticamente
-al cierre de la faena (CU-17). El Supervisor está autenticado y posee el permiso de aprobación. \\
-\midrule
-\textbf{Postcondiciones} & El reporte queda en estado \estado{APROBADO}, con registro del usuario
-que lo aprobó y la fecha y hora de aprobación, y habilitado para su envío al cliente (CU-20). \\
-
-\bottomrule
-
-\end{longtable}
-}
-
-{\estilotabla
-\begin{longtable}{C{0.04\textwidth} L{0.44\textwidth} L{0.44\textwidth}}
-
-\caption{CU-18: curso normal de los eventos}
-\label{tab:cu18_normal}
-\\
-
-\toprule
-\textbf{\#} & \textbf{Acción de los actores} & \textbf{Respuesta del sistema} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{\#} & \textbf{Acción de los actores} & \textbf{Respuesta del sistema} \\
-\midrule
-\endhead
-
-1 & El Supervisor accede a la bandeja de reportes pendientes de revisión. & \\
-\midrule
-2 & & El sistema lista los reportes en estado \estado{BORRADOR} con su folio, faena, cliente(s) y
-fecha de generación. \\
-\midrule
-3 & El Supervisor selecciona un reporte. & \\
-\midrule
-4 & & El sistema presenta el borrador del PDF: encabezado con fecha, hora y cuadrilla a cargo,
-desglose de fotografías y detalle por cliente, con la mercancía dañada destacada en rojo. \\
-\midrule
-5 & El Supervisor revisa visualmente la totalidad de las fotografías y los datos. & \\
-\midrule
-6 & El Supervisor aprueba el reporte. & \\
-\midrule
-7 & & El sistema registra la aprobación (usuario, fecha y hora), cambia el estado del reporte a
-\estado{APROBADO} y habilita su envío. \\
-\midrule
-8 & & El sistema notifica al Supervisor que el reporte está listo para ser despachado
-\este{(CU-20)}. \\
-
-\bottomrule
-
-\end{longtable}
-}
-
-{\estilotabla
-\begin{longtable}{C{0.06\textwidth} L{0.38\textwidth} L{0.48\textwidth}}
-
-\caption{CU-18: cursos alternos}
-\label{tab:cu18_alt}
-\\
-
-\toprule
-\textbf{Paso} & \textbf{Situación} & \textbf{Tratamiento} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Paso} & \textbf{Situación} & \textbf{Tratamiento} \\
-\midrule
-\endhead
-
-5 & Una fotografía está borrosa, mal encuadrada o apuntando al cielo. &
-El Supervisor la rechaza indicando el motivo \este{(CU-19)}. El sistema la marca como
-\estado{RECHAZADA}, cambia el reporte a \estado{EN\_CORRECCION} y notifica al jefe tarjador para
-que capture un reemplazo. Recibido este, el sistema regenera el PDF e incrementa su versión. \\
-\midrule
-
-5 & Una fotografía muestra un detalle menor que el terminal prefiere resolver internamente antes de
-notificar al cliente. &
-Mismo tratamiento anterior. Esta es precisamente la razón por la que se eliminó la visualización en
-vivo por parte del cliente. \\
-\midrule
-
-5 & Falta evidencia de una etapa obligatoria. &
-El sistema advierte la omisión e impide la aprobación hasta que la faena esté completa. \\
-\midrule
-
-5 & La faena presenta incidencias graves que ameritan revisión presencial. &
-El Supervisor deja el reporte en \estado{EN\_CORRECCION} con una observación y escala el caso al
-Jefe de faena. \este{(Flujo administrativo, parcialmente fuera del sistema.)} \\
-\midrule
-
-7 & El Supervisor no tiene permiso de aprobación. &
-El sistema deniega la acción y registra el intento en la bitácora. \\
-
-\bottomrule
-
-\end{longtable}
-}
-
-\subsection{CU-20 --- Enviar reporte al cliente}
-\label{subsec:cu20}
-
-{\estilotabla
-\begin{longtable}{L{0.25\textwidth} L{0.69\textwidth}}
-
-\caption{CU-20 Enviar reporte al cliente: descripción expandida}
-\label{tab:cu20_desc}
-\\
-
-\toprule
-\textbf{Campo} & \textbf{Contenido} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Campo} & \textbf{Contenido} \\
-\midrule
-\endhead
-
-\textbf{Caso de uso} & CU-20 Enviar reporte al cliente \\
-\midrule
-\textbf{Actores} & Supervisor de reportes \este{(iniciador)}, Servidor de correo \este{(sistema
-externo)}, Cliente del depósito \este{(receptor)} \\
-\midrule
-\textbf{Propósito} & Hacer llegar al importador, de forma inmediata y trazable, el expediente
-completo y aprobado del estado en que se recibió su mercancía. \\
-\midrule
-\textbf{Tipo} & Primario $\cdot$ Esencial \\
-\midrule
-\textbf{Referencias cruzadas} & Funciones R6.10, R6.11 $\cdot$ Casos de uso CU-02, CU-18, CU-21 \\
-\midrule
-\textbf{Precondiciones} & El reporte está en estado \estado{APROBADO}. Los clientes involucrados
-tienen al menos un correo destinatario registrado (CU-02). \\
-\midrule
-\textbf{Postcondiciones} & El reporte queda en estado \estado{ENVIADO}, con registro de fecha,
-hora, destinatarios y acuse de envío. \\
-
-\bottomrule
-
-\end{longtable}
-}
-
-{\estilotabla
-\begin{longtable}{C{0.04\textwidth} L{0.44\textwidth} L{0.44\textwidth}}
-
-\caption{CU-20: curso normal de los eventos}
-\label{tab:cu20_normal}
-\\
-
-\toprule
-\textbf{\#} & \textbf{Acción de los actores} & \textbf{Respuesta del sistema} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{\#} & \textbf{Acción de los actores} & \textbf{Respuesta del sistema} \\
-\midrule
-\endhead
-
-1 & El Supervisor pulsa el botón de envío sobre un reporte aprobado. & \\
-\midrule
-2 & & El sistema obtiene los destinatarios registrados de los clientes involucrados en la faena. \\
-\midrule
-3 & & El sistema compone el correo con su asunto y adjunta el PDF aprobado. \\
-\midrule
-4 & & El sistema entrega el mensaje al servidor de correo. \\
-\midrule
-5 & & El servidor de correo despacha el mensaje al Cliente del depósito. \\
-\midrule
-6 & & El sistema recibe el acuse, registra el envío (fecha, hora, destinatarios, estado
-\estado{ENVIADO}) y cambia el estado del reporte. \\
-\midrule
-7 & & El sistema confirma el envío al Supervisor. \\
-
-\bottomrule
-
-\end{longtable}
-}
-
-{\estilotabla
-\begin{longtable}{C{0.06\textwidth} L{0.38\textwidth} L{0.48\textwidth}}
-
-\caption{CU-20: cursos alternos}
-\label{tab:cu20_alt}
-\\
-
-\toprule
-\textbf{Paso} & \textbf{Situación} & \textbf{Tratamiento} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Paso} & \textbf{Situación} & \textbf{Tratamiento} \\
-\midrule
-\endhead
-
-2 & Un cliente no tiene destinatarios de correo registrados. &
-El sistema advierte la omisión y solicita completar la ficha del cliente (CU-02) antes de
-enviar. \\
-\midrule
-
-4--5 & El servidor de correo no responde o rechaza el mensaje. &
-El sistema registra el envío con estado \estado{FALLIDO} y el mensaje de error, programa un
-reintento automático y notifica al Supervisor. \\
-\midrule
-
---- & El PDF excede el tamaño máximo admitido por el servidor de correo. &
-El sistema envía un enlace de descarga en lugar del adjunto. \este{(Comportamiento inferido;
-requiere validación.)} \\
-\midrule
-
---- & El cliente solicita el reporte tiempo después. &
-Se recupera desde la consulta histórica (CU-21) sin necesidad de reenvío. \\
-
-\bottomrule
-
-\end{longtable}
-}
-
-\section{Casos de uso pendientes de expandir}
-\label{sec:cu_pendientes}
-
-\begin{pendiente}
-Los siguientes casos de uso se documentaron únicamente en su forma narrativa de alto nivel
-(Sección~\ref{sec:cu_narrativos}). Se dejan las plantillas listas para expandirlos si la pauta o el
-profesor lo requieren. Se sugiere priorizar \textbf{CU-11} y \textbf{CU-14}, que completan el ciclo
-de la faena en terreno, y \textbf{CU-01}, como representante del módulo de administración.
-\end{pendiente}
-
-{\estilotabla
-\begin{longtable}{L{0.34\textwidth} C{0.16\textwidth} L{0.44\textwidth}}
-
-\caption{Casos de uso pendientes de expansión y prioridad sugerida}
-\label{tab:cu_pendientes}
-\\
-
-\toprule
-\textbf{Caso de uso} & \textbf{Prioridad sugerida} & \textbf{Justificación} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Caso de uso} & \textbf{Prioridad sugerida} & \textbf{Justificación} \\
-\midrule
-\endhead
-
-CU-11 Registrar apertura de contenedor & Alta &
-Completa el ciclo de terreno junto a CU-12 y CU-14; contiene la verificación del sello, de alto
-valor probatorio. \\
-\midrule
-
-CU-14 Registrar cierre de faena & Alta &
-Dispara la generación automática del reporte y valida la completitud de la evidencia. \\
-\midrule
-
-CU-01 Gestionar usuarios, roles y permisos & Media &
-Representa el módulo de administración de maestros. \\
-\midrule
-
-CU-07 Registrar carga en modalidad tarja ciega & Media &
-Modalidad de contingencia con flujo propio diferenciado. \\
-\midrule
-
-CU-21 Consultar faenas históricas y trazabilidad & Baja &
-Caso de uso de consulta, de menor complejidad algorítmica. \\
-\midrule
-
-CU-06, CU-09, CU-10, CU-15, CU-16, CU-17, CU-19, CU-22 & Baja &
-Casos de uso secundarios o ya descritos dentro del curso de eventos de los casos expandidos. \\
-
-\bottomrule
-
-\end{longtable}
-}
-
-\textbf{Plantilla para la expansión} \este{(copiar y completar)}.
-
-{\estilotabla
-\begin{longtable}{L{0.25\textwidth} L{0.69\textwidth}}
-
-\caption{Plantilla en blanco para la expansión de un caso de uso}
-\label{tab:cu_plantilla}
-\\
-
-\toprule
-\textbf{Campo} & \textbf{Contenido} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Campo} & \textbf{Contenido} \\
-\midrule
-\endhead
-
-\textbf{Caso de uso} & \\
-\midrule
-\textbf{Actores} & \\
-\midrule
-\textbf{Propósito} & \\
-\midrule
-\textbf{Tipo} & \\
-\midrule
-\textbf{Referencias cruzadas} & \\
-\midrule
-\textbf{Precondiciones} & \\
-\midrule
-\textbf{Postcondiciones} & \\
-
-\bottomrule
-
-\end{longtable}
-}
-
-{\estilotabla
-\begin{longtable}{C{0.04\textwidth} L{0.44\textwidth} L{0.44\textwidth}}
-
-\caption{Plantilla en blanco para el curso normal de los eventos}
-\label{tab:cu_plantilla_normal}
-\\
-
-\toprule
-\textbf{\#} & \textbf{Acción de los actores} & \textbf{Respuesta del sistema} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{\#} & \textbf{Acción de los actores} & \textbf{Respuesta del sistema} \\
-\midrule
-\endhead
-
-1 & & \\
-\midrule
-2 & & \\
-
-\bottomrule
-
-\end{longtable}
-}
-
-{\estilotabla
-\begin{longtable}{C{0.06\textwidth} L{0.38\textwidth} L{0.48\textwidth}}
-
-\caption{Plantilla en blanco para los cursos alternos}
-\label{tab:cu_plantilla_alt}
-\\
-
-\toprule
-\textbf{Paso} & \textbf{Situación} & \textbf{Tratamiento} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Paso} & \textbf{Situación} & \textbf{Tratamiento} \\
-\midrule
-\endhead
-
-& & \\
-
-\bottomrule
-
 \end{longtable}
 }

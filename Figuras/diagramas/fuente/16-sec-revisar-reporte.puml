@@ -1,0 +1,59 @@
+@startuml
+!include _estilo.iuml
+actor "Supervisor del reporte" as SUP
+actor "Jefe de faena" as JF
+participant ":GestorReportes" as GR
+participant "r:Reporte" as R
+participant "f:Fotografia" as F
+participant ":Cliente" as CL
+participant ":ServicioCorreo" as SC
+actor "Jefe tarjador" as JT
+
+== Validar reporte (Supervisor del reporte) ==
+SUP -> GR : abrirReporte(idReporte)
+activate GR
+GR -> R : generarPDF()
+activate R
+R --> GR : File
+deactivate R
+GR --> SUP : r : Reporte
+deactivate GR
+
+alt datos y evidencia correctos
+  SUP -> GR : aprobarReporte(idReporte, aprobador)
+  activate GR
+  GR -> R : aprobar(aprobador)
+  GR --> SUP : reporte APROBADO
+  deactivate GR
+else evidencia defectuosa
+  SUP -> GR : rechazarFotografia(idReporte, idFoto, motivo)
+  activate GR
+  GR -> F : marcarRechazada(motivo)
+  GR -> R : pasarACorreccion()
+  GR ->> JT : solicitar corrección de evidencia (idFoto, motivo)
+  GR --> SUP : reporte EN_CORRECCION
+  deactivate GR
+  opt llega la fotografía de reemplazo
+    GR -> R : versionar()
+  end
+end
+
+== Enviar PDF (Jefe de faena, sobre un reporte aprobado) ==
+JF -> GR : enviarReporte(idReporte)
+activate GR
+GR -> CL : obtenerDestinatarios()
+activate CL
+CL --> GR : String[]
+deactivate CL
+GR -> SC : enviar(destinatarios, asunto, adjunto)
+activate SC
+SC --> GR : exitoso : boolean
+deactivate SC
+GR -> R : registrarEnvio(exitoso, destinatarios)
+alt exitoso
+  GR --> JF : true (estado de envío ENVIADO)
+else falla del servidor de correo
+  GR --> JF : false (estado de envío FALLIDO, permite reintentar)
+end
+deactivate GR
+@enduml

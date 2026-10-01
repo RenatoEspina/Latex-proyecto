@@ -1,0 +1,60 @@
+\chapter{Conclusiones}
+\label{cap:conclusiones}
+
+\begin{pendiente}[Por completar / personalizar]
+Las conclusiones que siguen son una propuesta redactada a partir del trabajo efectivamente
+realizado. Conviene ajustarlas a la experiencia concreta del equipo y agregar el aprendizaje
+personal de cada integrante, que es lo que el profesor suele valorar en esta sección.
+\end{pendiente}
+
+\textbf{Sobre el modelado del sistema.} El ejercicio confirma que es posible reconstruir la
+arquitectura funcional y estructural de un sistema en producción \textbf{sin acceso a su código
+fuente}, partiendo de la descripción del proceso de negocio y de la observación de su
+comportamiento externo. El modelo UML resultante no pretende ser idéntico a la implementación real
+de BeeTracer, pero sí constituye un \textbf{plano coherente y completo} que explica todo el
+comportamiento observado y que serviría de base para construir o extender un sistema equivalente.
+
+\textbf{Sobre el traslado del modelo estructurado al orientado a objetos.} El paso del Informe 1
+---con sus diagramas de flujo de datos y su modelo entidad-relación--- a este informe evidenció una
+diferencia importante de enfoque. Mientras el modelo estructurado describe \textbf{qué
+transformaciones sufre la información}, el modelo orientado a objetos obliga a decidir
+\textbf{quién es responsable de cada comportamiento}. Esa decisión no es trivial y en varios puntos
+del diseño fue necesario resolverla explícitamente, como al separar \clase{SincronizadorOffline}
+del \clase{GestorFaena} o al escoger entre asociar las fotografías a la etapa o a la incidencia.
+
+\textbf{Sobre el dominio.} El estudio del caso reveló que el valor central de BeeTracer \textbf{no
+es tecnológico sino probatorio}. El sistema no compite por procesar más rápido ni por almacenar más
+datos: compite por producir, en el momento exacto en que la carga cambia de custodia, una evidencia
+fechada, geolocalizada y difícil de refutar. Toda su arquitectura se subordina a ese objetivo: por
+eso la aplicación \textbf{bloquea el avance} si falta una fotografía, por eso sube las imágenes una
+por una en lugar de esperar al final, y por eso existe una etapa de revisión humana antes de que el
+reporte llegue al cliente.
+
+\textbf{Sobre las restricciones del entorno como motor del diseño.} Uno de los aprendizajes más
+claros del caso es que \textbf{las decisiones de arquitectura más determinantes no nacieron de
+requisitos funcionales, sino de restricciones físicas del entorno}. El bloqueo de la señal Wi-Fi
+por los contenedores metálicos explica el envío incremental, la compresión en dispositivo y el modo
+offline completo. El hecho de que el operario trabaje con guantes y bajo presión de tiempo explica
+el flujo guiado paso a paso. La sensibilidad comercial de la evidencia explica la eliminación de la
+visualización en vivo por parte del cliente. Un modelo construido solo desde los requisitos
+declarados habría omitido lo más característico del sistema.
+
+\textbf{Sobre las limitaciones del trabajo.} El modelo presentado tiene un grado de inferencia
+significativo. Las clases, atributos y multiplicidades son una propuesta coherente, pero no
+verificada contra la implementación real. Los módulos complementarios ---visor 3D y aplicación de
+avisos de transporte--- quedaron fuera del alcance por falta de información. Asimismo, no fue
+posible validar el modelo con el equipo desarrollador, lo que habría permitido contrastar las
+hipótesis de diseño.
+
+\textbf{Proyección.} El modelo obtenido habilita al menos tres líneas de trabajo futuro:
+\textbf{(i)} la incorporación de grabación de video del desconsolidado, funcionalidad que el propio
+equipo de BeeTracer evalúa y que el modelo admitiría generalizando \clase{Fotografia} hacia una
+clase \clase{Evidencia}; \textbf{(ii)} la integración del visor 3D de patios, añadiendo coordenadas
+de ubicación a \clase{Contenedor}; y \textbf{(iii)} la explotación analítica del historial de
+incidencias por cliente y por naviera, hoy registrado pero no aprovechado como indicador de
+gestión.
+
+\begin{pendiente}
+Agregar aquí las conclusiones personales del equipo: dificultades encontradas durante el modelado,
+decisiones que se discutieron y cómo se resolvieron, y aprendizaje obtenido de la asignatura.
+\end{pendiente}

@@ -125,21 +125,25 @@
 \newcommand{\figuradiagrama}[5]{%
     \begin{figure}[H]
         \centering
-        \includegraphics[width=#1\textwidth]{#2}
+        \IfFileExists{Figuras/diagramas/#2}{%
+            \includegraphics[width=#1\textwidth]{#2}%
+        }{%
+            \fbox{\parbox[c][7cm][c]{0.85\textwidth}{\centering
+                \textbf{[Diagrama pendiente]}\\[4pt]
+                \texttt{Figuras/diagramas/#2}}}%
+        }
         \caption[#3]{#4}
         \label{#5}
     \end{figure}%
 }
 
 % ---------------------------------------------------------
-% Formato de los anexos: "Anexo A." en lugar de "A."
+% Tablas de casos de uso narrativos (formato de los ejemplos)
 % ---------------------------------------------------------
 
-\newcommand{\formatoanexos}{%
-    \renewcommand{\thechapter}{Anexo~\Alph{chapter}}%
-    \setcounter{figure}{0}%
-    \setcounter{table}{0}%
-}
+\newcommand{\campocu}[2]{\hline \textbf{#1} & #2 \\}
+\newcommand{\encabezadocu}[1]{\hline \rowcolor{filacabecera} \multicolumn{2}{|c|}{\textbf{#1}} \\}
+\newcommand{\subencabezadocu}[2]{\hline \rowcolor{filacabecera} \textbf{#1} & \textbf{#2} \\}
 
 % ---------------------------------------------------------
 % Ajustes de listas y espaciado dentro de entornos
@@ -154,3 +158,18 @@
     pdftitle = {Informe 2 - Modelamiento UML del sistema BeeTracer},
     pdfsubject = {ICI-3242 Modelamiento de Software - PUCV}
 }
+
+% Nombre de botón o menú entre comillas angulares
+\newcommand{\bt}[1]{\guillemotleft{}#1\guillemotright{}}
+
+% Numeración corrida de figuras y tablas (Figura 1, 2, 3... como en los ejemplos)
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+
+% ---------------------------------------------------------
+% Tolerancia de justificación: evita desbordes de línea con
+% nombres de clases largos en monoespaciado.
+% ---------------------------------------------------------
+
+\setlength{\emergencystretch}{3em}

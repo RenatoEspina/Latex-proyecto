@@ -1,67 +1,24 @@
-# Informe 2 — Modelamiento UML (versión LaTeX)
+# Informe 2 - BeeTracer (Modelamiento de Software)
 
-Versión LaTeX de `informe/INFORME-2-UML.md`, con el formato de la Escuela de
-Ingeniería Informática PUCV (`pucv_inf_2024.sty`) y el encabezado institucional
-de la portada.
+Estructura idéntica a los ejemplos: Portada, Índice, Lista de Figuras, Lista de Tablas, y los capítulos 1 a 11
+(Introducción, Definición del problema, Descripción general, Clientes y usuarios, Funciones del sistema,
+Diagramas de casos de uso, Diagramas de secuencia y colaboración, Diagrama de clases, Diccionario de clases,
+Conclusiones, Referencias bibliográficas).
 
 ## Compilar
+`pdflatex main.tex` → `biber main` → `pdflatex main.tex` (dos veces). Requiere biblatex con backend biber.
 
-Requiere una distribución LaTeX con `biber`:
+## Diagramas
+Todos se guardan en `Figuras/diagramas/` con los nombres indicados en `Guia_de_diagramas.md`.
+Mientras un archivo no exista, el PDF muestra un recuadro "[Diagrama pendiente]".
 
-```bash
-cd informe/latex
-pdflatex main.tex
-biber main
-pdflatex main.tex
-pdflatex main.tex
-```
+* Figuras 1-12 (casos de uso): imágenes `.jpg` dibujadas en draw.io. Falta `04-cu-gestionar-tipos-bulto` (.png o .jpg; ajustar la extensión en `Capitulos/06_casos_uso.tex`).
+* Figuras 13-21 (secuencia, colaboración y clases): se generan con PlantUML desde `Figuras/diagramas/fuente/*.puml`:
+  `cd Figuras/diagramas/fuente && plantuml -charset UTF-8 -Sdpi=200 -tpng -o .. 1[3-9]-*.puml 2[01]-*.puml`
+  (el diagrama de clases también en SVG: `plantuml -charset UTF-8 -tsvg -o ../svg 21-diagrama-clases.puml`).
 
-O, en un solo paso:
+## Datos por completar
+Integrantes, profesor(a) y sección en `main.tex` y `Portadas/portada_principal.tex`.
 
-```bash
-latexmk -pdf main.tex
-```
-
-El resultado es `main.pdf`.
-
-## Estructura
-
-| Archivo | Contenido |
-|---|---|
-| `main.tex` | Documento maestro y **datos de portada** (título, asignatura, profesor, sección, fecha). |
-| `pucv_inf_2024.sty` | Formato PUCV. Copia sin modificar del paquete original. |
-| `estilo_informe.tex` | Comandos y estilos propios del informe (cajas de nota y de pendientes, estilo de tablas, rótulos en español). No toca el `.sty`. |
-| `referencias.bib` | Bibliografía en formato BibLaTeX / APA. |
-| `Portadas/portada_principal.tex` | Portada con el encabezado PUCV. |
-| `Capitulos/` | Capítulos 1 a 10 y las notas pendientes de la bibliografía. |
-| `Anexos/` | Anexo A (trazabilidad) y Anexo B (regeneración de diagramas). |
-| `Figuras/encabezado_pucv.png` | Encabezado institucional de la portada. |
-| `Figuras/diagramas/` | Copia de los PNG de `informe/diagramas/`. |
-
-## Qué falta completar
-
-Los bloques naranjos rotulados **POR COMPLETAR** dentro del PDF marcan lo que
-el equipo debe terminar; provienen de las mismas marcas del documento Markdown
-original. Los datos de portada pendientes (integrantes, profesor, sección) se
-editan en la sección «DATOS DE PORTADA» de `main.tex` y en
-`Portadas/portada_principal.tex`.
-
-## Separación silábica en español
-
-`main.tex` carga `babel` con español **solo si está instalado** en la
-distribución. Si no lo está, el documento compila igual, pero la partición de
-palabras usa las reglas del inglés. Para habilitarla:
-
-```bash
-# Arch / CachyOS
-sudo pacman -S texlive-langspanish
-```
-
-## Si se regeneran los diagramas
-
-Tras regenerar los PNG con PlantUML (ver Anexo B), hay que actualizar la copia
-usada por el documento:
-
-```bash
-cp informe/diagramas/*.png informe/latex/Figuras/diagramas/
-```
+## Material anterior
+`Extras_fuera_del_modelo/` guarda los capítulos, anexos y diagramas de la versión anterior; no se incluyen en el informe.
