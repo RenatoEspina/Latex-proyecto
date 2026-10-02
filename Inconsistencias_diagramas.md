@@ -1,6 +1,6 @@
 # Inconsistencias entre los diagramas
 
-Revisión cruzada de los 11 diagramas de casos de uso (draw.io), el diagrama de clases (PlantUML) y los diagramas de secuencia y colaboración (Fig. 13-20). El texto del informe ya está alineado con los diagramas. Lo que sigue son contradicciones **entre diagramas**, que se corrigen en el dibujo.
+Revisión cruzada de los 11 diagramas de casos de uso (draw.io), el diagrama de clases (PlantUML) los diagramas de secuencia del sistema (Fig. 13-16) y los de colaboración (Fig. 17-20, generados a partir de las secuencias). El texto del informe ya está alineado con los diagramas. Lo que sigue son contradicciones **entre diagramas**, que se corrigen en el dibujo.
 
 ## 1. Errores dentro del diagrama de clases (ya corregidos en `21-diagrama-clases.puml`)
 
@@ -31,7 +31,7 @@ Revisión cruzada de los 11 diagramas de casos de uso (draw.io), el diagrama de 
 | Diagrama de CU | Problema |
 |---|---|
 | Fig. 2 Gestionar usuarios | «Editar Usuario» y «Modificar Usuario» son el mismo caso. En los demás CRUD es «Modificar **Estado** X». |
-| Fig. 4 Gestionar tipos de bulto | **Falta el diagrama.** En el PDF aparece como «[Diagrama pendiente]». |
+| Fig. 4 Gestionar tipos de bultos | «Asignar Características de Bulto» (include de Crear tipo bulto) no tiene atributo ni operación en `TipoBulto`, que solo tiene `nombre`, `codigo` y `activo`. Además, el título dice «Tipos de Bultos» y el de alto nivel (Fig. 1), «Tipos de Bulto». |
 | Fig. 5 Gestionar clientes | «Registrar Contacto Cliente» no tiene clase ni operación. `Cliente` solo tiene un `email` (y `obtenerDestinatarios(): String[]` devuelve varios). |
 | Fig. 6 Gestionar trabajadores | «Asignar Cuadrilla» (include de Crear trabajador) tiene el mismo nombre que `GestorProgramacion.asignarCuadrilla`, que asigna una cuadrilla a una **programación**. Para trabajadores corresponde `Cuadrilla.agregarTrabajador`. Además, ningún caso de uso crea o mantiene `Cuadrilla`. |
 | Fig. 7 Importar manifiesto | «**Cargar archivo** de manifiesto» sugiere que el usuario sube un archivo, pero el diseño lo **descarga** del web service (`importarManifiesto(nave, viaje, fecha)` → `ServicioAduana.descargarXML`). «Notificar resultado de importación» hacia Aduanas y «Generar reporte de errores» no tienen operación en ninguna clase. |
@@ -40,15 +40,24 @@ Revisión cruzada de los 11 diagramas de casos de uso (draw.io), el diagrama de 
 | Fig. 10 Completar información | El caso base es «Iniciar sesión App» (descomposición funcional). Iniciar sesión no es un objetivo del actor. «Registrar datos de operación» agrupa `registrarSello`, `registrarLote` y `cerrarOperacion`, que no aparecen. No hay caso de uso para la **tarja ciega**, aunque existe `OrigenDatos.TARJA_CIEGA`. |
 | Fig. 11 Aprobar reporte | El extend «Aprobar Reporte» se llama igual que el caso de alto nivel. «Rechazar Reporte» no tiene operación: el diseño rechaza **una fotografía** (`rechazarFotografia`). «Registrar Observación» no tiene atributo en `Reporte`; solo existe `Fotografia.motivoRechazo`. |
 | Fig. 12 Visualizar estado | El actor dice «Cliente del deposito» (sin tilde). En los demás dice «depósito». |
-| Fig. 1 vs. Fig. 9 / Fig. 11 | En la Fig. 1 el envío del PDF queda en *Gestionar operaciones* (Jefe de faena), no en *Aprobar reporte*. El informe ya refleja eso, pero `Guia_de_diagramas.md` (Fig. 9 y 11) todavía dice lo contrario. |
 | Actores administrativos | Los 5 CRUD del Administrador y *Visualizar estado* no tienen controlador (el informe lo declara como simplificación en el cap. 8). |
 
-## 4. Secuencia/colaboración vs. diagrama de clases (dependencias faltantes)
+## 4. Diagramas de secuencia (Fig. 13-16) vs. casos de uso y clases
 
-Los diagramas de interacción usan solo operaciones que existen en las clases. Sin embargo, los controladores envían mensajes a clases con las que **no tienen dependencia** en el diagrama de clases:
+En el informe, las secuencias se presentan como **diagramas de secuencia del sistema** (el sistema como caja negra). La Tabla 9 del cap. 7 relaciona cada evento con las operaciones del diagrama de clases. Aun así, quedan estas diferencias, que se corrigen en los dibujos:
 
-* `GestorProgramacion` → `Cuadrilla`, `Trabajador` (`estaDisponible`).
-* `GestorOperacion` → `SelloSeguridad`, `LineaCarga`, `Incidencia`, `Fotografia`, `SincronizadorOffline`, `GestorReportes` (solo tiene `..> Operacion`).
-* `GestorReportes` → `Fotografia` (`marcarRechazada`) y `Cliente` (`obtenerDestinatarios`).
+| Diagrama | Problema |
+|---|---|
+| Fig. 16 Revisar reporte vs. Fig. 9 / Fig. 11 | En la secuencia, al aprobar, el sistema **envía el PDF automáticamente** (`enviarPDFAlCliente()`). En los CU, el envío solo aparece como *Enviar PDF* del Jefe de faena (Fig. 9), y *Aprobar reporte* (Fig. 11) no lo menciona. Para conciliarlos, el informe trata el envío como automático al aprobar y *Enviar PDF* como **reenvío** manual. Si no es lo que quieren, hay que cambiar uno de los dos diagramas. |
+| Fig. 16 Revisar reporte | Rechazar devuelve «notifica solicitud de recaptura a terreno» como respuesta **al Supervisor**: la flecha apunta al actor equivocado, porque la notificación va al Jefe tarjador. «Registrar observación» y «Marcar evidencia defectuosa» (Fig. 11) no aparecen; solo está `rechazarFotografia(motivo)`. |
+| Fig. 16 vs. clases | `aprobarReporte()` no recibe parámetros (en la clase: `aprobarReporte(idReporte, aprobador)`). `estado = "En Corrección"` no coincide con el literal del enumerado `EN_CORRECCION`. |
+| Fig. 15 Registrar desconsolidado | No incluye el **registro y verificación del sello** ni la apertura, aunque el narrativo, el CU y la clase (`registrarSello`, `SelloSeguridad`) sí los tienen. |
+| Fig. 15 vs. cap. 2-3 | Todo se guarda en la base local y se sincroniza **solo al finalizar** (`sincronizarAlServidor()`). Los cap. 2 y 3 explican que el envío en lote al final provocaba caídas y que la app **sube cada foto inmediatamente**. Sugerencia: agregar en el `loop` un `opt [hay conectividad] subirFotografia()`. |
+| Fig. 15 vs. clases | `iniciarFaena`/`finalizarFaena` en la secuencia y `iniciarOperacion`/`cerrarOperacion` en la clase. `registrarLoteYFotografia(cantidad)` no indica la línea de carga (en la clase: `registrarLote(idOperacion, idLinea, cantidadRecibida, imagen)`). `:Base de Datos` no es una clase del diseño. |
+| Fig. 15 vs. Fig. 10 | El título dice «Registrar Desconsolidado», pero el CU se llama «Registrar Datos de Operación». |
+| Fig. 14 Crear programación | El fragmento `alt [Con conflictos]` solo cubre el conflicto de horario. La no disponibilidad del personal (narrativo A4) no tiene rama. `crearProgramacion(contenedor, fecha, hora)` usa una sola hora; la clase usa `horaInicio, horaTermino`. |
+| Fig. 14 vs. Fig. 8 | La secuencia incluye `asignarPersonal(cuadrilla, jefeTarjador)` dentro de crear, pero el CU *Crear programación* (Fig. 8) no tiene ese include. |
+| Fig. 13 Importar manifiesto | `importarManifiesto(nave, viaje)` no lleva fecha (en la clase: `importarManifiesto(nave, viaje, fecha)`). No aparecen *Notificar resultado de importación* ni *Generar reporte de errores* (Fig. 7); la rama de error solo «muestra error». |
+| Fig. 16 vs. Fig. 11 | El título dice «Revisar Reporte», pero el CU se llama «Validar Reporte». El actor se llama «Supervisor», no «Supervisor del reporte». |
 
-Agregar esas flechas `..>` al diagrama de clases (o redirigir los mensajes a través de `Operacion`).
+`Guia_de_diagramas.md` quedó desactualizada respecto de todos los diagramas actuales.

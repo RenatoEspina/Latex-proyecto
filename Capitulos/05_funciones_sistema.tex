@@ -12,8 +12,9 @@ alto nivel (Figura~\ref{fig:cu_altonivel}):
     \item \textbf{Gestionar roles:} permite crear, consultar, editar, eliminar y activar o
           desactivar los perfiles de acceso, asignando a cada rol sus permisos para diferenciar las
           capacidades de cada usuario.
-    \item \textbf{Gestionar tipos de bulto:} permite mantener el catálogo de unidades de carga
-          (caja, pallet, atado) con que se registra la mercancía en terreno.
+    \item \textbf{Gestionar tipos de bulto:} permite crear, consultar, editar, eliminar y activar
+          o desactivar las unidades de carga (caja, pallet, atado) con que se registra la mercancía
+          en terreno, asignando a cada tipo de bulto sus características al momento de crearlo.
     \item \textbf{Gestionar clientes:} permite crear, consultar, editar, eliminar y activar o
           desactivar a las empresas importadoras, registrando el contacto al que se envían sus
           reportes.
@@ -27,7 +28,7 @@ alto nivel (Figura~\ref{fig:cu_altonivel}):
           contenedor, asignándole fecha, franja horaria, cuadrilla y jefe tarjador, y luego
           buscarla, editarla, modificar su estado o eliminarla.
     \item \textbf{Gestionar operaciones:} permite consultar las operaciones en ejecución o
-          finalizadas, modificar su estado y visualizar, descargar o enviar al cliente su reporte
+          finalizadas, modificar su estado y visualizar, descargar o reenviar al cliente su reporte
           PDF.
     \item \textbf{Completar información de consolidado/desconsolidado:} permite al jefe tarjador,
           tras iniciar sesión en la aplicación móvil, seleccionar la operación que tiene asignada,
@@ -35,8 +36,8 @@ alto nivel (Figura~\ref{fig:cu_altonivel}):
           capturar la evidencia fotográfica correspondiente.
     \item \textbf{Aprobar reporte:} permite validar el reporte generado en terreno, revisando los
           datos registrados y la evidencia fotográfica, marcar la evidencia defectuosa y aprobar el
-          reporte o rechazarlo, registrando una observación y solicitando la corrección de la
-          evidencia.
+          reporte ---con lo que el sistema lo envía automáticamente al cliente--- o rechazarlo,
+          registrando una observación y solicitando la corrección de la evidencia.
     \item \textbf{Visualizar estado:} permite al cliente consultar el estado de sus operaciones,
           seleccionar una de ellas y visualizar o descargar su reporte PDF aprobado.
 \end{itemize}
@@ -52,11 +53,12 @@ Por otro lado, se describen los actores relacionados con las funciones anteriore
     \item \textbf{Administrador del depósito:} responsable de la configuración del sistema
           (usuarios, roles, tipos de bulto, clientes y trabajadores).
     \item \textbf{Jefe de faena:} responsable de importar los manifiestos, de las programaciones y
-          de la gestión de las operaciones, incluido el envío del reporte aprobado al cliente.
+          de la gestión de las operaciones, incluido el reenvío del reporte aprobado al cliente.
     \item \textbf{Jefe tarjador:} utiliza la aplicación móvil en terreno para completar la
           información de consolidado/desconsolidado.
-    \item \textbf{Supervisor del reporte:} responsable de validar los reportes, aprobándolos o
-          rechazándolos y solicitando la corrección de la evidencia defectuosa.
+    \item \textbf{Supervisor del reporte:} responsable de validar los reportes, aprobándolos (lo que
+          dispara su envío al cliente) o rechazándolos y solicitando la corrección de la evidencia
+          defectuosa.
     \item \textbf{Cliente del depósito:} actor externo que consulta el estado de sus operaciones y
           visualiza o descarga sus reportes.
     \item \textbf{Servicio Nacional de Aduanas:} actor externo (sistema) que entrega el manifiesto

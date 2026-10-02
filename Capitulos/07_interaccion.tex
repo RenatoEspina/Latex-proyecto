@@ -2,12 +2,96 @@
 \label{cap:interaccion}
 
 Se presentan los diagramas de secuencia y de colaboración de cuatro casos de uso considerados los
-más relevantes del sistema: importar el manifiesto, crear una programación, registrar los datos de
-la operación en terreno y validar y enviar el reporte. Ambos tipos de diagrama describen la misma
+más relevantes del sistema: importar el manifiesto, crear una programación, registrar el
+desconsolidado en terreno y revisar el reporte. Ambos tipos de diagrama describen la misma
 interacción: el de secuencia enfatiza el orden temporal de los mensajes y permite representar
 condiciones y repeticiones, mientras que el de colaboración enfatiza qué objetos se relacionan
-entre sí. Los objetos y mensajes utilizados corresponden a las clases y operaciones del diagrama de
-clases (Capítulo~\ref{cap:clases}) y del diccionario (Capítulo~\ref{cap:diccionario}).
+entre sí.
+
+Los diagramas se construyeron como \textbf{diagramas de secuencia del sistema}
+\parencite{larman2003}: el sistema se representa como una caja negra (\clase{:Sistema BeeTracer}
+en la plataforma web y \clase{:App BeeTracer} en la aplicación móvil) que recibe los
+\textbf{eventos del sistema} generados por los actores y se comunica con los servicios externos
+(\clase{:ServicioAduana}, \clase{:ServicioCorreo}) y con la base de datos local del dispositivo
+(\clase{:Base de Datos}). La Tabla~\ref{tab:eventos_operaciones} relaciona cada evento del
+sistema con las operaciones del diagrama de clases (Capítulo~\ref{cap:clases}) que lo resuelven
+en el diseño.
+
+{\estilotabla
+\begin{longtable}{L{0.40\textwidth} L{0.54\textwidth}}
+
+\caption{Correspondencia entre eventos del sistema y operaciones de diseño}
+\label{tab:eventos_operaciones}
+\\
+
+\toprule
+\textbf{Evento del sistema} & \textbf{Operaciones de diseño que lo resuelven} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Evento del sistema} & \textbf{Operaciones de diseño que lo resuelven} \\
+\midrule
+\endhead
+
+\clase{importarManifiesto(\allowbreak{}nave, viaje)} &
+\clase{GestorManifiesto.importarManifiesto()}, que usa \clase{ServicioAduana.descargarXML()}
+(\clase{solicitarXML()}), \clase{Manifiesto.validarEsquema()},
+\clase{Manifiesto.agregarContenedor()} y \clase{Contenedor.agregarLinea()}
+(\clase{guardarContenedoresYLotes()}). \\
+\midrule
+
+\clase{crearProgramacion(\allowbreak{}contenedor, fecha, hora)} &
+\clase{GestorProgramacion.crearProgramacion()}, que usa \clase{hayConflicto()}
+(\clase{verificarDisponibilidadHorario()}). \\
+\midrule
+
+\clase{asignarPersonal(\allowbreak{}cuadrilla, jefeTarjador)} &
+\clase{GestorProgramacion.asignarCuadrilla()}, que usa \clase{Cuadrilla.estaDisponible()} y
+\clase{Trabajador.estaDisponible()} (\clase{verificarDisponibilidadPersonal()}) y
+\clase{Programacion.asignarCuadrilla()} (\clase{guardarProgramacion()}). \\
+\midrule
+
+\clase{iniciarFaena(\allowbreak{}idProgramacion)} &
+\clase{GestorOperacion.iniciarOperacion()} y \clase{Operacion.iniciar()}. \\
+\midrule
+
+\clase{registrarLoteYFotografia(\allowbreak{}cantidad)} &
+\clase{GestorOperacion.registrarLote()}, que usa \clase{LineaCarga.contrastarCantidad()},
+\clase{Fotografia.comprimir()}, \clase{Operacion.agregarFotografia()} y
+\clase{SincronizadorOffline.encolar()} (\clase{guardarDatosLocal()}). \\
+\midrule
+
+\clase{registrarIncidencia(\allowbreak{}fotografias)} &
+\clase{GestorOperacion.registrarIncidencia()} e \clase{Incidencia.adjuntarFotografia()}
+(\clase{guardarIncidencia()}). \\
+\midrule
+
+\clase{finalizarFaena(\allowbreak{}fotoVacio)} &
+\clase{GestorOperacion.cerrarOperacion()}, que usa
+\clase{SincronizadorOffline.\allowbreak{}sincronizarPendientes()} (\clase{sincronizarAlServidor()}),
+\clase{Operacion.cerrar()} y \clase{GestorReportes.generarBorrador()}. \\
+\midrule
+
+\clase{revisarReporte(\allowbreak{}idReporte)} &
+\clase{GestorReportes.abrirReporte()} y \clase{Reporte.generarPDF()}. \\
+\midrule
+
+\clase{aprobarReporte(\allowbreak{})} &
+\clase{GestorReportes.aprobarReporte()} y \clase{Reporte.aprobar()}, seguido de
+\clase{GestorReportes.enviarReporte()}, que usa \clase{Cliente.obtenerDestinatarios()},
+\clase{ServicioCorreo.enviar()} (\clase{enviarPDFAlCliente()}) y
+\clase{Reporte.registrarEnvio()}. \\
+\midrule
+
+\clase{rechazarFotografia(\allowbreak{}motivo)} &
+\clase{GestorReportes.rechazarFotografia()}, que usa \clase{Fotografia.marcarRechazada()} y
+\clase{Reporte.pasarACorreccion()} (\clase{estado = "En Corrección"}). \\
+
+\bottomrule
+
+\end{longtable}
+}
 
 \section{Diagramas de secuencia}
 \label{sec:secuencia}
@@ -19,13 +103,12 @@ aparecen en los cursos alternos de los casos de uso narrativos.
 \subsection{Importar manifiesto}
 \label{subsec:sec_manifiesto}
 
-El Jefe de faena solicita el manifiesto al controlador \clase{GestorManifiesto}, que lo obtiene
-mediante \clase{ServicioAduana}. Si el servicio responde y el XML es válido, se crea el
-\clase{Manifiesto} y, por cada contenedor y línea de carga declarados, se crean los objetos
-\clase{Contenedor} y \clase{LineaCarga} (curso normal y cursos A1 a A3 de la
-Tabla~\ref{tab:cu_importar_manifiesto}).
+El Jefe de faena solicita la importación del manifiesto de una nave y viaje. El sistema solicita
+el XML a \clase{:ServicioAduana} y, si el XML es válido y el servicio está en línea, guarda los
+contenedores y lotes declarados y confirma la importación; en caso contrario muestra un error
+(curso normal y cursos A1 a A3 de la Tabla~\ref{tab:cu_importar_manifiesto}).
 
-\figuradiagrama{0.95}{13-sec-importar-manifiesto.png}
+\figuradiagrama{0.80}{13-sec-importar-manifiesto.jpg}
 {Diagrama de secuencia - Importar manifiesto}
 {Diagrama de secuencia - Importar manifiesto.}
 {fig:sec_manifiesto}
@@ -33,68 +116,72 @@ Tabla~\ref{tab:cu_importar_manifiesto}).
 \subsection{Crear programación}
 \label{subsec:sec_programacion}
 
-El Jefe de faena crea la programación de un contenedor y luego le asigna cuadrilla y jefe
-tarjador. El controlador \clase{GestorProgramacion} verifica el cruce de franjas y la
-disponibilidad de la cuadrilla y del jefe tarjador antes de asociarlos
-(Tabla~\ref{tab:cu_crear_programacion}).
+El Jefe de faena crea la programación de un contenedor indicando fecha y hora. El sistema verifica
+la disponibilidad del horario; si no hay conflictos de agenda, el Jefe de faena asigna la cuadrilla
+y el jefe tarjador, y el sistema verifica la disponibilidad del personal antes de guardar la
+programación. Si hay conflictos, alerta la indisponibilidad (Tabla~\ref{tab:cu_crear_programacion}).
 
-\figuradiagrama{0.95}{14-sec-crear-programacion.png}
+\figuradiagrama{0.72}{14-sec-crear-programacion.jpg}
 {Diagrama de secuencia - Crear programación}
 {Diagrama de secuencia - Crear programación.}
 {fig:sec_programacion}
 
-\subsection{Registrar datos de operación}
+\subsection{Registrar desconsolidado}
 \label{subsec:sec_operacion}
 
-Es la interacción más extensa del sistema. El Jefe tarjador inicia la operación, verifica el sello,
-registra cada lote separado por cliente (repetición), registra una incidencia cuando existe
-diferencia o daño (opción) y cierra la faena. Cada fotografía se crea, se comprime y se encola en
-\clase{SincronizadorOffline}, que la envía si hay conectividad. Al cerrar, se genera el borrador del
-reporte (Tabla~\ref{tab:cu_registrar_datos}).
+Corresponde al caso de uso \textit{Registrar datos de operación}. El Jefe tarjador inicia la
+faena desde la aplicación móvil y, por cada lote de cliente (repetición), registra la cantidad y
+su fotografía, que la aplicación guarda en la base de datos local; si hay daño o diferencia
+(opción), registra además una incidencia con sus fotografías. Al finalizar la faena con la
+fotografía del contenedor vacío, la aplicación sincroniza los datos con el servidor y confirma el
+cierre (Tabla~\ref{tab:cu_registrar_datos}).
 
-\figuradiagrama{0.80}{15-sec-registrar-desconsolidado.png}
-{Diagrama de secuencia - Registrar datos de operación}
-{Diagrama de secuencia - Registrar datos de operación.}
+\figuradiagrama{0.80}{15-sec-registrar-desconsolidado.jpg}
+{Diagrama de secuencia - Registrar desconsolidado}
+{Diagrama de secuencia - Registrar desconsolidado.}
 {fig:sec_operacion}
 
-\subsection{Validar reporte y enviar PDF}
+\subsection{Revisar reporte}
 \label{subsec:sec_reporte}
 
-El Supervisor del reporte abre el reporte y decide entre aprobarlo o rechazar una fotografía
-defectuosa, en cuyo caso el reporte pasa a corrección y se solicita la corrección de la evidencia
-al Jefe tarjador. Una vez aprobado, el Jefe de faena envía el PDF a los destinatarios del cliente
-desde la gestión de operaciones (Tablas~\ref{tab:cu_validar_reporte} y~\ref{tab:cu_enviar_pdf}).
+Corresponde al caso de uso \textit{Validar reporte}. El Supervisor revisa el reporte y el sistema
+le muestra los datos y fotografías. Si los datos y la evidencia son correctos, el Supervisor lo
+aprueba y el sistema envía el PDF al cliente mediante \clase{:ServicioCorreo}; si la evidencia es
+defectuosa, rechaza la fotografía indicando el motivo, el reporte pasa a estado «En Corrección» y
+se notifica la solicitud de recaptura a terreno (Tabla~\ref{tab:cu_validar_reporte}).
 
-\figuradiagrama{0.95}{16-sec-revisar-reporte.png}
-{Diagrama de secuencia - Validar reporte y enviar PDF}
-{Diagrama de secuencia - Validar reporte y enviar PDF.}
+\figuradiagrama{0.80}{16-sec-revisar-reporte.jpg}
+{Diagrama de secuencia - Revisar reporte}
+{Diagrama de secuencia - Revisar reporte.}
 {fig:sec_reporte}
 
 \section{Diagramas de colaboración}
 \label{sec:colaboracion}
 
-Como complemento, se presentan los diagramas de colaboración de los mismos cuatro casos de uso. En
-ellos los mensajes se numeran para indicar el orden, y la numeración decimal (por ejemplo, 3.1)
-indica que el mensaje se origina como consecuencia del mensaje 3; el asterisco indica una
-repetición. Se muestra el curso normal de cada caso, incluyendo las repeticiones necesarias, y se
+Como complemento, se presentan los diagramas de colaboración de los mismos cuatro casos de uso,
+con los mismos objetos y mensajes que sus diagramas de secuencia. En ellos los mensajes se numeran
+para indicar el orden, y la numeración decimal (por ejemplo, 2.1) indica que el mensaje se origina
+como consecuencia del mensaje 2; el asterisco indica una repetición y la condición entre corchetes,
+una guarda. Las flechas \(\downarrow\) y \(\uparrow\) junto a cada mensaje indican su sentido
+(hacia el objeto de abajo o de vuelta hacia el de arriba). Se muestra el curso normal de cada caso, incluyendo las repeticiones necesarias, y se
 omiten los cursos alternos, que ya se detallan en los diagramas de secuencia.
 
-\figuradiagrama{0.95}{17-col-importar-manifiesto.png}
+\figuradiagrama{0.55}{17-col-importar-manifiesto.png}
 {Diagrama de colaboración - Importar manifiesto}
 {Diagrama de colaboración - Importar manifiesto.}
 {fig:col_manifiesto}
 
-\figuradiagrama{0.95}{18-col-crear-programacion.png}
+\figuradiagrama{0.58}{18-col-crear-programacion.png}
 {Diagrama de colaboración - Crear programación}
 {Diagrama de colaboración - Crear programación.}
 {fig:col_programacion}
 
-\figuradiagrama{1.0}{19-col-registrar-desconsolidado.png}
-{Diagrama de colaboración - Registrar datos de operación}
-{Diagrama de colaboración - Registrar datos de operación.}
+\figuradiagrama{0.45}{19-col-registrar-desconsolidado.png}
+{Diagrama de colaboración - Registrar desconsolidado}
+{Diagrama de colaboración - Registrar desconsolidado.}
 {fig:col_operacion}
 
-\figuradiagrama{0.95}{20-col-revisar-reporte.png}
-{Diagrama de colaboración - Validar reporte y enviar PDF}
-{Diagrama de colaboración - Validar reporte y enviar PDF (curso de aprobación y envío).}
+\figuradiagrama{0.55}{20-col-revisar-reporte.png}
+{Diagrama de colaboración - Revisar reporte}
+{Diagrama de colaboración - Revisar reporte (curso de aprobación y envío).}
 {fig:col_reporte}
