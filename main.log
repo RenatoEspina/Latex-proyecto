@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.1)  1 OCT 2026 20:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.1)  2 OCT 2026 04:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1522,7 +1522,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.I}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.22 ...eporte y enviar PDF}{30}{subsection.7.1.4}
+l.22 ...1.4}Revisar reporte}{31}{subsection.7.1.4}
                                                   % [1
 
 
@@ -1609,7 +1609,7 @@ Capítulo 5.
 
  (./Capitulos/06_casos_uso.tex
 Capítulo 6.
-<Figuras/diagramas/01-cu-alto-nivel.jpg, id=482, 885.3075pt x 885.3075pt>
+<Figuras/diagramas/01-cu-alto-nivel.jpg, id=484, 885.3075pt x 885.3075pt>
 File: Figuras/diagramas/01-cu-alto-nivel.jpg Graphic file (type jpg)
 <use Figuras/diagramas/01-cu-alto-nivel.jpg>
 Package pdftex.def Info: Figuras/diagramas/01-cu-alto-nivel.jpg  used on input 
@@ -1625,20 +1625,20 @@ File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 
 
  <./Figuras/diagramas/01-cu-alto-nivel.jpg>]
-<Figuras/diagramas/02-cu-gestionar-usuarios.jpg, id=487, 586.19pt x 533.995pt>
+<Figuras/diagramas/02-cu-gestionar-usuarios.jpg, id=489, 586.19pt x 533.995pt>
 File: Figuras/diagramas/02-cu-gestionar-usuarios.jpg Graphic file (type jpg)
 <use Figuras/diagramas/02-cu-gestionar-usuarios.jpg>
 Package pdftex.def Info: Figuras/diagramas/02-cu-gestionar-usuarios.jpg  used o
 n input line 36.
 (pdftex.def)             Requested size: 330.42041pt x 300.99886pt.
-<Figuras/diagramas/03-cu-gestionar-roles.jpg, id=488, 585.18625pt x 533.995pt>
+<Figuras/diagramas/03-cu-gestionar-roles.jpg, id=490, 585.18625pt x 533.995pt>
 File: Figuras/diagramas/03-cu-gestionar-roles.jpg Graphic file (type jpg)
 <use Figuras/diagramas/03-cu-gestionar-roles.jpg>
 Package pdftex.def Info: Figuras/diagramas/03-cu-gestionar-roles.jpg  used on i
 nput line 41.
 (pdftex.def)             Requested size: 330.42041pt x 301.52847pt.
  [10 <./Figuras/diagramas/02-cu-gestionar-usuarios.jpg>]
-<Figuras/diagramas/05-cu-gestionar-clientes.jpg, id=494, 605.26125pt x 533.995p
+<Figuras/diagramas/05-cu-gestionar-clientes.jpg, id=496, 605.26125pt x 533.995p
 t>
 File: Figuras/diagramas/05-cu-gestionar-clientes.jpg Graphic file (type jpg)
 <use Figuras/diagramas/05-cu-gestionar-clientes.jpg>
@@ -1646,7 +1646,7 @@ Package pdftex.def Info: Figuras/diagramas/05-cu-gestionar-clientes.jpg  used o
 n input line 51.
 (pdftex.def)             Requested size: 330.42041pt x 291.51447pt.
  [11 <./Figuras/diagramas/03-cu-gestionar-roles.jpg>]
-<Figuras/diagramas/06-cu-gestionar-trabajadores.jpg, id=499, 605.26125pt x 533.
+<Figuras/diagramas/06-cu-gestionar-trabajadores.jpg, id=501, 605.26125pt x 533.
 995pt>
 File: Figuras/diagramas/06-cu-gestionar-trabajadores.jpg Graphic file (type jpg
 )
@@ -1654,7 +1654,7 @@ File: Figuras/diagramas/06-cu-gestionar-trabajadores.jpg Graphic file (type jpg
 Package pdftex.def Info: Figuras/diagramas/06-cu-gestionar-trabajadores.jpg  us
 ed on input line 56.
 (pdftex.def)             Requested size: 330.42041pt x 291.51447pt.
-<Figuras/diagramas/07-cu-importar-manifiesto.jpg, id=500, 775.89874pt x 533.995
+<Figuras/diagramas/07-cu-importar-manifiesto.jpg, id=502, 775.89874pt x 533.995
 pt>
 File: Figuras/diagramas/07-cu-importar-manifiesto.jpg Graphic file (type jpg)
 <use Figuras/diagramas/07-cu-importar-manifiesto.jpg>
@@ -1663,7 +1663,7 @@ on input line 61.
 (pdftex.def)             Requested size: 401.22942pt x 276.139pt.
  [12 <./Figuras/diagramas/05-cu-gestionar-clientes.jpg> <./Figuras/diagramas/06
 -cu-gestionar-trabajadores.jpg>]
-<Figuras/diagramas/08-cu-gestionar-programaciones.jpg, id=507, 712.6625pt x 614
+<Figuras/diagramas/08-cu-gestionar-programaciones.jpg, id=509, 712.6625pt x 614
 .295pt>
 File: Figuras/diagramas/08-cu-gestionar-programaciones.jpg Graphic file (type j
 pg)
@@ -1671,7 +1671,7 @@ pg)
 Package pdftex.def Info: Figuras/diagramas/08-cu-gestionar-programaciones.jpg  
 used on input line 66.
 (pdftex.def)             Requested size: 354.02342pt x 305.15958pt.
-<Figuras/diagramas/09-cu-gestionar-operaciones.jpg, id=508, 695.59875pt x 614.2
+<Figuras/diagramas/09-cu-gestionar-operaciones.jpg, id=510, 695.59875pt x 614.2
 95pt>
 File: Figuras/diagramas/09-cu-gestionar-operaciones.jpg Graphic file (type jpg)
 
@@ -1681,7 +1681,7 @@ d on input line 71.
 (pdftex.def)             Requested size: 354.02342pt x 312.63953pt.
  [13 <./Figuras/diagramas/07-cu-importar-manifiesto.jpg> <./Figuras/diagramas/0
 8-cu-gestionar-programaciones.jpg>]
-<Figuras/diagramas/10-cu-completar-informacion.jpg, id=513, 695.59875pt x 614.2
+<Figuras/diagramas/10-cu-completar-informacion.jpg, id=515, 695.59875pt x 614.2
 95pt>
 File: Figuras/diagramas/10-cu-completar-informacion.jpg Graphic file (type jpg)
 
@@ -1690,14 +1690,14 @@ Package pdftex.def Info: Figuras/diagramas/10-cu-completar-informacion.jpg  use
 d on input line 76.
 (pdftex.def)             Requested size: 368.18378pt x 325.14362pt.
  [14 <./Figuras/diagramas/09-cu-gestionar-operaciones.jpg>]
-<Figuras/diagramas/11-cu-aprobar-reporte.jpg, id=518, 748.7975pt x 614.295pt>
+<Figuras/diagramas/11-cu-aprobar-reporte.jpg, id=520, 748.7975pt x 614.295pt>
 File: Figuras/diagramas/11-cu-aprobar-reporte.jpg Graphic file (type jpg)
 <use Figuras/diagramas/11-cu-aprobar-reporte.jpg>
 Package pdftex.def Info: Figuras/diagramas/11-cu-aprobar-reporte.jpg  used on i
 nput line 81.
 (pdftex.def)             Requested size: 387.06906pt x 317.54181pt.
  [15 <./Figuras/diagramas/10-cu-completar-informacion.jpg>]
-<Figuras/diagramas/12-cu-visualizar-estado.jpg, id=523, 611.28375pt x 614.295pt
+<Figuras/diagramas/12-cu-visualizar-estado.jpg, id=525, 611.28375pt x 614.295pt
 >
 File: Figuras/diagramas/12-cu-visualizar-estado.jpg Graphic file (type jpg)
 <use Figuras/diagramas/12-cu-visualizar-estado.jpg>
@@ -1711,83 +1711,82 @@ Package pdftex.def Info: Figuras/diagramas/12-cu-visualizar-estado.jpg  used on
 
  (./Capitulos/07_interaccion.tex
 Capítulo 7.
-<Figuras/diagramas/13-sec-importar-manifiesto.png, id=583, 2579.6375pt x 1600.9
-8125pt>
-File: Figuras/diagramas/13-sec-importar-manifiesto.png Graphic file (type png)
-<use Figuras/diagramas/13-sec-importar-manifiesto.png>
-Package pdftex.def Info: Figuras/diagramas/13-sec-importar-manifiesto.png  used
- on input line 31.
-(pdftex.def)             Requested size: 448.42822pt x 278.29489pt.
 [27
 
 
 
 
 ]
-<Figuras/diagramas/14-sec-crear-programacion.png, id=589, 2456.17625pt x 1601.9
-85pt>
-File: Figuras/diagramas/14-sec-crear-programacion.png Graphic file (type png)
-<use Figuras/diagramas/14-sec-crear-programacion.png>
-Package pdftex.def Info: Figuras/diagramas/14-sec-crear-programacion.png  used 
-on input line 44.
-(pdftex.def)             Requested size: 448.42822pt x 292.47594pt.
- [28 <./Figuras/diagramas/13-sec-importar-manifiesto.png (PNG copy)>]
-<Figuras/diagramas/15-sec-registrar-desconsolidado.png, id=595, 3104.59875pt x 
-4000.9475pt>
-File: Figuras/diagramas/15-sec-registrar-desconsolidado.png Graphic file (type 
-png)
-<use Figuras/diagramas/15-sec-registrar-desconsolidado.png>
-Package pdftex.def Info: Figuras/diagramas/15-sec-registrar-desconsolidado.png 
- used on input line 58.
-(pdftex.def)             Requested size: 377.62642pt x 486.62529pt.
-
-[29 <./Figuras/diagramas/14-sec-crear-programacion.png (PNG copy)>]
-<Figuras/diagramas/16-sec-revisar-reporte.png, id=602, 2935.96875pt x 1949.2825
-pt>
-File: Figuras/diagramas/16-sec-revisar-reporte.png Graphic file (type png)
-<use Figuras/diagramas/16-sec-revisar-reporte.png>
-Package pdftex.def Info: Figuras/diagramas/16-sec-revisar-reporte.png  used on 
-input line 71.
-(pdftex.def)             Requested size: 448.42822pt x 297.70387pt.
- [30 <./Figuras/diagramas/15-sec-registrar-desconsolidado.png (PNG copy)>]
-<Figuras/diagramas/17-col-importar-manifiesto.png, id=608, 3548.25626pt x 494.8
-4875pt>
+<Figuras/diagramas/13-sec-importar-manifiesto.jpg, id=590, 849.1725pt x 711.658
+75pt>
+File: Figuras/diagramas/13-sec-importar-manifiesto.jpg Graphic file (type jpg)
+<use Figuras/diagramas/13-sec-importar-manifiesto.jpg>
+Package pdftex.def Info: Figuras/diagramas/13-sec-importar-manifiesto.jpg  used
+ on input line 114.
+(pdftex.def)             Requested size: 377.62642pt x 316.47539pt.
+ [28]
+<Figuras/diagramas/14-sec-crear-programacion.jpg, id=596, 804.00375pt x 820.063
+75pt>
+File: Figuras/diagramas/14-sec-crear-programacion.jpg Graphic file (type jpg)
+<use Figuras/diagramas/14-sec-crear-programacion.jpg>
+Package pdftex.def Info: Figuras/diagramas/14-sec-crear-programacion.jpg  used 
+on input line 127.
+(pdftex.def)             Requested size: 339.86305pt x 346.65176pt.
+ [29 <./Figuras/diagramas/13-sec-importar-manifiesto.jpg>]
+<Figuras/diagramas/15-sec-registrar-desconsolidado.jpg, id=602, 912.40875pt x 7
+87.94376pt>
+File: Figuras/diagramas/15-sec-registrar-desconsolidado.jpg Graphic file (type 
+jpg)
+<use Figuras/diagramas/15-sec-registrar-desconsolidado.jpg>
+Package pdftex.def Info: Figuras/diagramas/15-sec-registrar-desconsolidado.jpg 
+ used on input line 142.
+(pdftex.def)             Requested size: 377.62642pt x 326.11288pt.
+ [30 <./Figuras/diagramas/14-sec-crear-programacion.jpg>]
+<Figuras/diagramas/16-sec-revisar-reporte.jpg, id=609, 932.48375pt x 808.01875p
+t>
+File: Figuras/diagramas/16-sec-revisar-reporte.jpg Graphic file (type jpg)
+<use Figuras/diagramas/16-sec-revisar-reporte.jpg>
+Package pdftex.def Info: Figuras/diagramas/16-sec-revisar-reporte.jpg  used on 
+input line 156.
+(pdftex.def)             Requested size: 377.62642pt x 327.22115pt.
+ [31 <./Figuras/diagramas/15-sec-registrar-desconsolidado.jpg>]
+<Figuras/diagramas/17-col-importar-manifiesto.png, id=615, 894.34125pt x 724.70
+75pt>
 File: Figuras/diagramas/17-col-importar-manifiesto.png Graphic file (type png)
 <use Figuras/diagramas/17-col-importar-manifiesto.png>
 Package pdftex.def Info: Figuras/diagramas/17-col-importar-manifiesto.png  used
- on input line 85.
-(pdftex.def)             Requested size: 448.42822pt x 62.5355pt.
-<Figuras/diagramas/18-col-crear-programacion.png, id=609, 2044.63875pt x 438.63
-875pt>
+ on input line 172.
+(pdftex.def)             Requested size: 259.6186pt x 210.38095pt.
+ [32 <./Figuras/diagramas/16-sec-revisar-reporte.jpg>]
+<Figuras/diagramas/18-col-crear-programacion.png, id=621, 937.5025pt x 555.0737
+5pt>
 File: Figuras/diagramas/18-col-crear-programacion.png Graphic file (type png)
 <use Figuras/diagramas/18-col-crear-programacion.png>
 Package pdftex.def Info: Figuras/diagramas/18-col-crear-programacion.png  used 
-on input line 90.
-(pdftex.def)             Requested size: 448.42822pt x 96.19963pt.
- [31 <./Figuras/diagramas/16-sec-revisar-reporte.png (PNG copy)> <./Figuras/dia
-gramas/17-col-importar-manifiesto.png (PNG copy)>]
-<Figuras/diagramas/19-col-registrar-desconsolidado.png, id=615, 3767.07375pt x 
-1281.78876pt>
+on input line 177.
+(pdftex.def)             Requested size: 273.77898pt x 162.09373pt.
+<Figuras/diagramas/19-col-registrar-desconsolidado.png, id=622, 659.46375pt x 8
+98.35625pt>
 File: Figuras/diagramas/19-col-registrar-desconsolidado.png Graphic file (type 
 png)
 <use Figuras/diagramas/19-col-registrar-desconsolidado.png>
 Package pdftex.def Info: Figuras/diagramas/19-col-registrar-desconsolidado.png 
- used on input line 95.
-(pdftex.def)             Requested size: 472.03123pt x 160.5948pt.
-<Figuras/diagramas/20-col-revisar-reporte.png, id=616, 2298.5875pt x 443.6575pt
->
+ used on input line 182.
+(pdftex.def)             Requested size: 212.41261pt x 289.35783pt.
+ [33 <./Figuras/diagramas/17-col-importar-manifiesto.png (PNG copy)> <./Figuras
+/diagramas/18-col-crear-programacion.png (PNG copy)>]
+<Figuras/diagramas/20-col-revisar-reporte.png, id=627, 893.3375pt x 740.7675pt>
+
 File: Figuras/diagramas/20-col-revisar-reporte.png Graphic file (type png)
 <use Figuras/diagramas/20-col-revisar-reporte.png>
 Package pdftex.def Info: Figuras/diagramas/20-col-revisar-reporte.png  used on 
-input line 100.
-(pdftex.def)             Requested size: 448.42822pt x 86.5501pt.
-) [32 <./Figuras/diagramas/18-col-crear-programacion.png (PNG copy)> <./Figuras
-/diagramas/19-col-registrar-desconsolidado.png (PNG copy)> <./Figuras/diagramas
-/20-col-revisar-reporte.png (PNG copy)>]
+input line 187.
+(pdftex.def)             Requested size: 259.6186pt x 215.2805pt.
+) [34 <./Figuras/diagramas/19-col-registrar-desconsolidado.png (PNG copy)> <./F
+iguras/diagramas/20-col-revisar-reporte.png (PNG copy)>]
 \openout2 = `Capitulos/08_clases_diseno.aux'.
 
-
-(./Capitulos/08_clases_diseno.tex
+ (./Capitulos/08_clases_diseno.tex
 Capítulo 8.
 
 Underfull \hbox (badness 6078) in paragraph at lines 14--17
@@ -1814,20 +1813,20 @@ Underfull \hbox (badness 6808) in paragraph at lines 17--21
 1/ptm/m/n/12 en-cap-su-lan los sis-te-mas ex-ter-nos; y
  []
 
-[33
+[35
 
 
 
 
 ]
-<Figuras/diagramas/21-diagrama-clases.png, id=626, 8338.15125pt x 2891.80376pt>
+<Figuras/diagramas/21-diagrama-clases.png, id=637, 8338.15125pt x 2891.80376pt>
 
 File: Figuras/diagramas/21-diagrama-clases.png Graphic file (type png)
 <use Figuras/diagramas/21-diagrama-clases.png>
 Package pdftex.def Info: Figuras/diagramas/21-diagrama-clases.png  used on inpu
 t line 44.
 (pdftex.def)             Requested size: 652.70622pt x 226.36287pt.
- [34
+ [36
 
  <./Figuras/diagramas/21-diagrama-clases.png (PNG copy)>])
 \openout2 = `Capitulos/09_diccionario_clases.aux'.
@@ -1835,26 +1834,26 @@ t line 44.
 
 (./Capitulos/09_diccionario_clases.tex
 Capítulo 9.
-[35
+[37
 
 
 
 
 
-] [36] [37] [38] [39] [40] [41] [42] [43] [44]) [45]
+] [38] [39] [40] [41] [42] [43] [44] [45] [46]) [47]
 \openout2 = `Capitulos/10_conclusiones.aux'.
 
 
 (./Capitulos/10_conclusiones.tex
 Capítulo 10.
-) [46
+) [48
 
 
 
 
 ]
 Capítulo 11.
-[47
+[49
 
 
 
@@ -1874,27 +1873,28 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 9AB33CF6667F1C10E4C468B08A1612F8;9374.
+(rerunfilecheck)             Checksum: 6E947777712030BC4ABA53EA3E8C7558;9271.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 45098 strings out of 476047
- 897159 string characters out of 5792075
- 2000317 words of memory out of 5000000
- 66142 multiletter control sequences out of 15000+600000
+ 45104 strings out of 476047
+ 897228 string characters out of 5792075
+ 2000394 words of memory out of 5000000
+ 66145 multiletter control sequences out of 15000+600000
  621866 words of font info for 87 fonts, out of 8000000 for 9000
  85 hyphenation exceptions out of 8191
  125i,12n,131p,2341b,2895s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/urw/times/utmri8a.pfb>
-Output written on main.pdf (54 pages, 3963607 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
+times/utmri8a.pfb>
+Output written on main.pdf (56 pages, 2681571 bytes).
 PDF statistics:
- 755 PDF objects out of 1000 (max. 8388607)
- 639 compressed objects within 7 object streams
- 170 named destinations out of 1000 (max. 500000)
+ 771 PDF objects out of 1000 (max. 8388607)
+ 651 compressed objects within 7 object streams
+ 173 named destinations out of 1000 (max. 500000)
  662 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -208,7 +208,7 @@ A3. En el paso 5 se deja vacío un campo obligatorio. & El sistema indica el cam
 \midrule
 \textbf{Acción del actor} & \textbf{Respuesta del sistema} \\
 \midrule
-1. El Jefe de faena selecciona «Importar manifiesto» e ingresa nave, viaje y fecha (\textit{Cargar archivo de manifiesto}). & 2. El sistema solicita el archivo del manifiesto al \este{web service} del Servicio Nacional de Aduanas. \\
+1. El Jefe de faena selecciona «Importar manifiesto» e ingresa la nave y el viaje (\textit{Cargar archivo de manifiesto}). & 2. El sistema solicita el archivo XML del manifiesto al \este{web service} del Servicio Nacional de Aduanas. \\
 \midrule
 3. El Servicio Nacional de Aduanas entrega el manifiesto en formato XML. & 4. El sistema valida que la estructura y los datos del XML cumplan el esquema esperado (\textit{Validar estructura y datos}). \\
 \midrule
@@ -259,13 +259,13 @@ A5. En el paso 2 el manifiesto ya había sido importado. & El sistema informa la
 \midrule
 1. El Jefe de faena selecciona «Programaciones» y presiona «Crear programación». & 2. El sistema muestra los contenedores importados que no tienen programación, con su fecha de arribo y su contenido declarado. \\
 \midrule
-3. El Jefe de faena selecciona un contenedor e ingresa la fecha y la franja horaria. & 4. El sistema verifica que la franja no se cruce con otra programación. \\
+3. El Jefe de faena selecciona un contenedor e ingresa la fecha y la hora (franja horaria). & 4. El sistema verifica la disponibilidad del horario, es decir, que la franja no se cruce con otra programación. \\
 \midrule
- & 5. El sistema crea la programación en estado \estado{PROGRAMADA} y muestra las cuadrillas disponibles en esa franja. \\
+ & 5. El sistema muestra las cuadrillas y los jefes tarjadores disponibles en esa franja. \\
 \midrule
-6. El Jefe de faena selecciona una cuadrilla y designa al jefe tarjador. & 7. El sistema verifica que la cuadrilla esté disponible y que el jefe tarjador esté habilitado. \\
+6. El Jefe de faena asigna una cuadrilla y un jefe tarjador. & 7. El sistema verifica la disponibilidad del personal: que la cuadrilla esté disponible y que el jefe tarjador esté habilitado. \\
 \midrule
- & 8. El sistema asocia la cuadrilla y el jefe tarjador a la programación, la publica en la aplicación móvil de este último y confirma el registro. \\
+ & 8. El sistema guarda la programación en estado \estado{PROGRAMADA} con su cuadrilla y jefe tarjador, la publica en la aplicación móvil de este último y confirma el registro. \\
 \midrule
 \multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Cursos alternos}} \\
 \midrule
@@ -273,11 +273,11 @@ A5. En el paso 2 el manifiesto ya había sido importado. & El sistema informa la
 \midrule
 A1. En el paso 2 no existen contenedores sin programar. & El sistema informa que no hay contenedores pendientes y sugiere importar un manifiesto. \\
 \midrule
-A2. En el paso 4 la franja se cruza con otra programación. & El sistema informa el conflicto, no crea la programación y solicita elegir otra franja. \\
+A2. En el paso 4 la franja se cruza con otra programación. & El sistema alerta la indisponibilidad, no crea la programación y solicita elegir otra franja. \\
 \midrule
-A3. En el paso 5 no hay cuadrillas disponibles. & El sistema mantiene la programación sin cuadrilla y la marca como pendiente de asignación. \\
+A3. En el paso 5 no hay cuadrillas disponibles en la franja. & El sistema alerta la indisponibilidad del personal y no guarda la programación; el Jefe de faena puede elegir otra franja. \\
 \midrule
-A4. En el paso 7 el jefe tarjador designado no está habilitado o ya tiene otra faena en esa franja. & El sistema rechaza la designación y solicita seleccionar a otro trabajador. \\
+A4. En el paso 7 el jefe tarjador designado no está habilitado o ya tiene otra faena en esa franja. & El sistema alerta la indisponibilidad, no guarda la programación y solicita seleccionar a otro trabajador. \\
 \midrule
 A5. En el paso 8 el dispositivo del jefe tarjador no tiene conexión. & El sistema conserva la programación y esta se descarga en el dispositivo cuando este se conecta. \\
 \bottomrule
@@ -306,15 +306,15 @@ A5. En el paso 8 el dispositivo del jefe tarjador no tiene conexión. & El siste
 \midrule
 \textbf{Acción del actor} & \textbf{Respuesta del sistema} \\
 \midrule
-1. El Jefe tarjador inicia sesión en la aplicación móvil y selecciona la operación que le fue asignada, pudiendo buscarla o filtrarla (\textit{Selección operación asignada}). & 2. El sistema carga los datos del contenedor y de sus líneas de carga declaradas, e inicia la operación en estado \estado{EN\_EJECUCION}. \\
+1. El Jefe tarjador inicia sesión en la aplicación móvil y selecciona la operación que le fue asignada, pudiendo buscarla o filtrarla (\textit{Selección operación asignada}). & 2. El sistema inicia la faena: carga los datos del contenedor y de sus líneas de carga declaradas y deja la operación en estado \estado{EN\_EJECUCION}. \\
 \midrule
-3. El Jefe tarjador fotografía las puertas, el candado y el sello, y digita el número del sello (\textit{Capturar evidencia fotográfica}). & 4. El sistema comprime la fotografía, le registra fecha, hora y geoposición, la envía al almacenamiento y compara el número digitado con el sello declarado. \\
+3. El Jefe tarjador fotografía las puertas, el candado y el sello, y digita el número del sello (\textit{Capturar evidencia fotográfica}). & 4. El sistema comprime la fotografía, le registra fecha, hora y geoposición, la guarda en la base de datos local del dispositivo y compara el número digitado con el sello declarado. \\
 \midrule
-5. El Jefe tarjador abre el contenedor y fotografía la carga sin alterar. & 6. El sistema registra y envía la fotografía, y habilita el registro de lotes. \\
+5. El Jefe tarjador abre el contenedor y fotografía la carga sin alterar. & 6. El sistema guarda la fotografía en la base de datos local y habilita el registro de lotes. \\
 \midrule
-7. Por cada lote separado, el Jefe tarjador selecciona la línea de carga correspondiente al cliente, ingresa la cantidad recibida y fotografía el lote. & 8. El sistema contrasta la cantidad recibida con la declarada, registra la fotografía y confirma el lote. \\
+7. Por cada lote separado, el Jefe tarjador selecciona la línea de carga correspondiente al cliente, ingresa la cantidad recibida y fotografía el lote. & 8. El sistema contrasta la cantidad recibida con la declarada, guarda el lote y su fotografía en la base de datos local y confirma el lote. \\
 \midrule
-9. El Jefe tarjador fotografía el contenedor vacío y presiona «Cerrar faena». & 10. El sistema verifica que exista la evidencia obligatoria, sincroniza los datos pendientes, cambia la operación a \estado{FINALIZADA} y genera el borrador del reporte. \\
+9. El Jefe tarjador fotografía el contenedor vacío y presiona «Cerrar faena». & 10. El sistema verifica que exista la evidencia obligatoria, sincroniza los datos con el servidor, cambia la operación a \estado{FINALIZADA}, genera el borrador del reporte y confirma el cierre de la faena. \\
 \midrule
 \multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Cursos alternos}} \\
 \midrule
@@ -322,11 +322,11 @@ A5. En el paso 8 el dispositivo del jefe tarjador no tiene conexión. & El siste
 \midrule
 A1. En el paso 4 el sello no coincide con el declarado o está roto. & El sistema exige registrar una incidencia de sello alterado, con fotografías, antes de permitir la apertura (\textit{Registrar incidencias}). \\
 \midrule
-A2. En el paso 8 la cantidad recibida difiere de la declarada, o el lote tiene daño visible. & El sistema solicita registrar una incidencia (faltante, sobrante o daño) con fotografías exclusivas del problema (\textit{Registrar incidencias}) y luego permite continuar con el siguiente lote. \\
+A2. En el paso 8 la cantidad recibida difiere de la declarada, o el lote tiene daño visible. & El sistema solicita registrar una incidencia (faltante, sobrante o daño) con fotografías exclusivas del problema (\textit{Registrar incidencias}), la guarda en la base de datos local y luego permite continuar con el siguiente lote. \\
 \midrule
 A3. En los pasos 3, 5, 7 o 9 la fotografía no se puede tomar o está defectuosa. & El sistema no permite avanzar hasta capturar una fotografía válida. \\
 \midrule
-A4. En cualquier paso el dispositivo no tiene conexión. & El sistema guarda los datos en el dispositivo, encola las fotografías y las envía automáticamente cuando recupera la señal; el operario continúa trabajando. \\
+A4. En cualquier paso el dispositivo no tiene conexión. & El sistema sigue guardando los datos y las fotografías en la base de datos local y los sincroniza con el servidor cuando recupera la señal; el operario continúa trabajando. \\
 \midrule
 A5. En el paso 2 la operación no tiene carga declarada (no se importó el manifiesto). & El sistema inicia la operación en modalidad tarja ciega: el Jefe tarjador ingresa manualmente cada lote (descripción, cantidad, tipo de bulto y cliente) y no se realiza el contraste de cantidades. \\
 \midrule
@@ -345,13 +345,13 @@ A6. En el paso 9 existe una línea de carga declarada sin lote registrado. & El 
 \midrule
 \textbf{Actores} & Supervisor del reporte \\
 \midrule
-\textbf{Propósito} & Verificar los datos y la evidencia del reporte generado en terreno y aprobarlo, o rechazarlo y solicitar la corrección de la evidencia defectuosa. \\
+\textbf{Propósito} & Verificar los datos y la evidencia del reporte generado en terreno y aprobarlo para que sea enviado al cliente, o rechazarlo y solicitar la corrección de la evidencia defectuosa. \\
 \midrule
 \textbf{Tipo} & Principal \\
 \midrule
-\textbf{Descripción} & El Supervisor revisa los datos registrados y la evidencia fotográfica del reporte de una operación finalizada. Si la información es consistente lo aprueba, quedando disponible para su envío al cliente; si detecta evidencia defectuosa, la marca y rechaza el reporte, registrando una observación y solicitando su corrección al Jefe tarjador. \\
+\textbf{Descripción} & El Supervisor revisa los datos registrados y la evidencia fotográfica del reporte de una operación finalizada. Si la información es consistente lo aprueba y el sistema envía automáticamente el PDF al cliente por correo electrónico; si detecta evidencia defectuosa, la marca y rechaza el reporte, registrando una observación y solicitando su corrección al Jefe tarjador. \\
 \midrule
-\textbf{Referencias cruzadas} & Pertenece al caso de uso de alto nivel \textit{Aprobar reporte} (Figura~\ref{fig:cu_aprobar}). Incluye \textit{Revisar datos registrados} y \textit{Revisar evidencia fotográfica} (extendida por \textit{Marcar evidencia defectuosa}); se extiende con \textit{Aprobar reporte} y \textit{Rechazar reporte}, que incluye \textit{Solicitar corrección de evidencia} y \textit{Registrar observación}. Depende del cierre de la operación en \textit{Registrar datos de operación}; el envío al cliente se realiza en \textit{Enviar PDF}. \\
+\textbf{Referencias cruzadas} & Pertenece al caso de uso de alto nivel \textit{Aprobar reporte} (Figura~\ref{fig:cu_aprobar}). Incluye \textit{Revisar datos registrados} y \textit{Revisar evidencia fotográfica} (extendida por \textit{Marcar evidencia defectuosa}); se extiende con \textit{Aprobar reporte} y \textit{Rechazar reporte}, que incluye \textit{Solicitar corrección de evidencia} y \textit{Registrar observación}. Depende del cierre de la operación en \textit{Registrar datos de operación}. El envío al cliente es automático al aprobar; el reenvío manual se realiza en \textit{Enviar PDF}. \\
 \midrule
 \multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Curso normal de los eventos}} \\
 \midrule
@@ -359,17 +359,25 @@ A6. En el paso 9 existe una línea de carga declarada sin lote registrado. & El 
 \midrule
 1. El Supervisor accede a la bandeja de reportes pendientes. & 2. El sistema lista los reportes en estado \estado{BORRADOR} con su folio, operación y fecha. \\
 \midrule
-3. El Supervisor selecciona un reporte. & 4. El sistema muestra el reporte con los datos de la faena y las fotografías ordenadas por etapa y cliente. \\
+3. El Supervisor selecciona un reporte para revisarlo. & 4. El sistema muestra el reporte con los datos de la faena y las fotografías ordenadas por etapa y cliente. \\
 \midrule
-5. El Supervisor revisa los datos registrados y la evidencia fotográfica, y presiona «Aprobar» (\textit{Aprobar reporte}). & 6. El sistema registra al aprobador y la fecha, cambia el estado del reporte a \estado{APROBADO} y lo deja disponible para su envío al cliente. \\
+5. El Supervisor revisa los datos registrados y la evidencia fotográfica, y presiona «Aprobar» (\textit{Aprobar reporte}). & 6. El sistema registra al aprobador y la fecha y cambia el estado del reporte a \estado{APROBADO}. \\
+\midrule
+ & 7. El sistema obtiene los correos del cliente y le envía el reporte en PDF mediante el servidor de correo. \\
+\midrule
+ & 8. El sistema registra el envío e informa al Supervisor que el reporte fue enviado exitosamente. \\
 \midrule
 \multicolumn{2}{c}{\cellcolor{filacabecera}\textbf{Cursos alternos}} \\
 \midrule
 \textbf{Situación} & \textbf{Respuesta del sistema} \\
 \midrule
-A1. En el paso 5 el Supervisor marca una fotografía como defectuosa y rechaza el reporte registrando una observación con el motivo (\textit{Rechazar reporte}). & El sistema marca la fotografía como rechazada, guarda el motivo, cambia el reporte a \estado{EN\_CORRECCION} y solicita al Jefe tarjador la corrección de la evidencia. Al recibir la fotografía de reemplazo, el sistema genera una nueva versión del reporte que vuelve a revisión. \\
+A1. En el paso 5 el Supervisor marca una fotografía como defectuosa y rechaza el reporte registrando una observación con el motivo (\textit{Rechazar reporte}). & El sistema marca la fotografía como rechazada, guarda el motivo, cambia el reporte a \estado{EN\_CORRECCION} y notifica a terreno (Jefe tarjador) la solicitud de recaptura. Al recibir la fotografía de reemplazo, el sistema genera una nueva versión del reporte que vuelve a revisión. \\
 \midrule
 A2. En el paso 5 falta evidencia obligatoria en el reporte. & El sistema impide la aprobación e indica qué etapa carece de fotografías. \\
+\midrule
+A3. En el paso 7 el cliente no tiene correo registrado. & El sistema mantiene el reporte aprobado, informa que no fue posible enviarlo y solicita completar la ficha del cliente. \\
+\midrule
+A4. En el paso 7 el servidor de correo rechaza el envío. & El sistema registra el envío como fallido e informa al Supervisor; el reporte puede reenviarse desde \textit{Enviar PDF}. \\
 \bottomrule
 \end{longtable}
 }
@@ -384,11 +392,11 @@ A2. En el paso 5 falta evidencia obligatoria en el reporte. & El sistema impide 
 \midrule
 \textbf{Actores} & Jefe de faena \\
 \midrule
-\textbf{Propósito} & Hacer llegar al cliente, por correo electrónico, el reporte PDF aprobado de una operación. \\
+\textbf{Propósito} & Reenviar al cliente, por correo electrónico, el reporte PDF aprobado de una operación. \\
 \midrule
 \textbf{Tipo} & Extensión \\
 \midrule
-\textbf{Descripción} & Una vez localizada una operación finalizada cuyo reporte fue aprobado, el Jefe de faena lo envía a los correos registrados del cliente y el sistema deja constancia del resultado del envío. \\
+\textbf{Descripción} & Al aprobarse un reporte, el sistema lo envía automáticamente al cliente (\textit{Validar reporte}). Además, una vez localizada una operación finalizada cuyo reporte fue aprobado, el Jefe de faena puede enviarlo nuevamente a los correos registrados del cliente, por ejemplo si el envío automático falló o el cliente lo solicita, y el sistema deja constancia del resultado del envío. \\
 \midrule
 \textbf{Referencias cruzadas} & Extiende el caso de uso \textit{Consultar operación} del caso de uso de alto nivel \textit{Gestionar operaciones} (Figura~\ref{fig:cu_operaciones}). Requiere que el reporte haya sido aprobado en \textit{Validar reporte} y que el cliente tenga su contacto registrado en \textit{Gestionar clientes}. \\
 \midrule

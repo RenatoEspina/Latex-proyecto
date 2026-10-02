@@ -6,8 +6,13 @@ skinparam responseMessageBelowArrow true
 skinparam ParticipantPadding 12
 skinparam BoxPadding 10
 skinparam rectangle {
-  BackgroundColor #F1F1F1
-  BorderColor #181818
+  BackgroundColor #ECECFF
+  BorderColor #9370DB
 }
+skinparam actor {
+  BackgroundColor #ECECFF
+  BorderColor #9370DB
+}
+skinparam ArrowColor #333333
 skinparam actorStyle stick
 hide footbox

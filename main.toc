@@ -15,37 +15,37 @@
 \contentsline {subsection}{\numberline {6.1.2}Diagramas de caso de uso expandidos}{10}{subsection.6.1.2}%
 \contentsline {section}{\numberline {6.2}Diagramas de caso de uso narrativos}{17}{section.6.2}%
 \contentsline {chapter}{\numberline {7}Diagramas de secuencia y colaboración}{27}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Diagramas de secuencia}{27}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}Importar manifiesto}{27}{subsection.7.1.1}%
-\contentsline {subsection}{\numberline {7.1.2}Crear programación}{28}{subsection.7.1.2}%
-\contentsline {subsection}{\numberline {7.1.3}Registrar datos de operación}{29}{subsection.7.1.3}%
-\contentsline {subsection}{\numberline {7.1.4}Validar reporte y enviar PDF}{30}{subsection.7.1.4}%
-\contentsline {section}{\numberline {7.2}Diagramas de colaboración}{31}{section.7.2}%
-\contentsline {chapter}{\numberline {8}Diagrama de clases}{33}{chapter.8}%
-\contentsline {chapter}{\numberline {9}Diccionario de clases}{35}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Clase: Usuario}{35}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Clase: Rol}{35}{section.9.2}%
-\contentsline {section}{\numberline {9.3}Clase: Permiso}{36}{section.9.3}%
-\contentsline {section}{\numberline {9.4}Clase: Cliente}{36}{section.9.4}%
-\contentsline {section}{\numberline {9.5}Clase: Trabajador}{36}{section.9.5}%
-\contentsline {section}{\numberline {9.6}Clase: Cuadrilla}{37}{section.9.6}%
-\contentsline {section}{\numberline {9.7}Clase: TipoBulto}{37}{section.9.7}%
-\contentsline {section}{\numberline {9.8}Clase: Manifiesto}{37}{section.9.8}%
-\contentsline {section}{\numberline {9.9}Clase: Contenedor}{38}{section.9.9}%
-\contentsline {section}{\numberline {9.10}Clase: LineaCarga}{38}{section.9.10}%
-\contentsline {section}{\numberline {9.11}Clase: Programacion}{39}{section.9.11}%
-\contentsline {section}{\numberline {9.12}Clase: Operacion}{39}{section.9.12}%
-\contentsline {section}{\numberline {9.13}Clase: SelloSeguridad}{40}{section.9.13}%
-\contentsline {section}{\numberline {9.14}Clase: Incidencia}{40}{section.9.14}%
-\contentsline {section}{\numberline {9.15}Clase: Fotografia}{41}{section.9.15}%
-\contentsline {section}{\numberline {9.16}Clase: Reporte}{41}{section.9.16}%
-\contentsline {section}{\numberline {9.17}Clase: GestorManifiesto}{42}{section.9.17}%
-\contentsline {section}{\numberline {9.18}Clase: GestorProgramacion}{42}{section.9.18}%
-\contentsline {section}{\numberline {9.19}Clase: GestorOperacion}{42}{section.9.19}%
-\contentsline {section}{\numberline {9.20}Clase: GestorReportes}{43}{section.9.20}%
-\contentsline {section}{\numberline {9.21}Clase: ServicioAduana}{43}{section.9.21}%
-\contentsline {section}{\numberline {9.22}Clase: ServicioCorreo}{44}{section.9.22}%
-\contentsline {section}{\numberline {9.23}Clase: SincronizadorOffline}{44}{section.9.23}%
-\contentsline {section}{\numberline {9.24}Tipos enumerados}{44}{section.9.24}%
-\contentsline {chapter}{\numberline {10}Conclusiones}{46}{chapter.10}%
-\contentsline {chapter}{\numberline {11}Referencias bibliográficas}{47}{chapter.11}%
+\contentsline {section}{\numberline {7.1}Diagramas de secuencia}{28}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Importar manifiesto}{28}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Crear programación}{29}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}Registrar desconsolidado}{30}{subsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.1.4}Revisar reporte}{31}{subsection.7.1.4}%
+\contentsline {section}{\numberline {7.2}Diagramas de colaboración}{32}{section.7.2}%
+\contentsline {chapter}{\numberline {8}Diagrama de clases}{35}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Diccionario de clases}{37}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Clase: Usuario}{37}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Clase: Rol}{37}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Clase: Permiso}{38}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Clase: Cliente}{38}{section.9.4}%
+\contentsline {section}{\numberline {9.5}Clase: Trabajador}{38}{section.9.5}%
+\contentsline {section}{\numberline {9.6}Clase: Cuadrilla}{39}{section.9.6}%
+\contentsline {section}{\numberline {9.7}Clase: TipoBulto}{39}{section.9.7}%
+\contentsline {section}{\numberline {9.8}Clase: Manifiesto}{39}{section.9.8}%
+\contentsline {section}{\numberline {9.9}Clase: Contenedor}{40}{section.9.9}%
+\contentsline {section}{\numberline {9.10}Clase: LineaCarga}{40}{section.9.10}%
+\contentsline {section}{\numberline {9.11}Clase: Programacion}{41}{section.9.11}%
+\contentsline {section}{\numberline {9.12}Clase: Operacion}{41}{section.9.12}%
+\contentsline {section}{\numberline {9.13}Clase: SelloSeguridad}{42}{section.9.13}%
+\contentsline {section}{\numberline {9.14}Clase: Incidencia}{42}{section.9.14}%
+\contentsline {section}{\numberline {9.15}Clase: Fotografia}{43}{section.9.15}%
+\contentsline {section}{\numberline {9.16}Clase: Reporte}{43}{section.9.16}%
+\contentsline {section}{\numberline {9.17}Clase: GestorManifiesto}{44}{section.9.17}%
+\contentsline {section}{\numberline {9.18}Clase: GestorProgramacion}{44}{section.9.18}%
+\contentsline {section}{\numberline {9.19}Clase: GestorOperacion}{44}{section.9.19}%
+\contentsline {section}{\numberline {9.20}Clase: GestorReportes}{45}{section.9.20}%
+\contentsline {section}{\numberline {9.21}Clase: ServicioAduana}{45}{section.9.21}%
+\contentsline {section}{\numberline {9.22}Clase: ServicioCorreo}{46}{section.9.22}%
+\contentsline {section}{\numberline {9.23}Clase: SincronizadorOffline}{46}{section.9.23}%
+\contentsline {section}{\numberline {9.24}Tipos enumerados}{46}{section.9.24}%
+\contentsline {chapter}{\numberline {10}Conclusiones}{48}{chapter.10}%
+\contentsline {chapter}{\numberline {11}Referencias bibliográficas}{49}{chapter.11}%
