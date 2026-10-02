@@ -31,7 +31,7 @@ Revisión cruzada de los 11 diagramas de casos de uso (draw.io), el diagrama de 
 | Diagrama de CU | Problema |
 |---|---|
 | Fig. 2 Gestionar usuarios | «Editar Usuario» y «Modificar Usuario» son el mismo caso. En los demás CRUD es «Modificar **Estado** X». |
-| Fig. 4 Gestionar tipos de bulto | **Falta el diagrama.** En el PDF aparece como «[Diagrama pendiente]». |
+| Fig. 4 Gestionar tipos de bultos | «Asignar Características de Bulto» (include de Crear tipo bulto) no tiene atributo ni operación en `TipoBulto`, que solo tiene `nombre`, `codigo` y `activo`. Además, el título dice «Tipos de Bultos» y el de alto nivel (Fig. 1), «Tipos de Bulto». |
 | Fig. 5 Gestionar clientes | «Registrar Contacto Cliente» no tiene clase ni operación. `Cliente` solo tiene un `email` (y `obtenerDestinatarios(): String[]` devuelve varios). |
 | Fig. 6 Gestionar trabajadores | «Asignar Cuadrilla» (include de Crear trabajador) tiene el mismo nombre que `GestorProgramacion.asignarCuadrilla`, que asigna una cuadrilla a una **programación**. Para trabajadores corresponde `Cuadrilla.agregarTrabajador`. Además, ningún caso de uso crea o mantiene `Cuadrilla`. |
 | Fig. 7 Importar manifiesto | «**Cargar archivo** de manifiesto» sugiere que el usuario sube un archivo, pero el diseño lo **descarga** del web service (`importarManifiesto(nave, viaje, fecha)` → `ServicioAduana.descargarXML`). «Notificar resultado de importación» hacia Aduanas y «Generar reporte de errores» no tienen operación en ninguna clase. |
