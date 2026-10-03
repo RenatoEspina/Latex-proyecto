@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.3)  3 OCT 2026 02:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.3)  3 OCT 2026 02:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1799,26 +1799,26 @@ gramas/20-col-validar-reporte.png>]
  (./Capitulos/08_clases_diseno.tex
 CapÃ­tulo 8.
 
-Underfull \hbox (badness 6078) in paragraph at lines 16--19
+Underfull \hbox (badness 6078) in paragraph at lines 17--20
 []\T1/ptm/b/n/12 Carga y ope-ra-ción en te-rreno: \T1/pcr/m/n/12 Manifiesto\T1/
 ptm/m/n/12 , \T1/pcr/m/n/12 Contenedor\T1/ptm/m/n/12 , \T1/pcr/m/n/12 LineaCarg
 a\T1/ptm/m/n/12 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 19--23
+Underfull \hbox (badness 10000) in paragraph at lines 20--24
 []\T1/ptm/b/n/12 Controladores y ser-vi-cios: \T1/pcr/m/n/12 GestorManifiesto\T
 1/ptm/m/n/12 , \T1/pcr/m/n/12 GestorProgramacion\T1/ptm/m/n/12 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 19--23
+Underfull \hbox (badness 10000) in paragraph at lines 20--24
 \T1/pcr/m/n/12 GestorOperacion \T1/ptm/m/n/12 y \T1/pcr/m/n/12 GestorReportes \
 T1/ptm/m/n/12 coor-di-nan los ca-sos de uso;
  []
 
 
-Underfull \hbox (badness 6808) in paragraph at lines 19--23
+Underfull \hbox (badness 6808) in paragraph at lines 20--24
 \T1/pcr/m/n/12 ServicioAduana \T1/ptm/m/n/12 y \T1/pcr/m/n/12 ServicioCorreo \T
 1/ptm/m/n/12 en-cap-su-lan los sis-te-mas ex-ter-nos; y
  []
@@ -1829,15 +1829,15 @@ Underfull \hbox (badness 6808) in paragraph at lines 19--23
 
 
 ]
-<Figuras/diagramas/21-diagrama-clases.png, id=648, 8363.245pt x 3251.14626pt>
+<Figuras/diagramas/21-diagrama-clases.png, id=648, 7299.27pt x 3139.73pt>
 File: Figuras/diagramas/21-diagrama-clases.png Graphic file (type png)
 <use Figuras/diagramas/21-diagrama-clases.png>
 Package pdftex.def Info: Figuras/diagramas/21-diagrama-clases.png  used on inpu
-t line 50.
-(pdftex.def)             Requested size: 652.70622pt x 253.69753pt.
+t line 53.
+(pdftex.def)             Requested size: 652.70622pt x 280.743pt.
  [38
 
- <./Figuras/diagramas/21-diagrama-clases.png>])
+ <./Figuras/diagramas/21-diagrama-clases.png (PNG copy)>])
 \openout2 = `Capitulos/09_diccionario_clases.aux'.
 
 
@@ -1900,9 +1900,9 @@ r/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
 times/utmri8a.pfb>
-Output written on main.pdf (58 pages, 3444059 bytes).
+Output written on main.pdf (58 pages, 4278062 bytes).
 PDF statistics:
- 782 PDF objects out of 1000 (max. 8388607)
+ 781 PDF objects out of 1000 (max. 8388607)
  654 compressed objects within 7 object streams
  174 named destinations out of 1000 (max. 500000)
  667 words of extra memory for PDF output out of 10000 (max. 10000000)

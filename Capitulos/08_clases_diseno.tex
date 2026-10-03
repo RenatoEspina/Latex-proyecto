@@ -4,7 +4,8 @@
 \sloppy
 
 El diagrama de clases (Figura~\ref{fig:clases}) es una propuesta de diseño inferida a partir de la
-funcionalidad observada. Se organiza en tres grupos:
+funcionalidad observada. Se organiza en tres grupos, que en la figura se distinguen por color
+(ver la leyenda):
 
 \begin{itemize}
     \item \textbf{Datos maestros y seguridad:} \clase{Usuario}, \clase{Rol}, \clase{Permiso},
@@ -33,7 +34,9 @@ se asocian a la línea de carga afectada, salvo la de sello alterado; el sincron
 fotografías pendientes de envío; y un reporte se genera a partir de una operación y, una vez aprobado, queda asociado al usuario
 que lo aprobó. Las dependencias (líneas punteadas) indican qué clases utiliza cada controlador en
 los diagramas de secuencia, y \clase{Imagen}, \clase{Filtro} y \clase{File} son tipos de apoyo que
-solo aparecen en las firmas de las operaciones. Las operaciones de crear, consultar, editar, eliminar y cambiar estado de los datos
+solo aparecen en las firmas de las operaciones. Los tipos enumerados se agrupan aparte y se
+relacionan con cada clase mediante el tipo de sus atributos (por ejemplo, \clase{estado: Estado}),
+por lo que no se dibujan flechas hacia ellos. Las operaciones de crear, consultar, editar, eliminar y cambiar estado de los datos
 maestros son las habituales de cada entidad y no se modelaron como controladores para no recargar
 el diagrama.
 

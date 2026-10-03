@@ -1,68 +1,63 @@
 @startuml
 hide empty members
-
-class Usuario {
- - idUsuario: int
- - nombre: String
- - email: String
- - passwordHash: String
- - activo: boolean
-
- + iniciarSesion(password: String): boolean
- + cerrarSesion(): void
- + cambiarPassword(nueva: String): void
- + tienePermiso(codigo: String): boolean
+skinparam shadowing false
+skinparam defaultFontName "DejaVu Sans"
+skinparam packageStyle rectangle
+skinparam nodesep 40
+skinparam ranksep 60
+skinparam class {
+  BackgroundColor #F7F7FF
+  BorderColor #9370DB
+  ArrowColor #333333
 }
-
-class Rol {
- - idRol: int
- - nombre: String
- - activo: boolean
- + agregarPermiso(p: Permiso): void
- + tienePermiso(codigo: String): boolean
+skinparam legendBackgroundColor #FFFFFF
+skinparam package {
+  BorderColor #9370DB
+  FontStyle bold
 }
-
-class Permiso {
- - idPermiso: int
- - codigo: String
- - descripcion: String
+class ServicioAduana #E4D9F7 {
+ - urlWebService: String
+ + descargarXML(nave: String, viaje: String, fecha: Date): String
+ + notificarResultadoImportacion(nave: String, viaje: String, exitoso: boolean): void
 }
-
-class Cliente {
- - idCliente: int
- - rut: String
- - razonSocial: String
- - email: String
- - activo: boolean
-
- + obtenerDestinatarios(): String[]
+class GestorManifiesto #E4D9F7 {
+ + importarManifiesto(nave: String, viaje: String, fecha: Date): Manifiesto
+ + generarReporteErrores(xml: String): File
 }
-
-class Trabajador {
- - idTrabajador: int
- - rut: String
- - nombre: String
- - cargo: String
- - habilitado: boolean
- + estaDisponible(fecha: Date, horaInicio: Time, horaTermino: Time): boolean
+class GestorProgramacion #E4D9F7 {
+ + listarContenedoresPendientes(): Contenedor[]
+ + crearProgramacion(idContenedor: int, fecha: Date, horaInicio: Time, horaTermino: Time): Programacion
+ + hayConflicto(fecha: Date, horaInicio: Time, horaTermino: Time): boolean
+ + asignarCuadrilla(idProgramacion: int, idCuadrilla: int, idJefeTarjador: int): void
+ + eliminarProgramacion(idProgramacion: int): void
 }
-
-class Cuadrilla {
- - idCuadrilla: int
- - nombre: String
-
- + agregarTrabajador(t: Trabajador): void
- + estaDisponible(fecha: Date, horaInicio: Time, horaTermino: Time): boolean
+class GestorOperacion #E4D9F7 {
+ + iniciarOperacion(idProgramacion: int): Operacion
+ + registrarSello(idOperacion: int, nroSello: String, imagen: Imagen): EstadoSello
+ + registrarLote(idOperacion: int, idLinea: int, cantidadRecibida: int, imagen: Imagen): int
+ + registrarIncidencia(idOperacion: int, idLinea: int, tipo: TipoIncidencia, cantidadAfectada: int, imagenes: Imagen[]): Incidencia
+ + cerrarOperacion(idOperacion: int, imagenVacio: Imagen): void
+ + buscarOperaciones(idCliente: int, filtros: Filtro): Operacion[]
 }
-
-class TipoBulto {
- - idTipoBulto: int
- - nombre: String
- - codigo: String
- - activo: boolean
+class SincronizadorOffline #E4D9F7 {
+ + encolar(f: Fotografia): void
+ + hayConectividad(): boolean
+ + sincronizarPendientes(): int
 }
-
-class Manifiesto {
+class GestorReportes #E4D9F7 {
+ + generarBorrador(idOperacion: int): Reporte
+ + abrirReporte(idReporte: int): Reporte
+ + aprobarReporte(idReporte: int, aprobador: Usuario): void
+ + rechazarFotografia(idReporte: int, idFoto: int, motivo: String): void
+ + enviarReporte(idReporte: int): boolean
+ + solicitarCorreccionEvidencia(idFoto: int, motivo: String): void
+}
+class ServicioCorreo #E4D9F7 {
+ - servidor: String
+ - puerto: int
+ + enviar(destinatarios: String[], asunto: String, adjunto: File): boolean
+}
+class Manifiesto #EAF1FB {
  - idManifiesto: int
  - numero: String
  - nave: String
@@ -71,8 +66,33 @@ class Manifiesto {
  + validarEsquema(xml: String): boolean
  + agregarContenedor(numero: String, tamano: String, nroSelloDeclarado: String, fechaArribo: Date): Contenedor
 }
-
-class Contenedor {
+class Programacion #EAF1FB {
+ - idProgramacion: int
+ - fecha: Date
+ - horaInicio: Time
+ - horaTermino: Time
+ - estado: Estado
+ + asignarCuadrilla(c: Cuadrilla, jefe: Trabajador): void
+ + reprogramar(fecha: Date, horaInicio: Time, horaTermino: Time): void
+ + anular(): void
+ + modificarEstado(e: Estado): void
+}
+class Reporte #EAF1FB {
+ - idReporte: int
+ - folio: String
+ - version: int
+ - estado: EstadoReporte
+ - fechaGeneracion: DateTime
+ - fechaAprobacion: DateTime
+ - estadoEnvio: EstadoEnvio
+ + generarPDF(): File
+ + aprobar(aprobador: Usuario): void
+ + pasarACorreccion(): void
+ + versionar(): void
+ + registrarEnvio(exitoso: boolean, destinatarios: String[]): void
+ + obtenerClientes(): Cliente[]
+}
+class Contenedor #EAF1FB {
  - idContenedor: int
  - numero: String
  - tamano: String
@@ -81,36 +101,12 @@ class Contenedor {
  + agregarLinea(descripcion: String, cantidadDeclarada: int, cliente: Cliente, tipo: TipoBulto): LineaCarga
  + totalBultosDeclarados(): int
 }
-
-class LineaCarga {
- - idLinea: int
- - descripcion: String
- - cantidadDeclarada: int
- - cantidadRecibida: int
- + contrastarCantidad(recibida: int): int
- + tieneDiferencia(): boolean
-}
-
-class Programacion {
- - idProgramacion: int
- - fecha: Date
- - horaInicio: Time
- - horaTermino: Time
- - estado: Estado
-
- + asignarCuadrilla(c: Cuadrilla, jefe: Trabajador): void
- + reprogramar(fecha: Date, horaInicio: Time, horaTermino: Time): void
- + anular(): void
- + modificarEstado(e: Estado): void
-}
-
-class Operacion {
+class Operacion #EAF1FB {
  - idOperacion: int
  - horaInicio: DateTime
  - horaFin: DateTime
  - estado: Estado
  - modalidadIngreso: OrigenDatos
-
  + iniciar(): void
  + cerrar(): void
  + obtenerEstado(): Estado
@@ -118,17 +114,22 @@ class Operacion {
  + agregarIncidencia(i: Incidencia): void
  + modificarEstado(e: Estado): void
 }
-
-class SelloSeguridad {
+class LineaCarga #EAF1FB {
+ - idLinea: int
+ - descripcion: String
+ - cantidadDeclarada: int
+ - cantidadRecibida: int
+ + contrastarCantidad(recibida: int): int
+ + tieneDiferencia(): boolean
+}
+class SelloSeguridad #EAF1FB {
  - idSello: int
  - numeroDigitado: String
  - estado: EstadoSello
  - fechaVerificacion: DateTime
-
  + verificar(declarado: String): EstadoSello
 }
-
-class Incidencia {
+class Incidencia #EAF1FB {
  - idIncidencia: int
  - tipo: TipoIncidencia
  - descripcion: String
@@ -136,8 +137,7 @@ class Incidencia {
  - fechaHora: DateTime
  + adjuntarFotografia(f: Fotografia): void
 }
-
-class Fotografia {
+class Fotografia #EAF1FB {
  - idFoto: int
  - uuid: String
  - fechaHoraCaptura: DateTime
@@ -150,178 +150,169 @@ class Fotografia {
  + marcarSubida(url: String): void
  + marcarRechazada(motivo: String): void
 }
-
-class Reporte {
- - idReporte: int
- - folio: String
- - version: int
- - estado: EstadoReporte
- - fechaGeneracion: DateTime
- - fechaAprobacion: DateTime
- - estadoEnvio: EstadoEnvio
-
- + generarPDF(): File
- + aprobar(aprobador: Usuario): void
- + pasarACorreccion(): void
- + versionar(): void
- + registrarEnvio(exitoso: boolean, destinatarios: String[]): void
- + obtenerClientes(): Cliente[]
+class TipoBulto #DDF0E0 {
+ - idTipoBulto: int
+ - nombre: String
+ - codigo: String
+ - activo: boolean
 }
-
-class GestorManifiesto {
- + importarManifiesto(nave: String, viaje: String, fecha: Date): Manifiesto
- + generarReporteErrores(xml: String): File
+class Cliente #DDF0E0 {
+ - idCliente: int
+ - rut: String
+ - razonSocial: String
+ - email: String
+ - activo: boolean
+ + obtenerDestinatarios(): String[]
 }
-
-class GestorProgramacion {
- + listarContenedoresPendientes(): Contenedor[]
- + crearProgramacion(idContenedor: int, fecha: Date, horaInicio: Time, horaTermino: Time): Programacion
- + hayConflicto(fecha: Date, horaInicio: Time, horaTermino: Time): boolean
- + asignarCuadrilla(idProgramacion: int, idCuadrilla: int, idJefeTarjador: int): void
- + eliminarProgramacion(idProgramacion: int): void
+class Usuario #DDF0E0 {
+ - idUsuario: int
+ - nombre: String
+ - email: String
+ - passwordHash: String
+ - activo: boolean
+ + iniciarSesion(password: String): boolean
+ + cerrarSesion(): void
+ + cambiarPassword(nueva: String): void
+ + tienePermiso(codigo: String): boolean
 }
-
-class GestorOperacion {
- + iniciarOperacion(idProgramacion: int): Operacion
- + registrarSello(idOperacion: int, nroSello: String, imagen: Imagen): EstadoSello
- + registrarLote(idOperacion: int, idLinea: int, cantidadRecibida: int, imagen: Imagen): int
- + registrarIncidencia(idOperacion: int, idLinea: int, tipo: TipoIncidencia, cantidadAfectada: int, imagenes: Imagen[]): Incidencia
- + cerrarOperacion(idOperacion: int, imagenVacio: Imagen): void
- + buscarOperaciones(idCliente: int, filtros: Filtro): Operacion[]
+class Rol #DDF0E0 {
+ - idRol: int
+ - nombre: String
+ - activo: boolean
+ + agregarPermiso(p: Permiso): void
+ + tienePermiso(codigo: String): boolean
 }
-
-class GestorReportes {
- + generarBorrador(idOperacion: int): Reporte
- + abrirReporte(idReporte: int): Reporte
- + aprobarReporte(idReporte: int, aprobador: Usuario): void
- + rechazarFotografia(idReporte: int, idFoto: int, motivo: String): void
- + enviarReporte(idReporte: int): boolean
- + solicitarCorreccionEvidencia(idFoto: int, motivo: String): void
+class Permiso #DDF0E0 {
+ - idPermiso: int
+ - codigo: String
+ - descripcion: String
 }
-
-class ServicioAduana {
- - urlWebService: String
- + descargarXML(nave: String, viaje: String, fecha: Date): String
- + notificarResultadoImportacion(nave: String, viaje: String, exitoso: boolean): void
+class Trabajador #DDF0E0 {
+ - idTrabajador: int
+ - rut: String
+ - nombre: String
+ - cargo: String
+ - habilitado: boolean
+ + estaDisponible(fecha: Date, horaInicio: Time, horaTermino: Time): boolean
 }
-
-class ServicioCorreo {
- - servidor: String
- - puerto: int
- + enviar(destinatarios: String[], asunto: String, adjunto: File): boolean
+class Cuadrilla #DDF0E0 {
+ - idCuadrilla: int
+ - nombre: String
+ + agregarTrabajador(t: Trabajador): void
+ + estaDisponible(fecha: Date, horaInicio: Time, horaTermino: Time): boolean
 }
-
-class SincronizadorOffline {
- + encolar(f: Fotografia): void
- + hayConectividad(): boolean
- + sincronizarPendientes(): int
-}
-
-enum Estado {
+enum Estado #FFF1CC {
  PROGRAMADA
  EN_EJECUCION
  FINALIZADA
  ANULADA
 }
-
-enum OrigenDatos {
+enum OrigenDatos #FFF1CC {
  MANIFIESTO_XML
  TARJA_CIEGA
 }
-
-enum EstadoSello {
+enum EstadoSello #FFF1CC {
  INTACTO
  ROTO
  NO_COINCIDE
 }
-
-enum TipoIncidencia {
+enum TipoIncidencia #FFF1CC {
  DANO
  FALTANTE
  SOBRANTE
  MAL_EMBALAJE
  SELLO_ALTERADO
 }
-
-enum EstadoFoto {
+enum EstadoFoto #FFF1CC {
  PENDIENTE
  SUBIDA
  RECHAZADA
  REEMPLAZADA
 }
-
-enum EstadoReporte {
+enum EstadoReporte #FFF1CC {
  BORRADOR
  EN_CORRECCION
  APROBADO
 }
-
-enum EstadoEnvio {
+enum EstadoEnvio #FFF1CC {
  PENDIENTE
  ENVIADO
  FALLIDO
 }
+class Imagen #ECECEC
+class Filtro #ECECEC
+class File #ECECEC
+' Controladores en la fila superior; cada servicio bajo el controlador que lo usa
+GestorManifiesto .down.> ServicioAduana
+GestorOperacion .down.> SincronizadorOffline
+GestorOperacion .right.> GestorReportes
+GestorReportes .down.> ServicioCorreo
 
-Reporte ..> File
-GestorManifiesto ..> File
-GestorOperacion ..> Imagen
-GestorOperacion ..> Filtro
+' Carga y operación en terreno
+Manifiesto *-down- "*" Contenedor
+Contenedor *-down- "*" LineaCarga
+Programacion -down-> "1" Contenedor
+Programacion "1" -down- "0..1" Operacion
+Reporte -down-> "1" Operacion
+Operacion *-down- "1" SelloSeguridad
+Operacion *-down- "*" Incidencia
+Operacion *-down- "*" Fotografia
+Incidencia o-down- "*" Fotografia
+Incidencia -down-> "0..1" LineaCarga
+SincronizadorOffline o-down- "*" Fotografia
 
-Usuario --> "1" Rol
-Usuario --> "0..1" Trabajador
-Usuario --> "0..1" Cliente
-Rol --> "*" Permiso
-Cuadrilla o-- "*" Trabajador
+' Datos maestros y seguridad
+LineaCarga -down-> "1" Cliente
+LineaCarga -down-> "1" TipoBulto
+Programacion -down-> "0..1" Cuadrilla
+Programacion -down-> "0..1" Trabajador
+Cuadrilla o-down- "*" Trabajador
+Reporte -down-> "0..1" Usuario : aprobadoPor
+Usuario -down-> "1" Rol
+Usuario -down-> "0..1" Trabajador
+Usuario -down-> "0..1" Cliente
+Rol -down-> "*" Permiso
 
-Manifiesto *-- "*" Contenedor
-Contenedor *-- "*" LineaCarga
-LineaCarga --> "1" Cliente
-LineaCarga --> "1" TipoBulto
+' Dependencias de los controladores
+GestorManifiesto .down.> Manifiesto
+GestorManifiesto .down.> Contenedor
+GestorManifiesto .down.> File
+GestorProgramacion .down.> Programacion
+GestorProgramacion .down.> Contenedor
+GestorProgramacion .down.> Cuadrilla
+GestorProgramacion .down.> Trabajador
+GestorOperacion .down.> Operacion
+GestorOperacion .down.> SelloSeguridad
+GestorOperacion .down.> LineaCarga
+GestorOperacion .down.> Incidencia
+GestorOperacion .down.> Fotografia
+GestorOperacion .down.> Imagen
+GestorOperacion .down.> Filtro
+GestorReportes .down.> Reporte
+GestorReportes .down.> Cliente
+GestorReportes .down.> Fotografia
+Reporte .down.> File
 
-Programacion --> "1" Contenedor
-Programacion "1" -- "0..1" Operacion
-Programacion --> "0..1" Cuadrilla
-Programacion --> "0..1" Trabajador
+' Orden de las filas (enlaces invisibles, solo para la disposición)
+GestorManifiesto -[hidden]right- GestorProgramacion
+GestorProgramacion -[hidden]right- GestorOperacion
+Manifiesto -[hidden]right- Programacion
+Programacion -[hidden]right- Reporte
+Contenedor -[hidden]down- Estado
+Estado -[hidden]right- OrigenDatos
+OrigenDatos -[hidden]right- EstadoSello
+EstadoSello -[hidden]right- TipoIncidencia
+Estado -[hidden]down- EstadoFoto
+EstadoFoto -[hidden]right- EstadoReporte
+EstadoReporte -[hidden]right- EstadoEnvio
 
-Operacion *-- "1" SelloSeguridad
-Operacion *-- "*" Fotografia
-Operacion *-- "*" Incidencia
-Incidencia o-- "*" Fotografia
-Incidencia --> "0..1" LineaCarga
+legend right
+  <b>Grupos de clases</b>
+  |<#E4D9F7> Controladores y servicios |
+  |<#EAF1FB> Carga y operación en terreno |
+  |<#DDF0E0> Datos maestros y seguridad |
+  |<#FFF1CC> Tipos enumerados |
+  |<#ECECEC> Tipos de apoyo |
+endlegend
 
-Reporte --> "1" Operacion
-Reporte --> "0..1" Usuario : aprobadoPor
-SincronizadorOffline o-- "*" Fotografia
-
-GestorManifiesto ..> ServicioAduana
-GestorReportes ..> ServicioCorreo
-
-GestorManifiesto ..> Manifiesto
-GestorManifiesto ..> Contenedor
-
-GestorProgramacion ..> Programacion
-GestorProgramacion ..> Contenedor
-GestorProgramacion ..> Cuadrilla
-GestorProgramacion ..> Trabajador
-
-GestorOperacion ..> Operacion
-GestorOperacion ..> SincronizadorOffline
-GestorOperacion ..> GestorReportes
-GestorOperacion ..> SelloSeguridad
-GestorOperacion ..> LineaCarga
-GestorOperacion ..> Incidencia
-GestorOperacion ..> Fotografia
-
-GestorReportes ..> Reporte
-GestorReportes ..> Cliente
-GestorReportes ..> Fotografia
-
-Programacion --> Estado
-Operacion --> Estado
-Operacion --> OrigenDatos
-SelloSeguridad --> EstadoSello
-Incidencia --> TipoIncidencia
-Fotografia --> EstadoFoto
-Reporte --> EstadoReporte
-Reporte --> EstadoEnvio
 @enduml
