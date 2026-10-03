@@ -10,14 +10,14 @@ rectangle ":Fotografia" as F
 rectangle ":SincronizadorOffline" as SO
 rectangle ":GestorReportes" as GR
 
-JT -- GO : "1: iniciarOperacion(idProgramacion) ↓\n↑ o : Operacion (estado EN_EJECUCION)\n2: registrarSello(idOperacion, nroSello, imagen) ↓\n↑ estadoSello : EstadoSello\n3*[por cada lote separado por cliente]:\nregistrarLote(idOperacion, idLinea,\ncantidadRecibida, imagen) ↓\n↑ diferencia : int\n4 [diferencia != 0 o daño visible]:\nregistrarIncidencia(idOperacion, idLinea,\ntipo, cantidadAfectada, imagenes) ↓\n↑ i : Incidencia\n5: cerrarOperacion(idOperacion, imagenVacio) ↓\n↑ faena cerrada (estado FINALIZADA)"
-GO -- O : "1.1: <<create>> ↓\n1.2: iniciar() ↓\n2.2, 3.3, 5.2: agregarFotografia(f) ↓\n4.2: agregarIncidencia(i) ↓\n4.5*: agregarFotografia(f) ↓\n5.4: cerrar() ↓"
-GO -- S : "2.4: <<create>>(nroSello) ↓\n2.5: verificar(declarado) ↓\n↑ estadoSello : EstadoSello"
-GO -- L : "3.1: contrastarCantidad(cantidadRecibida) ↓\n↑ diferencia : int"
-GO -- I : "4.1: <<create>>(tipo, cantidadAfectada, l) ↓\n4.4*: adjuntarFotografia(f) ↓"
-GO -up- F : "2.1, 3.2: <<create>>(imagen) ↑\n4.3*[por cada imagen]: <<create>>(imagen) ↑\n5.1: <<create>>(imagenVacio) ↑"
-F -- F : "2.1.1, 3.2.1, 4.3.1, 5.1.1:\ncomprimir()"
-GO -up- SO : "2.3, 3.4, 4.6*, 5.3: encolar(f) ↑"
-SO -- SO : "2.3.1, 3.4.1, 4.6.1, 5.3.1:\nhayConectividad()\n2.3.2, 3.4.2, 4.6.2, 5.3.2\n[hay conectividad]:\nsincronizarPendientes()"
-GO -up- GR : "5.5: generarBorrador(idOperacion) ↑\n↓ r : Reporte (estado BORRADOR)"
+JT --> GO : "1: o := iniciarOperacion(…)\n2: estadoSello := registrarSello(…)\n3*[por cada lote]: diferencia := registrarLote(…)\n4 [diferencia ≠ 0 o daño]: i := registrarIncidencia(…)\n5: cerrarOperacion(…)"
+GO --> O : "1.1: <<create>>\n1.2: iniciar()\n4.2: agregarIncidencia(i)\n2.2, 3.3, 4.5*, 5.2: agregarFotografia(f)\n5.4: cerrar()"
+GO --> S : "2.4: <<create>>\n2.5: estadoSello := verificar(…)"
+GO --> L : "3.1: diferencia :=\n    contrastarCantidad(…)"
+GO --> I : "4.1: <<create>>\n4.4*: adjuntarFotografia(f)"
+GO -up-> F : "2.1, 3.2, 4.3*, 5.1:\n    f := <<create>>(imagen)"
+F --> F : "n.1: comprimir()\n(n = 2.1, 3.2, 4.3, 5.1)"
+GO -up-> SO : "2.3, 3.4, 4.6*, 5.3: encolar(f)"
+SO --> SO : "n.1: hayConectividad()\nn.2 [hay conectividad]:\n    sincronizarPendientes()\n(n = 2.3, 3.4, 4.6, 5.3)"
+GO -up-> GR : "5.5: r := generarBorrador(…)"
 @enduml

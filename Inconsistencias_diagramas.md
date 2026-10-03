@@ -32,7 +32,7 @@ Revisión cruzada de los casos de uso (Fig. 1-12, draw.io), las secuencias (Fig.
 | Fig. 14 / 18 Crear programación | Se agregó `listarContenedoresPendientes()` (pasos 1-2 de la narrativa). El rechazo indica que la programación queda `PROGRAMADA` sin asignar (A3/A4). |
 | Fig. 15 / 19 Registrar datos | `iniciarOperacion` hace `<<create>>` de la `Operacion` (antes no existía). Cada incidencia se agrega a la operación (`agregarIncidencia`) y sus fotos también (`agregarFotografia`). La de sello alterado se crea sin línea (`null`). Antes de cada `opt [hay conectividad]` se llama a `hayConectividad()`. Al cerrar, primero `cerrar()` y después `generarBorrador(idOperacion)`, que retorna el `Reporte`. |
 | Fig. 16 / 20 Validar reporte | `enviarReporte` obtiene los clientes del reporte, hace un `loop` por cliente para obtener sus destinatarios y regenera el PDF ya aprobado. Hay un `alt` por envío exitoso o fallido (A4). La solicitud de corrección es `solicitarCorreccionEvidencia(idFoto, motivo)`. |
-| Fig. 17-20 | Se regeneraron a partir de las secuencias nuevas. Ahora muestran todos los objetos que participan, no solo el controlador. |
+| Fig. 17-20 | Se regeneraron a partir de las secuencias nuevas, con todos los objetos que participan, y se simplificaron: cada enlace es una flecha en el sentido de los mensajes (sin ↓/↑), los retornos se escriben `resultado := mensaje(…)` y los parámetros se abrevian `(…)`. |
 
 ## 2. Pendiente (solo en los dibujos de casos de uso, draw.io)
 

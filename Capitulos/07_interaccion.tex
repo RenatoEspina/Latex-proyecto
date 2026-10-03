@@ -91,21 +91,34 @@ el reporte pasa a \estado{EN\_CORRECCION} y se solicita la corrección de la evi
 \label{sec:colaboracion}
 
 Como complemento, se presentan los diagramas de colaboración de los mismos cuatro casos de uso,
-con los mismos objetos y mensajes que sus diagramas de secuencia. En ellos los mensajes se numeran
-para indicar el orden, y la numeración decimal (por ejemplo, 2.1) indica que el mensaje se origina
-como consecuencia del mensaje 2; el asterisco indica una repetición y la condición entre corchetes,
-una guarda. Las flechas \(\downarrow\) y \(\uparrow\) junto a cada mensaje indican el sentido en que viaja
-sobre el enlace (hacia el objeto de abajo o hacia el de arriba), y los mensajes que un objeto se envía a
-sí mismo se dibujan sobre un enlace reflexivo. Se muestra el curso normal de cada caso, incluyendo
-las repeticiones necesarias, y se omiten los cursos alternos, que ya se detallan en los diagramas
-de secuencia.
+en una versión resumida que muestra qué objeto envía cada mensaje a cuál, con los mismos objetos y
+mensajes que sus diagramas de secuencia. Para facilitar su lectura se usan las siguientes
+convenciones:
 
-\figuradiagrama{0.90}{17-col-importar-manifiesto.png}
+\begin{itemize}
+    \item Cada enlace se dibuja como una flecha que va desde el objeto que envía los mensajes hacia
+          el que los recibe; los mensajes que un objeto se envía a sí mismo van sobre un enlace
+          reflexivo.
+    \item Los mensajes se numeran para indicar el orden. La numeración decimal (por ejemplo, 2.1)
+          indica que el mensaje se origina como consecuencia del mensaje 2.
+    \item El asterisco indica una repetición y la condición entre corchetes, una guarda.
+    \item El valor que retorna un mensaje se indica con la notación \clase{resultado := mensaje(...)},
+          en vez de dibujar la respuesta por separado.
+    \item Los parámetros se abrevian como \clase{(...)}; su detalle está en los diagramas de
+          secuencia.
+    \item Cuando un mismo mensaje interno se repite tras varios mensajes, se escribe una sola vez
+          con la letra \clase{n}, indicando entre paréntesis los números que toma.
+\end{itemize}
+
+Se muestra el curso normal de cada caso, incluyendo las repeticiones necesarias, y se omiten los
+cursos alternos, que ya se detallan en los diagramas de secuencia.
+
+\figuradiagrama{0.75}{17-col-importar-manifiesto.png}
 {Diagrama de colaboración - Importar manifiesto}
 {Diagrama de colaboración - Importar manifiesto.}
 {fig:col_manifiesto}
 
-\figuradiagrama{0.80}{18-col-crear-programacion.png}
+\figuradiagrama{0.85}{18-col-crear-programacion.png}
 {Diagrama de colaboración - Crear programación}
 {Diagrama de colaboración - Crear programación.}
 {fig:col_programacion}
@@ -115,7 +128,7 @@ de secuencia.
 {Diagrama de colaboración - Registrar datos de operación.}
 {fig:col_operacion}
 
-\figuradiagrama{0.90}{20-col-validar-reporte.png}
+\figuradiagrama{0.85}{20-col-validar-reporte.png}
 {Diagrama de colaboración - Validar reporte}
 {Diagrama de colaboración - Validar reporte (curso de aprobación y envío).}
 {fig:col_reporte}
