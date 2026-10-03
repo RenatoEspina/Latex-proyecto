@@ -1,9 +1,0 @@
-@startuml
-!include _estilo.iuml
-actor "Supervisor" as SUP
-rectangle ":Sistema BeeTracer" as SB
-rectangle ":ServicioCorreo" as SC
-
-SUP -- SB : "1: revisarReporte(idReporte) ↓\n↑ muestra datos y fotografías\n2 [datos y evidencia correctos]: aprobarReporte() ↓\n↑ reporte enviado exitosamente"
-SB -- SC : "2.1: enviarPDFAlCliente() ↓"
-@enduml

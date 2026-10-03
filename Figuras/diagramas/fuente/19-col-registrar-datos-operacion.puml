@@ -1,0 +1,11 @@
+@startuml
+!include _estilo.iuml
+actor "Jefe tarjador" as JT
+rectangle ":GestorOperacion" as GO
+rectangle ":SincronizadorOffline" as SO
+
+JT -- GO : "1: iniciarOperacion(idProgramacion) ↓\n↑ Operacion iniciada (estado EN_EJECUCION)\n2: registrarSello(idOperacion, nroSello, imagen) ↓\n3*[por cada lote separado por cliente]:\nregistrarLote(idOperacion, idLinea,\ncantidadRecibida, imagen) ↓\n4 [diferencia != 0 o daño visible]:\nregistrarIncidencia(idOperacion, idLinea,\ntipo, cantidad, imagenes) ↓\n5: cerrarOperacion(idOperacion, imagenVacio) ↓\n↑ faena cerrada (estado FINALIZADA)"
+GO -- GO : "2.1: verificar(declarado)\n5.3: generarBorrador()"
+GO -- SO : "2.2, 3.1, 5.1: encolar(fotografia) ↓\n4.1: encolar(fotografias) ↓\n5.2: sincronizarPendientes() ↓"
+SO -- SO : "2.2.1, 3.1.1, 4.1.1 [hay conectividad]:\nsincronizarPendientes()"
+@enduml

@@ -1,6 +1,6 @@
 # Inconsistencias entre los diagramas
 
-Revisión cruzada de los 11 diagramas de casos de uso (draw.io), el diagrama de clases (PlantUML) los diagramas de secuencia del sistema (Fig. 13-16) y los de colaboración (Fig. 17-20, generados a partir de las secuencias). El texto del informe ya está alineado con los diagramas. Lo que sigue son contradicciones **entre diagramas**, que se corrigen en el dibujo.
+Revisión cruzada de los 12 diagramas de casos de uso (draw.io), el diagrama de clases (PlantUML), los diagramas de secuencia (Fig. 13-16) y los de colaboración (Fig. 17-20, generados a partir de las secuencias). El texto del informe ya está alineado con los diagramas. Lo que sigue son contradicciones **entre diagramas**, que se corrigen en el dibujo.
 
 ## 1. Errores dentro del diagrama de clases (ya corregidos en `21-diagrama-clases.puml`)
 
@@ -42,22 +42,25 @@ Revisión cruzada de los 11 diagramas de casos de uso (draw.io), el diagrama de 
 | Fig. 12 Visualizar estado | El actor dice «Cliente del deposito» (sin tilde). En los demás dice «depósito». |
 | Actores administrativos | Los 5 CRUD del Administrador y *Visualizar estado* no tienen controlador (el informe lo declara como simplificación en el cap. 8). |
 
-## 4. Diagramas de secuencia (Fig. 13-16) vs. casos de uso y clases
+## 4. Diagramas de secuencia (Fig. 13-16) vs. clases y casos de uso
 
-En el informe, las secuencias se presentan como **diagramas de secuencia del sistema** (el sistema como caja negra). La Tabla 9 del cap. 7 relaciona cada evento con las operaciones del diagrama de clases. Aun así, quedan estas diferencias, que se corrigen en los dibujos:
+Las secuencias ya usan los controladores y entidades del diagrama de clases. Quedan estas diferencias, que se corrigen en los dibujos:
 
 | Diagrama | Problema |
 |---|---|
-| Fig. 16 Revisar reporte vs. Fig. 9 / Fig. 11 | En la secuencia, al aprobar, el sistema **envía el PDF automáticamente** (`enviarPDFAlCliente()`). En los CU, el envío solo aparece como *Enviar PDF* del Jefe de faena (Fig. 9), y *Aprobar reporte* (Fig. 11) no lo menciona. Para conciliarlos, el informe trata el envío como automático al aprobar y *Enviar PDF* como **reenvío** manual. Si no es lo que quieren, hay que cambiar uno de los dos diagramas. |
-| Fig. 16 Revisar reporte | Rechazar devuelve «notifica solicitud de recaptura a terreno» como respuesta **al Supervisor**: la flecha apunta al actor equivocado, porque la notificación va al Jefe tarjador. «Registrar observación» y «Marcar evidencia defectuosa» (Fig. 11) no aparecen; solo está `rechazarFotografia(motivo)`. |
-| Fig. 16 vs. clases | `aprobarReporte()` no recibe parámetros (en la clase: `aprobarReporte(idReporte, aprobador)`). `estado = "En Corrección"` no coincide con el literal del enumerado `EN_CORRECCION`. |
-| Fig. 15 Registrar desconsolidado | No incluye el **registro y verificación del sello** ni la apertura, aunque el narrativo, el CU y la clase (`registrarSello`, `SelloSeguridad`) sí los tienen. |
-| Fig. 15 vs. cap. 2-3 | Todo se guarda en la base local y se sincroniza **solo al finalizar** (`sincronizarAlServidor()`). Los cap. 2 y 3 explican que el envío en lote al final provocaba caídas y que la app **sube cada foto inmediatamente**. Sugerencia: agregar en el `loop` un `opt [hay conectividad] subirFotografia()`. |
-| Fig. 15 vs. clases | `iniciarFaena`/`finalizarFaena` en la secuencia y `iniciarOperacion`/`cerrarOperacion` en la clase. `registrarLoteYFotografia(cantidad)` no indica la línea de carga (en la clase: `registrarLote(idOperacion, idLinea, cantidadRecibida, imagen)`). `:Base de Datos` no es una clase del diseño. |
-| Fig. 15 vs. Fig. 10 | El título dice «Registrar Desconsolidado», pero el CU se llama «Registrar Datos de Operación». |
-| Fig. 14 Crear programación | El fragmento `alt [Con conflictos]` solo cubre el conflicto de horario. La no disponibilidad del personal (narrativo A4) no tiene rama. `crearProgramacion(contenedor, fecha, hora)` usa una sola hora; la clase usa `horaInicio, horaTermino`. |
-| Fig. 14 vs. Fig. 8 | La secuencia incluye `asignarPersonal(cuadrilla, jefeTarjador)` dentro de crear, pero el CU *Crear programación* (Fig. 8) no tiene ese include. |
-| Fig. 13 Importar manifiesto | `importarManifiesto(nave, viaje)` no lleva fecha (en la clase: `importarManifiesto(nave, viaje, fecha)`). No aparecen *Notificar resultado de importación* ni *Generar reporte de errores* (Fig. 7); la rama de error solo «muestra error». |
-| Fig. 16 vs. Fig. 11 | El título dice «Revisar Reporte», pero el CU se llama «Validar Reporte». El actor se llama «Supervisor», no «Supervisor del reporte». |
+| Fig. 13 Importar manifiesto | `agregarContenedor()` y `agregarLinea()` aparecen como mensajes de `:GestorManifiesto` a sí mismo, pero son operaciones de `Manifiesto` y de `Contenedor`. Faltan las líneas de vida `:Contenedor` y `:LineaCarga` y el `loop` por contenedor y por línea. |
+| Fig. 13 Importar manifiesto | La guarda dice «esquema válido», pero nunca se llama a `Manifiesto.validarEsquema(xml)`. |
+| Fig. 13 vs. Fig. 7 | No aparecen *Notificar resultado de importación* (a Aduanas) ni *Generar reporte de errores*: la rama de error solo devuelve «error de formato / manifiesto no disponible». |
+| Fig. 14 vs. clases | `GestorProgramacion` envía mensajes a `Cuadrilla` y `Trabajador`, pero el diagrama de clases no tiene esas dependencias (solo `..> Programacion` y `..> Contenedor`). |
+| Fig. 14 vs. Fig. 8 | La secuencia asigna cuadrilla y jefe tarjador al crear, pero el CU *Crear programación* (Fig. 8) no tiene el include correspondiente. |
+| Fig. 15 Registrar datos de operación | `verificar(declarado)` aparece como mensaje de `:GestorOperacion` a sí mismo, pero es una operación de `SelloSeguridad`. Tampoco aparecen `:Operacion` (`iniciar`, `cerrar`, `agregarFotografia`), `:LineaCarga` (`contrastarCantidad`), `:Incidencia` ni `:Fotografia` (`comprimir`). |
+| Fig. 15 Registrar datos de operación | `generarBorrador()` aparece como mensaje a sí mismo de `:GestorOperacion`, pero es `GestorReportes.generarBorrador(idOperacion)`: falta `:GestorReportes` y el parámetro. |
+| Fig. 15 Registrar datos de operación | `registrarSello` y `registrarLote` no muestran sus retornos (`EstadoSello`, diferencia `int`), pero el `opt [diferencia != 0]` depende de ese valor. Tampoco está el caso del sello alterado (narrativo A1). |
+| Fig. 15 vs. clases | Hay diferencias de nombres: `registrarIncidencia(..., cantidad, ...)` en la secuencia y `cantidadAfectada` en la clase; `encolar(fotografias)` (plural) en la secuencia y `encolar(f: Fotografia)` en la clase. Además, el diagrama de clases no tiene la dependencia `GestorOperacion ..> SincronizadorOffline`. |
+| Fig. 16 Validar reporte | `obtenerDatos()` no existe en `Reporte`; la operación de la clase es `generarPDF()`. |
+| Fig. 16 Validar reporte | El envío ocurre dentro de `aprobarReporte`, pero la clase tiene una operación separada `enviarReporte(idReporte)`. No se llama a `Cliente.obtenerDestinatarios()` (¿de dónde salen los `destinatarios`?) ni a `Reporte.registrarEnvio(...)`, así que no queda registrado el `estadoEnvio`. Además, `GestorReportes` no tiene dependencia hacia `Cliente`. |
+| Fig. 16 Validar reporte | Al rechazar no se llama a `Fotografia.marcarRechazada(motivo)`, así que el motivo (la «observación» de la Fig. 11) no queda guardado en ningún objeto. |
+| Fig. 16 vs. Fig. 9 / Fig. 11 | Al aprobar, el sistema **envía el PDF automáticamente**. En los CU, el envío solo aparece como *Enviar PDF* del Jefe de faena (Fig. 9), y *Aprobar reporte* (Fig. 11) no lo muestra. El informe trata el envío como automático al aprobar y *Enviar PDF* como **reenvío** manual. |
+| Fig. 16 vs. Fig. 11 | «Marcar evidencia defectuosa» y «Registrar observación» no aparecen como mensajes; se entienden incluidos en `rechazarFotografia(idReporte, idFoto, motivo)`. |
 
 `Guia_de_diagramas.md` quedó desactualizada respecto de todos los diagramas actuales.
