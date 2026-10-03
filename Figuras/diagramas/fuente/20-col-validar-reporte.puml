@@ -1,14 +1,16 @@
 @startuml
 !include _estilo.iuml
+
 actor "Supervisor del reporte" as SUP
 rectangle ":GestorReportes" as GR
 rectangle ":Reporte" as R
 rectangle ":Cliente" as C
 rectangle ":ServicioCorreo" as SC
 
-SUP -- GR : "1: abrirReporte(idReporte) ↓\n↑ r : Reporte (datos y evidencia fotográfica)\n2 [datos y evidencia correctos]:\naprobarReporte(idReporte, aprobador) ↓\n↑ reporte APROBADO y enviado"
-GR -- GR : "2.2: enviarReporte(idReporte)"
-GR -- R : "1.1: generarPDF() ↓\n↑ pdf : File\n2.1: aprobar(aprobador) ↓\n2.2.1: obtenerClientes() ↓\n↑ clientes : Cliente[]\n2.2.3: generarPDF() ↓\n↑ adjunto : File\n2.2.5: registrarEnvio(exitoso, destinatarios) ↓"
-GR -- C : "2.2.2*[por cada cliente de la operación]:\nobtenerDestinatarios() ↓\n↑ destinatarios : String[]"
-GR -- SC : "2.2.4: enviar(destinatarios, asunto, adjunto) ↓\n↑ exitoso : boolean"
+SUP --> GR : "1: r := abrirReporte(…)\n2 [datos y evidencia correctos]:\n    aprobarReporte(…)"
+GR --> GR : "2.2: enviarReporte(…)"
+GR --> R : "1.1: pdf := generarPDF()\n2.1: aprobar(…)\n2.2.1: clientes := obtenerClientes()\n2.2.3: adjunto := generarPDF()\n2.2.5: registrarEnvio(…)"
+GR ---> C : "2.2.2*[por cada cliente]:\n    destinatarios := obtenerDestinatarios()"
+GR --> SC : "2.2.4: exitoso := enviar(…)"
+
 @enduml

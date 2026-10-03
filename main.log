@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.3)  3 OCT 2026 02:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.3)  3 OCT 2026 02:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1762,41 +1762,48 @@ Package pdftex.def Info: Figuras/diagramas/16-sec-validar-reporte.png  used on
 input line 88.
 (pdftex.def)             Requested size: 448.42822pt x 412.76042pt.
  [34 <./Figuras/diagramas/16-sec-validar-reporte.png (PNG copy)>]
-<Figuras/diagramas/17-col-importar-manifiesto.png, id=626, 1654.18pt x 934.4912
-6pt>
+Underfull \hbox (badness 5245) in paragraph at lines 105--107
+[]\T1/ptm/m/n/12 El va-lor que re-tor-na un men-sa-je se in-di-ca con la no-ta-
+ci�n \T1/pcr/m/n/12 resultado :=
+ []
+
+<Figuras/diagramas/17-col-importar-manifiesto.png, id=625, 1191.45125pt x 794.9
+7pt>
 File: Figuras/diagramas/17-col-importar-manifiesto.png Graphic file (type png)
 <use Figuras/diagramas/17-col-importar-manifiesto.png>
 Package pdftex.def Info: Figuras/diagramas/17-col-importar-manifiesto.png  used
- on input line 106.
-(pdftex.def)             Requested size: 424.82523pt x 239.9961pt.
-<Figuras/diagramas/18-col-crear-programacion.png, id=627, 1171.37625pt x 702.62
+ on input line 119.
+(pdftex.def)             Requested size: 354.02342pt x 236.21236pt.
+<Figuras/diagramas/18-col-crear-programacion.png, id=626, 1106.1325pt x 536.002
 5pt>
 File: Figuras/diagramas/18-col-crear-programacion.png Graphic file (type png)
 <use Figuras/diagramas/18-col-crear-programacion.png>
 Package pdftex.def Info: Figuras/diagramas/18-col-crear-programacion.png  used 
-on input line 111.
-(pdftex.def)             Requested size: 377.62642pt x 226.50636pt.
-<Figuras/diagramas/19-col-registrar-datos-operacion.png, id=628, 2047.65pt x 87
-0.25125pt>
+on input line 124.
+(pdftex.def)             Requested size: 401.22942pt x 194.42474pt.
+[35 <./Figuras/diagramas/17-col-importar-manifiesto.png>]
+<Figuras/diagramas/19-col-registrar-datos-operacion.png, id=632, 1728.4575pt x 
+630.355pt>
 File: Figuras/diagramas/19-col-registrar-datos-operacion.png Graphic file (type
  png)
 <use Figuras/diagramas/19-col-registrar-datos-operacion.png>
 Package pdftex.def Info: Figuras/diagramas/19-col-registrar-datos-operacion.png
-  used on input line 116.
-(pdftex.def)             Requested size: 472.03123pt x 200.60506pt.
- [35 <./Figuras/diagramas/17-col-importar-manifiesto.png> <./Figuras/diagramas/
-18-col-crear-programacion.png>]
-<Figuras/diagramas/20-col-validar-reporte.png, id=635, 1533.73pt x 702.625pt>
+  used on input line 129.
+(pdftex.def)             Requested size: 472.03123pt x 172.14104pt.
+<Figuras/diagramas/20-col-validar-reporte.png, id=633, 1168.365pt x 695.59875pt
+>
 File: Figuras/diagramas/20-col-validar-reporte.png Graphic file (type png)
 <use Figuras/diagramas/20-col-validar-reporte.png>
 Package pdftex.def Info: Figuras/diagramas/20-col-validar-reporte.png  used on 
-input line 121.
-(pdftex.def)             Requested size: 424.82523pt x 194.61086pt.
-) [36 <./Figuras/diagramas/19-col-registrar-datos-operacion.png> <./Figuras/dia
-gramas/20-col-validar-reporte.png>]
+input line 134.
+(pdftex.def)             Requested size: 401.22942pt x 238.87798pt.
+ [36 <./Figuras/diagramas/18-col-crear-programacion.png> <./Figuras/diagramas/1
+9-col-registrar-datos-operacion.png>]) [37 <./Figuras/diagramas/20-col-validar-
+reporte.png>]
 \openout2 = `Capitulos/08_clases_diseno.aux'.
 
- (./Capitulos/08_clases_diseno.tex
+
+(./Capitulos/08_clases_diseno.tex
 Capítulo 8.
 
 Underfull \hbox (badness 6078) in paragraph at lines 17--20
@@ -1823,19 +1830,19 @@ Underfull \hbox (badness 6808) in paragraph at lines 20--24
 1/ptm/m/n/12 en-cap-su-lan los sis-te-mas ex-ter-nos; y
  []
 
-[37
+[38
 
 
 
 
 ]
-<Figuras/diagramas/21-diagrama-clases.png, id=648, 7299.27pt x 3139.73pt>
+<Figuras/diagramas/21-diagrama-clases.png, id=651, 7299.27pt x 3139.73pt>
 File: Figuras/diagramas/21-diagrama-clases.png Graphic file (type png)
 <use Figuras/diagramas/21-diagrama-clases.png>
 Package pdftex.def Info: Figuras/diagramas/21-diagrama-clases.png  used on inpu
 t line 53.
 (pdftex.def)             Requested size: 652.70622pt x 280.743pt.
- [38
+ [39
 
  <./Figuras/diagramas/21-diagrama-clases.png (PNG copy)>])
 \openout2 = `Capitulos/09_diccionario_clases.aux'.
@@ -1843,26 +1850,26 @@ t line 53.
 
 (./Capitulos/09_diccionario_clases.tex
 Capítulo 9.
-[39
+[40
 
 
 
 
 
-] [40] [41] [42] [43] [44] [45] [46] [47] [48]) [49]
+] [41] [42] [43] [44] [45] [46] [47] [48] [49]) [50]
 \openout2 = `Capitulos/10_conclusiones.aux'.
 
 
 (./Capitulos/10_conclusiones.tex
 Capítulo 10.
-) [50
+) [51
 
 
 
 
 ]
 Capítulo 11.
-[51
+[52
 
 
 
@@ -1888,22 +1895,21 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 45105 strings out of 476047
- 897512 string characters out of 5792075
+ 45106 strings out of 476047
+ 897519 string characters out of 5792075
  2000267 words of memory out of 5000000
  66146 multiletter control sequences out of 15000+600000
  614934 words of font info for 84 fonts, out of 8000000 for 9000
  85 hyphenation exceptions out of 8191
  125i,12n,131p,2341b,2895s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
-times/utmri8a.pfb>
-Output written on main.pdf (58 pages, 4278062 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/urw/times/utmri8a.pfb>
+Output written on main.pdf (59 pages, 4189730 bytes).
 PDF statistics:
  781 PDF objects out of 1000 (max. 8388607)
- 654 compressed objects within 7 object streams
- 174 named destinations out of 1000 (max. 500000)
+ 655 compressed objects within 7 object streams
+ 175 named destinations out of 1000 (max. 500000)
  667 words of extra memory for PDF output out of 10000 (max. 10000000)
 

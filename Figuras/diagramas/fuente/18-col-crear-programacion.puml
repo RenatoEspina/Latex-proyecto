@@ -6,9 +6,9 @@ rectangle ":Programacion" as P
 rectangle ":Cuadrilla" as CU
 rectangle ":Trabajador" as T
 
-JF -- GP : "1: listarContenedoresPendientes() ↓\n↑ contenedores : Contenedor[]\n2: crearProgramacion(idContenedor, fecha,\nhoraInicio, horaTermino) ↓\n↑ p : Programacion (estado PROGRAMADA)\n3: asignarCuadrilla(idProgramacion,\nidCuadrilla, idJefeTarjador) ↓\n↑ programación asignada"
-GP -- GP : "2.1: hayConflicto(fecha,\nhoraInicio, horaTermino)"
-GP -- P : "2.2 [sin conflicto de agenda]:\n<<create>>(contenedor, fecha,\nhoraInicio, horaTermino) ↓\n3.3 [cuadrilla y jefe tarjador disponibles]:\nasignarCuadrilla(c, jefe) ↓"
-GP -- CU : "3.1: estaDisponible(fecha,\nhoraInicio, horaTermino) ↓\n↑ boolean"
-GP -- T : "3.2: estaDisponible(fecha,\nhoraInicio, horaTermino) ↓\n↑ boolean"
+JF --> GP : "1: contenedores := listarContenedoresPendientes()\n2: p := crearProgramacion(…)\n3: asignarCuadrilla(…)"
+GP --> GP : "2.1: conflicto := hayConflicto(…)"
+GP --> P : "2.2 [sin conflicto]: <<create>>\n3.3 [ambos disponibles]:\n    asignarCuadrilla(c, jefe)"
+GP --> CU : "3.1: libre := estaDisponible(…)"
+GP --> T : "3.2: libre := estaDisponible(…)"
 @enduml

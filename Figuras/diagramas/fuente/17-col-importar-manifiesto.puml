@@ -7,10 +7,10 @@ rectangle ":Manifiesto" as M
 rectangle ":Contenedor" as C
 rectangle ":LineaCarga" as L
 
-JF -- GM : "1: importarManifiesto(nave, viaje, fecha) ↓\n↑ m : Manifiesto (resumen de la importación)"
-GM -- SA : "1.1: descargarXML(nave, viaje, fecha) ↓\n↑ xml : String\n1.6: notificarResultadoImportacion(nave, viaje, true) ↓"
-GM -- M : "1.2: <<create>>(nave, viaje) ↓\n1.3: validarEsquema(xml) ↓\n↑ boolean\n1.4*[por cada contenedor declarado]:\nagregarContenedor(numero, tamano,\nnroSelloDeclarado, fechaArribo) ↓\n↑ c : Contenedor"
-M -- C : "1.4.1: <<create>> ↓"
-GM -- C : "1.5*[por cada línea de carga del contenedor]:\nagregarLinea(descripcion, cantidadDeclarada,\ncliente, tipo) ↓\n↑ l : LineaCarga"
-C -- L : "1.5.1: <<create>> ↓"
+JF --> GM : "1: m := importarManifiesto(…)"
+GM --> SA : "1.1: xml := descargarXML(…)\n1.6: notificarResultadoImportacion(…)"
+GM --> M : "1.2: <<create>>\n1.3: valido := validarEsquema(xml)\n1.4*[por cada contenedor]:\n    c := agregarContenedor(…)"
+M --> C : "1.4.1: <<create>>"
+GM --> C : "1.5*[por cada línea]:\n    l := agregarLinea(…)"
+C --> L : "1.5.1: <<create>>"
 @enduml
