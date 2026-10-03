@@ -1,0 +1,29 @@
+sequenceDiagram
+    title Diagrama de Secuencia - Crear Programación
+    actor JF as Jefe de faena
+    participant GP as :GestorProgramacion
+    participant P as :Programacion
+    participant CU as :Cuadrilla
+    participant T as :Trabajador
+
+    JF->>GP: listarContenedoresPendientes()
+    GP-->>JF: contenedores : Contenedor[]
+    JF->>GP: crearProgramacion(idContenedor, fecha, horaInicio, horaTermino)
+    GP->>GP: hayConflicto(fecha, horaInicio, horaTermino)
+    alt sin conflicto de agenda
+        GP->>P: <<create>>(contenedor, fecha, horaInicio, horaTermino)
+        GP-->>JF: p : Programacion (estado PROGRAMADA)
+        JF->>GP: asignarCuadrilla(idProgramacion, idCuadrilla, idJefeTarjador)
+        GP->>CU: estaDisponible(fecha, horaInicio, horaTermino)
+        CU-->>GP: boolean
+        GP->>T: estaDisponible(fecha, horaInicio, horaTermino)
+        T-->>GP: boolean
+        alt cuadrilla y jefe tarjador disponibles
+            GP->>P: asignarCuadrilla(c, jefe)
+            GP-->>JF: programación asignada
+        else alguno no disponible
+            GP-->>JF: rechazo: cuadrilla o jefe tarjador no disponible (queda PROGRAMADA sin asignar)
+        end
+    else franja ocupada
+        GP-->>JF: conflicto de agenda
+    end
