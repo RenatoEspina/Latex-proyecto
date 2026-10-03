@@ -1,0 +1,11 @@
+@startuml
+!include _estilo.iuml
+actor "Supervisor del reporte" as SUP
+rectangle ":GestorReportes" as GR
+rectangle ":Reporte" as R
+rectangle ":ServicioCorreo" as SC
+
+SUP -- GR : "1: abrirReporte(idReporte) ↓\n↑ información del reporte y evidencia fotográfica\n2 [datos y evidencia correctos]:\naprobarReporte(idReporte, aprobador) ↓\n↑ reporte validado y enviado exitosamente"
+GR -- R : "1.1: obtenerDatos() ↓\n2.1: aprobar(aprobador) ↓"
+GR -- SC : "2.2: enviar(destinatarios, asunto, adjunto) ↓\n↑ exitoso : boolean"
+@enduml

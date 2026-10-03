@@ -1,8 +1,14 @@
 @startuml
 !include _estilo.iuml
 actor "Jefe de faena" as JF
-rectangle ":Sistema BeeTracer" as SB
+rectangle ":GestorProgramacion" as GP
+rectangle ":Programacion" as P
+rectangle ":Cuadrilla" as CU
+rectangle ":Trabajador" as T
 
-JF -- SB : "1: crearProgramacion(contenedor, fecha, hora) ↓\n2 [sin conflictos de agenda]:\nasignarPersonal(cuadrilla, jefeTarjador) ↓\n↑ confirmación exitosa"
-SB -- SB : "1.1: verificarDisponibilidadHorario()\n2.1: verificarDisponibilidadPersonal()\n2.2: guardarProgramacion()"
+JF -- GP : "1: crearProgramacion(idContenedor, fecha,\nhoraInicio, horaTermino) ↓\n↑ p : Programacion (estado PROGRAMADA)\n2: asignarCuadrilla(idProgramacion,\nidCuadrilla, idJefeTarjador) ↓\n↑ programación asignada exitosamente"
+GP -- GP : "1.1: hayConflicto(fecha,\nhoraInicio, horaTermino)"
+GP -- P : "1.2 [sin conflicto de agenda]:\n<<create>>(contenedor, fecha,\nhoraInicio, horaTermino) ↓\n2.3 [cuadrilla y jefe tarjador disponibles]:\nasignarCuadrilla(c, jefe) ↓"
+GP -- CU : "2.1: estaDisponible(fecha,\nhoraInicio, horaTermino) ↓\n↑ boolean"
+GP -- T : "2.2: estaDisponible(fecha,\nhoraInicio, horaTermino) ↓\n↑ boolean"
 @enduml

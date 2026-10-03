@@ -1,9 +1,0 @@
-@startuml
-!include _estilo.iuml
-actor "Jefe tarjador" as JT
-rectangle ":App BeeTracer" as APP
-rectangle ":Base de Datos" as BD
-
-JT -- APP : "1: iniciarFaena(idProgramacion) ↓\n2*[por cada lote de cliente]:\nregistrarLoteYFotografia(cantidad) ↓\n3*[si hay daño o diferencia]:\nregistrarIncidencia(fotografias) ↓\n4: finalizarFaena(fotoVacio) ↓\n↑ confirmación de faena cerrada"
-APP -- BD : "2.1: guardarDatosLocal() ↓\n3.1: guardarIncidencia() ↓\n4.1: sincronizarAlServidor() ↓"
-@enduml

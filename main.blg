@@ -1,20 +1,20 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
 [0] Config.pm:310> INFO - Logfile is 'main.blg'
-[139] biber:340> INFO - === Fri Oct  2, 2026, 04:22:20
-[177] Biber.pm:419> INFO - Reading 'main.bcf'
-[301] Biber.pm:976> INFO - Using all citekeys in bib section 0
-[322] Biber.pm:4419> INFO - Processing section 0
-[341] Biber.pm:4610> INFO - Looking for bibtex file 'referencias.bib' for section 0
-[343] bibtex.pm:1713> INFO - LaTeX decoding ...
-[354] bibtex.pm:1519> INFO - Found BibTeX data source 'referencias.bib'
-[485] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
-[485] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[485] Biber.pm:4239> INFO - Sorting list 'apa/apasortcite//global/global' of type 'entry' with template 'apa' and locale 'es-ES'
-[509] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
-[509] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[509] Biber.pm:4239> INFO - Sorting list 'apa/global//global/global' of type 'entry' with template 'apa' and locale 'es-ES'
-[527] bbl.pm:660> INFO - Writing 'main.bbl' with encoding 'UTF-8'
-[537] bbl.pm:763> INFO - Output to main.bbl
-[538] Biber.pm:131> WARN - legacy year field 's.f.' in entry 'bilix_sf' is not an integer - this will probably not sort properly.
-[538] Biber.pm:131> WARN - legacy year field 's.f.' in entry 'plantuml_sf' is not an integer - this will probably not sort properly.
-[538] Biber.pm:133> INFO - WARNINGS: 2
+[170] biber:340> INFO - === Sat Oct  3, 2026, 00:54:19
+[219] Biber.pm:419> INFO - Reading 'main.bcf'
+[306] Biber.pm:976> INFO - Using all citekeys in bib section 0
+[326] Biber.pm:4419> INFO - Processing section 0
+[344] Biber.pm:4610> INFO - Looking for bibtex file 'referencias.bib' for section 0
+[346] bibtex.pm:1713> INFO - LaTeX decoding ...
+[357] bibtex.pm:1519> INFO - Found BibTeX data source 'referencias.bib'
+[475] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
+[476] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[476] Biber.pm:4239> INFO - Sorting list 'apa/apasortcite//global/global' of type 'entry' with template 'apa' and locale 'es-ES'
+[499] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[499] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
+[499] Biber.pm:4239> INFO - Sorting list 'apa/global//global/global' of type 'entry' with template 'apa' and locale 'es-ES'
+[514] bbl.pm:660> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[522] bbl.pm:763> INFO - Output to main.bbl
+[522] Biber.pm:131> WARN - legacy year field 's.f.' in entry 'plantuml_sf' is not an integer - this will probably not sort properly.
+[522] Biber.pm:131> WARN - legacy year field 's.f.' in entry 'bilix_sf' is not an integer - this will probably not sort properly.
+[522] Biber.pm:133> INFO - WARNINGS: 2
