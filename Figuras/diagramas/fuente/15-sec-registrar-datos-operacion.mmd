@@ -1,0 +1,94 @@
+sequenceDiagram
+    title Diagrama de Secuencia - Registrar Datos de Operación
+    actor JT as Jefe tarjador
+    participant GO as :GestorOperacion
+    participant O as :Operacion
+    participant S as :SelloSeguridad
+    participant L as :LineaCarga
+    participant I as :Incidencia
+    participant F as :Fotografia
+    participant SO as :SincronizadorOffline
+    participant GR as :GestorReportes
+
+    JT->>GO: iniciarOperacion(idProgramacion)
+    GO->>O: <<create>>
+    GO->>O: iniciar()
+    GO-->>JT: o : Operacion (estado EN_EJECUCION)
+
+    JT->>GO: registrarSello(idOperacion, nroSello, imagen)
+    GO->>F: <<create>>(imagen)
+    F->>F: comprimir()
+    GO->>O: agregarFotografia(f)
+    GO->>SO: encolar(f)
+    SO->>SO: hayConectividad()
+    opt hay conectividad
+        SO->>SO: sincronizarPendientes()
+    end
+    GO->>S: <<create>>(nroSello)
+    GO->>S: verificar(declarado)
+    S-->>GO: estadoSello : EstadoSello
+    GO-->>JT: estadoSello : EstadoSello
+
+    opt estadoSello != INTACTO
+        JT->>GO: registrarIncidencia(idOperacion, null, SELLO_ALTERADO, 0, imagenes)
+        GO->>I: <<create>>(SELLO_ALTERADO, 0, null)
+        GO->>O: agregarIncidencia(i)
+        loop por cada imagen
+            GO->>F: <<create>>(imagen)
+            F->>F: comprimir()
+            GO->>I: adjuntarFotografia(f)
+            GO->>O: agregarFotografia(f)
+            GO->>SO: encolar(f)
+            SO->>SO: hayConectividad()
+            opt hay conectividad
+                SO->>SO: sincronizarPendientes()
+            end
+        end
+        GO-->>JT: i : Incidencia
+    end
+
+    loop por cada lote separado por cliente
+        JT->>GO: registrarLote(idOperacion, idLinea, cantidadRecibida, imagen)
+        GO->>L: contrastarCantidad(cantidadRecibida)
+        L-->>GO: diferencia : int
+        GO->>F: <<create>>(imagen)
+        F->>F: comprimir()
+        GO->>O: agregarFotografia(f)
+        GO->>SO: encolar(f)
+        SO->>SO: hayConectividad()
+        opt hay conectividad
+            SO->>SO: sincronizarPendientes()
+        end
+        GO-->>JT: diferencia : int
+        opt diferencia != 0 o daño visible
+            JT->>GO: registrarIncidencia(idOperacion, idLinea, tipo, cantidadAfectada, imagenes)
+            GO->>I: <<create>>(tipo, cantidadAfectada, l)
+            GO->>O: agregarIncidencia(i)
+            loop por cada imagen
+                GO->>F: <<create>>(imagen)
+                F->>F: comprimir()
+                GO->>I: adjuntarFotografia(f)
+                GO->>O: agregarFotografia(f)
+                GO->>SO: encolar(f)
+                SO->>SO: hayConectividad()
+                opt hay conectividad
+                    SO->>SO: sincronizarPendientes()
+                end
+            end
+            GO-->>JT: i : Incidencia
+        end
+    end
+
+    JT->>GO: cerrarOperacion(idOperacion, imagenVacio)
+    GO->>F: <<create>>(imagenVacio)
+    F->>F: comprimir()
+    GO->>O: agregarFotografia(f)
+    GO->>SO: encolar(f)
+    SO->>SO: hayConectividad()
+    opt hay conectividad
+        SO->>SO: sincronizarPendientes()
+    end
+    GO->>O: cerrar()
+    GO->>GR: generarBorrador(idOperacion)
+    GR-->>GO: r : Reporte (estado BORRADOR)
+    GO-->>JT: faena cerrada (estado FINALIZADA)

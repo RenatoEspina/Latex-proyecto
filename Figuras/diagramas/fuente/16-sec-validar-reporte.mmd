@@ -1,0 +1,40 @@
+sequenceDiagram
+    title Diagrama de Secuencia - Validar Reporte
+    actor SUP as Supervisor del reporte
+    participant GR as :GestorReportes
+    participant R as :Reporte
+    participant C as :Cliente
+    participant F as :Fotografia
+    participant SC as :ServicioCorreo
+
+    SUP->>GR: abrirReporte(idReporte)
+    GR->>R: generarPDF()
+    R-->>GR: pdf : File
+    GR-->>SUP: r : Reporte (datos y evidencia fotográfica)
+    alt datos y evidencia correctos
+        SUP->>GR: aprobarReporte(idReporte, aprobador)
+        GR->>R: aprobar(aprobador)
+        GR->>GR: enviarReporte(idReporte)
+        GR->>R: obtenerClientes()
+        R-->>GR: clientes : Cliente[]
+        loop por cada cliente de la operación
+            GR->>C: obtenerDestinatarios()
+            C-->>GR: destinatarios : String[]
+        end
+        GR->>R: generarPDF()
+        R-->>GR: adjunto : File
+        GR->>SC: enviar(destinatarios, asunto, adjunto)
+        SC-->>GR: exitoso : boolean
+        GR->>R: registrarEnvio(exitoso, destinatarios)
+        alt envío exitoso
+            GR-->>SUP: reporte APROBADO y enviado
+        else envío fallido
+            GR-->>SUP: reporte APROBADO, envío FALLIDO (reenviar desde Enviar PDF)
+        end
+    else evidencia defectuosa
+        SUP->>GR: rechazarFotografia(idReporte, idFoto, motivo)
+        GR->>F: marcarRechazada(motivo)
+        GR->>R: pasarACorreccion()
+        GR->>GR: solicitarCorreccionEvidencia(idFoto, motivo)
+        GR-->>SUP: reporte EN_CORRECCION
+    end

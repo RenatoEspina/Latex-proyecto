@@ -4,9 +4,13 @@ actor "Jefe de faena" as JF
 rectangle ":GestorManifiesto" as GM
 rectangle ":ServicioAduana" as SA
 rectangle ":Manifiesto" as M
+rectangle ":Contenedor" as C
+rectangle ":LineaCarga" as L
 
-JF -- GM : "1: importarManifiesto(nave, viaje, fecha) ↓\n↑ Manifiesto (resumen de la importación)"
-GM -- SA : "1.1: descargarXML(nave, viaje, fecha) ↓\n↑ xml : String"
-GM -- M : "1.2 [servicio responde y esquema válido]:\n<<create>>(nave, viaje) ↓"
-GM -- GM : "1.3: agregarContenedor()\ny agregarLinea()"
+JF -- GM : "1: importarManifiesto(nave, viaje, fecha) ↓\n↑ m : Manifiesto (resumen de la importación)"
+GM -- SA : "1.1: descargarXML(nave, viaje, fecha) ↓\n↑ xml : String\n1.6: notificarResultadoImportacion(nave, viaje, true) ↓"
+GM -- M : "1.2: <<create>>(nave, viaje) ↓\n1.3: validarEsquema(xml) ↓\n↑ boolean\n1.4*[por cada contenedor declarado]:\nagregarContenedor(numero, tamano,\nnroSelloDeclarado, fechaArribo) ↓\n↑ c : Contenedor"
+M -- C : "1.4.1: <<create>> ↓"
+GM -- C : "1.5*[por cada línea de carga del contenedor]:\nagregarLinea(descripcion, cantidadDeclarada,\ncliente, tipo) ↓\n↑ l : LineaCarga"
+C -- L : "1.5.1: <<create>> ↓"
 @enduml

@@ -16,29 +16,29 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {9}{\ignorespaces Diccionario de clases - Clase Usuario.}}{38}{table.9.9}%
-\contentsline {table}{\numberline {10}{\ignorespaces Diccionario de clases - Clase Rol.}}{38}{table.9.10}%
-\contentsline {table}{\numberline {11}{\ignorespaces Diccionario de clases - Clase Permiso.}}{39}{table.9.11}%
-\contentsline {table}{\numberline {12}{\ignorespaces Diccionario de clases - Clase Cliente.}}{39}{table.9.12}%
-\contentsline {table}{\numberline {13}{\ignorespaces Diccionario de clases - Clase Trabajador.}}{39}{table.9.13}%
-\contentsline {table}{\numberline {14}{\ignorespaces Diccionario de clases - Clase Cuadrilla.}}{40}{table.9.14}%
-\contentsline {table}{\numberline {15}{\ignorespaces Diccionario de clases - Clase TipoBulto.}}{40}{table.9.15}%
-\contentsline {table}{\numberline {16}{\ignorespaces Diccionario de clases - Clase Manifiesto.}}{41}{table.9.16}%
-\contentsline {table}{\numberline {17}{\ignorespaces Diccionario de clases - Clase Contenedor.}}{41}{table.9.17}%
-\contentsline {table}{\numberline {18}{\ignorespaces Diccionario de clases - Clase LineaCarga.}}{41}{table.9.18}%
-\contentsline {table}{\numberline {19}{\ignorespaces Diccionario de clases - Clase Programacion.}}{42}{table.9.19}%
-\contentsline {table}{\numberline {20}{\ignorespaces Diccionario de clases - Clase Operacion.}}{42}{table.9.20}%
-\contentsline {table}{\numberline {21}{\ignorespaces Diccionario de clases - Clase SelloSeguridad.}}{43}{table.9.21}%
-\contentsline {table}{\numberline {22}{\ignorespaces Diccionario de clases - Clase Incidencia.}}{43}{table.9.22}%
-\contentsline {table}{\numberline {23}{\ignorespaces Diccionario de clases - Clase Fotografia.}}{44}{table.9.23}%
-\contentsline {table}{\numberline {24}{\ignorespaces Diccionario de clases - Clase Reporte.}}{44}{table.9.24}%
-\contentsline {table}{\numberline {25}{\ignorespaces Diccionario de clases - Clase GestorManifiesto.}}{45}{table.9.25}%
-\contentsline {table}{\numberline {26}{\ignorespaces Diccionario de clases - Clase GestorProgramacion.}}{45}{table.9.26}%
-\contentsline {table}{\numberline {27}{\ignorespaces Diccionario de clases - Clase GestorOperacion.}}{45}{table.9.27}%
-\contentsline {table}{\numberline {28}{\ignorespaces Diccionario de clases - Clase GestorReportes.}}{46}{table.9.28}%
-\contentsline {table}{\numberline {29}{\ignorespaces Diccionario de clases - Clase ServicioAduana.}}{46}{table.9.29}%
-\contentsline {table}{\numberline {30}{\ignorespaces Diccionario de clases - Clase ServicioCorreo.}}{47}{table.9.30}%
-\contentsline {table}{\numberline {31}{\ignorespaces Diccionario de clases - Clase SincronizadorOffline.}}{47}{table.9.31}%
-\contentsline {table}{\numberline {32}{\ignorespaces Diccionario de clases - Tipos enumerados.}}{47}{table.9.32}%
+\contentsline {table}{\numberline {9}{\ignorespaces Diccionario de clases - Clase Usuario.}}{39}{table.9.9}%
+\contentsline {table}{\numberline {10}{\ignorespaces Diccionario de clases - Clase Rol.}}{39}{table.9.10}%
+\contentsline {table}{\numberline {11}{\ignorespaces Diccionario de clases - Clase Permiso.}}{40}{table.9.11}%
+\contentsline {table}{\numberline {12}{\ignorespaces Diccionario de clases - Clase Cliente.}}{40}{table.9.12}%
+\contentsline {table}{\numberline {13}{\ignorespaces Diccionario de clases - Clase Trabajador.}}{40}{table.9.13}%
+\contentsline {table}{\numberline {14}{\ignorespaces Diccionario de clases - Clase Cuadrilla.}}{41}{table.9.14}%
+\contentsline {table}{\numberline {15}{\ignorespaces Diccionario de clases - Clase TipoBulto.}}{41}{table.9.15}%
+\contentsline {table}{\numberline {16}{\ignorespaces Diccionario de clases - Clase Manifiesto.}}{42}{table.9.16}%
+\contentsline {table}{\numberline {17}{\ignorespaces Diccionario de clases - Clase Contenedor.}}{42}{table.9.17}%
+\contentsline {table}{\numberline {18}{\ignorespaces Diccionario de clases - Clase LineaCarga.}}{42}{table.9.18}%
+\contentsline {table}{\numberline {19}{\ignorespaces Diccionario de clases - Clase Programacion.}}{43}{table.9.19}%
+\contentsline {table}{\numberline {20}{\ignorespaces Diccionario de clases - Clase Operacion.}}{43}{table.9.20}%
+\contentsline {table}{\numberline {21}{\ignorespaces Diccionario de clases - Clase SelloSeguridad.}}{44}{table.9.21}%
+\contentsline {table}{\numberline {22}{\ignorespaces Diccionario de clases - Clase Incidencia.}}{44}{table.9.22}%
+\contentsline {table}{\numberline {23}{\ignorespaces Diccionario de clases - Clase Fotografia.}}{45}{table.9.23}%
+\contentsline {table}{\numberline {24}{\ignorespaces Diccionario de clases - Clase Reporte.}}{45}{table.9.24}%
+\contentsline {table}{\numberline {25}{\ignorespaces Diccionario de clases - Clase GestorManifiesto.}}{46}{table.9.25}%
+\contentsline {table}{\numberline {26}{\ignorespaces Diccionario de clases - Clase GestorProgramacion.}}{46}{table.9.26}%
+\contentsline {table}{\numberline {27}{\ignorespaces Diccionario de clases - Clase GestorOperacion.}}{47}{table.9.27}%
+\contentsline {table}{\numberline {28}{\ignorespaces Diccionario de clases - Clase GestorReportes.}}{47}{table.9.28}%
+\contentsline {table}{\numberline {29}{\ignorespaces Diccionario de clases - Clase ServicioAduana.}}{48}{table.9.29}%
+\contentsline {table}{\numberline {30}{\ignorespaces Diccionario de clases - Clase ServicioCorreo.}}{48}{table.9.30}%
+\contentsline {table}{\numberline {31}{\ignorespaces Diccionario de clases - Clase SincronizadorOffline.}}{48}{table.9.31}%
+\contentsline {table}{\numberline {32}{\ignorespaces Diccionario de clases - Tipos enumerados.}}{49}{table.9.32}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -23,12 +23,14 @@ aparecen en los cursos alternos de los casos de uso narrativos.
 \label{subsec:sec_manifiesto}
 
 El Jefe de faena solicita el manifiesto al controlador \clase{GestorManifiesto}, que lo descarga
-mediante \clase{ServicioAduana}. Si el servicio responde y el esquema es válido, se crea el
-\clase{Manifiesto}, se agregan sus contenedores y líneas de carga y se entrega el resumen de la
-importación; en caso contrario se informa el error de formato o que el manifiesto no está
-disponible (curso normal y cursos A1 a A3 de la Tabla~\ref{tab:cu_importar_manifiesto}).
+mediante \clase{ServicioAduana}. Si el servicio responde, se crea el \clase{Manifiesto} y se
+valida su esquema; si es válido, el manifiesto crea cada \clase{Contenedor} y cada contenedor sus
+\clase{LineaCarga} (repeticiones anidadas), se notifica el resultado a Aduanas y se entrega el
+resumen de la importación. Si el esquema no es válido se genera el reporte de errores sin registrar
+información parcial, y si el servicio no responde se informa que el manifiesto no está disponible
+(curso normal y cursos A1 a A3 de la Tabla~\ref{tab:cu_importar_manifiesto}).
 
-\figuradiagrama{0.90}{13-sec-importar-manifiesto.jpg}
+\figuradiagrama{0.90}{13-sec-importar-manifiesto.png}
 {Diagrama de secuencia - Importar manifiesto}
 {Diagrama de secuencia - Importar manifiesto.}
 {fig:sec_manifiesto}
@@ -36,14 +38,15 @@ disponible (curso normal y cursos A1 a A3 de la Tabla~\ref{tab:cu_importar_manif
 \subsection{Crear programación}
 \label{subsec:sec_programacion}
 
-El Jefe de faena crea la programación de un contenedor y el controlador
+El Jefe de faena consulta los contenedores pendientes, crea la programación de uno de ellos y el
+controlador
 \clase{GestorProgramacion} verifica que la franja no tenga conflicto de agenda; si no lo tiene,
 crea la \clase{Programacion} en estado \estado{PROGRAMADA}. Luego el Jefe de faena asigna la
 cuadrilla y el jefe tarjador: el controlador consulta la disponibilidad de la \clase{Cuadrilla} y
-del \clase{Trabajador} y, si ambos están disponibles, los asocia a la programación
-(Tabla~\ref{tab:cu_crear_programacion}).
+del \clase{Trabajador} y, si ambos están disponibles, los asocia a la programación; si alguno no
+lo está, la programación queda sin asignar (Tabla~\ref{tab:cu_crear_programacion}).
 
-\figuradiagrama{0.95}{14-sec-crear-programacion.jpg}
+\figuradiagrama{0.95}{14-sec-crear-programacion.png}
 {Diagrama de secuencia - Crear programación}
 {Diagrama de secuencia - Crear programación.}
 {fig:sec_programacion}
@@ -51,15 +54,18 @@ del \clase{Trabajador} y, si ambos están disponibles, los asocia a la programac
 \subsection{Registrar datos de operación}
 \label{subsec:sec_operacion}
 
-Es la interacción más extensa del sistema. El Jefe tarjador inicia la operación y registra el
-sello, que el controlador \clase{GestorOperacion} verifica contra el declarado. Luego registra cada
-lote separado por cliente (repetición) y, si hay diferencia o daño visible (opción), una incidencia
-con sus fotografías. Cada fotografía se encola en \clase{SincronizadorOffline}, que la envía de
-inmediato si hay conectividad. Al cerrar la operación se encola la fotografía del contenedor vacío,
-se sincronizan los pendientes y se genera el borrador del reporte
-(Tabla~\ref{tab:cu_registrar_datos}).
+Es la interacción más extensa del sistema. El Jefe tarjador inicia la operación, que el
+controlador \clase{GestorOperacion} crea en estado \estado{EN\_EJECUCION}, y registra el sello, que
+\clase{SelloSeguridad} verifica contra el declarado; si no está intacto, se registra una incidencia
+de sello alterado (opción). Luego registra cada lote separado por cliente (repetición):
+\clase{LineaCarga} contrasta la cantidad y, si hay diferencia o daño visible (opción), se registra
+una incidencia asociada a esa línea. Cada \clase{Fotografia} se comprime, se agrega a la
+\clase{Operacion} (y a la \clase{Incidencia}, si la respalda) y se encola en
+\clase{SincronizadorOffline}, que la envía de inmediato si hay conectividad. Al cerrar, se encola la
+fotografía del contenedor vacío, la operación pasa a \estado{FINALIZADA} y, ya finalizada,
+\clase{GestorReportes} genera el borrador del reporte (Tabla~\ref{tab:cu_registrar_datos}).
 
-\figuradiagrama{0.80}{15-sec-registrar-datos-operacion.jpg}
+\figuradiagrama{0.62}{15-sec-registrar-datos-operacion.png}
 {Diagrama de secuencia - Registrar datos de operación}
 {Diagrama de secuencia - Registrar datos de operación.}
 {fig:sec_operacion}
@@ -69,12 +75,14 @@ se sincronizan los pendientes y se genera el borrador del reporte
 
 El Supervisor del reporte abre el reporte y el controlador \clase{GestorReportes} le muestra los
 datos y la evidencia fotográfica. Si son correctos, el Supervisor lo aprueba: el \clase{Reporte}
-pasa a estado \estado{APROBADO} y se envía al cliente mediante \clase{ServicioCorreo}. Si la
-evidencia es defectuosa, rechaza la fotografía indicando el motivo, el reporte pasa a
-\estado{EN\_CORRECCION} y se solicita la corrección de la evidencia a terreno
+pasa a estado \estado{APROBADO} y el controlador lo envía (\clase{enviarReporte}), obteniendo los
+destinatarios de cada \clase{Cliente} de la operación, adjuntando el PDF mediante
+\clase{ServicioCorreo} y registrando el resultado del envío, exitoso o fallido. Si la evidencia es
+defectuosa, rechaza la fotografía indicando el motivo, que queda guardado en la \clase{Fotografia};
+el reporte pasa a \estado{EN\_CORRECCION} y se solicita la corrección de la evidencia a terreno
 (Tabla~\ref{tab:cu_validar_reporte}).
 
-\figuradiagrama{0.95}{16-sec-validar-reporte.jpg}
+\figuradiagrama{0.95}{16-sec-validar-reporte.png}
 {Diagrama de secuencia - Validar reporte}
 {Diagrama de secuencia - Validar reporte.}
 {fig:sec_reporte}
@@ -86,28 +94,28 @@ Como complemento, se presentan los diagramas de colaboración de los mismos cuat
 con los mismos objetos y mensajes que sus diagramas de secuencia. En ellos los mensajes se numeran
 para indicar el orden, y la numeración decimal (por ejemplo, 2.1) indica que el mensaje se origina
 como consecuencia del mensaje 2; el asterisco indica una repetición y la condición entre corchetes,
-una guarda. Las flechas \(\downarrow\) y \(\uparrow\) junto a cada mensaje indican su sentido
-(hacia el objeto de abajo o de vuelta hacia el de arriba), y los mensajes que un objeto se envía a
+una guarda. Las flechas \(\downarrow\) y \(\uparrow\) junto a cada mensaje indican el sentido en que viaja
+sobre el enlace (hacia el objeto de abajo o hacia el de arriba), y los mensajes que un objeto se envía a
 sí mismo se dibujan sobre un enlace reflexivo. Se muestra el curso normal de cada caso, incluyendo
 las repeticiones necesarias, y se omiten los cursos alternos, que ya se detallan en los diagramas
 de secuencia.
 
-\figuradiagrama{0.80}{17-col-importar-manifiesto.png}
+\figuradiagrama{0.90}{17-col-importar-manifiesto.png}
 {Diagrama de colaboración - Importar manifiesto}
 {Diagrama de colaboración - Importar manifiesto.}
 {fig:col_manifiesto}
 
-\figuradiagrama{0.90}{18-col-crear-programacion.png}
+\figuradiagrama{0.80}{18-col-crear-programacion.png}
 {Diagrama de colaboración - Crear programación}
 {Diagrama de colaboración - Crear programación.}
 {fig:col_programacion}
 
-\figuradiagrama{0.55}{19-col-registrar-datos-operacion.png}
+\figuradiagrama{1.00}{19-col-registrar-datos-operacion.png}
 {Diagrama de colaboración - Registrar datos de operación}
 {Diagrama de colaboración - Registrar datos de operación.}
 {fig:col_operacion}
 
-\figuradiagrama{0.55}{20-col-validar-reporte.png}
+\figuradiagrama{0.90}{20-col-validar-reporte.png}
 {Diagrama de colaboración - Validar reporte}
 {Diagrama de colaboración - Validar reporte (curso de aprobación y envío).}
 {fig:col_reporte}

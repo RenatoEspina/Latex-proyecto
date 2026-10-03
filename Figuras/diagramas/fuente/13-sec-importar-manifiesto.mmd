@@ -1,0 +1,40 @@
+sequenceDiagram
+    title Diagrama de Secuencia - Importar Manifiesto
+    actor JF as Jefe de faena
+    participant GM as :GestorManifiesto
+    participant SA as :ServicioAduana
+    participant M as :Manifiesto
+    participant C as :Contenedor
+    participant L as :LineaCarga
+
+    JF->>GM: importarManifiesto(nave, viaje, fecha)
+    GM->>SA: descargarXML(nave, viaje, fecha)
+    alt servicio responde
+        SA-->>GM: xml : String
+        GM->>M: <<create>>(nave, viaje)
+        GM->>M: validarEsquema(xml)
+        M-->>GM: boolean
+        alt esquema válido
+            loop por cada contenedor declarado
+                GM->>M: agregarContenedor(numero, tamano, nroSelloDeclarado, fechaArribo)
+                M->>C: <<create>>
+                C-->>M: c : Contenedor
+                M-->>GM: c : Contenedor
+                loop por cada línea de carga del contenedor
+                    GM->>C: agregarLinea(descripcion, cantidadDeclarada, cliente, tipo)
+                    C->>L: <<create>>
+                    L-->>C: l : LineaCarga
+                    C-->>GM: l : LineaCarga
+                end
+            end
+            GM->>SA: notificarResultadoImportacion(nave, viaje, true)
+            GM-->>JF: m : Manifiesto (resumen de la importación)
+        else esquema inválido
+            GM->>GM: generarReporteErrores(xml)
+            Note over GM,M: el manifiesto se descarta (no se registra información parcial)
+            GM-->>JF: error de formato y reporte de errores : File
+        end
+    else servicio no disponible o manifiesto inexistente
+        SA-->>GM: sin manifiesto
+        GM-->>JF: manifiesto no disponible
+    end

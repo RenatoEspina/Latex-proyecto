@@ -8,7 +8,7 @@ se describen al final del capítulo.
 \section{Clase: Usuario}
 \label{sec:cls_usuario}
 
-Representa a una persona con cuenta en el sistema (administrador, jefe de faena, jefe tarjador, supervisor o cliente). Se limita a la autenticación y a consultar los permisos de su rol; la lógica de cada módulo reside en los controladores.
+Representa a una persona con cuenta en el sistema (administrador, jefe de faena, jefe tarjador, supervisor o cliente). Se limita a la autenticación y a consultar los permisos de su rol; la lógica de cada módulo reside en los controladores. Se asocia a un rol (\clase{Rol}) y, según su perfil, a la ficha de \clase{Trabajador} del jefe tarjador, para conocer sus operaciones asignadas, o a la de \clase{Cliente}, para filtrar sus operaciones.
 
 {\estilotabla
 \begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
@@ -23,7 +23,6 @@ Representa a una persona con cuenta en el sistema (administrador, jefe de faena,
 \clase{email} & \clase{String} & Correo, usado también como credencial de acceso. \\
 \clase{passwordHash} & \clase{String} & Resumen criptográfico de la contraseña. \\
 \clase{activo} & \clase{boolean} & Indica si la cuenta puede iniciar sesión. \\
-\clase{rol} & \clase{Rol} & Rol asignado, que define sus permisos. \\
 \midrule
 \multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
 \midrule
@@ -147,7 +146,6 @@ Grupo de cuatro a cinco trabajadores que ejecuta físicamente un desconsolidado.
 \midrule
 \clase{idCuadrilla} & \clase{int} & Identificador único. \\
 \clase{nombre} & \clase{String} & Nombre o número de la cuadrilla. \\
-\clase{integrantes} & \clase{Trabajador[\,]} & Trabajadores que la componen. \\
 \midrule
 \multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
 \midrule
@@ -275,13 +273,14 @@ Planificación del desconsolidado de un contenedor en una fecha y franja horaria
 \clase{fecha} & \clase{Date} & Fecha planificada. \\
 \clase{horaInicio} & \clase{Time} & Inicio de la franja. \\
 \clase{horaTermino} & \clase{Time} & Término de la franja. \\
-\clase{estado} & \clase{EstadoProgramacion} & Estado de la programación. \\
+\clase{estado} & \clase{Estado} & Estado de la programación. \\
 \midrule
 \multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
 \midrule
 \multicolumn{2}{L{0.56\textwidth}}{\clase{asignarCuadrilla(\allowbreak{}c: Cuadrilla,\allowbreak{} jefe: Trabajador): void}} & Asocia la cuadrilla y el jefe tarjador y deja la faena disponible en la aplicación móvil. \\
 \multicolumn{2}{L{0.56\textwidth}}{\clase{reprogramar(\allowbreak{}fecha: Date,\allowbreak{} horaInicio: Time,\allowbreak{} horaTermino: Time): void}} & Modifica la fecha y franja de la programación. \\
 \multicolumn{2}{L{0.56\textwidth}}{\clase{anular(\allowbreak{}): void}} & Cambia el estado a anulada sin eliminar el registro. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{modificarEstado(\allowbreak{}e: Estado): void}} & Cambia manualmente el estado de la programación. \\
 \bottomrule
 \end{longtable}
 }
@@ -302,15 +301,17 @@ Ejecución en terreno de una programación: registra el avance de la faena desde
 \clase{idOperacion} & \clase{int} & Identificador único. \\
 \clase{horaInicio} & \clase{DateTime} & Momento en que se inició la faena. \\
 \clase{horaFin} & \clase{DateTime} & Momento en que se cerró. \\
-\clase{estado} & \clase{EstadoOperacion} & Estado de la operación. \\
+\clase{estado} & \clase{Estado} & Estado de la operación. \\
 \clase{modalidadIngreso} & \clase{OrigenDatos} & Indica si la carga proviene de manifiesto o de tarja ciega. \\
 \midrule
 \multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
 \midrule
 \multicolumn{2}{L{0.56\textwidth}}{\clase{iniciar(\allowbreak{}): void}} & Cambia el estado a en ejecución y registra la hora de inicio. \\
 \multicolumn{2}{L{0.56\textwidth}}{\clase{cerrar(\allowbreak{}): void}} & Cambia el estado a finalizada y registra la hora de cierre. \\
-\multicolumn{2}{L{0.56\textwidth}}{\clase{obtenerEstado(\allowbreak{}): EstadoOperacion}} & Retorna el estado actual. \\
-\multicolumn{2}{L{0.56\textwidth}}{\clase{agregarFotografia(\allowbreak{}f: Fotografia): void}} & Agrega una fotografía a la evidencia de la operación. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{obtenerEstado(\allowbreak{}): Estado}} & Retorna el estado actual. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{agregarFotografia(\allowbreak{}f: Fotografia): void}} & Agrega una fotografía a la evidencia de la operación, incluidas las que respaldan incidencias. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{agregarIncidencia(\allowbreak{}i: Incidencia): void}} & Agrega una incidencia registrada durante la faena. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{modificarEstado(\allowbreak{}e: Estado): void}} & Cambia manualmente el estado de la operación. \\
 \bottomrule
 \end{longtable}
 }
@@ -328,6 +329,7 @@ Sello del contenedor verificado al momento de la apertura.
 \toprule
 \textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
 \midrule
+\clase{idSello} & \clase{int} & Identificador único. \\
 \clase{numeroDigitado} & \clase{String} & Número ingresado por el jefe tarjador. \\
 \clase{estado} & \clase{EstadoSello} & Resultado de la verificación. \\
 \clase{fechaVerificacion} & \clase{DateTime} & Momento de la verificación. \\
@@ -342,7 +344,7 @@ Sello del contenedor verificado al momento de la apertura.
 \section{Clase: Incidencia}
 \label{sec:cls_incidencia}
 
-Hallazgo que altera lo declarado o el estado de la carga: daño, faltante, sobrante, mal embalaje o sello alterado.
+Hallazgo que altera lo declarado o el estado de la carga: daño, faltante, sobrante, mal embalaje o sello alterado. Se asocia a la línea de carga (y, por ende, al cliente) afectada; la de sello alterado no tiene línea asociada.
 
 {\estilotabla
 \begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
@@ -399,7 +401,7 @@ Evidencia visual capturada en terreno, comprimida y sellada con fecha, hora y ge
 \section{Clase: Reporte}
 \label{sec:cls_reporte}
 
-Documento PDF de una operación finalizada, con datos y fotografías por etapa y cliente.
+Documento PDF de una operación finalizada, con datos y fotografías por etapa y cliente. Se asocia al usuario que lo aprobó (\clase{aprobadoPor}), que no existe mientras está en borrador.
 
 {\estilotabla
 \begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
@@ -415,7 +417,6 @@ Documento PDF de una operación finalizada, con datos y fotografías por etapa y
 \clase{estado} & \clase{EstadoReporte} & Estado del reporte. \\
 \clase{fechaGeneracion} & \clase{DateTime} & Momento de generación del borrador. \\
 \clase{fechaAprobacion} & \clase{DateTime} & Momento de la aprobación. \\
-\clase{aprobadoPor} & \clase{Usuario} & Supervisor que lo aprobó. \\
 \clase{estadoEnvio} & \clase{EstadoEnvio} & Resultado del envío al cliente. \\
 \midrule
 \multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
@@ -425,6 +426,7 @@ Documento PDF de una operación finalizada, con datos y fotografías por etapa y
 \multicolumn{2}{L{0.56\textwidth}}{\clase{pasarACorreccion(\allowbreak{}): void}} & Cambia el estado a en corrección. \\
 \multicolumn{2}{L{0.56\textwidth}}{\clase{versionar(\allowbreak{}): void}} & Incrementa la versión y vuelve el estado a borrador. \\
 \multicolumn{2}{L{0.56\textwidth}}{\clase{registrarEnvio(\allowbreak{}exitoso: boolean,\allowbreak{} destinatarios: String[\,]): void}} & Registra el resultado del envío por correo. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{obtenerClientes(\allowbreak{}): Cliente[\,]}} & Retorna los clientes con carga en la operación, a quienes se envía el reporte. \\
 \bottomrule
 \end{longtable}
 }
@@ -443,6 +445,7 @@ Controlador del caso de uso Importar manifiesto.
 \multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
 \midrule
 \multicolumn{2}{L{0.56\textwidth}}{\clase{importarManifiesto(\allowbreak{}nave: String,\allowbreak{} viaje: String,\allowbreak{} fecha: Date): Manifiesto}} & Obtiene el XML mediante \clase{ServicioAduana}, lo valida y crea el manifiesto con sus contenedores y líneas. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{generarReporteErrores(\allowbreak{}xml: String): File}} & Genera el reporte con los errores encontrados cuando el XML no cumple el esquema. \\
 \bottomrule
 \end{longtable}
 }
@@ -464,6 +467,7 @@ Controlador de los casos de uso de programación de faenas.
 \multicolumn{2}{L{0.56\textwidth}}{\clase{crearProgramacion(\allowbreak{}idContenedor: int,\allowbreak{} fecha: Date,\allowbreak{} horaInicio: Time,\allowbreak{} horaTermino: Time): Programacion}} & Crea la programación si no hay cruce de franjas. \\
 \multicolumn{2}{L{0.56\textwidth}}{\clase{hayConflicto(\allowbreak{}fecha: Date,\allowbreak{} horaInicio: Time,\allowbreak{} horaTermino: Time): boolean}} & Verifica si la franja se cruza con otra programación. \\
 \multicolumn{2}{L{0.56\textwidth}}{\clase{asignarCuadrilla(\allowbreak{}idProgramacion: int,\allowbreak{} idCuadrilla: int,\allowbreak{} idJefeTarjador: int): void}} & Valida disponibilidad y asigna la cuadrilla y el jefe tarjador. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{eliminarProgramacion(\allowbreak{}idProgramacion: int): void}} & Elimina una programación que aún no tiene operación. \\
 \bottomrule
 \end{longtable}
 }
@@ -508,7 +512,8 @@ Controlador de los casos de uso de validación y envío de reportes.
 \multicolumn{2}{L{0.56\textwidth}}{\clase{abrirReporte(\allowbreak{}idReporte: int): Reporte}} & Retorna el reporte con su contenido para su revisión. \\
 \multicolumn{2}{L{0.56\textwidth}}{\clase{aprobarReporte(\allowbreak{}idReporte: int,\allowbreak{} aprobador: Usuario): void}} & Aprueba el reporte. \\
 \multicolumn{2}{L{0.56\textwidth}}{\clase{rechazarFotografia(\allowbreak{}idReporte: int,\allowbreak{} idFoto: int,\allowbreak{} motivo: String): void}} & Rechaza la fotografía, pasa el reporte a corrección y solicita la corrección de la evidencia. \\
-\multicolumn{2}{L{0.56\textwidth}}{\clase{enviarReporte(\allowbreak{}idReporte: int): boolean}} & Envía el reporte aprobado a los destinatarios del cliente y registra el resultado. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{enviarReporte(\allowbreak{}idReporte: int): boolean}} & Envía el reporte aprobado a los destinatarios de cada cliente de la operación y registra el resultado. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{solicitarCorreccionEvidencia(\allowbreak{}idFoto: int,\allowbreak{} motivo: String): void}} & Notifica al jefe tarjador que debe recapturar la fotografía rechazada, indicando el motivo. \\
 \bottomrule
 \end{longtable}
 }
@@ -531,6 +536,7 @@ Interfaz con el \este{web service} del Servicio Nacional de Aduanas.
 \multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
 \midrule
 \multicolumn{2}{L{0.56\textwidth}}{\clase{descargarXML(\allowbreak{}nave: String,\allowbreak{} viaje: String,\allowbreak{} fecha: Date): String}} & Retorna el manifiesto en formato XML. \\
+\multicolumn{2}{L{0.56\textwidth}}{\clase{notificarResultadoImportacion(\allowbreak{}nave: String,\allowbreak{} viaje: String,\allowbreak{} exitoso: boolean): void}} & Informa a Aduanas el resultado de la importación del manifiesto. \\
 \bottomrule
 \end{longtable}
 }
@@ -561,7 +567,7 @@ Interfaz con el servidor de correo electrónico.
 \section{Clase: SincronizadorOffline}
 \label{sec:cls_sincronizadoroffline}
 
-Gestiona la cola local de fotografías del dispositivo móvil y su envío cuando hay conectividad.
+Gestiona la cola local de fotografías del dispositivo móvil (su asociación con \clase{Fotografia}) y su envío cuando hay conectividad.
 
 {\estilotabla
 \begin{longtable}{L{0.31\textwidth} L{0.24\textwidth} L{0.39\textwidth}}
@@ -569,10 +575,6 @@ Gestiona la cola local de fotografías del dispositivo móvil y su envío cuando
 \label{tab:cls_sincronizadoroffline}
 \\
 \toprule
-\textbf{Atributo} & \textbf{Tipo} & \textbf{Descripción} \\
-\midrule
-\clase{colaPendientes} & \clase{Fotografia[\,]} & Fotografías aún no enviadas. \\
-\midrule
 \multicolumn{2}{L{0.56\textwidth}}{\textbf{Operación}} & \textbf{Descripción} \\
 \midrule
 \multicolumn{2}{L{0.56\textwidth}}{\clase{encolar(\allowbreak{}f: Fotografia): void}} & Agrega una fotografía a la cola de envío. \\
@@ -593,8 +595,7 @@ Gestiona la cola local de fotografías del dispositivo móvil y su envío cuando
 \toprule
 \textbf{Tipo} & \textbf{Valores} \\
 \midrule
-\clase{EstadoProgramacion} & \estado{PROGRAMADA, EN\_EJECUCION, FINALIZADA, ANULADA} \\
-\clase{EstadoOperacion} & \estado{EN\_EJECUCION, FINALIZADA} \\
+\clase{Estado} & \estado{PROGRAMADA, EN\_EJECUCION, FINALIZADA, ANULADA} (compartido por \clase{Programacion} y \clase{Operacion}) \\
 \clase{OrigenDatos} & \estado{MANIFIESTO\_XML, TARJA\_CIEGA} \\
 \clase{EstadoSello} & \estado{INTACTO, ROTO, NO\_COINCIDE} \\
 \clase{TipoIncidencia} & \estado{DANO, FALTANTE, SOBRANTE, MAL\_EMBALAJE, SELLO\_ALTERADO} \\
@@ -604,3 +605,5 @@ Gestiona la cola local de fotografías del dispositivo móvil y su envío cuando
 \bottomrule
 \end{longtable}
 }
+
+\clase{Imagen}, \clase{Filtro} y \clase{File} son tipos de apoyo que solo aparecen en las firmas de las operaciones: la imagen capturada por la cámara del dispositivo, los criterios de búsqueda de operaciones y el archivo PDF generado, respectivamente.

@@ -10,7 +10,9 @@ funcionalidad observada. Se organiza en tres grupos:
     \item \textbf{Datos maestros y seguridad:} \clase{Usuario}, \clase{Rol}, \clase{Permiso},
           \clase{Cliente}, \clase{Trabajador}, \clase{Cuadrilla} y \clase{TipoBulto}. Los permisos
           se asignan a los roles y no al usuario, de modo que \clase{Usuario} solo conoce su rol y
-          no concentra la lógica de autorización de cada módulo.
+          no concentra la lógica de autorización de cada módulo. Un usuario puede estar ligado a la
+          ficha de un \clase{Trabajador} (el jefe tarjador, para conocer sus operaciones asignadas)
+          o de un \clase{Cliente} (para consultar solo sus operaciones).
     \item \textbf{Carga y operación en terreno:} \clase{Manifiesto}, \clase{Contenedor},
           \clase{LineaCarga}, \clase{Programacion}, \clase{Operacion}, \clase{SelloSeguridad},
           \clase{Incidencia}, \clase{Fotografia} y \clase{Reporte}.
@@ -23,11 +25,15 @@ funcionalidad observada. Se organiza en tres grupos:
 Las relaciones representan las decisiones de diseño más importantes: un manifiesto se compone de
 contenedores y cada contenedor de líneas de carga, cada una de las cuales pertenece a un cliente y
 a un tipo de bulto; una programación corresponde a un contenedor, se asigna a una cuadrilla y a un
-jefe tarjador (\clase{Trabajador}) y da origen a una operación; una cuadrilla agrupa a sus
+jefe tarjador (\clase{Trabajador}) y, al iniciarse la faena, da origen a una operación, por lo
+que estas asociaciones admiten cero mientras la programación está pendiente; una cuadrilla agrupa a sus
 trabajadores; una operación se compone de fotografías, de un sello de seguridad y de las
-incidencias registradas, que se respaldan con fotografías; el sincronizador mantiene la cola de
-fotografías pendientes de envío; y un reporte se genera a partir de una operación y es aprobado
-por un usuario. Las operaciones de crear, consultar, editar, eliminar y cambiar estado de los datos
+incidencias registradas, que se respaldan con fotografías de la misma operación (agregación) y
+se asocian a la línea de carga afectada, salvo la de sello alterado; el sincronizador mantiene la cola de
+fotografías pendientes de envío; y un reporte se genera a partir de una operación y, una vez aprobado, queda asociado al usuario
+que lo aprobó. Las dependencias (líneas punteadas) indican qué clases utiliza cada controlador en
+los diagramas de secuencia, y \clase{Imagen}, \clase{Filtro} y \clase{File} son tipos de apoyo que
+solo aparecen en las firmas de las operaciones. Las operaciones de crear, consultar, editar, eliminar y cambiar estado de los datos
 maestros son las habituales de cada entidad y no se modelaron como controladores para no recargar
 el diagrama.
 
